@@ -1,0 +1,37 @@
+<ion-header>
+    <ion-toolbar class="white">
+        <ion-buttons>
+            <ion-back-button> </ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen class="bg-theme">
+    <div class="format">
+        <ng-container *ngFor="let rule of detail">
+            <div mode="ios">
+                <div class="">
+                    <div
+                        *ngIf="isRule(rule)"
+                        class="list2 fs-16 ion-text-capitalize roboto card-item mgt-15 mgb-15 zfab pd-10"
+                    >
+                        <p class="roboto-semibold">
+                            {{ rule.substring(0, rule.indexOf(' ')) }}
+                        </p>
+                        <p class="roboto">
+                            {{ rule.substring(rule.indexOf(' ')) }}
+                        </p>
+                    </div>
+                    <div
+                        *ngIf="!isRule(rule)"
+                        class="list2 fs-16 ion-text-capitalize roboto card-item mgt-15 mgb-15 zfab pd-10"
+                    >
+                        <p class="roboto">
+                            {{ rule }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</ion-content>

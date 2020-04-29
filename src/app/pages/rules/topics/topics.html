@@ -1,0 +1,23 @@
+<ion-header>
+    <ion-toolbar class="white">
+        <ion-buttons>
+            <ion-back-button> </ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content fullscreen class="bg-theme">
+    <div class="list zfab">
+        <div
+            mode="ios"
+            class="list2 fs-20 ion-text-capitalize roboto card-item mgt-15 mgb-15 zfab"
+            *ngFor="let rule of subsection"
+            (click)="nav(rule)"
+        >
+            <div class="mtgpd">
+                <img src="/assets/imgs/smallogo.jpg" class="dimensions" />
+
+                <a class="black roboto">{{ rule }}</a>
+            </div>
+        </div>
+    </div>
+</ion-content>

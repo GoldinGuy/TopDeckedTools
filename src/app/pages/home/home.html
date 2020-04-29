@@ -1,0 +1,153 @@
+<ion-header box-shadow>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title class="phalanax fs-20">MYSTIC</ion-title>
+        <ion-icon
+            name="md-funnel"
+            slot="end"
+            class="nav-icon"
+            routerLink="/tabs/contentFilters"
+            routerDirection="forward"
+        ></ion-icon>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-refresher
+        slot="fixed"
+        pullFactor="0.5"
+        pullMin="100"
+        pullMax="200"
+        (ionRefresh)="doRefresh($event)"
+    >
+        <ion-refresher-content
+            class="mgt-20 roboto"
+            refreshingSpinner="bubbles"
+            pullingIcon=""
+            refreshingText="Scanning the Multiverse"
+        ></ion-refresher-content>
+    </ion-refresher>
+
+    <ion-grid class="z-grid">
+        <ion-row>
+            <ion-col size="12" *ngIf="dataNotLoaded" class="mgt-100">
+                <div class="center">
+                    <p class="roboto fs-18">Scanning the Multiverse</p>
+                </div>
+                <div class="center">
+                    <ion-spinner name="bubbles" class="center"></ion-spinner>
+                </div>
+            </ion-col>
+
+            <ion-col size="12">
+                <ion-slides *ngIf="dataLoaded | async" #wizardSlider pager="true" #slides>
+                    <ion-slide
+                        background-size
+                        padding
+                        (click)="openPreviews()"
+                        [ngStyle]="{ 'background-image': 'url(' + getPreviewsImageURL() + ')' }"
+                        *ngIf="link.ongoing"
+                    >
+                        <span category class="logo">
+                            <ion-thumbnail class="bdr-5 logo-inner">
+                                <img
+                                    src="/assets/imgs/logos/scryfall.jpg"
+                                    alt=""
+                                    class="logo-inner bdr-5"
+                                />
+                            </ion-thumbnail>
+                        </span>
+
+                        <div clearfix></div>
+                    </ion-slide>
+
+                    <ion-slide *ngFor="let item of videos">
+                        <iframe
+                            [src]="item.safeUrl"
+                            allow="autoplay;"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen
+                            HEAD
+                            width="360"
+                            height="230"
+                        ></iframe>
+                    </ion-slide>
+                </ion-slides>
+            </ion-col>
+
+            <div *ngIf="getDisplay()">
+                <ion-col size="12" *ngFor="let item of getSelectedPosts(false)">
+                    <ion-item lines="none" box-shadow no-padding border-radius class="mg-0 h-125">
+                        <ion-thumbnail slot="start" class="thumb-large mgt-0">
+                            <img class="" [src]="getImageURL(item)" alt="" />
+                            <span border-radius text-uppercase category-row class="logo">
+                                <ion-thumbnail class="bdr-5">
+                                    <img [src]="getLogoURL(item)" alt="" class="logo-inner bdr-5" />
+                                </ion-thumbnail>
+                            </span>
+                        </ion-thumbnail>
+                        <ion-label>
+                            <p text-wrap text-size-xs margin-bottom class="roboto-semibold">
+                                {{ item.title }}
+                            </p>
+                            <div data-info>
+                                <ion-chip>
+                                    <ion-icon icon name="ios-clock"></ion-icon>
+                                    <ion-label text-size-p class="ion-margin-end roboto">
+                                        {{ getTimeString(item.date) }}
+                                    </ion-label>
+                                </ion-chip>
+                            </div>
+                        </ion-label>
+                    </ion-item>
+                </ion-col>
+            </div>
+
+            <ion-col size="6" size-md="3" *ngFor="let item of getSelectedPosts(false)">
+                <div *ngIf="!getDisplay()">
+                    <ion-card
+                        no-margin
+                        box-shadow
+                        border-radius
+                        *ngIf="dataLoaded | async"
+                        (click)="openPost(item)"
+                    >
+                        <div card-image>
+                            <img border-radius class="h-125" [src]="getImageURL(item)" alt="" />
+
+                            <span category-row class="logo">
+                                <ion-thumbnail class="bdr-5">
+                                    <img [src]="getLogoURL(item)" alt="" class="logo-inner bdr-5" />
+                                </ion-thumbnail>
+                            </span>
+                        </div>
+                        <ion-card-content>
+                            <h4 text-wrap text-size-xs class="roboto-semibold">{{ item.title }}</h4>
+                            <div itemTime class="ion-margin-top">
+                                <ion-chip>
+                                    <ion-icon icon name="ios-clock"></ion-icon>
+                                    <ion-label text-size-p class="ion-margin-end roboto">
+                                        {{ getTimeString(item.date) }}
+                                    </ion-label>
+                                </ion-chip>
+                            </div>
+                        </ion-card-content>
+                    </ion-card>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content
+            loadingSpinner="bubbles"
+            loadingText="Scanning the Multiverse..."
+        >
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>
+
+<ion-footer> </ion-footer>

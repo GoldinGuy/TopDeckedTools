@@ -1,0 +1,57 @@
+<!-- Header -->
+<ion-header box-shadow>
+    <ion-toolbar class="center">
+        <!-- <ion-button default-button slot="start" class="bdr-circle"> -->
+        <!-- <ion-back-button defaultHref="/"></ion-back-button> -->
+
+        <ion-title text-uppercase class="roboto-semibold fs-20">Customize Your Feed</ion-title>
+    </ion-toolbar>
+</ion-header>
+<!-- Content -->
+<ion-content class="bg-theme z-grid">
+    <div class=" bg-theme">
+        <!-- <ion-item lines="none" box-shadow no-padding border-radius class="mg-10">
+            <a class="default_text" (click)="row(false)">
+                <ion-icon name="md-grid" class="mgl-20 lg dark-text"></ion-icon>
+            </a>
+            <ion-label text-wrap class="center roboto-semibold fs-20  dark-text">
+                Display Type
+            </ion-label>
+            <a class="default_text" (click)="row(true)">
+                <ion-icon name="md-list" class="mgr-20 lg dark-text"></ion-icon>
+            </a>
+        </ion-item> -->
+        <div class="status fs-20 mg-10 roboto">
+            {{ status }}
+        </div>
+        <ion-item
+            lines="none"
+            box-shadow
+            no-padding
+            border-radius
+            class="mg-10"
+            *ngFor="let content of filter"
+        >
+            <ion-thumbnail class="mgl-5" slot="start">
+                <img border-radius class="mgl-5" src="{{ content.url }}" alt="" />
+            </ion-thumbnail>
+            <ion-label text-wrap class="roboto-semibold fs-20 mgl-5 dark-text">
+                <!-- <p text-wrap margin-bottom class="beleren fs-20 mgl-5 dark-text"> -->
+                {{ content.name }}
+                <!-- </p> -->
+            </ion-label>
+            <ion-toggle [(ngModel)]="content.isChecked" (ionChange)="searchChanged()"></ion-toggle>
+        </ion-item>
+    </div>
+</ion-content>
+
+<ion-fab class="filter" vertical="bottom" horizontal="end" edge id="fab1">
+    <ion-fab-button
+        mini
+        class="e2eFabTopRight filter purple1"
+        routerLink="/tabs/home"
+        routerDirection="back"
+    >
+        <ion-icon name="ios-checkmark-circle" color="secondary"></ion-icon>
+    </ion-fab-button>
+</ion-fab>

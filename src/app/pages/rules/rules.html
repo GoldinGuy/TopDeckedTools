@@ -1,0 +1,24 @@
+<ion-toolbar class="bdr-15 white-bg">
+    <ion-searchbar
+        mode="ios"
+        [(ngModel)]="searchTerm"
+        (ionChange)="searchChanged()"
+        placeholder="Search a Rule or Term"
+        class="roboto white-bg mgb-5 mgt-15"
+    ></ion-searchbar>
+</ion-toolbar>
+
+<ion-content fullscreen class="bg-theme">
+    <div
+        mode="ios"
+        class="list2 fs-20 ion-text-capitalize roboto card-item mgt-15 mgb-15"
+        *ngFor="let rule of array"
+        (click)="nav(rule)"
+    >
+        <div class="mtgpd">
+            <img src="/assets/imgs/smallogo.jpg" class="dimensions" />
+
+            <a class="black roboto">{{ rule }}</a>
+        </div>
+    </div>
+</ion-content>

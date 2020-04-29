@@ -1,0 +1,32 @@
+/* SETTINGS RTL STYLE
+=======================================================
+=======================================================*/
+
+html[dir=rtl] {
+  /* Settings Home page */
+  page-home {
+    [background-size] {
+      [category],
+      [wizard-title],
+      ion-chip {
+        right: 16px;
+        left: auto;
+      }
+
+      [bookmark] {
+        right: auto !important;
+        left: 0;
+      }
+    }
+    news-item-home {
+      [category] {
+        right: 8px;
+        left: auto !important;
+      }
+    }
+  }
+  /* Settings Single page*/
+  single-page {
+
+  }
+}

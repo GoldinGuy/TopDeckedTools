@@ -1,0 +1,142 @@
+/* Sytle Main Menu
+==================================*/
+:host-context(app-root) {
+    --meni-background: #1b1e28;
+    --menu-color: #fff;
+
+    ion-content {
+        --background: var(--meni-background, #1b1e28);
+    }
+
+    ion-grid,
+    ion-row {
+        height: 100%;
+    }
+
+    // .menu-width {
+    // 	width: 270px;
+    // }
+
+    /* SETTINGS MAIN MENU
+  =======================================================
+  =======================================================*/
+    ion-menu-toggle {
+        [icon-small] {
+            margin-right: 10px;
+        }
+    }
+
+    [button-link] {
+        margin-right: 10px;
+    }
+
+    ion-list {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    ion-item {
+        --background: var(--meni-background, #1b1e28);
+
+        [icon-small],
+        [text-size-xs] {
+            color: var(--menu-color, #fff);
+        }
+    }
+}
+
+.white {
+    color: white;
+}
+
+.modal-wrapper {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.splash {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // background: #ff7400;
+    // background: #11101b;
+    // background: #cf20de;
+    background: #892bfe;
+}
+
+// .spinner {
+//     /*
+//  *  Usage:
+//  *
+//       <div class="sk-rotating-plane"></div>
+//  *
+//  */
+//     // @import '../variables';
+//     $spinkit-spinner-margin: 40px auto !default;
+//     $spinkit-size: 40px !default;
+//     $spinkit-spinner-color: #ffffff !default;
+
+//     .sk-rotating-plane {
+//         width: $spinkit-size;
+//         height: $spinkit-size;
+//         background-color: $spinkit-spinner-color;
+//         margin: $spinkit-spinner-margin;
+//         animation: sk-rotatePlane 1.2s infinite ease-in-out;
+//     }
+
+//     @keyframes sk-rotatePlane {
+//         0% {
+//             transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+//         }
+//         50% {
+//             transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+//         }
+//         100% {
+//             transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+//         }
+//     }
+// }
+.spinner {
+    width: 50px;
+    height: 50px;
+    background-color: #ffffff;
+
+    margin: 100px auto;
+    -webkit-animation: sk-rotateplane 1.2s infinite ease-in-out;
+    animation: sk-rotateplane 1.2s infinite ease-in-out;
+}
+
+@-webkit-keyframes sk-rotateplane {
+    0% {
+        -webkit-transform: perspective(120px);
+    }
+    50% {
+        -webkit-transform: perspective(120px) rotateY(180deg);
+    }
+    100% {
+        -webkit-transform: perspective(120px) rotateY(180deg) rotateX(180deg);
+    }
+}
+
+@keyframes sk-rotateplane {
+    0% {
+        transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+        -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+    }
+    50% {
+        transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+        -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+    }
+    100% {
+        transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+        -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+    }
+}

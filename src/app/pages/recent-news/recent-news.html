@@ -1,0 +1,14 @@
+<ion-header box-shadow>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-menu-button defaultHref="/"></ion-menu-button>
+		</ion-buttons>
+		<ion-title>Articles</ion-title>
+	</ion-toolbar>
+</ion-header>
+<!-- Content -->
+<ion-content>
+	<ion-grid>
+		<news-list [categoryId]="categoryId" [title]=""></news-list>
+	</ion-grid>
+</ion-content>
