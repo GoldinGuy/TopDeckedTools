@@ -1,8 +1,8 @@
-<ion-toolbar class="bdr-15 white-bg">
+<!-- <ion-toolbar class="bdr-15 white-bg">
     <ion-searchbar
         mode="ios"
-        [(ngModel)]="searchTerm"
-        (ionChange)="searchChanged()"
+        [(ngModel)]="this.rules.searchTerm"
+        (ionChange)="this.rules.searchChanged()"
         placeholder="Search a Rule or Term"
         class="roboto white-bg mgb-5 mgt-15"
     ></ion-searchbar>
@@ -12,13 +12,40 @@
     <div
         mode="ios"
         class="list2 fs-20 ion-text-capitalize roboto card-item mgt-15 mgb-15"
-        *ngFor="let rule of array"
-        (click)="nav(rule)"
+        *ngFor="let rule of this.Rules.array"
+        (click)="this.Rules.nav(rule)"
     >
         <div class="mtgpd">
             <img src="/assets/imgs/smallogo.jpg" class="dimensions" />
-
+            
             <a class="black roboto">{{ rule }}</a>
         </div>
     </div>
+</ion-content> -->
+
+<ion-toolbar class="bdr-15 bg-theme">
+    <ion-searchbar
+        mode="ios"
+        [(ngModel)]="searchTerm"
+        (ionChange)="searchChanged()"
+        placeholder="Search a Rule or Term"
+        class="roboto white mgb-5 mgt-15"
+    ></ion-searchbar>
+</ion-toolbar>
+
+<ion-content fullscreen class="bg-theme">
+    <!-- <ng-container *ngFor="let rule of this.rules.getAllRulesMatching(this.searchTerm)"> -->
+    <ng-container *ngFor="let rule of this.rules.array">
+        <div class="fs-20 rule" (click)="this.setActive(rule)">
+            <div class="rule__title">
+                <!-- <img src="/assets/imgs/smallogo.jpg" class="dimensions" /> -->
+                <a class="white roboto truncate">{{ rule }}</a>
+            </div>
+
+            <!-- <div *ngIf="this.isActive(rule)" class="rule__details"> -->
+            <!-- {{ rule.details }} -->
+            <!-- {{ this.isActiveDescription }} -->
+            <!-- </div> -->
+        </div>
+    </ng-container>
 </ion-content>

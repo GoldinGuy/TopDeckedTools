@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IonicStorageModule } from '@ionic/storage';
 import { SMS } from '@ionic-native/sms/ngx';
+import { RulesService } from '../services/rules.service';
 
 @NgModule({
     declarations: [AppComponent],
@@ -17,19 +18,20 @@ import { SMS } from '@ionic-native/sms/ngx';
     imports: [
         BrowserModule,
         IonicModule.forRoot({
-            mode: 'md'
+            mode: 'md',
         }),
         IonicStorageModule.forRoot(),
         AppRoutingModule,
-        HttpClientModule
+        HttpClientModule,
     ],
     providers: [
         StatusBar,
         SplashScreen,
         ScreenOrientation,
+        RulesService,
         SMS,
-        { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+        { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
 })
 export class AppModule {}
