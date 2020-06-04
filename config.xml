@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.goldin.mystic" version="0.0.4" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Mystic</name>
-    <description>Your Magic Companion</description>
+    <name>TopDecked Tools</name>
+    <description>Magic Utilities for TopDecked</description>
     <author email="goldinwebdesign@gmail.com" href="https://goldinswebdesign.com/">Goldin Web Design</author>
     <content src="index.html" />
     <access origin="*" />

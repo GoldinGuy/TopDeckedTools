@@ -49,3 +49,6 @@ oldparser.txt
 /services/post.service.ts
 /services/service.service.ts
 /services/tags.service.ts
+/services/sync.service.ts
+/services/theme.service.ts
+/services/user.service.ts
