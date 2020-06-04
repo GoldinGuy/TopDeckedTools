@@ -25,7 +25,7 @@ export class RulesPage {
     public searching;
     public searchReference;
     hideBack: boolean;
-    sectionrule: any;
+    sectionrule: string;
     currentTerm: string;
     subsection: string[];
     section: string[];

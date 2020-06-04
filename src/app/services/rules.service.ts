@@ -75,10 +75,11 @@ export class RulesService {
         }
     }
 
-    getRuleSecById(sectionrule) {
+    // returns a given rules section (an array of subcategories containing further levels of rule abstraction)
+    getRuleSecById(sectionrule: string) {
         return Object.keys(rules[sectionrule]);
     }
-
+    // returns a given rules subsection (an array of detailed rules with descriptions)
     getRuleSubSecById(sectionrule, rule) {
         let subsection = rules[sectionrule][rule];
         if (typeof subsection === 'string') {
@@ -92,6 +93,7 @@ export class RulesService {
         return this.isNumeric(ruleToCheck.substring(0, 2));
     }
 
+    // determines if a string value is numeric
     isNumeric(value) {
         return /^-{0,1}\d+$/.test(value);
     }
