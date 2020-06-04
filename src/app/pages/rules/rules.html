@@ -1,28 +1,3 @@
-<!-- <ion-toolbar class="bdr-15 white-bg">
-    <ion-searchbar
-        mode="ios"
-        [(ngModel)]="this.rules.searchTerm"
-        (ionChange)="this.rules.searchChanged()"
-        placeholder="Search a Rule or Term"
-        class="roboto white-bg mgb-5 mgt-15"
-    ></ion-searchbar>
-</ion-toolbar>
-
-<ion-content fullscreen class="bg-theme">
-    <div
-        mode="ios"
-        class="list2 fs-20 ion-text-capitalize roboto card-item mgt-15 mgb-15"
-        *ngFor="let rule of this.Rules.array"
-        (click)="this.Rules.nav(rule)"
-    >
-        <div class="mtgpd">
-            <img src="/assets/imgs/smallogo.jpg" class="dimensions" />
-            
-            <a class="black roboto">{{ rule }}</a>
-        </div>
-    </div>
-</ion-content> -->
-
 <ion-toolbar class="bdr-15 bg-theme">
     <!-- hide searchbar when in subcategories/details -->
     <ion-searchbar
@@ -34,11 +9,6 @@
         class="roboto white mgb-5 mgt-15"
     ></ion-searchbar>
     <!-- display back button when in subcategories/details -->
-    <!-- <div
-            *ngIf="(this.rules.array != this.rules.mainRules) && (!this.rules.sectionmain() || searchTerm == (null || '')) || this.rules.isSubsecRule()"
-            class="rule fs-20"
-            (click)="this.rules.returnMainRules()"
-        > -->
     <div
         *ngIf="!this.rules.hideBack && (this.rules.array != this.rules.mainRules)"
         class="rule fs-20"
