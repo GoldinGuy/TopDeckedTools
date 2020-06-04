@@ -35,7 +35,7 @@ Thumbs.db
 UserInterfaceState.xcuserstate
 oldparser.txt
 .*/
-bookmark.service.ts
+*.service.ts
 categoty.service.ts
 bookmark.service.ts
 comment.service.ts
