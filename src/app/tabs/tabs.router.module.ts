@@ -7,28 +7,28 @@ const routes: Routes = [
         path: 'tabs',
         component: TabsPage,
         children: [
-            {
-                path: 'home',
-                children: [
-                    {
-                        path: '',
-                        loadChildren: () =>
-                            import('../pages/home/home.module').then((m) => m.HomePageModule),
-                    },
-                ],
-            },
-            {
-                path: 'contentFilters',
-                children: [
-                    {
-                        path: '',
-                        loadChildren: () =>
-                            import('../pages/contentFilters/contentFilters.module').then(
-                                (m) => m.ContentFiltersPageModule
-                            ),
-                    },
-                ],
-            },
+            // {
+            //     path: 'home',
+            //     children: [
+            //         {
+            //             path: '',
+            //             loadChildren: () =>
+            //                 import('../pages/home/home.module').then((m) => m.HomePageModule),
+            //         },
+            //     ],
+            // },
+            // {
+            //     path: 'contentFilters',
+            //     children: [
+            //         {
+            //             path: '',
+            //             loadChildren: () =>
+            //                 import('../pages/contentFilters/contentFilters.module').then(
+            //                     (m) => m.ContentFiltersPageModule
+            //                 ),
+            //         },
+            //     ],
+            // },
             // {
             //     path: 'tools',
             //     children: [
@@ -46,20 +46,6 @@ const routes: Routes = [
                         path: '',
                         loadChildren: () =>
                             import('../pages/rules/rules.module').then((m) => m.RulesPageModule),
-                    },
-                    {
-                        path: 'topics',
-                        loadChildren: () =>
-                            import('../pages/rules/topics/topics.module').then(
-                                (m) => m.TopicsPageModule
-                            ),
-                    },
-                    {
-                        path: 'details',
-                        loadChildren: () =>
-                            import('../pages/rules/details/details.module').then(
-                                (m) => m.DetailsPageModule
-                            ),
                     },
                 ],
             },
@@ -101,14 +87,14 @@ const routes: Routes = [
             },
             {
                 path: '',
-                redirectTo: '/tabs/home',
+                redirectTo: '/tabs/rules',
                 pathMatch: 'full',
             },
         ],
     },
     {
         path: '',
-        redirectTo: '/tabs/home',
+        redirectTo: '/tabs/rules',
         pathMatch: 'full',
     },
 ];

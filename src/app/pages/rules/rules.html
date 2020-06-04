@@ -24,28 +24,64 @@
 </ion-content> -->
 
 <ion-toolbar class="bdr-15 bg-theme">
+    <!-- hide searchbar when in subcategories/details -->
     <ion-searchbar
         mode="ios"
+        *ngIf="(this.rules.array == this.rules.mainRules) || (searchTerm != null && searchTerm != '')"
         [(ngModel)]="searchTerm"
         (ionChange)="searchChanged()"
         placeholder="Search a Rule or Term"
         class="roboto white mgb-5 mgt-15"
     ></ion-searchbar>
+    <!-- display back button when in subcategories/details -->
+    <!-- <div
+            *ngIf="(this.rules.array != this.rules.mainRules) && (!this.rules.sectionmain() || searchTerm == (null || '')) || this.rules.isSubsecRule()"
+            class="rule fs-20"
+            (click)="this.rules.returnMainRules()"
+        > -->
+    <div
+        *ngIf="!this.rules.hideBack && (this.rules.array != this.rules.mainRules)"
+        class="rule fs-20"
+        (click)="this.rules.returnMainRules()"
+    >
+        <div class="rule__title">
+            <ion-icon name="arrow-dropleft" class="white mgr-5"></ion-icon>
+            <a class="white roboto-semibold truncate">{{ this.rules.currentTerm }}</a>
+        </div>
+    </div>
 </ion-toolbar>
 
 <ion-content fullscreen class="bg-theme">
-    <!-- <ng-container *ngFor="let rule of this.rules.getAllRulesMatching(this.searchTerm)"> -->
+    <!-- display each rule in the array - initially main categories, then each subcategory, then detailed rules  -->
     <ng-container *ngFor="let rule of this.rules.array">
-        <div class="fs-20 rule" (click)="this.setActive(rule)">
+        <div
+            *ngIf="!this.rules.isSubsecRule()"
+            class="fs-20 rule"
+            (click)="this.rules.displaySubrules(rule)"
+        >
             <div class="rule__title">
-                <!-- <img src="/assets/imgs/smallogo.jpg" class="dimensions" /> -->
                 <a class="white roboto truncate">{{ rule }}</a>
             </div>
-
-            <!-- <div *ngIf="this.isActive(rule)" class="rule__details"> -->
-            <!-- {{ rule.details }} -->
-            <!-- {{ this.isActiveDescription }} -->
-            <!-- </div> -->
+        </div>
+        <!-- display detailed rules differently -->
+        <div *ngIf="this.rules.isSubsecRule()" mode="ios">
+            <div class="detail_card">
+                <!-- rules with numbers i.e. 719.1e Banding -->
+                <div *ngIf="isRule(rule)" class="roboto white detail">
+                    <p class="roboto-semibold">
+                        {{ rule.substring(0, rule.indexOf(' ')) }}
+                    </p>
+                    <p class="roboto">
+                        {{ rule.substring(rule.indexOf(' ')) }}
+                    </p>
+                </div>
+                <!-- rules without numbers (glossary of mtg terms) -->
+                <div *ngIf="!isRule(rule)" class="roboto white detail">
+                    <p class="roboto">
+                        {{ rule }}
+                    </p>
+                </div>
+            </div>
         </div>
     </ng-container>
 </ion-content>
