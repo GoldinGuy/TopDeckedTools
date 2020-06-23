@@ -18,9 +18,12 @@ import rules from './rules_txt';
 
 export interface IRulesService {
     // Direct get methods
+    getAllRules(): string[];
     getAllTopicIds(): string[];
     getAllSubTopicIds(topicId: string): string[];
     getSubTopic(topic: RuleTopic, id: string): RuleInstance[];
+    getTopicFromSubtopic(subtopic: string): RuleTopic;
+    getRuleDetails(rule: RuleInstance): Array<RuleInstance>;
 
     // Keyword Lookup
     getKeywordDefinition(keyword: string): RuleInstance;
@@ -29,6 +32,10 @@ export interface IRulesService {
     findAllTopicsMatching(term: string): Array<RuleTopic>;
     findAllSubTopicsMatching(topic: RuleTopic, term: string): Array<RuleSubTopic>;
     findAllInstancesMatching(topic: RuleSubTopic, term: string): Array<RuleInstance>;
+
+    // utilities
+    isNumeric(value: string): boolean;
+    isRule(ruleToCheck: string): boolean;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -169,12 +176,12 @@ export class RulesService {
     }
 
     // determine if a given rule is numeric or a glossary term
-    isRule(ruleToCheck: string) {
+    isRule(ruleToCheck: string): boolean {
         return this.isNumeric(ruleToCheck.substring(0, 2));
     }
 
     // determines if a string value is numeric
-    isNumeric(value: string) {
+    isNumeric(value: string): boolean {
         return /^-{0,1}\d+$/.test(value);
     }
 }
