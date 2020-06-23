@@ -2,7 +2,7 @@
     <!-- hide searchbar when in subcategories/details -->
     <ion-searchbar
         mode="ios"
-        *ngIf="(array == this.rules.mainRules) || (searchTerm != null && searchTerm != '')"
+        *ngIf="(array == this.rules.getAllTopicIds()) || (searchTerm != null && searchTerm != '')"
         [(ngModel)]="searchTerm"
         (ionChange)="searchChanged()"
         placeholder="Search a Rule or Term"
@@ -10,9 +10,9 @@
     ></ion-searchbar>
     <!-- display back button when in subcategories/details -->
     <div
-        *ngIf="!hideBack && (array != this.rules.mainRules)"
+        *ngIf="!hideBack && (array != this.rules.getAllTopicIds())"
         class="rule fs-20"
-        (click)="returnMainRules()"
+        (click)="resetArrayDefault()"
     >
         <div class="rule__title">
             <ion-icon name="arrow-dropleft" class="white mgr-5"></ion-icon>
@@ -33,6 +33,7 @@
         <div *ngIf="isSubsecRule()" mode="ios">
             <div class="detail_card">
                 <!-- rules with numbers i.e. 719.1e Banding -->
+
                 <div *ngIf="this.rules.isRule(rule)" class="roboto white detail">
                     <p class="roboto-semibold">
                         {{ rule.substring(0, rule.indexOf(' ')) }}

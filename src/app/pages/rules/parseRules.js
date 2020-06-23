@@ -8,9 +8,6 @@ let newword = false;
 
 let activeline = '';
 
-let outer = '~~';
-let inner = '~~';
-
 fs.readFile('rules.txt', 'utf8', function (err, str) {
     data = str.split('\n');
     for (let i = 0; i < data.length; i++) {
@@ -32,7 +29,7 @@ fs.readFile('rules.txt', 'utf8', function (err, str) {
             }
         } else if (progress == 'rules') {
             if (line.includes('Glossary')) {
-                progress = 'Glossary';
+                progress = 'glossary';
                 rules.Glossary = {};
             } else if (rules[line] && line.length >= 1) {
                 outer = line;

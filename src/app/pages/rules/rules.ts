@@ -16,14 +16,13 @@ export class RulesPage {
         private router: Router,
         public loadingController: LoadingController
     ) {
-        this.searching = false;
+        (this.searching = false), (this.hideBack = true);
         this.searchReference = {};
-        this.hideBack = true;
-        this.array = this.rules.mainRules;
+        this.array = this.rules.getAllTopicIds();
     }
-    public searchTerm: string;
-    public searching;
-    public searchReference;
+    searchTerm: string;
+    searching: boolean;
+    searchReference;
     hideBack: boolean;
     sectionrule: string;
     currentTerm: string;
@@ -38,39 +37,33 @@ export class RulesPage {
 
         if (this.searching) {
             this.hideBack = true;
-            this.array = this.rules.getAllRulesMatching(this.searchTerm);
+            // this.array = this.rules.getAllRulesMatching(this.searchTerm);
+            this.array = this.rules.findAllInstancesMatching(this.searchTerm, true);
+            this.subsection = this.array;
         } else {
-            this.array = this.rules.mainRules;
+            this.array = this.rules.getAllTopicIds();
         }
     }
 
     // when a rule is clicked, displays the subcategories or detailed rules that category contains
-    displaySubrules(rule) {
+    displaySubrules(rule: string) {
         // if the main rules are currently displayed (default), and a rule is clicked, display all rules its "section" represents, show back button
         this.hideBack = false;
-        if (this.array == this.rules.mainRules) {
-            this.array = this.rules.getRuleSecById(rule);
+        if (this.array == this.rules.getAllTopicIds()) {
             // sets the back-button label
             this.currentTerm = rule;
+            this.array = this.rules.getAllSubTopicIds(this.rules.getAllRules()[rule]);
             // when a section is displayed or searched, and a rule is clicked, display all rules its "subsection" represents
         } else if (this.searchReference != {}) {
-            // set sectionrule to glossary by default
-            this.sectionrule = this.rules.glossary;
-            // if not glossary, set sectionrule to appropriate section
-            for (let i = 0; i < this.rules.mainRules.length; i++) {
-                if (this.rules.mainRules[i].startsWith(rule.substring(0, 1))) {
-                    this.sectionrule = this.rules.mainRules[i];
-                }
-            }
-            this.array = this.rules.getRuleSubSecById(this.sectionrule, rule);
-            this.subsection = this.array;
             this.currentTerm = rule;
+            this.array = this.rules.getRuleDetails(rule);
+            this.subsection = this.array;
         }
     }
 
     // resets the array to default main rules categories, hides back button
-    returnMainRules() {
-        this.array = this.rules.mainRules;
+    resetArrayDefault() {
+        this.array = this.rules.getAllTopicIds();
         this.hideBack = true;
     }
 
