@@ -113,7 +113,7 @@ export class RulesService {
 
     // Query methods
     findAllTopicsMatching(term: string): Array<RuleTopic> {
-        let temp: Array<RuleTopic>;
+        const temp: Array<RuleTopic> = [];
         for (const topic in this.topics) {
             if (topic.includes(term)) {
                 temp.push(rules[topic]);
@@ -122,11 +122,11 @@ export class RulesService {
         }
     }
 
-    findAllSubTopicsMatching(topic: RuleTopic, term: string): Array<RuleSubTopic[]> {
+    findAllSubTopicsMatching(topic: RuleTopic, term: string): Array<RuleSubTopic> {
         if (term == null || term == '') {
             return [];
         } else {
-            let temp: Array<RuleSubTopic[]>;
+            let temp: Array<RuleSubTopic>;
             for (const subtopic in topic) {
                 // check subtopic for match against term and add to result if it does
                 if (subtopic.includes(term)) {
