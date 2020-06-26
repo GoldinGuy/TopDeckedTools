@@ -1,9 +1,7 @@
-import { Component } from '@angular/core';
 import { RulesService } from 'src/app/services/rules.service';
-import { Storage } from '@ionic/storage';
-import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
+
+import { Component } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
-import { empty } from 'rxjs';
 
 @Component({
     selector: 'page-rules',
@@ -12,17 +10,15 @@ import { empty } from 'rxjs';
 })
 export class RulesPage {
     constructor(
-        private rules: RulesService,
-        private router: Router,
+        public rules: RulesService,
         public loadingController: LoadingController
     ) {
         (this.searching = false), (this.hideBack = true);
-        this.searchReference = {};
         this.array = this.rules.getAllTopicIds();
     }
+
     searchTerm: string;
     searching: boolean;
-    searchReference;
     hideBack: boolean;
     sectionrule: string;
     currentTerm: string;
@@ -47,14 +43,15 @@ export class RulesPage {
 
     // when a rule is clicked, displays the subcategories or detailed rules that category contains
     displaySubrules(rule: string) {
-        // if the main rules are currently displayed (default), and a rule is clicked, display all rules its "section" represents, show back button
+        // if the main rules are currently displayed (default), and a rule is clicked,
+        // display all rules its "section" represents, show back button
         this.hideBack = false;
-        if (this.array == this.rules.getAllTopicIds()) {
+        if (this.array === this.rules.getAllTopicIds()) {
             // sets the back-button label
             this.currentTerm = rule;
             this.array = this.rules.getAllSubTopicIds(this.rules.getAllRules()[rule]);
             // when a section is displayed or searched, and a rule is clicked, display all rules its "subsection" represents
-        } else if (this.searchReference != {}) {
+        } else {
             this.currentTerm = rule;
             this.array = this.rules.getRuleDetails(rule);
             this.subsection = this.array;
@@ -68,8 +65,8 @@ export class RulesPage {
     }
 
     // determines whether the array is currently displaying "subsection" rules or not
-    isSubsecRule() {
-        if (this.array == this.subsection) {
+    isDisplayingSubsection(array: any[]) {
+        if (array === this.subsection) {
             return true;
         } else {
             return false;

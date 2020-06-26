@@ -24,13 +24,13 @@
 <ion-content fullscreen class="bg-theme">
     <!-- display each rule in the array - initially main categories, then each subcategory, then detailed rules  -->
     <ng-container *ngFor="let rule of array">
-        <div *ngIf="!isSubsecRule()" class="fs-20 rule" (click)="displaySubrules(rule)">
+        <div *ngIf="!isDisplayingSubsection(array)" class="fs-20 rule" (click)="displaySubrules(rule)">
             <div class="rule__title">
                 <a class="white roboto truncate">{{ rule }}</a>
             </div>
         </div>
         <!-- display detailed rules differently -->
-        <div *ngIf="isSubsecRule()" mode="ios">
+        <div *ngIf="isDisplayingSubsection(array)" mode="ios">
             <div class="detail_card">
                 <!-- rules with numbers i.e. 719.1e Banding -->
 

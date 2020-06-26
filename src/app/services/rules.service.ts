@@ -14,11 +14,12 @@ export type RuleInstance = string;
 
 import { Injectable } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
+
 import rules from './rules_txt';
 
 export interface IRulesService {
     // Direct get methods
-    getAllRules(): string[];
+    getAllRules(): RuleInstance[];
     getAllTopicIds(): string[];
     getAllSubTopicIds(topicId: string): string[];
     getSubTopic(topic: RuleTopic, id: string): RuleInstance[];
@@ -31,7 +32,7 @@ export interface IRulesService {
     // Query methods
     findAllTopicsMatching(term: string): Array<RuleTopic>;
     findAllSubTopicsMatching(topic: RuleTopic, term: string): Array<RuleSubTopic>;
-    findAllInstancesMatching(topic: RuleSubTopic, term: string): Array<RuleInstance>;
+    findAllInstancesMatching(term: string, withHeaders: boolean): Array<RuleInstance>;
 
     // utilities
     isNumeric(value: string): boolean;
@@ -39,21 +40,21 @@ export interface IRulesService {
 }
 
 @Injectable({ providedIn: 'root' })
-export class RulesService {
+export class RulesService implements IRulesService {
     topics: string[];
     glossary: string;
 
     constructor(public loadingController: LoadingController) {
         this.topics = Object.keys(rules);
-        for (let i = 0; i < this.topics.length; i++) {
-            if (this.topics[i].toLowerCase() == 'glossary') {
-                this.glossary = this.topics[i];
+        for (const topic of this.topics) {
+            if (topic.toLowerCase() === 'glossary') {
+                this.glossary = topic;
             }
         }
     }
 
     // Direct get methods
-    getAllRules(): string[] {
+    getAllRules(): RuleInstance[] {
         return rules;
     }
 
@@ -61,7 +62,7 @@ export class RulesService {
         return this.topics;
     }
 
-    getAllSubTopicIds(topicId: RuleTopic): string[] {
+    getAllSubTopicIds(topicId: string): string[] {
         return Object.keys(topicId);
         // return Object.keys(rules[topicId]);
     }
@@ -75,9 +76,9 @@ export class RulesService {
     }
 
     getTopicFromSubtopic(subtopic: string): RuleTopic {
-        for (let i = 0; i < this.topics.length; i++) {
-            if (this.topics[i].startsWith(subtopic.substring(0, 1))) {
-                return rules[this.topics[i]];
+        for (const topic of this.topics) {
+            if (topic.startsWith(subtopic.substring(0, 1))) {
+                return rules[topic];
             }
         }
     }
@@ -85,9 +86,9 @@ export class RulesService {
     getRuleDetails(rule: RuleInstance): Array<RuleInstance> {
         let subsection: Array<RuleInstance>, section: string;
         section = this.glossary;
-        for (let i = 0; i < this.topics.length; i++) {
-            if (this.topics[i].startsWith(rule.substring(0, 1))) {
-                section = this.topics[i];
+        for (const topic of this.topics) {
+            if (topic.startsWith(rule.substring(0, 1))) {
+                section = topic;
             }
         }
         subsection = rules[section][rule];
@@ -99,13 +100,13 @@ export class RulesService {
 
     // Keyword Lookup
     getKeywordDefinition(keyword: string): RuleInstance {
-        let def: string = 'undefined';
+        let def = 'undefined';
         keyword = keyword
             .toLowerCase()
             .split(' ')
             .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
             .join(' ');
-        if (!this.isRule(keyword) && keyword != null && keyword != '') {
+        if (!this.isRule(keyword) && keyword != null && keyword !== '') {
             def = rules[this.glossary][keyword];
         }
         return def;
@@ -118,15 +119,15 @@ export class RulesService {
             if (topic.includes(term)) {
                 temp.push(rules[topic]);
             }
-            return temp;
         }
+        return temp;
     }
 
     findAllSubTopicsMatching(topic: RuleTopic, term: string): Array<RuleSubTopic> {
-        if (term == null || term == '') {
+        if (term == null || term === '') {
             return [];
         } else {
-            let temp: Array<RuleSubTopic>;
+            const temp: Array<RuleSubTopic> = [];
             for (const subtopic in topic) {
                 // check subtopic for match against term and add to result if it does
                 if (subtopic.includes(term)) {
@@ -139,12 +140,12 @@ export class RulesService {
     }
 
     findAllInstancesMatching(term: string, withHeaders: boolean): Array<RuleInstance> {
-        if (term == null || term == '') {
+        if (term == null || term === '') {
             return this.topics;
         } else {
-            let temp = Array<RuleInstance>();
+            const temp = Array<RuleInstance>();
             this.topics.forEach((subtopic) => {
-                let subrule = rules[subtopic];
+                const subrule = rules[subtopic];
                 Object.keys(subrule).forEach((instance) => {
                     let detail = rules[subtopic][instance];
                     let added = false;
