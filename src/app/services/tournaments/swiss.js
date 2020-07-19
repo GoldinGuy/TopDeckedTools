@@ -29,7 +29,7 @@ function getModifiedMedianScores(options, round, participants, matches) {
             return acc;
         },
         participants.reduce((acc, participant) => {
-            acc[participant.id] = {
+            acc[participant.name] = {
                 scores: [],
                 points: 0,
             };
@@ -53,11 +53,11 @@ function getStandings(options, round, participants, matches) {
     matches = matches.filter((match) => match.round < round);
     var scores = getModifiedMedianScores(options, round, participants, matches);
     var standings = participants.reduce((standings, participant) => {
-        standings[participant.id] = {
+        standings[participant.name] = {
             seed: participant.seed,
             wins: 0,
             losses: 0,
-            tiebreaker: scores[participant.id],
+            tiebreaker: scores[participant.name],
         };
         return standings;
     }, {});
@@ -152,7 +152,7 @@ function getMatchups(options, round, participants, matches) {
     var results = blossom(arr, true);
     var matchups = [];
     // Here we sort matchups by standings so that matchups and standings follow
-    // roughly the same order - this doesn't impact funcitonality at all
+    // roughly the same order - this doesn't impact functionality at all
     // Ordering this in the view layer should be possible, so let's move it there
     // pending review
     var standings = getStandings(options, round, participants, matches);
@@ -187,21 +187,21 @@ function getMappings(participants, matches) {
         acc.push(
             matches
                 .filter((match) => {
-                    return match.home.id === participant.id || match.away.id === participant.id;
+                    return match.home.id === participant.name || match.away.id === participant.name;
                 })
                 .reduce(
                     (acc, match) => {
-                        if (match.home.id === participant.id) {
+                        if (match.home.id === participant.name) {
                             acc.points += match.home.points;
                             acc.opponents.push(match.away.id);
-                        } else if (match.away.id === participant.id) {
+                        } else if (match.away.id === participant.name) {
                             acc.points += match.away.points;
                             acc.opponents.push(match.home.id);
                         }
                         return acc;
                     },
                     {
-                        id: participant.id,
+                        id: participant.name,
                         seed: participant.seed,
                         droppedOut: participant.droppedOut,
                         points: 0,

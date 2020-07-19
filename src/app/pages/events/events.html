@@ -44,11 +44,11 @@
             <ion-list class="mgt-5 bg-purple">
                 <ion-item-sliding *ngFor="let item of participants" class="player">
                     <ion-item class="player-item">
-                        <ion-label class="roboto-white">{{ item.id }}</ion-label>
+                        <ion-label class="roboto-white">{{ item.name }}</ion-label>
                         <ion-label class="roboto-white">{{ item.phoneNumber }}</ion-label>
                     </ion-item>
                     <ion-item-options side="end" class="white">
-                        <ion-item-option (click)="remove(item.id)" class="white"
+                        <ion-item-option (click)="remove(item.name)" class="white"
                             >Remove
                         </ion-item-option>
                     </ion-item-options>
@@ -73,7 +73,7 @@
         <ion-toolbar class="bg-purple bdra-10">
             <ion-segment mode="ios" class=" ">
                 <ion-segment-button
-                    *ngFor="let choice of rounds"
+                    *ngFor="let choice of roundsPicker"
                     (name)="(choice.val)"
                     mode="ios"
                     class="h-30 select"
@@ -85,7 +85,8 @@
                 </ion-segment-button>
             </ion-segment>
         </ion-toolbar>
-        <!-- <ion-button expand="block" (click)="showPicker()">Select Number of Rounds</ion-button> -->
+        <!-- <ion-button expand="block" (c
+            lick)="showPicker()">Select Number of Rounds</ion-button> -->
         <br />
         <br />
 

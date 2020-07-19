@@ -14,17 +14,21 @@
         <ion-fab-button mini class="e2eFabTopRight" (click)="textPairings()">
             <ion-icon name="ios-text"></ion-icon>
         </ion-fab-button>
-        {{ status }}
+        {{ tourney.status }}
     </ion-fab>
 
     <br />
 
     <div class="pdl-20 pdr-20 pdt-5">
-        <h2 class="roboto-white fs-18 round">Round {{ this.round }}</h2>
+        <h2 class="roboto-white fs-18 round">Round {{ tourney.round.roundNum }}</h2>
 
         <br />
 
-        <ion-card no-margin class="mgb-15 bg-purple-card bdra-5" *ngFor="let pairing of pairings">
+        <ion-card
+            no-margin
+            class="mgb-15 bg-purple-card bdra-5"
+            *ngFor="let pairing of tourney.round.pairings"
+        >
             <ion-grid>
                 <ion-row>
                     <ion-col>
@@ -86,13 +90,13 @@
                             interface="popover"
                             *ngIf="!pairing.bye"
                         >
-                            <ion-select-option value="0" class="rv" lines="none"
+                            <ion-select-option value="0" class=" " lines="none"
                                 >0</ion-select-option
                             >
-                            <ion-select-option value="1" class="rv" lines="none"
+                            <ion-select-option value="1" class=" " lines="none"
                                 >1</ion-select-option
                             >
-                            <ion-select-option value="2" class="rv" lines="none"
+                            <ion-select-option value="2" class=" " lines="none"
                                 >2</ion-select-option
                             >
                         </ion-select>
