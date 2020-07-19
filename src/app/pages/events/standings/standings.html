@@ -22,7 +22,7 @@
         <br />
 
         <ion-list class="player">
-            <ion-item class="player-item" lines="none" *ngFor="let person of results">
+            <ion-item class="player-item" lines="none" *ngFor="let person of tourney.standings">
                 <h5 class="fs-19"><span class="rank">{{ person.index }}</span> {{ person.id }}</h5>
 
                 <ion-col
@@ -49,7 +49,7 @@
                 size="medium"
                 class="txt-light mgt--20 but fs-20"
                 type="submit"
-                (click)="back()"
+                (click)="endEvent()"
             >
                 <h3 class="roboto-white">Done</h3>
             </ion-button>
