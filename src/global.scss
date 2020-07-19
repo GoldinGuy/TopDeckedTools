@@ -170,10 +170,6 @@ ion-content[fullscreen] {
 // 	}
 // }
 
-.tab-btn-selected {
-    color: #892bfe !important;
-}
-
 .offset-top-obj {
     margin-top: calc(var(--offset-top) * -1) !important;
 }
@@ -1547,43 +1543,11 @@ ion-button[color='danger'] {
     --box-shadow: 0px 2px 7px 0px var(--ion-color-danger-shadow);
 }
 
-// ion-slides {
-// 	--bullet-background-active: #fff !important;
-// 	overflow: unset !important;
-// 	.swiper-wrapper {
-// 		overflow: unset !important;
-// 		height: 100% !important;
-// 		/*transition: 1s cubic-bezier(0.01, 0.63, 0.71, 0.82) !important;*/
-// 		ion-slide {
-// 			/*height: 100% !important;*/
-// 		}
-// 	}
-// }
-
-.light-purp {
-    color: #892bfe !important;
-    // color: #9f86c0 !important;
-    // background-color: #9f86c0 !important;
-}
-
-.med-purp {
-    color: #892bfe !important;
-    // color: #5e548e !important;
-    // background-color: #5e548e !important;
-}
-
-.dark-purp {
-    color: #892bfe !important;
-    // color: #231942 !important;
-    // background-color: #231942 !important;
-}
-
 .ion-segment-header {
     --background: var(--mystic-toobarBackground, #ffffff) !important;
     --background-checked: var(--mystic-toobarBackground, #ffffff) !important;
     --background-activated: var(--mystic-toobarBackground, #ffffff) !important;
     // --color-checked: #9f86c0 !important;
-    --color-checked: #892bfe !important;
 }
 
 .center {
@@ -1601,8 +1565,3 @@ ion-button[color='danger'] {
     width: 20px;
     height: 20px;
 }
-
-.purple1 {
-    color: #892bfe !important;
-}
-// #876796

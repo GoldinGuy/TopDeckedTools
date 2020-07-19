@@ -1,23 +1,27 @@
-<ion-header box-shadow>
-    <ion-toolbar class="bg-theme">
+<!-- <ion-header box-shadow>
+    <ion-toolbar>
         <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title class="roboto-white-title fs-20">TopDecked Tournaments</ion-title>
+        <ion-title class="phalanax fs-20">MYSTIC</ion-title>
+        <ion-icon
+            name="md-settings"
+            slot="end"
+            class="nav-icon"
+            routerLink="/tabs/settings"
+            routerDirection="forward"
+        ></ion-icon>
     </ion-toolbar>
 </ion-header>
-<ion-content class="bg-theme">
-    <!-- <ion-card
+<ion-content>
+    <ion-card
         class="tourney2"
         background-size
         [ngStyle]="{ 'background-image': 'url(/assets/imgs/progress.png)' }"
     >
         <div clearfix></div>
-    </ion-card> -->
+    </ion-card>
 
-    <div class="bg-light-purple">
-        <h3 class="roboto-white-title">Event in Progress</h3>
-    </div>
     <ion-fab class="filter" vertical="top" horizontal="end" edge id="fab1">
         <ion-fab-button mini class="e2eFabTopRight" (click)="textPairings()">
             <ion-icon name="ios-text"></ion-icon>
@@ -28,36 +32,28 @@
     <br />
 
     <div class="pdl-20 pdr-20 pdt-5">
-        <h2 class="roboto-white fs-18 round">Round {{ this.round }}</h2>
+        <h2 class="phalanax rv">ROUND {{ this.round }}</h2>
 
         <br />
 
-        <ion-card no-margin class="mgb-15 bg-purple-card bdra-5" *ngFor="let pairing of pairings">
+        <ion-card no-margin class="mgb-15" color="tourney" *ngFor="let pairing of pairings">
             <ion-grid>
                 <ion-row>
                     <ion-col>
-                        <h5 class="fs-17 roboto-white" side="start">
+                        <h5 class="open fs-17 ion-text-capitalize rv" side="start">
                             {{ pairing.home.id }}
                         </h5>
                     </ion-col>
                     <ion-col>
-                        <h3
-                            ion-text-center
-                            class="center roboto-semibold roboto-white"
-                            *ngIf="pairing.bye"
-                        >
+                        <h3 ion-text-center class="center roboto-semibold rv" *ngIf="pairing.bye">
                             BYE
                         </h3>
-                        <h3
-                            ion-text-center
-                            class="center roboto-semibold roboto-white"
-                            *ngIf="!pairing.bye"
-                        >
+                        <h3 ion-text-center class="center roboto-semibold rv" *ngIf="!pairing.bye">
                             VS
                         </h3>
                     </ion-col>
                     <ion-col>
-                        <h5 float-right class="fs-17 roboto-white" side="end">
+                        <h5 float-right class="open fs-17 ion-text-capitalize rv" side="end">
                             {{ pairing.away.id }}
                         </h5>
                     </ion-col>
@@ -65,20 +61,20 @@
                 <ion-row>
                     <ion-col>
                         <ion-select
-                            class="roboto-semibold fs-18 roboto-white purple-select"
+                            class="roboto-semibold fs-18 rv tournpop"
                             [(ngModel)]="pairing.home.score"
                             side="start"
                             placeholder="0"
                             interface="popover"
                             value="0"
-                            css-class="ion-select roboto-white"
+                            css-class="tournpop"
                             mode="md"
                             float-left
                             *ngIf="!pairing.bye"
                         >
-                            <ion-select-option value="0">0</ion-select-option>
-                            <ion-select-option value="1">1</ion-select-option>
-                            <ion-select-option value="2">2</ion-select-option>
+                            <ion-select-option value="0" class="rv">0</ion-select-option>
+                            <ion-select-option value="1" class="rv">1</ion-select-option>
+                            <ion-select-option value="2" class="rv">2</ion-select-option>
                         </ion-select>
                     </ion-col>
                     <ion-col>
@@ -87,9 +83,9 @@
                             side="end"
                             float-right
                             value="0"
-                            css-class="tournpop roboto-white"
+                            css-class="tournpop"
                             mode="md"
-                            class="roboto-semibold fs-18 tournpop roboto-white"
+                            class="roboto-semibold fs-18 rv tournpop"
                             placeholder="0"
                             interface="popover"
                             *ngIf="!pairing.bye"
@@ -111,17 +107,18 @@
 
         <br />
 
-        <div text-center class="fs-20 fw-900 mgt- mgb-30 spacing1">
+        <div text-center class="fs-30 fw-900 mgt- mgb-30 spacing1">
             <ion-button
                 expand="round"
+                color="primary"
                 size="medium"
-                class="mgt--20 but"
+                class="txt-light mgt--20 but"
                 type="submit"
                 (click)="nextRound()"
                 mode="ios"
             >
-                <h3 class="roboto-white">Next Round</h3>
+                <h2 class="phalanax white">NEXT ROUND</h2>
             </ion-button>
         </div>
     </div>
-</ion-content>
+</ion-content> -->

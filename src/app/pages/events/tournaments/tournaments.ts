@@ -24,12 +24,12 @@ import { Storage } from '@ionic/storage';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SMS } from '@ionic-native/sms/ngx';
 
-import swiss from './swiss.js';
+import swiss from '../../../services/tournaments/swiss.js';
 
 @Component({
     selector: 'app-tournaments',
     templateUrl: 'tournaments.html',
-    styleUrls: ['tournaments.scss']
+    styleUrls: ['tournaments.scss'],
 })
 export class TournamentsPage {
     constructor(
@@ -38,7 +38,7 @@ export class TournamentsPage {
         private route: ActivatedRoute,
         private sms: SMS
     ) {
-        this.route.queryParams.subscribe(params => {
+        this.route.queryParams.subscribe((params) => {
             console.log('starting');
             if (this.router.getCurrentNavigation().extras.state) {
                 this.newTournament = this.router.getCurrentNavigation().extras.state.new;
@@ -93,12 +93,12 @@ export class TournamentsPage {
     textPairings() {
         console.log(this.pairings);
         let participantRefactor = {};
-        this.participants.forEach(participant => {
+        this.participants.forEach((participant) => {
             participantRefactor[participant.id] = participant.phoneNumber;
         });
 
         let numbers = [];
-        let string = this.pairings.map(pairing => {
+        let string = this.pairings.map((pairing) => {
             numbers.push(participantRefactor[pairing.home.id]);
             numbers.push(participantRefactor[pairing.away.id]);
 
@@ -159,14 +159,14 @@ export class TournamentsPage {
                     home: {
                         id: pairing.home,
                         points: 1,
-                        score: 2
+                        score: 2,
                     },
                     bye: true,
                     away: {
                         id: pairing.away,
                         points: 0,
-                        score: 0
-                    }
+                        score: 0,
+                    },
                 };
             }
             return {
@@ -175,13 +175,13 @@ export class TournamentsPage {
                 home: {
                     id: pairing.home,
                     points: 0,
-                    score: 0
+                    score: 0,
                 },
                 away: {
                     id: pairing.away,
                     points: 0,
-                    score: 0
-                }
+                    score: 0,
+                },
             };
         });
 

@@ -140,3 +140,19 @@
         -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
     }
 }
+
+ion-select {
+    /* Applies to the value and placeholder color */
+    color: #545ca7 !important;
+
+    /* Set a different placeholder color */
+    --placeholder-color: #971e49 !important;
+
+    /* Set full opacity on the placeholder */
+    --placeholder-opacity: 0 !important;
+}
+
+.purple-select .select-interface-option {
+    --color: #971e49 !important;
+    --color-hover: #79193b !important;
+}

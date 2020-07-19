@@ -2,13 +2,13 @@ import { Component } from '@angular/core';
 import { ModalController, AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { Router, ActivatedRoute } from '@angular/router';
-import swiss from '../tournaments/swiss.js';
+import swiss from '../../../services/tournaments/swiss.js';
 // import { SMS } from "@ionic-native/sms/ngx";
 
 @Component({
     selector: 'app-standings',
     templateUrl: 'standings.html',
-    styleUrls: ['standings.scss']
+    styleUrls: ['standings.scss'],
 })
 export class standingsPage {
     constructor(
@@ -44,14 +44,14 @@ export class standingsPage {
             let differential = {};
             let points = {};
 
-            this.results.forEach(result => {
+            this.results.forEach((result) => {
                 wins[result.id] = result.wins;
                 differential[result.id] = 0;
                 points[result.id] = 0;
             });
 
             console.log(wins);
-            this.matches.forEach(match => {
+            this.matches.forEach((match) => {
                 if (match.away.id && match.home.id) {
                     differential[match.home.id] += 0 + wins[match.away.id];
                     differential[match.away.id] += 0 + wins[match.home.id];
@@ -62,14 +62,14 @@ export class standingsPage {
                 }
             });
 
-            this.results = this.results.map(result => {
+            this.results = this.results.map((result) => {
                 return {
                     id: result.id,
                     wins: result.wins,
                     losses: result.losses,
                     seed: 1 + this.results.length - result.seed,
                     tb: differential[result.id],
-                    dtb: points[result.id]
+                    dtb: points[result.id],
                 };
             });
 
@@ -144,7 +144,7 @@ export class standingsPage {
                 person.tb +
                 '\n Points: ' +
                 person.dtb,
-            buttons: ['DONE']
+            buttons: ['DONE'],
         });
         return await alert.present();
     }

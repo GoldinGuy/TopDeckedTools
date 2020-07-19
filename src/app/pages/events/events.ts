@@ -3,33 +3,37 @@ import { Storage } from '@ionic/storage';
 import { Router, NavigationExtras } from '@angular/router';
 import { AlertController, PopoverController } from '@ionic/angular';
 import { isNullOrUndefined } from 'util';
+import { PickerController } from '@ionic/angular';
+import { PickerOptions } from '@ionic/core';
 
 @Component({
     selector: 'app-events',
     templateUrl: 'events.html',
-    styleUrls: ['events.scss']
+    styleUrls: ['events.scss'],
 })
 export class EventsPage {
     participants = [];
     swipeLeft = true;
     round;
-    totalRounds = 2;
+    totalRounds = 4;
     name;
     phoneNumber;
 
     rounds = [
-        { val: 2, isChecked: true },
+        { val: 2, isChecked: false },
         { val: 3, isChecked: false },
-        { val: 4, isChecked: false },
+        { val: 4, isChecked: true },
         { val: 5, isChecked: false },
-        { val: 6, isChecked: false }
+        { val: 6, isChecked: false },
     ];
+    // rounds: number[] = [1, 2, 3, 4, 5, 6, 7, 8];
 
     constructor(
         public popoverController: PopoverController,
         public alertController: AlertController,
         private router: Router,
-        private storage: Storage
+        private storage: Storage,
+        private pickerController: PickerController
     ) {}
 
     async ionViewWillEnter() {
@@ -86,8 +90,8 @@ export class EventsPage {
         await this.storage.set('totalRounds', this.totalRounds);
         let navigationExtras: NavigationExtras = {
             state: {
-                new: true
-            }
+                new: true,
+            },
         };
         this.router.navigate(['/tabs/events/tournaments'], navigationExtras);
     }
@@ -100,7 +104,7 @@ export class EventsPage {
         const player = {
             id: this.name,
             phoneNumber: this.phoneNumber,
-            seed: this.participants.length + 1
+            seed: this.participants.length + 1,
         };
 
         this.name = '';
@@ -111,9 +115,9 @@ export class EventsPage {
         await this.storage.set('participants', this.participants);
     };
 
-    remove = async name => {
+    remove = async (name) => {
         console.log('Remove ' + name);
-        this.participants = this.participants.filter(player => player.id != name);
+        this.participants = this.participants.filter((player) => player.id != name);
         await this.storage.set('participants', this.participants);
     };
 
@@ -130,21 +134,53 @@ export class EventsPage {
 
     segmentButtonClicked(event: any) {
         this.totalRounds = event.target.value;
-        this.rounds = this.rounds.map(round => {
+        this.rounds = this.rounds.map((round) => {
             if (round.val == event.target.value) {
-                // console.log(round.val + " : true");
                 return {
                     val: round.val,
-                    isChecked: true
+                    isChecked: true,
                 };
             } else {
-                // console.log(round.val + " : false");
                 return {
                     val: round.val,
-                    isChecked: false
+                    isChecked: false,
                 };
             }
         });
         console.log(this.rounds);
     }
+
+    // async showPicker() {
+    //     let options: PickerOptions = {
+    //         buttons: [
+    //             {
+    //                 text: 'Cancel',
+    //                 role: 'cancel',
+    //             },
+    //             {
+    //                 text: 'Ok',
+    //                 handler: (value: any) => {
+    //                     console.log(value);
+    //                 },
+    //             },
+    //         ],
+    //         columns: [
+    //             {
+    //                 name: 'Number of Rounds',
+    //                 options: this.getColumnOptions(),
+    //             },
+    //         ],
+    //     };
+
+    //     let picker = await this.pickerController.create(options);
+    //     picker.present();
+    // }
+
+    // getColumnOptions() {
+    //     let options = [];
+    //     this.rounds.forEach((x) => {
+    //         options.push({ text: x, value: x });
+    //     });
+    //     return options;
+    // }
 }

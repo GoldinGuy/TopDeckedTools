@@ -1,0 +1,83 @@
+<!-- <ion-header box-shadow>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title class="phalanax fs-20">MYSTIC</ion-title>
+        <ion-icon
+            name="md-settings"
+            slot="end"
+            class="nav-icon"
+            routerLink="/tabs/settings"
+            routerDirection="forward"
+        ></ion-icon>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-card
+        class="tourney2"
+        background-size
+        [ngStyle]="{ 'background-image': 'url(/assets/imgs/eventsMain.jpg)' }"
+    >
+        <span category class="logo">
+            <ion-thumbnail class="bdr-5 logo-inner">
+                <img src="/assets/imgs/logos/results.png" alt="" class="logo-inner bdr-5" />
+            </ion-thumbnail>
+        </span>
+
+        <div clearfix></div>
+    </ion-card>
+
+    <ion-fab class="filter" vertical="top" horizontal="end" edge id="fab1">
+        <ion-fab-button
+            mini
+            class="e2eFabTopRight"
+            routerLink="/menu/tools/timer"
+            routerDirection="forward"
+        >
+            <ion-icon name="ios-text"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+    <div class="pdl-20 pdr-20 pdt-5">
+        <h2 class="phalanax rv">STANDINGS</h2>
+
+        <br />
+
+        <ion-list class="pdt-0 rv">
+            <ion-item class="open pdt-0 rv bdr-c" *ngFor="let person of results">
+                <h5 class="open ion-text-capitalize fs-19 rv">
+                    {{ person.index }} | {{ person.id }}
+                </h5>
+
+                <ion-col
+                    ><ion-button
+                        float-right
+                        side="end"
+                        mode="ios"
+                        class="open fs-14 rv"
+                        id="longMessage"
+                        expand="block"
+                        (click)="presentAlertLongMessage(person)"
+                        shape="round"
+                        fill="outline"
+                        >RECORD</ion-button
+                    ></ion-col
+                >
+            </ion-item>
+        </ion-list>
+
+        <div text-center class="fs-30 fw-900 mgt-30 mgb-20 spacing1">
+            <ion-button
+                expand="round"
+                color="primary"
+                mode="ios"
+                size="medium"
+                class="txt-light mgt--20 but"
+                type="submit"
+                (click)="back()"
+            >
+                <h2 class="phalanax white">END EVENT</h2>
+            </ion-button>
+        </div>
+    </div>
+</ion-content> -->
