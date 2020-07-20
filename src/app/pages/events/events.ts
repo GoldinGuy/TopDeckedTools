@@ -3,11 +3,7 @@ import { Storage } from '@ionic/storage';
 import { Router, NavigationExtras } from '@angular/router';
 import { AlertController, PopoverController } from '@ionic/angular';
 import { isNullOrUndefined } from 'util';
-import {
-    Tournament,
-    TournamentService,
-    TournamentPlayer,
-} from 'src/app/services/tournament.service';
+import { Tournament, TournamentService } from 'src/app/services/tournament.service';
 
 @Component({
     selector: 'app-events',
@@ -16,10 +12,7 @@ import {
 })
 export class EventsPage {
     tourney: Tournament;
-    participants = Array<TournamentPlayer>();
-    swipeLeft = true;
-    round: number;
-    totalRounds: number;
+    // temporary UI fields
     name: string;
     phoneNumber: string;
 
@@ -37,56 +30,66 @@ export class EventsPage {
         private router: Router,
         private storage: Storage,
         private tournamentService: TournamentService
-    ) {}
+    ) {
+        this.tourney = {
+            id: 'unknown',
+            participants: [
+                {
+                    name: 'bob',
+                    phoneNumber: '43534543',
+                    standing: null,
+                    seed: 1,
+                },
+                {
+                    name: 'joe',
+                    phoneNumber: '3543536',
+                    standing: null,
+                    seed: 2,
+                },
+                {
+                    name: 'sue',
+                    phoneNumber: '86767876',
+                    standing: null,
+                    seed: 3,
+                },
+            ],
+            matches: [],
+            totalRounds: 4,
+            round: {
+                roundNum: 1,
+                pairings: [],
+            },
+            rounds: [],
+            standings: null,
+            status: 'Unknown',
+        };
+    }
 
     async ionViewWillEnter() {
         try {
             this.tourney = await this.storage.get('tournament');
-            this.participants = this.tourney.participants;
-            this.round = this.tourney.round.roundNum;
-            this.totalRounds = this.tourney.totalRounds;
-            if (this.totalRounds <= 0) {
-                this.totalRounds = 4;
+            if (this.tourney.totalRounds <= 0) {
+                this.tourney.totalRounds = 4;
             }
         } catch (e) {
-            console.log('Error. No tournament found.');
-            this.participants = [];
-            this.round = 0;
-            this.totalRounds = 4;
+            console.log('Error. No tournament found. Creating new tournament.');
+            this.tourney = this.tournamentService.createTournament([], 4);
         }
-        if (isNullOrUndefined(this.participants)) {
-            this.participants = [];
+        if (isNullOrUndefined(this.tourney.participants)) {
+            this.tourney.participants = [];
         }
 
-        if (this.round != 0) {
+        if (this.tourney.round.roundNum != 0) {
             this.router.navigate(['/tabs/events/tournaments']);
         }
     }
 
-    isDisabled() {
-        if (this.participants.length < 1) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    isButtonDisabled() {
-        // console.log(this.participants.length < 2);
-        if (this.participants.length < 2) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     async startEvent() {
-        if (this.participants.length < 2) {
+        if (this.tourney.participants.length < 2) {
             return;
         }
 
-        this.tourney = this.tournamentService.createTournament(this.participants, this.totalRounds);
-        await this.storage.set('tournament', this.tourney);
+        this.tournamentService.saveTournament(this.tourney, this.storage);
         let navigationExtras: NavigationExtras = {
             state: {
                 new: true,
@@ -99,38 +102,30 @@ export class EventsPage {
         if (!this.name || !this.phoneNumber) {
             return;
         }
-        const player = this.tournamentService.addPlayer(
+        this.tournamentService.createPlayer(
             this.name,
             this.phoneNumber,
-            this.participants.length + 1
+            this.tourney.participants.length + 1,
+            this.tourney
         );
 
         this.name = '';
         this.phoneNumber = '';
 
-        this.participants.push(player);
-        console.log(this.participants);
+        console.log(this.tourney.participants);
     };
 
     remove = async (name: string) => {
-        console.log('Remove ' + name);
-        this.participants = this.participants.filter(
-            (player: TournamentPlayer) => player.name != name
-        );
+        this.tournamentService.removePlayer(this.tourney, name);
     };
 
     removeAll = async () => {
-        this.participants = [];
-        this.swipeLeft = false;
+        this.tournamentService.removeAllPlayers(this.tourney);
     };
 
-    removeTutorial() {
-        this.swipeLeft = false;
-        return this.swipeLeft;
-    }
-
+    // handle button events and whether they are disbaled
     segmentButtonClicked(ev: any) {
-        this.totalRounds = ev.target.value;
+        this.tourney.totalRounds = ev.target.value;
         this.roundsPicker = this.roundsPicker.map((round) => {
             if (round.val == ev.target.value) {
                 return {
@@ -145,5 +140,21 @@ export class EventsPage {
             }
         });
         console.log(this.roundsPicker);
+    }
+
+    isDisabled() {
+        if (this.tourney.participants.length < 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    isButtonDisabled() {
+        if (this.tourney.participants.length < 2) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

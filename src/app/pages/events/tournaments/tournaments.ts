@@ -19,8 +19,10 @@ import { AlertController } from '@ionic/angular';
 })
 export class TournamentsPage {
     tourney: Tournament;
+    // bool variables that determine UI
     newTournament: boolean;
     displayStandings: boolean;
+    eventComplete: boolean;
 
     constructor(
         private router: Router,
@@ -30,7 +32,7 @@ export class TournamentsPage {
         private sms: SMS,
         private tournamentService: TournamentService
     ) {
-        this.route.queryParams.subscribe((params) => {
+        this.route.queryParams.subscribe(() => {
             console.log('starting');
             if (this.router.getCurrentNavigation().extras.state) {
                 this.newTournament = this.router.getCurrentNavigation().extras.state.new;
@@ -79,20 +81,21 @@ export class TournamentsPage {
             console.log('Error. No tournament found.');
         }
         this.displayStandings = false;
+        this.eventComplete = false;
         if (this.newTournament) {
             this.tourney.status = 'newly created';
         }
         this.nextRound();
         if (this.tourney.round.roundNum <= 0 || this.tourney.participants.length < 2) {
             this.tourney.round.roundNum = 0;
-            this.storage.set('tournament', this.tourney);
+            this.tournamentService.saveTournament(this.tourney, this.storage);
             this.router.navigate(['/tabs/events']);
         }
     }
 
     async ionViewWillLeave() {
         try {
-            await this.storage.set('tournament', this.tourney);
+            this.tournamentService.saveTournament(this.tourney, this.storage);
         } catch (e) {
             console.log(e);
             this.tourney.status = e;
@@ -112,6 +115,8 @@ export class TournamentsPage {
             this.tourney.round.roundNum > 8
         ) {
             this.displayStandings = true;
+            this.eventComplete = true;
+
             // this.endEvent();
         } else {
             this.tourney.round = this.tournamentService.generateNextRound(this.tourney);
@@ -120,8 +125,8 @@ export class TournamentsPage {
 
     endEvent = () => {
         this.tourney.round.roundNum = 0;
-        this.storage.set('tournament', this.tourney);
-        this.router.navigate(['/tabs/events/standings']);
+        this.tournamentService.saveTournament(this.tourney, this.storage);
+        this.router.navigate(['/tabs/events']);
     };
 
     textPairings() {
@@ -129,7 +134,6 @@ export class TournamentsPage {
     }
 
     segmentChanged(ev: any) {
-        console.log('Segment changed', ev);
         if (ev.detail.value == 'standings') {
             this.displayStandings = true;
         } else {
@@ -137,26 +141,8 @@ export class TournamentsPage {
         }
     }
 
-    // endEvent() {
-    //     console.log('Resetting');
-    //     this.router.navigate(['/tabs/events']);
-    // }
-
     async presentDetailedStandings(person: Result) {
-        const alert = await this.alertController.create({
-            header: 'Record: ' + person.id,
-            message:
-                'Game Wins: ' +
-                person.wins +
-                '\n Game Losses: ' +
-                person.losses +
-                '\n Opponent Wins: ' +
-                person.tb +
-                '\n Points: ' +
-                person.dtb,
-            buttons: ['OK'],
-        });
-        return await alert.present();
+        this.tournamentService.getDetailedStandings(person, this.alertController);
     }
 }
 

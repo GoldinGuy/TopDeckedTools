@@ -1,14 +1,16 @@
 <ion-header box-shadow>
     <ion-toolbar class="bg-theme">
-        <ion-buttons slot="start">
-            <ion-menu-button></ion-menu-button>
-        </ion-buttons>
         <ion-title class="roboto-white-title fs-20">TopDecked Tournaments</ion-title>
     </ion-toolbar>
 </ion-header>
 <ion-content class="bg-theme">
     <div class="bg-light-purple">
-        <h3 class="roboto-white-title">Round {{ tourney.round.roundNum }}</h3>
+        <h3 class="roboto-white-title" *ngIf="!eventComplete">
+            Round {{ tourney.round.roundNum }}
+        </h3>
+        <h3 class="roboto-white-title" *ngIf="eventComplete">
+            Event Complete!
+        </h3>
     </div>
     <!-- <ion-fab class="filter" vertical="top" horizontal="end" edge id="fab1">
         <ion-fab-button mini class="e2eFabTopRight" (click)="textPairings()">
@@ -20,7 +22,12 @@
     <br />
 
     <div class="pdl-18 pdr-18 pdt-5">
-        <ion-segment (ionChange)="segmentChanged($event)" mode="ios" value="pairings" class="">
+        <ion-segment
+            (ionChange)="segmentChanged($event)"
+            mode="ios"
+            value="pairings"
+            *ngIf="!eventComplete"
+        >
             <ion-segment-button value="pairings">
                 <ion-label class="roboto-white">Pairings</ion-label>
             </ion-segment-button>
