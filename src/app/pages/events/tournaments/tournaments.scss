@@ -25,6 +25,10 @@
     background-color: #544a63 !important;
 }
 
+.text-center {
+    text-align: center !important;
+}
+
 .player {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -40,6 +44,30 @@
 
 .bg-theme {
     --background: #544a63 !important;
+}
+
+ion-segment-button {
+    --indicator-color: #6a5787 !important;
+}
+
+ion-select {
+    /* Set a different placeholder color */
+    --placeholder-color: #fff;
+    width: 50%;
+
+    justify-content: center;
+    /* Set full opacity on the placeholder */
+    --placeholder-opacity: 1;
+}
+
+.select-int .select-interface-option {
+    color: red;
+    --color: #971e49;
+    --color-hover: #79193b;
+}
+
+.float-right {
+    text-align: right !important;
 }
 
 .but {

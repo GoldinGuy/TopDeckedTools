@@ -24,7 +24,7 @@
                 [(ngModel)]="phoneNumber"
             ></ion-input>
         </ion-item>
-        <div text-right class="mgt-45">
+        <div class="mgt-45 text-right">
             <ion-button
                 (click)="addPlayer()"
                 expand="round"
@@ -55,48 +55,49 @@
                 </ion-item-sliding>
             </ion-list>
 
-            <div text-right class="mgr-10">
+            <div class="mgr-10 text-right">
                 <ion-button
-                    text-right
                     expand="round"
                     size="small"
                     color="primary"
                     (click)="removeAll()"
-                    class="mgt-10 light-purple"
+                    class="mgt-10 light-purple text-right"
                 >
                     <ion-label class="fs-16 mgr-10">Clear</ion-label
-                    ><ion-icon class=" " name="close-circle"></ion-icon>
+                    ><ion-icon class="white" name="close-circle-outline"></ion-icon>
                 </ion-button>
             </div>
         </div>
         <h3 class="roboto-white">Rounds</h3>
-        <ion-toolbar class="bg-purple bdra-10">
-            <ion-segment mode="ios" class=" ">
+        <!-- <ion-toolbar class="bg-purple bdra-10"> -->
+        <div class="">
+            <ion-segment mode="ios" value="4">
                 <ion-segment-button
                     *ngFor="let choice of roundsPicker"
                     (name)="(choice.val)"
                     mode="ios"
-                    class="h-30 select"
+                    class="h-25 select"
                     (ionSelect)="segmentButtonClicked($event)"
                     value="{{ choice.val }}"
                     checked="{{ choice.isChecked }}"
                 >
-                    <ion-label class="fs-14">{{ choice.val }}</ion-label>
+                    <ion-label class="fs-14 roboto-white">{{ choice.val }}</ion-label>
                 </ion-segment-button>
             </ion-segment>
-        </ion-toolbar>
+        </div>
+        <!-- </ion-toolbar> -->
         <!-- <ion-button expand="block" (c
             lick)="showPicker()">Select Number of Rounds</ion-button> -->
         <br />
         <br />
 
         <div *ngIf="!isButtonDisabled()">
-            <div text-center class="fs-20 fw-900 mgb-35 spacing1">
+            <div class="fs-20 fw-900 mgb-35 spacing1 text-center">
                 <ion-button
                     expand="round"
                     color="primary"
                     size="medium"
-                    class="txt-light but"
+                    class="txt-light but text-center"
                     type="submit"
                     (disabled)="isButtonDisabled()"
                     (click)="startEvent()"

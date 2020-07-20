@@ -118,6 +118,10 @@ export class TournamentsPage {
     textPairings() {
         this.tournamentService.sendPairings(this.tourney, this.sms);
     }
+
+    segmentChanged(ev: any) {
+        console.log('Segment changed', ev);
+    }
 }
 
 // async generatePairings() {

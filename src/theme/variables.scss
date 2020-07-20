@@ -317,14 +317,14 @@ ion-chip {
 /* SETTINGS SEGMENT
 =======================================================
 =======================================================*/
-ion-segment-button {
-    --background: var(--mystic-listBackground, #ffffff);
-    // --background: var(--mystic-toobarBackground, #ffffff);
-    --background-checked: var(--mystic-toobarBackground, #892bfe);
-    --background-activated: var(--mystic-toobarBackground, #ffffff);
-    // --color: var(--mystic-light, #1b1e28);
-    --color-checked: var(--mystic-light, #ffffff);
-}
+// ion-segment-button {
+// --background: #876796 !important;
+// // --background: var(--mystic-toobarBackground, #ffffff);
+// --background-checked: #876796 !important;
+// --background-activated: #876796 !important;
+// // --color: var(--mystic-light, #1b1e28);
+// --color-checked: #876796 !important;
+// }
 
 /* SETTINGS COLOR AND SIZE ICON
 =======================================================
