@@ -84,7 +84,7 @@ export class TournamentsPage {
         }
 
         if (this.newTournament) {
-            this.tourney.status = 'no errors; newly created';
+            this.tourney.status = 'newly created';
         }
     }
 
@@ -93,11 +93,12 @@ export class TournamentsPage {
             await this.storage.set('tournament', this.tourney);
         } catch (e) {
             console.log(e);
+            this.tourney.status = e;
         }
     }
 
     nextRound() {
-        this.tourney.standings = this.tournamentService.setResults(this.tourney);
+        this.tournamentService.setResults(this.tourney);
         if (
             this.tourney.round.roundNum >= this.tourney.totalRounds ||
             this.tourney.round.roundNum > 8

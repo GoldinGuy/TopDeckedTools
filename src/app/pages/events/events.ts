@@ -63,8 +63,8 @@ export class EventsPage {
     }
 
     isDisabled() {
-        console.log('Checking if disabled');
-        console.log(this.participants.length < 2);
+        // console.log('Checking if disabled');
+        // console.log(this.participants.length < 2);
         if (this.participants.length < 1) {
             return true;
         } else {
@@ -73,7 +73,7 @@ export class EventsPage {
     }
 
     isButtonDisabled() {
-        console.log('Checking if disabled');
+        // console.log('Checking if disabled');
         console.log(this.participants.length < 2);
         if (this.participants.length < 2) {
             return true;

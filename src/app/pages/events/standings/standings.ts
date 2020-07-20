@@ -78,7 +78,7 @@ export class standingsPage {
 
     async presentAlertLongMessage(person: Result) {
         const alert = await this.alertController.create({
-            header: 'Record',
+            header: 'Record: ' + person.id,
             message:
                 'Game Wins: ' +
                 person.wins +
@@ -88,7 +88,7 @@ export class standingsPage {
                 person.tb +
                 '\n Points: ' +
                 person.dtb,
-            buttons: ['DONE'],
+            buttons: ['OK'],
         });
         return await alert.present();
     }

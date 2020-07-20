@@ -20,6 +20,14 @@
     <br />
 
     <div class="pdl-20 pdr-20 pdt-5">
+        <ion-segment (ionChange)="segmentChanged($event)">
+            <ion-segment-button value="friends">
+                <ion-label>Friends</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="enemies">
+                <ion-label>Enemies</ion-label>
+            </ion-segment-button>
+        </ion-segment>
         <h2 class="roboto-white fs-18 round">Round {{ tourney.round.roundNum }}</h2>
 
         <br />
