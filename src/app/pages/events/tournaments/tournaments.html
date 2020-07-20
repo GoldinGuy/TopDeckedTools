@@ -51,8 +51,12 @@
                             <h5 class="fs-17 roboto-white w-100" side="start">
                                 {{ pairing.home.id }}
                             </h5>
-                            <button class="wins float-right" *ngIf="!pairing.bye">
-                                <a class="fs-19 roboto-white">0</a>
+                            <button
+                                class="wins float-right"
+                                *ngIf="!pairing.bye"
+                                (click)="incrementScore(pairing.home, pairing.away)"
+                            >
+                                <a class="fs-19 roboto-white">{{ pairing.home.score }}</a>
                             </button>
                         </ion-col>
 
@@ -76,8 +80,12 @@
                             <h5 class="fs-17 roboto-white float-right w-100" side="end">
                                 {{ pairing.away.id }}
                             </h5>
-                            <button class="wins float-right" *ngIf="!pairing.bye">
-                                <a class="fs-19 roboto-white">0</a>
+                            <button
+                                class="wins float-right"
+                                *ngIf="!pairing.bye"
+                                (click)="incrementScore(pairing.away, pairing.home)"
+                            >
+                                <a class="fs-19 roboto-white">{{ pairing.away.score }}</a>
                             </button>
                         </ion-col>
                     </ion-row>
@@ -181,7 +189,7 @@
                     </ion-item>
                 </ion-list>
                 <br />
-                <div class="fs-20 fw-900 mgt-30 mgb-20 text-center">
+                <div class="fs-20 fw-900 mgt-30 mgb-20 text-center" *ngIf="eventComplete">
                     <ion-button
                         color="primary"
                         mode="ios"

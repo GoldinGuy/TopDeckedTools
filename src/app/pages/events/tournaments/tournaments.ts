@@ -116,8 +116,6 @@ export class TournamentsPage {
         ) {
             this.displayStandings = true;
             this.eventComplete = true;
-
-            // this.endEvent();
         } else {
             this.tourney.round = this.tournamentService.generateNextRound(this.tourney);
         }
@@ -143,6 +141,16 @@ export class TournamentsPage {
 
     async presentDetailedStandings(person: Result) {
         this.tournamentService.getDetailedStandings(person, this.alertController);
+    }
+
+    incrementScore(player1, player2) {
+        if (player2.score < 2) {
+            player1.score += 1;
+            if (player1.score > 2) {
+                player1.score = 0;
+            }
+            console.log(player1.score);
+        }
     }
 }
 
