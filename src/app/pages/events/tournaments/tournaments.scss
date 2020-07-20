@@ -50,6 +50,20 @@ ion-segment-button {
     --indicator-color: #6a5787 !important;
 }
 
+.wins {
+    border-radius: 8px;
+    background-color: #544a63 !important;
+    --background: #544a63 !important;
+    padding: 15px 20px;
+    margin-top: 5px;
+    color: #fff;
+}
+
+.w-100 {
+    width: 100px;
+    text-overflow: ellipsis !important;
+}
+
 ion-select {
     /* Set a different placeholder color */
     --placeholder-color: #fff;
@@ -109,6 +123,33 @@ ion-select {
 
 .tourney2 {
     height: 225px !important;
+}
+
+.width-100 {
+    width: 100%;
+}
+
+.w-150 {
+    width: 150px;
+}
+
+.rank {
+    border-radius: 8px;
+    background-color: #544a63 !important;
+    --background: #544a63 !important;
+    padding: 10px;
+    margin-right: 10px;
+    height: 100%;
+}
+
+.results {
+    border-radius: 8px;
+    background-color: #544a63 !important;
+    --background: #544a63 !important;
+    padding: 10px 5px;
+    width: 80px !important;
+    // margin-right: 10px;
+    height: 100%;
 }
 
 // ion-select {

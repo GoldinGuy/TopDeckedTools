@@ -45,6 +45,9 @@ export class EventsPage {
             this.participants = this.tourney.participants;
             this.round = this.tourney.round.roundNum;
             this.totalRounds = this.tourney.totalRounds;
+            if (this.totalRounds <= 0) {
+                this.totalRounds = 4;
+            }
         } catch (e) {
             console.log('Error. No tournament found.');
             this.participants = [];
@@ -53,8 +56,6 @@ export class EventsPage {
         }
         if (isNullOrUndefined(this.participants)) {
             this.participants = [];
-            this.round = 0;
-            this.totalRounds = 4;
         }
 
         if (this.round != 0) {
@@ -63,8 +64,6 @@ export class EventsPage {
     }
 
     isDisabled() {
-        // console.log('Checking if disabled');
-        // console.log(this.participants.length < 2);
         if (this.participants.length < 1) {
             return true;
         } else {
@@ -73,8 +72,7 @@ export class EventsPage {
     }
 
     isButtonDisabled() {
-        // console.log('Checking if disabled');
-        console.log(this.participants.length < 2);
+        // console.log(this.participants.length < 2);
         if (this.participants.length < 2) {
             return true;
         } else {
@@ -131,10 +129,10 @@ export class EventsPage {
         return this.swipeLeft;
     }
 
-    segmentButtonClicked(event: any) {
-        this.totalRounds = event.target.value;
+    segmentButtonClicked(ev: any) {
+        this.totalRounds = ev.target.value;
         this.roundsPicker = this.roundsPicker.map((round) => {
-            if (round.val == event.target.value) {
+            if (round.val == ev.target.value) {
                 return {
                     val: round.val,
                     isChecked: true,

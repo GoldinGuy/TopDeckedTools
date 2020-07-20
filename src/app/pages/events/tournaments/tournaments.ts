@@ -8,7 +8,9 @@ import {
     Tournament,
     TournamentPlayer,
     Pairing,
+    Result,
 } from 'src/app/services/tournament.service.js';
+import { AlertController } from '@ionic/angular';
 
 @Component({
     selector: 'app-tournaments',
@@ -18,11 +20,13 @@ import {
 export class TournamentsPage {
     tourney: Tournament;
     newTournament: boolean;
+    displayStandings: boolean;
 
     constructor(
         private router: Router,
         private storage: Storage,
         private route: ActivatedRoute,
+        public alertController: AlertController,
         private sms: SMS,
         private tournamentService: TournamentService
     ) {
@@ -74,17 +78,15 @@ export class TournamentsPage {
         } catch (e) {
             console.log('Error. No tournament found.');
         }
-
-        this.tourney.round = this.tournamentService.generateNextRound(this.tourney);
-
+        this.displayStandings = false;
+        if (this.newTournament) {
+            this.tourney.status = 'newly created';
+        }
+        this.nextRound();
         if (this.tourney.round.roundNum <= 0 || this.tourney.participants.length < 2) {
             this.tourney.round.roundNum = 0;
             this.storage.set('tournament', this.tourney);
             this.router.navigate(['/tabs/events']);
-        }
-
-        if (this.newTournament) {
-            this.tourney.status = 'newly created';
         }
     }
 
@@ -98,12 +100,19 @@ export class TournamentsPage {
     }
 
     nextRound() {
-        this.tournamentService.setResults(this.tourney);
+        // TODO: error here is where the wins/losses are not being reported by the tournament page buttons
+        if (!this.newTournament) {
+            this.tournamentService.setResults(this.tourney);
+        }
+        console.log('Round num: ' + this.tourney.round.roundNum);
+        console.log('Total rounds: ' + this.tourney.totalRounds);
+        this.tourney.standings = this.tournamentService.getStandings(this.tourney);
         if (
             this.tourney.round.roundNum >= this.tourney.totalRounds ||
             this.tourney.round.roundNum > 8
         ) {
-            this.endEvent();
+            this.displayStandings = true;
+            // this.endEvent();
         } else {
             this.tourney.round = this.tournamentService.generateNextRound(this.tourney);
         }
@@ -121,6 +130,33 @@ export class TournamentsPage {
 
     segmentChanged(ev: any) {
         console.log('Segment changed', ev);
+        if (ev.detail.value == 'standings') {
+            this.displayStandings = true;
+        } else {
+            this.displayStandings = false;
+        }
+    }
+
+    // endEvent() {
+    //     console.log('Resetting');
+    //     this.router.navigate(['/tabs/events']);
+    // }
+
+    async presentDetailedStandings(person: Result) {
+        const alert = await this.alertController.create({
+            header: 'Record: ' + person.id,
+            message:
+                'Game Wins: ' +
+                person.wins +
+                '\n Game Losses: ' +
+                person.losses +
+                '\n Opponent Wins: ' +
+                person.tb +
+                '\n Points: ' +
+                person.dtb,
+            buttons: ['OK'],
+        });
+        return await alert.present();
     }
 }
 

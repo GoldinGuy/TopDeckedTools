@@ -69,15 +69,13 @@
             </div>
         </div>
         <h3 class="roboto-white">Rounds</h3>
-        <!-- <ion-toolbar class="bg-purple bdra-10"> -->
         <div class="">
-            <ion-segment mode="ios" value="4">
+            <ion-segment mode="ios" value="4" (ionChange)="segmentButtonClicked($event)">
                 <ion-segment-button
                     *ngFor="let choice of roundsPicker"
                     (name)="(choice.val)"
                     mode="ios"
                     class="h-25 select"
-                    (ionSelect)="segmentButtonClicked($event)"
                     value="{{ choice.val }}"
                     checked="{{ choice.isChecked }}"
                 >
@@ -85,16 +83,13 @@
                 </ion-segment-button>
             </ion-segment>
         </div>
-        <!-- </ion-toolbar> -->
-        <!-- <ion-button expand="block" (c
-            lick)="showPicker()">Select Number of Rounds</ion-button> -->
+
         <br />
         <br />
 
         <div *ngIf="!isButtonDisabled()">
             <div class="fs-20 fw-900 mgb-35 spacing1 text-center">
                 <ion-button
-                    expand="round"
                     color="primary"
                     size="medium"
                     class="txt-light but text-center"
