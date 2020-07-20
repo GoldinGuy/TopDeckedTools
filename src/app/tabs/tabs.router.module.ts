@@ -7,38 +7,6 @@ const routes: Routes = [
         path: 'tabs',
         component: TabsPage,
         children: [
-            // {
-            //     path: 'home',
-            //     children: [
-            //         {
-            //             path: '',
-            //             loadChildren: () =>
-            //                 import('../pages/home/home.module').then((m) => m.HomePageModule),
-            //         },
-            //     ],
-            // },
-            // {
-            //     path: 'contentFilters',
-            //     children: [
-            //         {
-            //             path: '',
-            //             loadChildren: () =>
-            //                 import('../pages/contentFilters/contentFilters.module').then(
-            //                     (m) => m.ContentFiltersPageModule
-            //                 ),
-            //         },
-            //     ],
-            // },
-            // {
-            //     path: 'tools',
-            //     children: [
-            //         {
-            //             path: '',
-            //             loadChildren: () =>
-            //                 import('../pages/tools/tools.module').then(m => m.ToolsPageModule)
-            //         }
-            //     ]
-            // },
             {
                 path: 'rules',
                 children: [
@@ -49,18 +17,7 @@ const routes: Routes = [
                     },
                 ],
             },
-            // {
-            //     path: 'settings',
-            //     children: [
-            //         {
-            //             path: '',
-            //             loadChildren: () =>
-            //                 import('../pages/settings/settings.module').then(
-            //                     (m) => m.SettingsPageModule
-            //                 ),
-            //         },
-            //     ],
-            // },
+
             {
                 path: 'events',
                 children: [
@@ -104,7 +61,3 @@ const routes: Routes = [
     exports: [RouterModule],
 })
 export class TabsPageRoutingModule {}
-
-// { path: 'feed', loadChildren: './feed/feed.module#FeedPageModule' },
-// { path: 'tools', loadChildren: './tools/tools.module#ToolsPageModule' },
-// { path: 'events', loadChildren: './events/events.module#EventsPageModule' }
