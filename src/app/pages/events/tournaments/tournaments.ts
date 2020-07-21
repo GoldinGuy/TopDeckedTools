@@ -105,11 +105,11 @@ export class TournamentsPage {
     nextRound() {
         // TODO: error here is where the wins/losses are not being reported by the tournament page buttons
         if (!this.newTournament) {
-            this.tournamentService.setResults(this.tourney);
+            // this.tournamentService.setResults(this.tourney);
         }
         console.log('Round num: ' + this.tourney.round.roundNum);
         console.log('Total rounds: ' + this.tourney.totalRounds);
-        this.tourney.standings = this.tournamentService.getStandings(this.tourney);
+        // this.tourney.standings = this.tournamentService.getStandings(this.tourney);
         if (
             this.tourney.round.roundNum >= this.tourney.totalRounds ||
             this.tourney.round.roundNum > 8
@@ -118,6 +118,27 @@ export class TournamentsPage {
             this.eventComplete = true;
         } else {
             this.tourney.round = this.tournamentService.generateNextRound(this.tourney);
+        }
+    }
+
+    incrementScore(
+        player1: {
+            id: any;
+            points: number;
+            score: number;
+        },
+        player2: {
+            id: any;
+            points: number;
+            score: number;
+        }
+    ) {
+        if (player2.score < 2 || player1.score < 1) {
+            player1.score += 1;
+            if (player1.score > 2) {
+                player1.score = 0;
+            }
+            console.log(player1.score);
         }
     }
 
@@ -141,16 +162,6 @@ export class TournamentsPage {
 
     async presentDetailedStandings(person: Result) {
         this.tournamentService.getDetailedStandings(person, this.alertController);
-    }
-
-    incrementScore(player1, player2) {
-        if (player2.score < 2) {
-            player1.score += 1;
-            if (player1.score > 2) {
-                player1.score = 0;
-            }
-            console.log(player1.score);
-        }
     }
 }
 

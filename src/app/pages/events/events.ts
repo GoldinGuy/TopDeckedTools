@@ -112,7 +112,7 @@ export class EventsPage {
         this.name = '';
         this.phoneNumber = '';
 
-        console.log(this.tourney.participants);
+        console.log(JSON.stringify(this.tourney.participants));
     };
 
     remove = async (name: string) => {
@@ -156,5 +156,13 @@ export class EventsPage {
         } else {
             return false;
         }
+    }
+
+    clearCache() {
+        this.tourney.matches = [];
+        this.tourney.totalRounds = 4;
+        this.tourney.rounds = [];
+        // this.tourney.participants = [];
+        this.tourney.round.pairings = [];
     }
 }

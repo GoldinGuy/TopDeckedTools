@@ -1,7 +1,6 @@
-const blossom = require('./blossom');
+//www.npmjs.com/package/swiss-pairing
 
-// Doesn't account for forfeits yet, still debating on that implementation
-// for multi-point scenarios
+https: const blossom = require('./blossom');
 
 const options = {
     maxPerRound: 3,
@@ -11,7 +10,7 @@ const options = {
 };
 
 function getModifiedMedianScores(options, round, participants, matches) {
-    matches = matches.filter((match) => match.round < round);
+    matches = matches.filter((match) => match.roundNum < round);
     var mappings = getMappings(participants, matches);
     var points = mappings.reduce((acc, val) => {
         acc[val.id] = val.points;
@@ -20,7 +19,7 @@ function getModifiedMedianScores(options, round, participants, matches) {
     var scores = mappings.reduce(
         (acc, history) => {
             history.opponents.forEach((opponent) => {
-                // Don't calculate points for null (BYE) opponents
+                // Doesn't calculate points for opponents with byes
                 if (opponent) {
                     acc[opponent].scores.push(history.points);
                     acc[opponent].points += history.points;
@@ -50,7 +49,7 @@ function getModifiedMedianScores(options, round, participants, matches) {
 }
 
 function getStandings(options, round, participants, matches) {
-    matches = matches.filter((match) => match.round < round);
+    matches = matches.filter((match) => match.roundNum < round);
     var scores = getModifiedMedianScores(options, round, participants, matches);
     var standings = participants.reduce((standings, participant) => {
         standings[participant.name] = {
@@ -64,7 +63,7 @@ function getStandings(options, round, participants, matches) {
     matches.forEach((match) => {
         standings[match.home.id].wins += match.home.points;
         standings[match.home.id].losses += match.away.points;
-        // Ignore null opponents/BYEs
+        // Ignore opponents with byes
         if (match.away.id) {
             standings[match.away.id].wins += match.away.points;
             standings[match.away.id].losses += match.home.points;
@@ -95,11 +94,10 @@ function getStandings(options, round, participants, matches) {
 }
 
 function getMatchups(options, round, participants, matches) {
-    matches = matches.filter((match) => match.round < round);
+    matches = matches.filter((match) => match.roundNum < round);
     var mappings = getMappings(participants, matches);
 
-    // because ids are strings but the blossom algorithm needs integers
-    // we create maps from int-to-id then set the ids to integers
+    // ids are strings but the blossom algorithm needs integers - create maps from int-to-id then set the ids to integers
     var mapIds = new Map();
     var index = 0;
     for (var m of mappings) {
@@ -110,11 +108,6 @@ function getMatchups(options, round, participants, matches) {
     mappings = mappings.filter((m) => !m.droppedOut);
 
     if (mappings.length % 2 === 1) {
-        // we simulate the bye having played against every team with a bye
-        // that way those teams will not get a bye again unless the matches are
-        // ridiculously better if they have another
-        // we also want it to bias toward giving byes to teams at the bottom
-        // of the standings
         mappings.push({
             id: index,
             points: 0,
@@ -128,9 +121,8 @@ function getMatchups(options, round, participants, matches) {
         });
         mapIds.set(index, null);
     }
-    // to avoid repeatedly matching the same team up or down repeatedly
-    // we shuffle the inputs to the blossom algorithm to counteract
-    // any ordering biases it may have
+    // avoid repeatedly matching the same pairing up or down repeatedly
+    // shuffle the inputs to the blossom algorithm to counteract any ordering biases
     mappings = shuffle(mappings, round, options.seedMultiplier);
     var arr = mappings.reduce((arr, team, i, orig) => {
         var opps = orig.slice(0, i).concat(orig.slice(i + 1));
@@ -151,13 +143,9 @@ function getMatchups(options, round, participants, matches) {
 
     var results = blossom(arr, true);
     var matchups = [];
-    // Here we sort matchups by standings so that matchups and standings follow
-    // roughly the same order - this doesn't impact functionality at all
-    // Ordering this in the view layer should be possible, so let's move it there
-    // pending review
+    // sort matchups by standings so they follow roughly the same order
     var standings = getStandings(options, round, participants, matches);
     var sortedKeys = [...mapIds.keys()].sort((a, b) => {
-        // Float BYEs to the end
         if (mapIds.get(a) === null) {
             return 1;
         } else if (mapIds.get(b) === null) {

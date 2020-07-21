@@ -56,7 +56,7 @@
                                 *ngIf="!pairing.bye"
                                 (click)="incrementScore(pairing.home, pairing.away)"
                             >
-                                <a class="fs-19 roboto-white">{{ pairing.home.score }}</a>
+                                <a class="fs-22 roboto-white">{{ pairing.home.score }}</a>
                             </button>
                         </ion-col>
 
@@ -85,51 +85,8 @@
                                 *ngIf="!pairing.bye"
                                 (click)="incrementScore(pairing.away, pairing.home)"
                             >
-                                <a class="fs-19 roboto-white">{{ pairing.away.score }}</a>
+                                <a class="fs-22 roboto-white">{{ pairing.away.score }}</a>
                             </button>
-                        </ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col>
-                            <!-- <ion-select
-                            class="roboto-semibold fs-18 roboto-white purple-select"
-                            [(ngModel)]="pairing.home.score"
-                            side="start"
-                            placeholder="0"
-                            interface="popover"
-                            value="0"
-                            css-class="select-int roboto-white"
-                            mode="ios"
-                            float-left
-                            *ngIf="!pairing.bye"
-                        >
-                            <ion-select-option value="0">0</ion-select-option>
-                            <ion-select-option value="1">1</ion-select-option>
-                            <ion-select-option value="2">2</ion-select-option>
-                        </ion-select> -->
-                        </ion-col>
-                        <ion-col>
-                            <!-- <ion-select
-                            [(ngModel)]="pairing.away.score"
-                            side="end"
-                            value="0"
-                            css-class="select-int roboto-white float-right"
-                            mode="ios"
-                            class="roboto-semibold fs-18 tournpop roboto-white"
-                            placeholder="0"
-                            interface="popover"
-                            *ngIf="!pairing.bye"
-                        >
-                            <ion-select-option value="0" checked class=" " lines="none"
-                                >0</ion-select-option
-                            >
-                            <ion-select-option value="1" class=" " lines="none"
-                                >1</ion-select-option
-                            >
-                            <ion-select-option value="2" class=" " lines="none"
-                                >2</ion-select-option
-                            >
-                        </ion-select> -->
                         </ion-col>
                     </ion-row>
                 </ion-grid>
