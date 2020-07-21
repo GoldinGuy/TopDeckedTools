@@ -1,6 +1,5 @@
-//www.npmjs.com/package/swiss-pairing
-
-https: const blossom = require('./blossom');
+// based on https://www.npmjs.com/package/swiss-pairing
+const blossom = require('./blossom');
 
 const options = {
     maxPerRound: 3,

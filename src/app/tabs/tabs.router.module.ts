@@ -33,13 +33,6 @@ const routes: Routes = [
                                 (m) => m.TournamentsPageModule
                             ),
                     },
-                    {
-                        path: 'standings',
-                        loadChildren: () =>
-                            import('../pages/events/standings/standings.module').then(
-                                (m) => m.standingsPageModule
-                            ),
-                    },
                 ],
             },
             {

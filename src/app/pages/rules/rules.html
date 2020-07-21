@@ -15,7 +15,7 @@
         (click)="resetArrayDefault()"
     >
         <div class="rule__title">
-            <ion-icon name="arrow-dropleft" class="white mgr-5"></ion-icon>
+            <ion-icon name="chevron-back-outline" class="white mgr-5"></ion-icon>
             <a class="white roboto-semibold truncate">{{ this.currentTerm }}</a>
         </div>
     </div>
@@ -24,7 +24,11 @@
 <ion-content fullscreen class="bg-theme">
     <!-- display each rule in the array - initially main categories, then each subcategory, then detailed rules  -->
     <ng-container *ngFor="let rule of array">
-        <div *ngIf="!isDisplayingSubsection(array)" class="fs-20 rule" (click)="displaySubrules(rule)">
+        <div
+            *ngIf="!isDisplayingSubsection(array)"
+            class="fs-20 rule"
+            (click)="displaySubrules(rule)"
+        >
             <div class="rule__title">
                 <a class="white roboto truncate">{{ rule }}</a>
             </div>

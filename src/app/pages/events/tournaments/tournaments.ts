@@ -44,22 +44,16 @@ export class TournamentsPage {
             id: 'unknown',
             participants: [
                 {
-                    name: 'bob',
+                    name: 'Jace',
                     phoneNumber: '43534543',
                     standing: null,
                     seed: 1,
                 },
                 {
-                    name: 'joe',
+                    name: 'Chandra',
                     phoneNumber: '3543536',
                     standing: null,
                     seed: 2,
-                },
-                {
-                    name: 'sue',
-                    phoneNumber: '86767876',
-                    standing: null,
-                    seed: 3,
                 },
             ],
             matches: [],
@@ -103,13 +97,6 @@ export class TournamentsPage {
     }
 
     nextRound() {
-        // TODO: error here is where the wins/losses are not being reported by the tournament page buttons
-        if (!this.newTournament) {
-            // this.tournamentService.setResults(this.tourney);
-        }
-        console.log('Round num: ' + this.tourney.round.roundNum);
-        console.log('Total rounds: ' + this.tourney.totalRounds);
-        // this.tourney.standings = this.tournamentService.getStandings(this.tourney);
         if (
             this.tourney.round.roundNum >= this.tourney.totalRounds ||
             this.tourney.round.roundNum > 8
@@ -117,6 +104,10 @@ export class TournamentsPage {
             this.displayStandings = true;
             this.eventComplete = true;
         } else {
+            if (!this.newTournament) {
+                this.tournamentService.setResults(this.tourney);
+                this.tournamentService.getStandings(this.tourney);
+            }
             this.tourney.round = this.tournamentService.generateNextRound(this.tourney);
         }
     }
@@ -138,7 +129,7 @@ export class TournamentsPage {
             if (player1.score > 2) {
                 player1.score = 0;
             }
-            console.log(player1.score);
+            // console.log(player1.score);
         }
     }
 
@@ -164,72 +155,6 @@ export class TournamentsPage {
         this.tournamentService.getDetailedStandings(person, this.alertController);
     }
 }
-
-// async generatePairings() {
-//     console.log(this.round);
-//     console.log(this.totalRounds);
-//     for (let i = 0; i < this.pairings.length; i++) {
-//         if (this.pairings[i].home.score == this.pairings[i].away.score) {
-//             this.pairings[i].home.points = 0.5;
-//             this.pairings[i].away.points = 0.5;
-//         } else if (this.pairings[i].home.score > this.pairings[i].away.score) {
-//             this.pairings[i].home.points = 1;
-//             this.pairings[i].away.points = 0;
-//         } else {
-//             this.pairings[i].home.points = 0;
-//             this.pairings[i].away.points = 1;
-//         }
-//         this.pairings[i].home.score = parseInt(this.pairings[i].home.score);
-//         this.pairings[i].away.score = parseInt(this.pairings[i].away.score);
-//     }
-
-//     this.matches = (this.pairings || []).concat(this.matches || []);
-
-//     if (this.round > this.totalRounds || this.round > 8) {
-//         await this.storage.set('matches', this.matches);
-//         this.endEvent();
-//     }
-
-//     // console.log(this.round);
-//     // console.log(this.matches);
-//     this.pairings = swiss.getMatchups(this.round, this.participants, this.matches || []);
-
-//     this.pairings = this.pairings.map((pairing, index) => {
-//         if (!pairing.away) {
-//             return {
-//                 index,
-//                 round: this.round,
-//                 home: {
-//                     id: pairing.home,
-//                     points: 1,
-//                     score: 2,
-//                 },
-//                 bye: true,
-//                 away: {
-//                     id: pairing.away,
-//                     points: 0,
-//                     score: 0,
-//                 },
-//             };
-//         }
-//         return {
-//             index,
-//             round: this.round,
-//             home: {
-//                 id: pairing.home,
-//                 points: 0,
-//                 score: 0,
-//             },
-//             away: {
-//                 id: pairing.away,
-//                 points: 0,
-//                 score: 0,
-//             },
-//         };
-//     });
-
-//     console.log(this.pairings);
-// }
 
 // // An asynchronous timer
 // function startCountDown(seconds) {
