@@ -1,7 +1,5 @@
 {
-  "name": "pleaseWork",
-  "integrations": {
-    "cordova": {}
-  },
+  "name": "TopDecked",
+  "integrations": {},
   "type": "angular"
 }
