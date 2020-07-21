@@ -1,0 +1,164 @@
+<ion-header box-shadow>
+    <ion-toolbar class="bg-theme">
+        <ion-title class="roboto-white-title fs-20">TopDecked Tournaments</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="bg-theme">
+    <div class="bg-light-purple">
+        <h3 class="roboto-white-title" *ngIf="!eventComplete">
+            Round {{ tourney.round.roundNum }}
+        </h3>
+        <h3 class="roboto-white-title" *ngIf="eventComplete">
+            Event Complete!
+        </h3>
+    </div>
+    <!-- <ion-fab class="filter" vertical="top" horizontal="end" edge id="fab1">
+        <ion-fab-button mini class="e2eFabTopRight" (click)="textPairings()">
+            <ion-icon name="ios-text"></ion-icon>
+        </ion-fab-button>
+        {{ tourney.status }}
+    </ion-fab> -->
+
+    <br />
+
+    <div class="pdl-18 pdr-18 pdt-5">
+        <ion-segment
+            (ionChange)="segmentChanged($event)"
+            mode="ios"
+            value="pairings"
+            *ngIf="!eventComplete"
+        >
+            <ion-segment-button value="pairings">
+                <ion-label class="roboto-white">Pairings</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="standings">
+                <ion-label class="roboto-white">Standings</ion-label>
+            </ion-segment-button>
+        </ion-segment>
+
+        <br />
+
+        <!-- display pairings -->
+        <div *ngIf="!displayStandings">
+            <ion-card
+                no-margin
+                class="mgb-15 bg-purple-card bdra-5"
+                *ngFor="let pairing of tourney.round.pairings"
+            >
+                <ion-grid>
+                    <ion-row>
+                        <ion-col>
+                            <h5 class="fs-17 roboto-white w-100" side="start">
+                                {{ pairing.home.id }}
+                            </h5>
+                            <button
+                                class="wins float-right"
+                                *ngIf="!pairing.bye"
+                                (click)="incrementScore(pairing.home, pairing.away)"
+                            >
+                                <a class="fs-22 roboto-white">{{ pairing.home.score }}</a>
+                            </button>
+                        </ion-col>
+
+                        <ion-col>
+                            <h3
+                                ion-text-center
+                                class="center roboto-semibold roboto-white"
+                                *ngIf="pairing.bye"
+                            >
+                                BYE
+                            </h3>
+                            <h3
+                                ion-text-center
+                                class="center roboto-semibold roboto-white"
+                                *ngIf="!pairing.bye"
+                            >
+                                VS
+                            </h3>
+                        </ion-col>
+                        <ion-col class="float-right">
+                            <h5 class="fs-17 roboto-white float-right w-100" side="end">
+                                {{ pairing.away.id }}
+                            </h5>
+                            <button
+                                class="wins float-right"
+                                *ngIf="!pairing.bye"
+                                (click)="incrementScore(pairing.away, pairing.home)"
+                            >
+                                <a class="fs-22 roboto-white">{{ pairing.away.score }}</a>
+                            </button>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-card>
+            <br />
+
+            <div class="fs-20 fw-900 mgt- mgb-30 spacing1 text-center">
+                <ion-button
+                    size="medium"
+                    class="mgt--20 but"
+                    type="submit"
+                    (click)="nextRound()"
+                    mode="ios"
+                >
+                    <h2
+                        class="roboto-white fs-18"
+                        *ngIf="tourney.round.roundNum < tourney.totalRounds"
+                    >
+                        Next Round
+                    </h2>
+                    <h2
+                        class="roboto-white fs-18"
+                        *ngIf="tourney.round.roundNum >= tourney.totalRounds"
+                    >
+                        See Results
+                    </h2>
+                </ion-button>
+            </div>
+        </div>
+
+        <!-- display standings -->
+        <div *ngIf="displayStandings">
+            <div class="pdl-15 pdr-15 pdt-5">
+                <ion-list class="player">
+                    <ion-item
+                        class="player-item ion-text-start"
+                        lines="none"
+                        *ngFor="let person of tourney.standings"
+                        ><ion-col size="8">
+                            <h5 class="fs-19 roboto-white">
+                                <span class="rank">{{ person.index }}</span>
+                                {{ person.id }}
+                            </h5>
+                        </ion-col>
+                        <ion-col
+                            ><ion-button
+                                side="end"
+                                mode="ios"
+                                class="results float-right"
+                                id="longMessage"
+                                expand="block"
+                                (click)="presentDetailedStandings(person)"
+                                shape="results"
+                                >RECORD</ion-button
+                            ></ion-col
+                        >
+                    </ion-item>
+                </ion-list>
+                <br />
+                <div class="fs-20 fw-900 mgt-30 mgb-20 text-center" *ngIf="eventComplete">
+                    <ion-button
+                        color="primary"
+                        mode="ios"
+                        size="medium"
+                        class="mgt--20 but fs-20"
+                        type="submit"
+                        (click)="endEvent()"
+                    >
+                        <h3 class="roboto-white">Done</h3>
+                    </ion-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ion-content>

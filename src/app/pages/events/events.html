@@ -1,0 +1,125 @@
+<ion-header box-shadow>
+	<ion-toolbar class="bg-theme">
+		<ion-title class="roboto-white-title fs-20"
+			>TopDecked Tournaments</ion-title
+		>
+	</ion-toolbar>
+</ion-header>
+<ion-content class="bg-theme">
+	<div class="pdl-30 pdr-30">
+		<br />
+		<h4 class="roboto-white">Add Participants</h4>
+		<ion-item lines="none" light class="bdra-6">
+			<ion-input
+				placeholder="Name (Jace Beleren)"
+				class="enter fs-14"
+				[(ngModel)]="name"
+			></ion-input>
+		</ion-item>
+		<ion-item light lines="none" class="bdra-6 mgt-10">
+			<ion-input
+				class="enter fs-14"
+				placeholder="Phone (1234567890)"
+				[(ngModel)]="phoneNumber"
+			></ion-input>
+		</ion-item>
+		<div class="mgt-45 text-right">
+			<ion-button
+				(click)="addPlayer()"
+				expand="round"
+				color="primary"
+				size="small"
+				class="txt-light mgt--30 light-purple"
+			>
+				<ion-icon class="txt-light" name="add"></ion-icon>
+			</ion-button>
+		</div>
+
+		<div *ngIf="!isDisabled()">
+			<h3 class="roboto-white">
+				Players
+			</h3>
+
+			<ion-list class="mgt-5 bg-purple">
+				<ion-item-sliding
+					*ngFor="let item of tourney.participants"
+					class="player"
+				>
+					<ion-item class="player-item">
+						<ion-label class="roboto-white">{{ item.name }}</ion-label>
+						<ion-label class="roboto-white">{{ item.phoneNumber }}</ion-label>
+					</ion-item>
+					<ion-item-options side="end" class="white">
+						<ion-item-option (click)="remove(item.name)" class="white"
+							>Remove
+						</ion-item-option>
+					</ion-item-options>
+				</ion-item-sliding>
+			</ion-list>
+
+			<div class="mgr-10 text-right">
+				<ion-button
+					expand="round"
+					size="small"
+					color="primary"
+					(click)="removeAll()"
+					class="mgt-10 light-purple text-right"
+				>
+					<ion-label class="fs-16 mgr-10">Clear</ion-label
+					><ion-icon class="txt-light" name="close-circle"></ion-icon>
+				</ion-button>
+			</div>
+		</div>
+		<h3 class="roboto-white">Rounds</h3>
+		<div class="">
+			<ion-segment
+				mode="ios"
+				value="4"
+				(ionChange)="segmentButtonClicked($event)"
+			>
+				<ion-segment-button
+					*ngFor="let choice of roundsPicker"
+					(name)="(choice.val)"
+					mode="ios"
+					class="h-25 select"
+					value="{{ choice.val }}"
+					checked="{{ choice.isChecked }}"
+				>
+					<ion-label class="fs-14 roboto-white">{{ choice.val }}</ion-label>
+				</ion-segment-button>
+			</ion-segment>
+		</div>
+
+		<br />
+		<br />
+
+		<div *ngIf="!isButtonDisabled()">
+			<div class="fs-20 fw-900 mgb-35 spacing1 text-center">
+				<ion-button
+					color="primary"
+					size="medium"
+					class="txt-light but text-center"
+					type="submit"
+					(disabled)="isButtonDisabled()"
+					(click)="startEvent()"
+					mode="ios"
+				>
+					<h2 class="roboto-white fs-18">Start Tournament</h2>
+				</ion-button>
+			</div>
+		</div>
+
+		<div class="fs-20 fw-900 mgb-35 spacing1 text-center">
+			<ion-button
+				color="primary"
+				size="medium"
+				class="txt-light but text-center"
+				type="submit"
+				(click)="clearCache()"
+				mode="ios"
+			>
+				<h2 class="roboto-white fs-18">Clear Cache</h2>
+			</ion-button>
+		</div>
+	</div>
+</ion-content>

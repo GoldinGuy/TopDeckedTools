@@ -1,0 +1,6 @@
+.bg-color {
+    --background: var(--mystic-backgroundColor, var(--ion-background-color, #544a63));
+    --background-focused: #e0e0e0;
+    --color: var(--ion-tab-bar-color, var(--ion-color-step-600, #aaa));
+    --color-selected: var(--ion-tab-bar-color-activated, var(--mystic-light, #fff));
+}

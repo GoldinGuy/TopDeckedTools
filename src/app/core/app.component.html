@@ -1,0 +1,8 @@
+<ion-app>
+    <div *ngIf="showSplash" class="splash">
+        <div class="spinner"></div>
+    </div>
+
+    <ion-nav #content swipeBackEnabled="false"></ion-nav>
+    <ion-router-outlet></ion-router-outlet>
+</ion-app>

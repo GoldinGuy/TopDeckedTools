@@ -1,0 +1,393 @@
+// Ionic Variables and Theming. For more info, please see:
+// http://ionicframework.com/docs/theming/
+
+/** Ionic CSS Variables **/
+:root {
+    /* Settings Fonts Size And Icon Size
+=======================================================
+=======================================================*/
+    // --fallback-color: #5e548e;
+    --fallback-color: #6a5787;
+    --h1-font-size: 20px;
+    --h2-font-size: 18px;
+    --h3-font-size: 16px;
+    --h4-font-size: 15px;
+    --h5-font-size: 14px;
+    --h6-font-size: 12px;
+    --text-font-size: 14px;
+
+    /* Settings Fonts Size Icon
+=======================================================
+=======================================================*/
+
+    --icon-size-small: 20px;
+    --icon--size-medium: 32px;
+    --icon-size-large: 60px;
+
+    /* Settings Font Span
+=======================================================
+=======================================================*/
+
+    --span-size-small: 12px;
+    --span-size-medium: 24px;
+    --span-size-large: 30px;
+
+    /** primary **/
+    // --ion-color-primary: #5e548e;
+    --ion-color-primary: #6a5787;
+    --ion-color-primary-rgb: 112, 68, 255;
+    --ion-color-primary-contrast: #f8f8f8;
+    --ion-color-primary-contrast-rgb: 255, 255, 255;
+    --ion-color-primary-shade: #6a5787;
+    --ion-color-primary-tint: #6a5787;
+    // --ion-color-primary: #7044ff;
+    // --ion-color-primary-rgb: 112, 68, 255;
+    // --ion-color-primary-contrast: #f8f8f8;
+    // --ion-color-primary-contrast-rgb: 255, 255, 255;
+    // --ion-color-primary-shade: #633ce0;
+    // --ion-color-primary-tint: #7e57ff;
+
+    /** secondary **/
+    --ion-color-secondary: #f4f4f4;
+    --ion-color-secondary-rgb: 255, 255, 255;
+    --ion-color-secondary-contrast: #000000;
+    --ion-color-secondary-contrast-rgb: 255, 255, 255;
+    --ion-color-secondary-shade: #f8f8f8;
+    --ion-color-secondary-tint: #f8f8f8;
+
+    /** tertiary **/
+    --ion-color-tertiary: #3880ff;
+    --ion-color-tertiary-rgb: 56, 128, 255;
+    --ion-color-tertiary-contrast: #ffffff;
+    --ion-color-tertiary-contrast-rgb: 255, 255, 255;
+    --ion-color-tertiary-shade: #3171e0;
+    --ion-color-tertiary-tint: #4c8dff;
+
+    /** success **/
+    --ion-color-success: #10dc60;
+    --ion-color-success-rgb: 16, 220, 96;
+    --ion-color-success-contrast: #ffffff;
+    --ion-color-success-contrast-rgb: 255, 255, 255;
+    --ion-color-success-shade: #0ec254;
+    --ion-color-success-tint: #28e070;
+
+    /** warning **/
+    --ion-color-warning: #ffce00;
+    --ion-color-warning-rgb: 255, 206, 0;
+    --ion-color-warning-contrast: #ffffff;
+    --ion-color-warning-contrast-rgb: 255, 255, 255;
+    --ion-color-warning-shade: #e0b500;
+    --ion-color-warning-tint: #ffd31a;
+
+    /** danger **/
+    --ion-color-danger: #f04141;
+    --ion-color-danger-rgb: 245, 61, 61;
+    --ion-color-danger-contrast: #ffffff;
+    --ion-color-danger-contrast-rgb: 255, 255, 255;
+    --ion-color-danger-shade: #d33939;
+    --ion-color-danger-tint: #f25454;
+
+    /** dark **/
+    --ion-color-dark: #222428;
+    --ion-color-dark-rgb: 34, 34, 34;
+    --ion-color-dark-contrast: #ffffff;
+    --ion-color-dark-contrast-rgb: 255, 255, 255;
+    --ion-color-dark-shade: #1e2023;
+    --ion-color-dark-tint: #383a3e;
+
+    /** medium **/
+    --ion-color-medium: #989aa2;
+    --ion-color-medium-rgb: 152, 154, 162;
+    --ion-color-medium-contrast: #f8f8f8;
+    --ion-color-medium-contrast-rgb: 255, 255, 255;
+    --ion-color-medium-shade: #86888f;
+    --ion-color-medium-tint: #a2a4ab;
+
+    /** light **/
+    --ion-color-light: #f8f8f8;
+    --ion-color-light-rgb: 240, 240, 240;
+    --ion-color-light-contrast: #000000;
+    --ion-color-light-contrast-rgb: 0, 0, 0;
+    --ion-color-light-shade: #d7d8da;
+    --ion-color-light-tint: #f5f6f9;
+
+    $toolbar-md-title-text-color: black;
+}
+
+:focus {
+    outline: none;
+}
+/* SETTINGS TOOLBAR
+=======================================================
+=======================================================*/
+.header-md:after,
+.footer-md:before {
+    background-image: none !important;
+}
+
+/* INCLUDE FONTS
+=======================================================
+=======================================================*/
+@import 'fontello';
+@import 'rtl';
+
+/* SETTINGS FONT SIZE
+=======================================================
+=======================================================*/
+[text-size-xl] {
+    font-size: var(--h1-font-size, 20px) !important;
+    color: var(--mystic-light, #1b1e28);
+}
+
+[text-size-lg] {
+    font-size: var(--h2-font-size, 18px) !important;
+    color: var(--mystic-light, #1b1e28);
+}
+
+[text-size-md] {
+    font-size: var(--h3-font-size, 16px) !important;
+    color: var(--mystic-light, #1b1e28);
+}
+
+[text-size-xs] {
+    font-size: var(--h4-font-size, 14px) !important;
+    color: var(--mystic-light, #1b1e28);
+}
+
+[text-size-sm] {
+    font-size: var(--h5-font-size, 15px) !important;
+    color: var(--mystic-light, #1b1e28);
+}
+
+[text-size-p] {
+    font-size: var(--text-font-size, 14px) !important;
+    color: var(--mystic-light, #1b1e28);
+}
+
+[text-nowrap] {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+page-home {
+    .swiper-pagination.swiper-pagination-bullets {
+        bottom: 5px !important;
+
+        .swiper-pagination-bullet-active {
+            --bullet-background: var(--mystic-light, #231942) !important;
+            background: var(--bullet-background);
+        }
+    }
+}
+
+*::-webkit-scrollbar {
+    display: none !important;
+}
+
+/* SETTINGS BUTTON
+=======================================================
+=======================================================*/
+[default-button] {
+    --padding-top: 20px;
+    --padding-bottom: 20px;
+    --background: var(--mystic-light, #892bfe);
+    --color: var(--mystic-primary, #ffffff);
+    --ripple-color: transparent;
+    border-radius: 4px;
+    overflow: hidden;
+    min-height: 45px;
+    text-transform: inherit;
+}
+
+/* SETTINGS CATEGORY
+=======================================================
+=======================================================*/
+// [category] {
+//     position: absolute;
+//     top: 7px;
+//     z-index: 999;
+//     left: 7px;
+//     border-radius: 4px;
+//     // background: var(--mystic-danger, #5e548e);
+//     background: var(--mystic-danger, #892bfe);
+//     padding: 5px;
+//     font-size: 10px;
+//     color: var(--mystic-category, #fff);
+// }
+[category] {
+    position: absolute;
+    top: 8px;
+    z-index: 999;
+    right: 8px;
+    border-radius: 4px;
+    // background: var(--mystic-danger, #5e548e);
+    background: var(--mystic-danger, #892bfe);
+    padding: 5px;
+    font-size: 10px;
+    color: var(--mystic-category, #fff);
+}
+
+[category-small] {
+    position: absolute;
+    top: 3px;
+    z-index: 999;
+    left: 3px;
+    border-radius: 4px;
+    background: var(--mystic-danger, #892bfe);
+    padding: 5px;
+    font-size: 10px;
+    color: var(--mystic-category, #fff);
+}
+
+[category-row] {
+    position: absolute;
+    top: 1px;
+    z-index: 999;
+    left: 1px;
+    border-radius: 4px;
+    background: var(--mystic-danger, #892bfe);
+    padding: 5px;
+    font-size: 10px;
+    color: var(--mystic-category, #fff);
+}
+
+/* SETTINGS COLOR BACKGROUND OUR APP
+=======================================================
+=======================================================*/
+ion-content {
+    --background: var(--mystic-backgroundColor, #ffffff);
+}
+
+ion-list {
+    padding-top: 0 !important;
+    --background: var(--mystic-backgroundColor, #ffffff);
+}
+
+ion-item {
+    --background: var(--mystic-backgroundColor, #ffffff);
+}
+
+ion-toolbar {
+    // --background: var(--mystic-listBackgroundColor, #ffffff);
+    --background: var(--mystic-listBackgroundColor, #ffffff);
+
+    --color: var(--mystic-toobarButton, #aab2b7);
+}
+
+ion-title {
+    --color: var(--mystic-light, #1b1e28);
+    font-size: 16px;
+}
+
+.default_text {
+    --color: var(--mystic-light, #aab2b7) !important;
+}
+
+.dark-text {
+    --color: var(--mystic-light, #1b1e28) !important;
+}
+
+.bg-theme {
+    --background: var(--mystic-toobarBackground, #ffffff) !important;
+}
+
+/* SETTINGS CHIP
+=======================================================
+=======================================================*/
+ion-chip {
+    --background: transparent;
+    margin: 0;
+    padding-top: 0;
+    -webkit-padding-start: 4px;
+    padding-inline-start: 4px;
+    padding-inline-end: 0px;
+
+    .ripple-effect {
+        display: none !important;
+    }
+
+    ion-icon {
+        color: var(--mystic-colorIcon, #cccbda);
+    }
+    ion-label {
+        color: var(--mystic-colorIconText, #876796) !important;
+    }
+}
+
+/* SETTINGS SEGMENT
+=======================================================
+=======================================================*/
+// ion-segment-button {
+// --background: #876796 !important;
+// // --background: var(--mystic-toobarBackground, #ffffff);
+// --background-checked: #876796 !important;
+// --background-activated: #876796 !important;
+// // --color: var(--mystic-light, #1b1e28);
+// --color-checked: #876796 !important;
+// }
+
+/* SETTINGS COLOR AND SIZE ICON
+=======================================================
+=======================================================*/
+[icon-small] {
+    color: var(--mystic-colorIcon, #cccbda);
+    font-size: var(--icon-size-small, 20px);
+}
+
+/* Image
+=======================================================
+=======================================================*/
+
+img {
+    object-fit: cover;
+}
+
+/* Settings bookmark
+=======================================================
+=======================================================*/
+[bookMark] {
+    ion-icon {
+        &.active {
+            color: var(--mystic-danger, #892bfe) !important;
+        }
+    }
+}
+
+/* Default Overview Ionic Section
+=======================================================
+=======================================================*/
+[background-size] {
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
+
+[border-radius] {
+    border-radius: 4px;
+}
+
+[font-bold] {
+    font-weight: bold !important;
+}
+
+[no-box-shadow] {
+    box-shadow: none !important;
+}
+
+[box-shadow] {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15) !important;
+    z-index: 999;
+}
+
+[transparent] {
+    --background: transparent;
+}
+
+[clearfix] {
+    display: block;
+    clear: both;
+}
+
+// #16161D
+// #892bfe ;
+$toolbar-md-title-text-color: black;

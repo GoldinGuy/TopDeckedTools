@@ -1,0 +1,173 @@
+.light-purple {
+    --ion-color-primary: #6a5787 !important;
+}
+
+.select {
+    --background-checked: #6a5787 !important;
+    outline: none !important;
+    border: 0px !important;
+    border-radius: 7px !important;
+}
+
+.roboto-white {
+    font-family: Roboto;
+    color: white !important;
+}
+
+.roboto-white-title {
+    font-family: Roboto;
+    color: white !important;
+    text-align: center !important;
+    margin-top: 6px;
+}
+
+.bg-purple {
+    background-color: #544a63 !important;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+.player {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: #6a5787;
+    color: #6a5787 !important;
+    border-radius: 6px !important;
+}
+
+.player-item {
+    color: #6a5787 !important;
+    --background: #6a5787 !important;
+}
+
+.bg-theme {
+    --background: #544a63 !important;
+}
+
+ion-segment-button {
+    --indicator-color: #6a5787 !important;
+}
+
+.wins {
+    border-radius: 8px;
+    background-color: #544a63 !important;
+    --background: #544a63 !important;
+    padding: 15px 20px;
+    margin-top: 5px;
+    color: #fff;
+}
+
+.w-100 {
+    width: 100px;
+    text-overflow: ellipsis !important;
+}
+
+ion-select {
+    /* Set a different placeholder color */
+    --placeholder-color: #fff;
+    width: 50%;
+
+    justify-content: center;
+    /* Set full opacity on the placeholder */
+    --placeholder-opacity: 1;
+}
+
+.select-int .select-interface-option {
+    color: red;
+    --color: #971e49;
+    --color-hover: #79193b;
+}
+
+.float-right {
+    text-align: right !important;
+}
+
+.but {
+    --padding-top: 10px !important;
+    --padding-bottom: 20px !important;
+}
+
+.white {
+    color: #544a63 !important;
+    --background: #fff !important;
+}
+
+.filter {
+    top: 75px;
+    right: 11px;
+}
+
+.round {
+    border-radius: 10px;
+    background-color: #6a5787 !important;
+    --background: #6a5787 !important;
+    padding: 10px;
+    width: 100px;
+}
+
+.bg-light-purple {
+    background-color: #915fc2 !important;
+    color: #915fc2 !important;
+    --background: #915fc2 !important;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.bg-purple-card {
+    background-color: #6a5787 !important;
+    color: #6a5787 !important;
+    --background: #6a5787 !important;
+}
+
+.tourney2 {
+    height: 225px !important;
+}
+
+.width-100 {
+    width: 100%;
+}
+
+.w-150 {
+    width: 150px;
+}
+
+.rank {
+    border-radius: 8px;
+    background-color: #544a63 !important;
+    --background: #544a63 !important;
+    padding: 10px;
+    margin-right: 10px;
+    height: 100%;
+}
+
+.results {
+    border-radius: 8px;
+    background-color: #544a63 !important;
+    --background: #544a63 !important;
+    padding: 10px 5px;
+    width: 80px !important;
+    // margin-right: 10px;
+    height: 100%;
+}
+
+// ion-select {
+//     /* Applies to the value and placeholder color */
+//     color: #545ca7 !important;
+
+//     /* Set a different placeholder color */
+//     --placeholder-color: #971e49 !important;
+
+//     /* Set full opacity on the placeholder */
+//     --placeholder-opacity: 0 !important;
+// }
+
+// .purple-select .select-interface-option {
+//     --color: #971e49 !important;
+//     --color-hover: #79193b !important;
+// }
+
+// .popover-content {
+//     --min-width: 50%;
+// }

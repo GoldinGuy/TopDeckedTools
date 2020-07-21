@@ -1,0 +1,58 @@
+<ion-toolbar class="bdr-15 bg-theme">
+    <!-- hide searchbar when in subcategories/details -->
+    <ion-searchbar
+        mode="ios"
+        *ngIf="(array == this.rules.getAllTopicIds()) || (searchTerm != null && searchTerm != '')"
+        [(ngModel)]="searchTerm"
+        (ionChange)="searchChanged()"
+        placeholder="Search a Rule or Term"
+        class="roboto white mgb-5 mgt-15"
+    ></ion-searchbar>
+    <!-- display back button when in subcategories/details -->
+    <div
+        *ngIf="!hideBack && (array != this.rules.getAllTopicIds())"
+        class="rule fs-20"
+        (click)="resetArrayDefault()"
+    >
+        <div class="rule__title">
+            <ion-icon name="chevron-back-outline" class="white mgr-5"></ion-icon>
+            <a class="white roboto-semibold truncate">{{ this.currentTerm }}</a>
+        </div>
+    </div>
+</ion-toolbar>
+
+<ion-content fullscreen class="bg-theme">
+    <!-- display each rule in the array - initially main categories, then each subcategory, then detailed rules  -->
+    <ng-container *ngFor="let rule of array">
+        <div
+            *ngIf="!isDisplayingSubsection(array)"
+            class="fs-20 rule"
+            (click)="displaySubrules(rule)"
+        >
+            <div class="rule__title">
+                <a class="white roboto truncate">{{ rule }}</a>
+            </div>
+        </div>
+        <!-- display detailed rules differently -->
+        <div *ngIf="isDisplayingSubsection(array)" mode="ios">
+            <div class="detail_card">
+                <!-- rules with numbers i.e. 719.1e Banding -->
+
+                <div *ngIf="this.rules.isRule(rule)" class="roboto white detail">
+                    <p class="roboto-semibold">
+                        {{ rule.substring(0, rule.indexOf(' ')) }}
+                    </p>
+                    <p class="roboto">
+                        {{ rule.substring(rule.indexOf(' ')) }}
+                    </p>
+                </div>
+                <!-- rules without numbers (glossary of mtg terms) -->
+                <div *ngIf="!this.rules.isRule(rule)" class="roboto white detail">
+                    <p class="roboto">
+                        {{ rule }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</ion-content>
