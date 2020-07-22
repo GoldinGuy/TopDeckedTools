@@ -23,6 +23,7 @@ export class TournamentsPage {
     newTournament: boolean;
     displayStandings: boolean;
     eventComplete: boolean;
+    expandedView: boolean;
 
     constructor(
         private router: Router,
@@ -74,8 +75,10 @@ export class TournamentsPage {
         } catch (e) {
             console.log('Error. No tournament found.');
         }
+        // UI state bools
         this.displayStandings = false;
         this.eventComplete = false;
+        this.expandedView = false;
         if (this.newTournament) {
             this.tourney.status = 'newly created';
         }
@@ -104,10 +107,10 @@ export class TournamentsPage {
             this.displayStandings = true;
             this.eventComplete = true;
         } else {
-            if (!this.newTournament) {
-                this.tournamentService.setResults(this.tourney);
-                this.tournamentService.getStandings(this.tourney);
-            }
+            // if (!this.newTournament) {
+            this.tournamentService.setResults(this.tourney);
+            this.tournamentService.getStandings(this.tourney);
+            // }
             this.tourney.round = this.tournamentService.generateNextRound(this.tourney);
         }
     }
@@ -126,11 +129,17 @@ export class TournamentsPage {
     ) {
         if (player2.score < 2 || player1.score < 1) {
             player1.score += 1;
-            if (player1.score > 2) {
-                player1.score = 0;
-            }
-            // console.log(player1.score);
+            // if (player1.score > 2) {
+            //     player1.score = 0;
+            // }
+        } else {
+            player2.score -= 1;
+            player1.score += 1;
         }
+        if (player1.score > 2 || player1.score < 0) {
+            player1.score = 0;
+        }
+        // console.log(player1.score);
     }
 
     endEvent = () => {

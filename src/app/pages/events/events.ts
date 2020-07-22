@@ -3,7 +3,7 @@ import { Storage } from '@ionic/storage';
 import { Router, NavigationExtras } from '@angular/router';
 import { AlertController, PopoverController } from '@ionic/angular';
 import { isNullOrUndefined } from 'util';
-import { Tournament, TournamentService } from 'src/app/services/tournament.service';
+import { Tournament, TournamentService, TotalRounds } from 'src/app/services/tournament.service';
 
 @Component({
     selector: 'app-events',
@@ -33,30 +33,11 @@ export class EventsPage {
     ) {
         this.tourney = {
             id: 'unknown',
-            participants: [
-                {
-                    name: 'bob',
-                    phoneNumber: '43534543',
-                    standing: null,
-                    seed: 1,
-                },
-                {
-                    name: 'joe',
-                    phoneNumber: '3543536',
-                    standing: null,
-                    seed: 2,
-                },
-                {
-                    name: 'sue',
-                    phoneNumber: '86767876',
-                    standing: null,
-                    seed: 3,
-                },
-            ],
+            participants: [],
             matches: [],
             totalRounds: 4,
             round: {
-                roundNum: 1,
+                roundNum: 0,
                 pairings: [],
             },
             rounds: [],

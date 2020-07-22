@@ -1,76 +1,140 @@
 .light-purple {
-	--ion-color-primary: #6a5787 !important;
+    --ion-color-primary: #6a5787 !important;
 }
 
 .select {
-	// --background-checked: #6a5787 !important;
-	--indicator-color: #6a5787 !important;
-	outline: none !important;
-	border: 0px !important;
-	border-radius: 7px !important;
+    // --background-checked: #6a5787 !important;
+    --indicator-color: #6a5787 !important;
+    outline: none !important;
+    border: 0px !important;
+    border-radius: 7px !important;
 }
 
 ion-segment-button {
-	min-width: auto !important;
+    min-width: auto !important;
 }
 
 .col-w {
-	color: white !important;
-	--background: #fff !important;
-	--primary-color: white !important;
+    color: white !important;
+    --background: #fff !important;
+    --primary-color: white !important;
 }
 
 .h-25 {
-	height: 35px !important;
+    height: 35px !important;
 }
 
 .roboto-white {
-	font-family: Roboto;
-	color: white !important;
+    font-family: Roboto;
+    color: white !important;
 }
 
 .roboto-white-title {
-	font-family: Roboto;
-	color: white !important;
-	text-align: center !important;
-	margin-top: 6px;
+    font-family: Roboto;
+    color: white !important;
+    text-align: center !important;
+    margin-top: 6px;
 }
 
 .bg-purple {
-	background-color: #544a63 !important;
+    background-color: #544a63 !important;
+}
+
+.round {
+    border-radius: 10px;
+    background-color: #6a5787 !important;
+    --background: #6a5787 !important;
+    padding: 10px;
+    width: 100px;
+}
+
+.bg-light-purple {
+    background-color: #915fc2 !important;
+    color: #915fc2 !important;
+    --background: #915fc2 !important;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.bg-purple-card {
+    background-color: #6a5787 !important;
+    color: #6a5787 !important;
+    --background: #6a5787 !important;
+}
+.round {
+    border-radius: 10px;
+    background-color: #6a5787 !important;
+    --background: #6a5787 !important;
+    padding: 10px;
+    width: 100px;
+}
+
+.bg-light-purple {
+    background-color: #915fc2 !important;
+    color: #915fc2 !important;
+    --background: #915fc2 !important;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.bg-purple-card {
+    background-color: #6a5787 !important;
+    color: #6a5787 !important;
+    --background: #6a5787 !important;
+}
+.round {
+    border-radius: 10px;
+    background-color: #6a5787 !important;
+    --background: #6a5787 !important;
+    padding: 10px;
+    width: 100px;
+}
+
+.bg-light-purple {
+    background-color: #915fc2 !important;
+    color: #915fc2 !important;
+    --background: #915fc2 !important;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.bg-purple-card {
+    background-color: #6a5787 !important;
+    color: #6a5787 !important;
+    --background: #6a5787 !important;
 }
 
 .player {
-	margin-top: 10px;
-	margin-bottom: 10px;
-	background: #6a5787;
-	color: #6a5787 !important;
-	border-radius: 6px !important;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: #6a5787;
+    color: #6a5787 !important;
+    border-radius: 6px !important;
 }
 
 .player-item {
-	color: #6a5787 !important;
-	--background: #6a5787 !important;
+    color: #6a5787 !important;
+    --background: #6a5787 !important;
 }
 
 .text-center {
-	text-align: center !important;
+    text-align: center !important;
 }
 
 .text-right {
-	text-align: right !important;
+    text-align: right !important;
 }
 
 .bg-theme {
-	--background: #544a63 !important;
+    --background: #544a63 !important;
 }
 
 .but {
-	--padding-top: 10px !important;
-	--padding-bottom: 20px !important;
+    --padding-top: 10px !important;
+    --padding-bottom: 20px !important;
 }
 
 .white {
-	color: #544a63 !important;
-	--background: #fff !important;
+    color: #544a63 !important;
+    --background: #fff !important;
 }
