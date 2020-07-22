@@ -3,7 +3,12 @@ import { Storage } from '@ionic/storage';
 import { Router, NavigationExtras } from '@angular/router';
 import { AlertController, PopoverController } from '@ionic/angular';
 import { isNullOrUndefined } from 'util';
-import { Tournament, TournamentService, TotalRounds } from 'src/app/services/tournament.service';
+import {
+    Tournament,
+    TournamentService,
+    TotalRounds,
+    TournamentPlayer,
+} from 'src/app/services/tournament.service';
 
 @Component({
     selector: 'app-events',
@@ -12,6 +17,7 @@ import { Tournament, TournamentService, TotalRounds } from 'src/app/services/tou
 })
 export class EventsPage {
     tourney: Tournament;
+    lastUsedPlayers: Array<TournamentPlayer>;
     // temporary UI fields
     name: string;
     phoneNumber: string;
@@ -56,14 +62,30 @@ export class EventsPage {
             if (this.tourney.totalRounds <= 0) {
                 this.tourney.totalRounds = 4;
             }
+            if (isNullOrUndefined(this.tourney.participants)) {
+                this.tourney.participants = [];
+            }
+            if (
+                this.tourney.round.roundNum >= this.tourney.totalRounds ||
+                this.tourney.status == 'complete' ||
+                isNullOrUndefined(this.tourney)
+            ) {
+                for (var i = 0; i < this.tourney.participants.length; i++) {
+                    var play = this.tournamentService.createPlayer(
+                        this.tourney.participants[0].name,
+                        this.tourney.participants[0].phoneNumber,
+                        this.lastUsedPlayers.length + 1
+                    );
+                    this.lastUsedPlayers.push(play);
+                    console.log(JSON.stringify(this.lastUsedPlayers));
+                }
+                this.tourney = this.tournamentService.createTournament([], 4);
+            }
         } catch (e) {
             console.log('Error. No tournament found. Creating new tournament.');
+            this.lastUsedPlayers = [];
             this.tourney = this.tournamentService.createTournament([], 4);
         }
-        if (isNullOrUndefined(this.tourney.participants)) {
-            this.tourney.participants = [];
-        }
-
         if (this.tourney.round.roundNum != 0) {
             this.router.navigate(['/tabs/events/tournaments']);
         }
@@ -73,7 +95,6 @@ export class EventsPage {
         if (this.tourney.participants.length < 2) {
             return;
         }
-
         this.tournamentService.saveTournament(this.tourney, this.storage);
         let navigationExtras: NavigationExtras = {
             state: {

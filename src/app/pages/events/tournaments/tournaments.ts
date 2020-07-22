@@ -23,9 +23,9 @@ export class TournamentsPage {
     displayStandings: boolean;
     eventComplete: boolean;
     expandedView: boolean;
-    timer: number;
     timerDisplay: string;
     timerOn: boolean;
+    timer: number;
 
     constructor(
         private router: Router,
@@ -143,7 +143,7 @@ export class TournamentsPage {
     }
 
     endEvent = () => {
-        this.tourney.round.roundNum = 0;
+        this.tourney.status = 'complete';
         this.tournamentService.saveTournament(this.tourney, this.storage);
         this.router.navigate(['/tabs/events']);
     };
