@@ -78,7 +78,11 @@ export class TournamentsPage {
         // UI state bools
         this.displayStandings = false;
         this.eventComplete = false;
-        this.expandedView = false;
+        if (this.tourney.participants.length > 6) {
+            this.expandedView = true;
+        } else {
+            this.expandedView = true;
+        }
         if (this.newTournament) {
             this.tourney.status = 'newly created';
         }

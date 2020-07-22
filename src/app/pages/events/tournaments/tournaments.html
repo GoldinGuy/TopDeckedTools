@@ -1,7 +1,9 @@
 <ion-header box-shadow>
     <ion-toolbar class="bg-theme">
-        <ion-title class="roboto-white-title fs-20">TopDecked Tournaments</ion-title>
-        <!-- <ion-icon name="settings" slot="end" class="roboto-white"></ion-icon> -->
+        <ion-icon name="play" slot="start" class="roboto-white pdl-10 fs-20"></ion-icon>
+        <ion-icon name="pause" slot="start" class="roboto-white pdl-10 fs-20"></ion-icon>
+        <ion-title class="roboto-white-title fs-21"><span class=""> 8:47</span></ion-title>
+        <ion-icon name="settings" slot="end" class="roboto-white pdr-10 fs-20"></ion-icon>
     </ion-toolbar>
 </ion-header>
 <ion-content class="bg-theme">
@@ -13,12 +15,6 @@
             Event Complete!
         </h3>
     </div>
-    <!-- <ion-fab class="filter" vertical="top" horizontal="end" edge id="fab1">
-        <ion-fab-button mini class="e2eFabTopRight" (click)="textPairings()">
-            <ion-icon name="ios-text"></ion-icon>
-        </ion-fab-button>
-        {{ tourney.status }}
-    </ion-fab> -->
 
     <br />
 
@@ -88,29 +84,6 @@
                     </ion-row>
                 </ion-grid>
             </ion-card>
-
-            <!-- <div class="fs-20 fw-900 mgt- mgb-30 spacing1 text-center">
-                <ion-button
-                    size="medium"
-                    class="mgt--20 but"
-                    type="submit"
-                    (click)="nextRound()"
-                    mode="ios"
-                >
-                    <h2
-                        class="roboto-white fs-18"
-                        *ngIf="tourney.round.roundNum < tourney.totalRounds"
-                    >
-                        Next Round
-                    </h2>
-                    <h2
-                        class="roboto-white fs-18"
-                        *ngIf="tourney.round.roundNum >= tourney.totalRounds"
-                    >
-                        See Results
-                    </h2>
-                </ion-button>
-            </div> -->
         </div>
 
         <div *ngIf="!displayStandings && expandedView">
@@ -195,49 +168,45 @@
                         >
                     </ion-item>
                 </ion-list>
-                <!-- <div class="fs-20 fw-900 mgt-30 mgb-20 text-center" *ngIf="eventComplete">
-                    <ion-button
-                        color="primary"
-                        mode="ios"
-                        size="medium"
-                        class="mgt--20 but fs-20"
-                        type="submit"
-                        (click)="endEvent()"
-                    >
-                        <h3 class="roboto-white">Done</h3>
-                    </ion-button>
-                </div> -->
             </div>
         </div>
     </div>
-</ion-content>
-<ion-footer class="bg-theme">
-    <ion-toolbar class="bg-theme">
-        <div class="fs-20 fw-900 text-center" *ngIf="!displayStandings && !eventComplete">
-            <ion-button size="medium" class="but" type="submit" (click)="nextRound()" mode="ios">
-                <h2 class="roboto-white fs-18" *ngIf="tourney.round.roundNum < tourney.totalRounds">
-                    Next Round
-                </h2>
-                <h2
-                    class="roboto-white fs-18"
-                    *ngIf="tourney.round.roundNum >= tourney.totalRounds"
-                >
-                    See Results
-                </h2>
-            </ion-button>
-        </div>
 
-        <div class="fs-20 fw-900 text-center" *ngIf="eventComplete">
-            <ion-button
-                color="primary"
-                mode="ios"
-                size="medium"
-                class="but fs-18"
-                type="submit"
-                (click)="endEvent()"
-            >
-                <h3 class="roboto-white">Done</h3>
-            </ion-button>
-        </div>
-    </ion-toolbar>
-</ion-footer>
+    <!-- <ion-fab class="filter" vertical="top" horizontal="end" edge id="fab1">
+        <ion-fab-button mini class="e2eFabTopRight" (click)="textPairings()">
+            <ion-icon name="ios-text"></ion-icon>
+        </ion-fab-button>
+        {{ tourney.status }}
+    </ion-fab> -->
+
+    <!-- </ion-content>
+<ion-footer class="bg-trans"> -->
+    <!-- <ion-toolbar class="bg-trans"> -->
+    <!-- <div class="fixed-bottom"> -->
+    <div class="fs-20 fw-900 text-center" *ngIf="!displayStandings && !eventComplete">
+        <ion-button size="medium" class="but" type="submit" (click)="nextRound()" mode="ios">
+            <h2 class="roboto-white fs-18" *ngIf="tourney.round.roundNum < tourney.totalRounds">
+                Next Round
+            </h2>
+            <h2 class="roboto-white fs-18" *ngIf="tourney.round.roundNum >= tourney.totalRounds">
+                See Results
+            </h2>
+        </ion-button>
+    </div>
+
+    <div class="fs-20 fw-900 text-center" *ngIf="eventComplete">
+        <ion-button
+            color="primary"
+            mode="ios"
+            size="medium"
+            class="but fs-18"
+            type="submit"
+            (click)="endEvent()"
+        >
+            <h3 class="roboto-white">Done</h3>
+        </ion-button>
+    </div>
+    <!-- </div> -->
+    <!-- </ion-toolbar> -->
+    <!-- </ion-footer> -->
+</ion-content>

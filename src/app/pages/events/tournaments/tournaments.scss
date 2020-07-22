@@ -46,6 +46,22 @@
     --background: #544a63 !important;
 }
 
+.bg-trans {
+    --background: transparent !important;
+}
+
+.mt-10 {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.fixed-bottom {
+    position: fixed;
+    left: 0;
+    bottom: 10px;
+    right: 0;
+}
+
 ion-segment-button {
     --indicator-color: #6a5787 !important;
 }
@@ -113,6 +129,15 @@ ion-select {
     --background: #915fc2 !important;
     padding-top: 5px;
     padding-bottom: 5px;
+}
+
+.center-v {
+    display: flex !important;
+    align-content: center !important;
+    align-items: center !important;
+    // height: 100%;
+    // display: block;
+    // vertical-align: middle;
 }
 
 .bg-purple-card {
