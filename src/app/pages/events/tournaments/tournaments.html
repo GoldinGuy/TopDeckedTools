@@ -1,8 +1,22 @@
 <ion-header box-shadow>
     <ion-toolbar class="bg-theme">
-        <ion-icon name="play" slot="start" class="roboto-white pdl-10 fs-20"></ion-icon>
-        <ion-icon name="pause" slot="start" class="roboto-white pdl-10 fs-20"></ion-icon>
-        <ion-title class="roboto-white-title fs-21"><span class=""> 8:47</span></ion-title>
+        <ion-icon
+            *ngIf="!timerOn"
+            name="play"
+            slot="start"
+            class="roboto-white pdl-10 fs-20"
+            (click)="manipulateTimer()"
+        ></ion-icon>
+        <ion-icon
+            *ngIf="timerOn"
+            name="pause"
+            slot="start"
+            class="roboto-white pdl-10 fs-20"
+            (click)="manipulateTimer()"
+        ></ion-icon>
+        <ion-title class="roboto-white-title fs-21"
+            ><span class="">{{ timerDisplay }}</span></ion-title
+        >
         <ion-icon name="settings" slot="end" class="roboto-white pdr-10 fs-20"></ion-icon>
     </ion-toolbar>
 </ion-header>
@@ -204,6 +218,18 @@
             (click)="endEvent()"
         >
             <h3 class="roboto-white">Done</h3>
+        </ion-button>
+    </div>
+    <div class="fs-10 text-center">
+        <ion-button
+            color="bg-theme"
+            mode="ios"
+            size="small"
+            class="fs-10"
+            type="submit"
+            (click)="reset()"
+        >
+            <p color="primary" class="fs-14 color-purp">Reset</p>
         </ion-button>
     </div>
     <!-- </div> -->

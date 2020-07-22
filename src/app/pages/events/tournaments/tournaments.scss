@@ -90,12 +90,6 @@ ion-select {
     --placeholder-opacity: 1;
 }
 
-.select-int .select-interface-option {
-    color: red;
-    --color: #971e49;
-    --color-hover: #79193b;
-}
-
 .float-right {
     text-align: right !important;
 }
@@ -144,6 +138,10 @@ ion-select {
     background-color: #6a5787 !important;
     color: #6a5787 !important;
     --background: #6a5787 !important;
+}
+
+.color-purp {
+    color: #6a5787 !important;
 }
 
 .tourney2 {
