@@ -49,10 +49,6 @@ export class EventsPage {
             rounds: [],
             standings: null,
             status: 'Unknown',
-            // ui_settings: {
-            //     timer: 3000,
-            //     expanded_view: true,
-            // },
         };
     }
 
@@ -70,11 +66,13 @@ export class EventsPage {
                 this.tourney.status == 'complete' ||
                 isNullOrUndefined(this.tourney)
             ) {
+                this.lastUsedPlayers = [];
                 for (var i = 0; i < this.tourney.participants.length; i++) {
                     var play = this.tournamentService.createPlayer(
-                        this.tourney.participants[0].name,
-                        this.tourney.participants[0].phoneNumber,
-                        this.lastUsedPlayers.length + 1
+                        this.tourney.participants[i].name,
+                        this.tourney.participants[i].phoneNumber,
+                        this.lastUsedPlayers.length + 1,
+                        null
                     );
                     this.lastUsedPlayers.push(play);
                     console.log(JSON.stringify(this.lastUsedPlayers));
