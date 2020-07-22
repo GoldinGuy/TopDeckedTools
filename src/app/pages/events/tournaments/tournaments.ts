@@ -78,7 +78,7 @@ export class TournamentsPage {
         this.displayStandings = false;
         this.eventComplete = false;
         this.timer = 3000.0;
-        this.timerDisplay = (this.timer / 60).toString();
+        this.timerDisplay = (this.timer / 60).toString() + ':00';
         this.timerOn = true;
         if (this.tourney.participants.length > 6) {
             this.expandedView = false;

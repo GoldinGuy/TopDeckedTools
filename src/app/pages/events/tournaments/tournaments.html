@@ -1,23 +1,8 @@
 <ion-header box-shadow>
     <ion-toolbar class="bg-theme">
-        <ion-icon
-            *ngIf="!timerOn"
-            name="play"
-            slot="start"
-            class="roboto-white pdl-10 fs-20"
-            (click)="manipulateTimer()"
-        ></ion-icon>
-        <ion-icon
-            *ngIf="timerOn"
-            name="pause"
-            slot="start"
-            class="roboto-white pdl-10 fs-20"
-            (click)="manipulateTimer()"
-        ></ion-icon>
-        <ion-title class="roboto-white-title fs-21"
-            ><span class="">{{ timerDisplay }}</span></ion-title
-        >
-        <ion-icon name="settings" slot="end" class="roboto-white pdr-10 fs-20"></ion-icon>
+        <ion-title class="roboto-white-title fs-21" (click)="manipulateTimer()">
+            <span class="">{{ timerDisplay }}</span>
+        </ion-title>
     </ion-toolbar>
 </ion-header>
 <ion-content class="bg-theme">
@@ -29,8 +14,10 @@
             Event Complete!
         </h3>
     </div>
-
-    <br />
+    <div class="roboto-white-title fs-21 text-center pdt-7 pdb-7" (click)="manipulateTimer()">
+        <span class="">{{ timerDisplay }}</span>
+    </div>
+    <!-- <br /> -->
 
     <div class="pdl-18 pdr-18 pdt-5">
         <ion-segment
@@ -47,18 +34,77 @@
             </ion-segment-button>
         </ion-segment>
     </div>
-    <div>
-        <br />
 
-        <!-- display pairings -->
-        <div *ngIf="!displayStandings && !expandedView">
-            <ion-card
-                no-margin
-                class="mgb-15 bg-purple-card bdra-5"
-                *ngFor="let pairing of tourney.round.pairings"
-            >
-                <ion-grid>
-                    <ion-row>
+    <!-- <div class="text-center">
+        <ion-button size="medium" class="but" type="submit" (click)="nextRound()" mode="ios">
+            <h2 class="roboto-white fs-18">
+                Share Pairings
+            </h2>
+        </ion-button>
+        <ion-button size="medium" class="but" type="submit" (click)="nextRound()" mode="ios">
+            <h2 class="roboto-white fs-18">
+                Start Timer
+            </h2>
+        </ion-button>
+    </div> -->
+    <br />
+
+    <!-- display pairings -->
+    <div *ngIf="!displayStandings && !expandedView">
+        <ion-card
+            no-margin
+            class="mgb-15 bg-purple-card bdra-5"
+            *ngFor="let pairing of tourney.round.pairings"
+        >
+            <ion-grid>
+                <ion-row>
+                    <h5 class="fs-17 roboto-white w-100 pdl-5" side="start">
+                        {{ pairing.home.id }}
+                    </h5>
+                    <button
+                        class="wins float-right"
+                        *ngIf="!pairing.bye"
+                        (click)="incrementScore(pairing.home, pairing.away)"
+                    >
+                        <a class="fs-22 roboto-white">{{ pairing.home.score }}</a>
+                    </button>
+                    <ion-col *ngIf="pairing.bye">
+                        <h3 class="center roboto-semibold roboto-white fs-18">
+                            BYE
+                        </h3>
+                    </ion-col>
+                    <h3
+                        ion-text-center
+                        class="center roboto-semibold roboto-white fs-18 pdl-7 pdr-7"
+                        *ngIf="!pairing.bye"
+                    >
+                        VS
+                    </h3>
+                    <button
+                        class="wins float-right"
+                        *ngIf="!pairing.bye"
+                        (click)="incrementScore(pairing.away, pairing.home)"
+                    >
+                        <a class="fs-22 roboto-white">{{ pairing.away.score }}</a>
+                    </button>
+
+                    <h5 class="fs-17 roboto-white float-right w-100 pdr-5" side="end">
+                        {{ pairing.away.id }}
+                    </h5>
+                </ion-row>
+            </ion-grid>
+        </ion-card>
+    </div>
+
+    <div *ngIf="!displayStandings && expandedView">
+        <ion-card
+            no-margin
+            class="mgb-15 bg-purple-card bdra-5"
+            *ngFor="let pairing of tourney.round.pairings"
+        >
+            <ion-grid>
+                <ion-row>
+                    <ion-col>
                         <h5 class="fs-17 roboto-white w-100 pdl-5" side="start">
                             {{ pairing.home.id }}
                         </h5>
@@ -69,7 +115,9 @@
                         >
                             <a class="fs-22 roboto-white">{{ pairing.home.score }}</a>
                         </button>
+                    </ion-col>
 
+                    <ion-col>
                         <h3
                             ion-text-center
                             class="center roboto-semibold roboto-white fs-18 pdl-7 pdr-7"
@@ -84,6 +132,11 @@
                         >
                             VS
                         </h3>
+                    </ion-col>
+                    <ion-col class="float-right">
+                        <h5 class="fs-17 roboto-white float-right w-100 pdr-5" side="end">
+                            {{ pairing.away.id }}
+                        </h5>
                         <button
                             class="wins float-right"
                             *ngIf="!pairing.bye"
@@ -91,98 +144,40 @@
                         >
                             <a class="fs-22 roboto-white">{{ pairing.away.score }}</a>
                         </button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card>
+    </div>
 
-                        <h5 class="fs-17 roboto-white float-right w-100 pdr-5" side="end">
-                            {{ pairing.away.id }}
+    <!-- display standings -->
+    <div *ngIf="displayStandings">
+        <div class="pdl-15 pdr-15 pdt-5">
+            <ion-list class="player">
+                <ion-item
+                    class="player-item ion-text-start"
+                    lines="none"
+                    *ngFor="let person of tourney.standings"
+                    ><ion-col size="8">
+                        <h5 class="fs-19 roboto-white">
+                            <span class="rank">{{ person.index }}</span>
+                            {{ person.id }}
                         </h5>
-                    </ion-row>
-                </ion-grid>
-            </ion-card>
-        </div>
-
-        <div *ngIf="!displayStandings && expandedView">
-            <ion-card
-                no-margin
-                class="mgb-15 bg-purple-card bdra-5"
-                *ngFor="let pairing of tourney.round.pairings"
-            >
-                <ion-grid>
-                    <ion-row>
-                        <ion-col>
-                            <h5 class="fs-17 roboto-white w-100 pdl-5" side="start">
-                                {{ pairing.home.id }}
-                            </h5>
-                            <button
-                                class="wins float-right"
-                                *ngIf="!pairing.bye"
-                                (click)="incrementScore(pairing.home, pairing.away)"
-                            >
-                                <a class="fs-22 roboto-white">{{ pairing.home.score }}</a>
-                            </button>
-                        </ion-col>
-
-                        <ion-col>
-                            <h3
-                                ion-text-center
-                                class="center roboto-semibold roboto-white fs-18 pdl-7 pdr-7"
-                                *ngIf="pairing.bye"
-                            >
-                                BYE
-                            </h3>
-                            <h3
-                                ion-text-center
-                                class="center roboto-semibold roboto-white fs-18 pdl-7 pdr-7"
-                                *ngIf="!pairing.bye"
-                            >
-                                VS
-                            </h3>
-                        </ion-col>
-                        <ion-col class="float-right">
-                            <h5 class="fs-17 roboto-white float-right w-100 pdr-5" side="end">
-                                {{ pairing.away.id }}
-                            </h5>
-                            <button
-                                class="wins float-right"
-                                *ngIf="!pairing.bye"
-                                (click)="incrementScore(pairing.away, pairing.home)"
-                            >
-                                <a class="fs-22 roboto-white">{{ pairing.away.score }}</a>
-                            </button>
-                        </ion-col>
-                    </ion-row>
-                </ion-grid>
-            </ion-card>
-        </div>
-
-        <!-- display standings -->
-        <div *ngIf="displayStandings">
-            <div class="pdl-15 pdr-15 pdt-5">
-                <ion-list class="player">
-                    <ion-item
-                        class="player-item ion-text-start"
-                        lines="none"
-                        *ngFor="let person of tourney.standings"
-                        ><ion-col size="8">
-                            <h5 class="fs-19 roboto-white">
-                                <span class="rank">{{ person.index }}</span>
-                                {{ person.id }}
-                            </h5>
-                        </ion-col>
-                        <ion-col
-                            ><ion-button
-                                side="end"
-                                mode="ios"
-                                class="results float-right"
-                                id="longMessage"
-                                expand="block"
-                                (click)="presentDetailedStandings(person)"
-                                shape="results"
-                                >RECORD</ion-button
-                            ></ion-col
-                        >
-                    </ion-item>
-                </ion-list>
-            </div>
+                    </ion-col>
+                    <ion-col
+                        ><ion-button
+                            side="end"
+                            mode="ios"
+                            class="results float-right"
+                            id="longMessage"
+                            expand="block"
+                            (click)="presentDetailedStandings(person)"
+                            shape="results"
+                            >RECORD</ion-button
+                        ></ion-col
+                    >
+                </ion-item>
+            </ion-list>
         </div>
     </div>
 
