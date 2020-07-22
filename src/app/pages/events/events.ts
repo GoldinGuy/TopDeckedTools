@@ -43,6 +43,10 @@ export class EventsPage {
             rounds: [],
             standings: null,
             status: 'Unknown',
+            // ui_settings: {
+            //     timer: 3000,
+            //     expanded_view: true,
+            // },
         };
     }
 
@@ -137,13 +141,5 @@ export class EventsPage {
         } else {
             return false;
         }
-    }
-
-    clearCache() {
-        this.tourney.matches = [];
-        this.tourney.totalRounds = 4;
-        this.tourney.rounds = [];
-        // this.tourney.participants = [];
-        this.tourney.round.pairings = [];
     }
 }

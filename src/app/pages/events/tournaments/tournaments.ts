@@ -81,7 +81,7 @@ export class TournamentsPage {
         this.timerDisplay = (this.timer / 60).toString();
         this.timerOn = true;
         if (this.tourney.participants.length > 6) {
-            this.expandedView = true;
+            this.expandedView = false;
         } else {
             this.expandedView = true;
         }
@@ -149,6 +149,35 @@ export class TournamentsPage {
     };
 
     reset() {
+        this.tournamentService.saveTournament(
+            {
+                id: 'unknown',
+                participants: [
+                    {
+                        name: 'Jace',
+                        phoneNumber: '43534543',
+                        standing: null,
+                        seed: 1,
+                    },
+                    {
+                        name: 'Chandra',
+                        phoneNumber: '3543536',
+                        standing: null,
+                        seed: 2,
+                    },
+                ],
+                matches: [],
+                totalRounds: 4,
+                round: {
+                    roundNum: 1,
+                    pairings: [],
+                },
+                rounds: [],
+                standings: null,
+                status: 'Unknown',
+            },
+            this.storage
+        );
         this.router.navigate(['/tabs/events']);
     }
 
