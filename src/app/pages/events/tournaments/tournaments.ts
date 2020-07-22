@@ -20,7 +20,6 @@ import { AlertController } from '@ionic/angular';
 export class TournamentsPage {
     tourney: Tournament;
     // bool variables that determine UI
-    // newTournament: boolean;
     displayStandings: boolean;
     eventComplete: boolean;
     expandedView: boolean;
@@ -38,9 +37,6 @@ export class TournamentsPage {
     ) {
         this.route.queryParams.subscribe(() => {
             console.log('starting');
-            // if (this.router.getCurrentNavigation().extras.state) {
-            //     this.newTournament = this.router.getCurrentNavigation().extras.state.new;
-            // }
         });
 
         // dummy data
@@ -89,9 +85,7 @@ export class TournamentsPage {
         } else {
             this.expandedView = true;
         }
-        // if (this.newTournament) {
-        //     this.tourney.status = 'newly created';
-        // }
+
         this.startTimer();
         this.nextRound();
         if (this.tourney.round.roundNum <= 0 || this.tourney.participants.length < 2) {
@@ -118,10 +112,8 @@ export class TournamentsPage {
             this.displayStandings = true;
             this.eventComplete = true;
         } else {
-            // if (!this.newTournament) {
             this.tournamentService.setResults(this.tourney);
             this.tournamentService.getStandings(this.tourney);
-            // }
             this.tourney.round = this.tournamentService.generateNextRound(this.tourney);
         }
     }
@@ -140,9 +132,6 @@ export class TournamentsPage {
     ) {
         if (player2.score < 2 || player1.score < 1) {
             player1.score += 1;
-            // if (player1.score > 2) {
-            //     player1.score = 0;
-            // }
         } else {
             player2.score -= 1;
             player1.score += 1;
@@ -218,52 +207,3 @@ export class TournamentsPage {
         }, 1000);
     }
 }
-
-// // // An asynchronous timer
-// async function startCountDown(seconds) {
-//     var counter = seconds;
-//     var interval = setInterval(() => {
-//         console.log(counter);
-//         counter--;
-//         if (counter < 0) {
-//             // code here will run when the counter reaches zero.
-
-//             clearInterval(interval);
-//             console.log('Ding!');
-//         }
-//     }, 1000);
-// }
-
-// startCountDown(10);\
-
-// setTwoNumberDecimal(event: number) {
-//     return parseFloat(event.toString()).toFixed(2);
-// }
-
-// StartTimer() {
-//     while (this.timerOn) {
-//         let timer = setTimeout((x) => {
-//             if (this.timer <= 0) {
-//             }
-//             if (this.timer > 0) {
-//                 this.timer -= 1;
-//                 this.StartTimer();
-//             }
-//         }, 1000);
-//     }
-// }
-// // An asynchronous timer
-// async startTimer() {
-//     var interval = setInterval(() => {
-//         console.log(this.timer);
-//         if (this.timer > 0) {
-//             this.timer--;
-//             if (this.timer < 0) {
-//                 // code here will run when the counter reaches zero.
-
-//                 clearInterval(interval);
-//                 console.log('Ding!');
-//             }
-//         }
-//     }, 1000);
-// }
