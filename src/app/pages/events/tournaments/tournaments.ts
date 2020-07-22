@@ -19,6 +19,7 @@ import { AlertController } from '@ionic/angular';
 })
 export class TournamentsPage {
     tourney: Tournament;
+    events: Array<Tournament>;
     // bool variables that determine UI
     displayStandings: boolean;
     eventComplete: boolean;
@@ -69,8 +70,13 @@ export class TournamentsPage {
     }
 
     async ionViewWillEnter() {
+        this.events = [];
+
         try {
-            this.tourney = await this.storage.get('tournament');
+            // this.tourney = await this.storage.get('tournament');
+            this.events = await this.storage.get('events');
+            console.log(JSON.stringify(this.events));
+            this.tourney = this.events[0];
         } catch (e) {
             console.log('Error. No tournament found.');
         }
@@ -90,14 +96,14 @@ export class TournamentsPage {
         this.nextRound();
         if (this.tourney.round.roundNum <= 0 || this.tourney.participants.length < 2) {
             this.tourney.round.roundNum = 0;
-            this.tournamentService.saveTournament(this.tourney, this.storage);
+            this.tournamentService.saveTournament(this.events, this.storage);
             this.router.navigate(['/tabs/events']);
         }
     }
 
     async ionViewWillLeave() {
         try {
-            this.tournamentService.saveTournament(this.tourney, this.storage);
+            this.tournamentService.saveTournament(this.events, this.storage);
         } catch (e) {
             console.log(e);
             this.tourney.status = e;
@@ -144,40 +150,12 @@ export class TournamentsPage {
 
     endEvent = () => {
         this.tourney.status = 'complete';
-        this.tournamentService.saveTournament(this.tourney, this.storage);
+        this.tournamentService.saveTournament(this.events, this.storage);
         this.router.navigate(['/tabs/events']);
     };
 
     reset() {
-        this.tournamentService.saveTournament(
-            {
-                id: 'unknown',
-                participants: [
-                    {
-                        name: 'Jace',
-                        phoneNumber: '43534543',
-                        standing: null,
-                        seed: 1,
-                    },
-                    {
-                        name: 'Chandra',
-                        phoneNumber: '3543536',
-                        standing: null,
-                        seed: 2,
-                    },
-                ],
-                matches: [],
-                totalRounds: 4,
-                round: {
-                    roundNum: 1,
-                    pairings: [],
-                },
-                rounds: [],
-                standings: null,
-                status: 'Unknown',
-            },
-            this.storage
-        );
+        this.tournamentService.saveTournament(this.events, this.storage);
         this.router.navigate(['/tabs/events']);
     }
 
