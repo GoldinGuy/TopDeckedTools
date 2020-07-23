@@ -9,6 +9,7 @@ import {
     TournamentPlayer,
     Pairing,
     Result,
+    Events,
 } from 'src/app/services/tournament.service.js';
 import { AlertController } from '@ionic/angular';
 
@@ -19,7 +20,7 @@ import { AlertController } from '@ionic/angular';
 })
 export class TournamentsPage {
     tourney: Tournament;
-    events: Array<Tournament>;
+    events: Events;
     // bool variables that determine UI
     displayStandings: boolean;
     eventComplete: boolean;
@@ -39,7 +40,6 @@ export class TournamentsPage {
         this.route.queryParams.subscribe(() => {
             console.log('starting');
         });
-
         // dummy data
         this.tourney = {
             id: 'unknown',
@@ -67,6 +67,7 @@ export class TournamentsPage {
             standings: null,
             status: 'Unknown',
         };
+        this.events = [];
     }
 
     async ionViewWillEnter() {
@@ -75,8 +76,10 @@ export class TournamentsPage {
         try {
             // this.tourney = await this.storage.get('tournament');
             this.events = await this.storage.get('events');
+            if (this.events.length > 0) {
+                this.tourney = this.events[0];
+            }
             console.log(JSON.stringify(this.events));
-            this.tourney = this.events[0];
         } catch (e) {
             console.log('Error. No tournament found.');
         }
@@ -95,7 +98,7 @@ export class TournamentsPage {
         this.startTimer();
         this.nextRound();
         if (this.tourney.round.roundNum <= 0 || this.tourney.participants.length < 2) {
-            this.tourney.round.roundNum = 0;
+            // this.tourney.round.roundNum = 0;
             this.tournamentService.saveTournament(this.events, this.storage);
             this.router.navigate(['/tabs/events']);
         }

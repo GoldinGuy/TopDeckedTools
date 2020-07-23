@@ -50,7 +50,7 @@
             </ion-button>
         </div>
 
-        <div class="text-center">
+        <div class="text-center" *ngIf="events.length > 1">
             <ion-button
                 (click)="tourney.participants = lastUsedPlayers"
                 expand="round"

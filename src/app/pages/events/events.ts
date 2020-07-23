@@ -8,6 +8,7 @@ import {
     TournamentService,
     TotalRounds,
     TournamentPlayer,
+    Events,
 } from 'src/app/services/tournament.service';
 
 @Component({
@@ -17,7 +18,7 @@ import {
 })
 export class EventsPage {
     tourney: Tournament;
-    events: Array<Tournament>;
+    events: Events;
     lastUsedPlayers: Array<TournamentPlayer>;
     // temporary UI fields
     name: string;
@@ -51,41 +52,45 @@ export class EventsPage {
             standings: null,
             status: 'Unknown',
         };
+        this.events = [this.tourney];
     }
 
     async ionViewWillEnter() {
+        this.lastUsedPlayers = [];
         try {
             // this.tourney = await this.storage.get('tournament');
             this.events = await this.storage.get('events');
             console.log('events: ' + JSON.stringify(this.events));
-            this.tourney = this.events[0];
-            if (this.tourney.totalRounds <= 0) {
-                this.tourney.totalRounds = 4;
-            }
-            if (isNullOrUndefined(this.tourney.participants)) {
-                this.tourney.participants = [];
-            }
-            if (
-                this.tourney.round.roundNum >= this.tourney.totalRounds ||
-                this.tourney.status == 'complete' ||
-                isNullOrUndefined(this.tourney)
-            ) {
-                // this.lastUsedPlayers = [];
-                // for (var i = 0; i < this.tourney.participants.length; i++) {
-                //     var play = this.tournamentService.createPlayer(
-                //         this.tourney.participants[i].name,
-                //         this.tourney.participants[i].phoneNumber,
-                //         this.lastUsedPlayers.length + 1,
-                //         null
-                //     );
-                //     this.lastUsedPlayers.push(play);
-                //     console.log(JSON.stringify(this.lastUsedPlayers));
-                // }
-                // this.tourney = this.tournamentService.createTournament([], 4);
+            if (this.events.length > 0) {
+                this.tourney = this.events[0];
+                if (this.tourney.totalRounds <= 0) {
+                    this.tourney.totalRounds = 4;
+                }
+                if (isNullOrUndefined(this.tourney.participants)) {
+                    this.tourney.participants = [];
+                }
+                if (
+                    this.tourney.round.roundNum >= this.tourney.totalRounds ||
+                    this.tourney.status == 'complete' ||
+                    isNullOrUndefined(this.tourney)
+                ) {
+                    for (var i = 0; i < this.tourney.participants.length; i++) {
+                        var play = this.tournamentService.createPlayer(
+                            this.tourney.participants[i].name,
+                            this.tourney.participants[i].phoneNumber,
+                            this.lastUsedPlayers.length + 1,
+                            null
+                        );
+                        this.lastUsedPlayers.push(play);
+                        console.log(JSON.stringify(this.lastUsedPlayers));
+                    }
+                    this.tourney = this.tournamentService.createTournament([], 4);
+                    this.events.unshift(this.tourney);
+                }
             }
         } catch (e) {
             console.log('Error. No tournament found. Creating new tournament.');
-            this.lastUsedPlayers = [];
+            this.events = [];
             this.tourney = this.tournamentService.createTournament([], 4);
             this.events.unshift(this.tourney);
         }
