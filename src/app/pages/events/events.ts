@@ -6,7 +6,6 @@ import { isNullOrUndefined } from 'util';
 import {
     Tournament,
     TournamentService,
-    TotalRounds,
     TournamentPlayer,
     Events,
 } from 'src/app/services/tournament.service';
@@ -58,7 +57,6 @@ export class EventsPage {
     async ionViewWillEnter() {
         this.lastUsedPlayers = [];
         try {
-            // this.tourney = await this.storage.get('tournament');
             this.events = await this.storage.get('events');
             console.log('events: ' + JSON.stringify(this.events));
             if (this.events.length > 0) {
@@ -71,7 +69,6 @@ export class EventsPage {
                 }
                 if (
                     this.tourney.round.roundNum >= this.tourney.totalRounds ||
-                    this.tourney.status == 'complete' ||
                     isNullOrUndefined(this.tourney)
                 ) {
                     for (var i = 0; i < this.tourney.participants.length; i++) {
@@ -82,14 +79,14 @@ export class EventsPage {
                             null
                         );
                         this.lastUsedPlayers.push(play);
-                        console.log(JSON.stringify(this.lastUsedPlayers));
+                        // console.log(JSON.stringify(this.lastUsedPlayers));
                     }
                     this.tourney = this.tournamentService.createTournament([], 4);
                     this.events.unshift(this.tourney);
                 }
             }
         } catch (e) {
-            console.log('Error. No tournament found. Creating new tournament.');
+            console.log('Error. No tournaments found. Creating new tournament.');
             this.events = [];
             this.tourney = this.tournamentService.createTournament([], 4);
             this.events.unshift(this.tourney);
@@ -99,6 +96,7 @@ export class EventsPage {
         }
     }
 
+    // handle button events, what they do, and whether they are disabled
     async startEvent() {
         if (this.tourney.participants.length < 2) {
             return;
@@ -137,7 +135,6 @@ export class EventsPage {
         this.tournamentService.removeAllPlayers(this.tourney);
     };
 
-    // handle button events and whether they are disbaled
     segmentButtonClicked(ev: any) {
         this.tourney.totalRounds = ev.target.value;
         this.roundsPicker = this.roundsPicker.map((round) => {

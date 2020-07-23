@@ -40,25 +40,25 @@
         </ion-item>
         <div class="mgt-45 text-right">
             <ion-button
-                (click)="addPlayer()"
-                expand="round"
-                color="primary"
-                size="small"
-                class="txt-light mgt--30 light-purple"
-            >
-                <ion-icon class="txt-light" name="add"></ion-icon>
-            </ion-button>
-        </div>
-
-        <div class="text-center" *ngIf="events.length > 1">
-            <ion-button
                 (click)="tourney.participants = lastUsedPlayers"
                 expand="round"
                 color="primary"
                 size="small"
+                *ngIf="(events.length > 1) && (tourney.participants.length < 1)"
+                slot="start"
                 class="txt-light mgt--30 light-purple"
             >
                 Use players from last event
+            </ion-button>
+            <ion-button
+                (click)="addPlayer()"
+                expand="round"
+                color="primary"
+                slot="end"
+                size="small"
+                class="txt-light mgl-10 mgt--30 light-purple"
+            >
+                <ion-icon class="txt-light" name="add"></ion-icon>
             </ion-button>
         </div>
 
@@ -89,7 +89,7 @@
                     (click)="removeAll()"
                     class="mgt-10 light-purple text-right"
                 >
-                    <ion-label class="fs-16 mgr-10">Clear</ion-label
+                    <ion-label class="fs-14 mgr-10">Clear</ion-label
                     ><ion-icon class="txt-light" name="close-circle"></ion-icon>
                 </ion-button>
             </div>

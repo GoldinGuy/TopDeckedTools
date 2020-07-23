@@ -6,8 +6,6 @@ import { SMS } from '@ionic-native/sms/ngx';
 import {
     TournamentService,
     Tournament,
-    TournamentPlayer,
-    Pairing,
     Result,
     Events,
 } from 'src/app/services/tournament.service.js';
@@ -38,7 +36,7 @@ export class TournamentsPage {
         private tournamentService: TournamentService
     ) {
         this.route.queryParams.subscribe(() => {
-            console.log('starting');
+            console.log('starting tournament');
         });
         // dummy data
         this.tourney = {
@@ -67,38 +65,32 @@ export class TournamentsPage {
             standings: null,
             status: 'Unknown',
         };
-        this.events = [];
+        this.events = [this.tourney];
     }
 
     async ionViewWillEnter() {
-        this.events = [];
-
         try {
-            // this.tourney = await this.storage.get('tournament');
             this.events = await this.storage.get('events');
             if (this.events.length > 0) {
                 this.tourney = this.events[0];
             }
-            console.log(JSON.stringify(this.events));
         } catch (e) {
-            console.log('Error. No tournament found.');
+            console.log('Error. No tournaments found.');
         }
-        // UI state bools
-        this.displayStandings = false;
-        this.eventComplete = false;
-        this.timer = 3000.0;
+        // set UI state
+        (this.displayStandings = false), (this.eventComplete = false), (this.timerOn = true);
+        this.timer = 3000.0; // 50 minutes
         this.timerDisplay = (this.timer / 60).toString() + ':00';
-        this.timerOn = true;
         if (this.tourney.participants.length > 6) {
             this.expandedView = false;
         } else {
             this.expandedView = true;
         }
-
+        // start new round
         this.startTimer();
         this.nextRound();
+        // if tournament does not have enough players or rounds, end
         if (this.tourney.round.roundNum <= 0 || this.tourney.participants.length < 2) {
-            // this.tourney.round.roundNum = 0;
             this.tournamentService.saveTournament(this.events, this.storage);
             this.router.navigate(['/tabs/events']);
         }
@@ -113,14 +105,17 @@ export class TournamentsPage {
         }
     }
 
+    // handle button events, what they do, and whether they are disabled
     nextRound() {
         if (
             this.tourney.round.roundNum >= this.tourney.totalRounds ||
             this.tourney.round.roundNum > 8
         ) {
+            // display standings when event complete
             this.displayStandings = true;
             this.eventComplete = true;
         } else {
+            // save results of current round, start new round
             this.tournamentService.setResults(this.tourney);
             this.tournamentService.getStandings(this.tourney);
             this.tourney.round = this.tournamentService.generateNextRound(this.tourney);
