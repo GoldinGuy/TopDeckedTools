@@ -14,7 +14,7 @@
         (click)="manipulateTimer()"
         *ngIf="!eventComplete"
     >
-        <ion-icon name="timer" class="roboto-white"></ion-icon
+        <ion-icon name="timer" [style.color]="timer <= 300 ? 'red' : 'white'"></ion-icon
         ><span class="ml-5">{{ timerDisplay }}</span>
         <!-- <ion-icon name="pause" class="roboto-white"></ion-icon> -->
     </div>
@@ -52,6 +52,7 @@
                     <button
                         class="wins float-right"
                         *ngIf="!pairing.bye"
+                        [style.background]="pairing.home.score > pairing.away.score ? '#915fc2' : '#544a63'"
                         (click)="incrementScore(pairing.home, pairing.away)"
                     >
                         <a class="fs-22 roboto-white">{{ pairing.home.score }}</a>
@@ -71,6 +72,7 @@
                     <button
                         class="wins float-right"
                         *ngIf="!pairing.bye"
+                        [style.background]="pairing.home.score < pairing.away.score ? '#915fc2' : '#544a63'"
                         (click)="incrementScore(pairing.away, pairing.home)"
                     >
                         <a class="fs-22 roboto-white">{{ pairing.away.score }}</a>
@@ -98,6 +100,7 @@
                         </h5>
                         <button
                             class="wins float-right"
+                            [style.background]="pairing.home.score > pairing.away.score ? '#915fc2' : '#544a63'"
                             *ngIf="!pairing.bye"
                             (click)="incrementScore(pairing.home, pairing.away)"
                         >
@@ -127,6 +130,7 @@
                         </h5>
                         <button
                             class="wins float-right"
+                            [style.background]="pairing.home.score < pairing.away.score ? '#915fc2' : '#544a63'"
                             *ngIf="!pairing.bye"
                             (click)="incrementScore(pairing.away, pairing.home)"
                         >
