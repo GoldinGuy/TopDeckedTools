@@ -4,17 +4,6 @@
     </ion-toolbar>
 </ion-header>
 <ion-content class="bg-theme">
-    <!-- <div class="pdl-30 pdr-30"> -->
-    <!-- <h4 class="roboto-white pdb-10">Continue an Event</h4>
-
-        <ion-card class="" *ngFor="let tourney of events">
-            <ion-card-header>
-                <ion-card-title>Card Title</ion-card-title>
-                <ion-card-subtitle></ion-card-subtitle>
-            </ion-card-header>
-        </ion-card>
-    </div>
-    <br /> -->
     <div class="bg-light-purple">
         <h3 class="roboto-white-title">
             New Event
@@ -44,7 +33,7 @@
                 expand="round"
                 color="primary"
                 size="small"
-                *ngIf="(events.length > 1) && (tourney.participants.length < 1)"
+                *ngIf="(events.length > 1) && (tourney.participants.length < 1) && (lastUsedPlayers.length > 0)"
                 slot="start"
                 class="txt-light mgt--30 light-purple"
             >
