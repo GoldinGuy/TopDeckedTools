@@ -25,3 +25,5 @@ npm install
 ```
 ionic serve
 ```
+
+The base of some of the code in this project was originally written for [Mystic](https://play.google.com/store/apps/details?id=com.goldin.mystic&hl=en_US), an app @TimG and I worked on in the summer of 2019 that aimed to do many of the same things as TopDecked
