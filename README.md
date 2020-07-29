@@ -1,10 +1,9 @@
 # TopDeckedTools
 
   <a href="https://github.com/GoldinGuy/TopDeckedTools/graphs/contributors" alt="Contributors">
-        <img src="https://img.shields.io/github/contributors/badges/shields" /></a>
- <a href="https://github.com/GoldinGuy/TopDeckedTools/compare/gh-pages...master">
-        <img src="https://img.shields.io/github/commits-since/badges/shields/gh-pages?label=commits%20to%20be%20deployed"
-            alt="commits to be deployed"></a>
+        <img src="https://img.shields.io/github/contributors/GoldinGuy/TopDeckedTools" /></a>
+ <a href="https://img.shields.io/badge/Built%20With-Ionic%205-blue">
+        <img src="https://img.shields.io/badge/Built%20With-Ionic%205-blue" alt="ionic5"></a>
 
 :wrench: An Ionic app that contains several tools, features, and/or utilities used in TopDecked, an essential all-in-one companion app & website for MTG deck-building, 3D simulation testing, pricing, trading, and collecting.
 Eventually this repository aims to include a full `rules search engine and term glossary`, a swiss-style `tournament system` with smart pairings, a `life tracker`, and more!
