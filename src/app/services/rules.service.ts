@@ -15,7 +15,7 @@ export type RuleInstance = string;
 import { Injectable } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 
-import rules from './rules_txt';
+import rules from './rules/rules_txt';
 
 export interface IRulesService {
     // Direct get methods

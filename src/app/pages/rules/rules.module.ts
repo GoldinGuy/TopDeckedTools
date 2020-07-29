@@ -15,11 +15,11 @@ import { RulesPage } from './rules';
         RouterModule.forChild([
             {
                 path: '',
-                component: RulesPage
-            }
-        ])
+                component: RulesPage,
+            },
+        ]),
     ],
     declarations: [RulesPage],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class RulesPageModule {}

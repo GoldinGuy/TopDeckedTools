@@ -12,6 +12,7 @@ log.txt
 .vscode/
 npm-debug.log*
 
+# generated files
 .idea/
 .ionic/
 .sourcemaps/
@@ -30,6 +31,7 @@ plugins/android.json
 plugins/ios.json
 $RECYCLE.BIN/
 
+# old files
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate
