@@ -16,7 +16,7 @@ The code is fairly straightforward - each feature has its own tab/page, and is s
 You can view these features and use them in TopDecked on the [site](https://www.topdecked.com/) or [app](https://app.topdecked.me/)
 
 You can also download and run this code with the following commands
-(ensure you ionic and angular installed, and have all the necessary packages)
+(ensure you have ionic and angular installed, as well as all the necessary packages)
 
 ```
 npm install
