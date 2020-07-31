@@ -52,3 +52,7 @@ theme.service.ts
 user.service.ts
 .oldrulesservice.txt
 .oldswiss.txt
+
+# prettier
+.prettierignore
+.prettierrc
