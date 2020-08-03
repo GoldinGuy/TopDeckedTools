@@ -1,0 +1,104 @@
+.bg-theme {
+    --background: #544a63 !important;
+}
+
+.life {
+    text-align: center;
+    justify-content: center;
+}
+
+.life-choice {
+    // background: #6a5787;
+    border-radius: 9px;
+    text-align: center;
+    padding: 15px;
+    margin: 10px 15px;
+}
+
+.player-choice {
+    // background: #6a5787;
+    border-radius: 9px;
+    text-align: center;
+    margin: 10px 10px;
+}
+
+.life-custom {
+    border: 5px;
+    border-color: #6a5787;
+    border-radius: 9px;
+    text-align: center;
+    padding: 15px;
+    margin: 10px 15px;
+}
+
+.life-title {
+    font-size: 22px;
+    color: white;
+    padding-top: 30px;
+    padding-bottom: 15px;
+}
+
+.life-num {
+    font-size: 34px;
+    color: white;
+}
+
+.player-die {
+    font-size: 55px;
+    color: white;
+}
+
+ion-segment-button {
+    min-width: auto !important;
+}
+
+.select {
+    --indicator-color: #6a5787 !important;
+    outline: none !important;
+    border: 0px !important;
+    border-radius: 7px !important;
+}
+
+.pad {
+    padding: 5px 25px 0px;
+}
+
+.but {
+    margin-top: 50px;
+    --padding-top: 10px !important;
+    --padding-bottom: 20px !important;
+}
+
+.fullheight {
+    height: 100%;
+}
+
+.bg-light-purple {
+    background-color: #915fc2 !important;
+    color: #915fc2 !important;
+    --background: #915fc2 !important;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.white-title {
+    font-family: Roboto;
+    color: white !important;
+    text-align: center !important;
+    margin-top: 6px;
+}
+
+.cc {
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    flex-direction: column;
+}
+
+.black {
+    color: #1f272d !important;
+}
+
+.white {
+    color: white;
+}

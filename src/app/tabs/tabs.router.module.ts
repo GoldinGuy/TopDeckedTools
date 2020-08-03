@@ -17,6 +17,16 @@ const routes: Routes = [
                     },
                 ],
             },
+            {
+                path: 'life',
+                children: [
+                    {
+                        path: '',
+                        loadChildren: () =>
+                            import('../pages/life/life.module').then((m) => m.LifePageModule),
+                    },
+                ],
+            },
 
             {
                 path: 'events',
