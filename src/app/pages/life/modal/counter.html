@@ -8,18 +8,17 @@
                     class="val-container mgr-4 mgb-4 bdr-top"
                     [style.background-color]="players[0].color"
                 >
+                    <p class="val rotate-left">{{ players[0].life }}</p>
                     <div class="up right" (click)="incrementLife(players[0])"></div>
                     <div class="down left" (click)="decrementLife(players[0])"></div>
-
-                    <p class="val rotate-left">{{ players[0].life }}</p>
                 </ion-col>
                 <ion-col
                     class="val-container mgl-4 mgb-4 bdr-left"
                     [style.background-color]="players[1].color"
                 >
+                    <p class="val rotate-right">{{ players[1].life }}</p>
                     <div class="up left" (click)="incrementLife(players[1])"></div>
                     <div class="down right" (click)="decrementLife(players[1])"></div>
-                    <p class="val rotate-right">{{ players[1].life }}</p>
                 </ion-col>
             </ion-row>
             <ion-row>
@@ -27,17 +26,17 @@
                     class="val-container mgr-4 mgt-4 bdr-right"
                     [style.background-color]="players[2].color"
                 >
+                    <p class="val rotate-left">{{ players[2].life }}</p>
                     <div class="up right" (click)="incrementLife(players[2])"></div>
                     <div class="down left" (click)="decrementLife(players[2])"></div>
-                    <p class="val rotate-left">{{ players[2].life }}</p>
                 </ion-col>
                 <ion-col
                     class="val-container mgl-4 mgt-4 bdr-bottom"
                     [style.background-color]="players[3].color"
                 >
+                    <p class="val rotate-right">{{ players[3].life }}</p>
                     <div class="up left" (click)="incrementLife(players[3])"></div>
                     <div class="down right" (click)="decrementLife(players[3])"></div>
-                    <p class="val rotate-right">{{ players[3].life }}</p>
                 </ion-col>
             </ion-row>
             <!-- </div> -->
