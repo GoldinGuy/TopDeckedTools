@@ -1,25 +1,46 @@
 <!DOCTYPE html>
 <ion-content fullscreen class="bg-theme">
     <div class="grid-container">
-        <ion-grid class=" ">
-            <!-- <ng-container *ngFor="let player of players"> -->
+        <ion-grid class="grid">
+            <!-- <div *ngIf="players.length === 4"> -->
             <ion-row class="">
-                <ion-col class="val-container" [style.background-color]="players[0].color">
+                <ion-col
+                    class="val-container mgr-4 mgb-4 bdr-top"
+                    [style.background-color]="players[0].color"
+                >
+                    <div class="up right" (click)="incrementLife(players[0])"></div>
+                    <div class="down left" (click)="decrementLife(players[0])"></div>
+
                     <p class="val rotate-left">{{ players[0].life }}</p>
                 </ion-col>
-                <ion-col class="val-container" [style.background-color]="players[1].color">
+                <ion-col
+                    class="val-container mgl-4 mgb-4 bdr-left"
+                    [style.background-color]="players[1].color"
+                >
+                    <div class="up left" (click)="incrementLife(players[1])"></div>
+                    <div class="down right" (click)="decrementLife(players[1])"></div>
                     <p class="val rotate-right">{{ players[1].life }}</p>
                 </ion-col>
             </ion-row>
             <ion-row>
-                <ion-col class="val-container" [style.background-color]="players[2].color">
+                <ion-col
+                    class="val-container mgr-4 mgt-4 bdr-right"
+                    [style.background-color]="players[2].color"
+                >
+                    <div class="up right" (click)="incrementLife(players[2])"></div>
+                    <div class="down left" (click)="decrementLife(players[2])"></div>
                     <p class="val rotate-left">{{ players[2].life }}</p>
                 </ion-col>
-                <ion-col class="val-container" [style.background-color]="players[3].color">
+                <ion-col
+                    class="val-container mgl-4 mgt-4 bdr-bottom"
+                    [style.background-color]="players[3].color"
+                >
+                    <div class="up left" (click)="incrementLife(players[3])"></div>
+                    <div class="down right" (click)="decrementLife(players[3])"></div>
                     <p class="val rotate-right">{{ players[3].life }}</p>
                 </ion-col>
             </ion-row>
-            <!-- </ng-container> -->
+            <!-- </div> -->
         </ion-grid>
     </div>
 </ion-content>

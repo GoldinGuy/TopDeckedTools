@@ -11,6 +11,7 @@ export interface PlayerStats {
 
 import { Component, Input } from '@angular/core';
 import { NavParams } from '@ionic/angular';
+import { isNullOrUndefined } from 'util';
 
 @Component({
     selector: 'page-life',
@@ -73,7 +74,7 @@ export class CounterPage {
         console.log('Players: ' + JSON.stringify(this.players));
     }
 
-    getColor() {
+    getColor(): string {
         let colors = [
             // red
             '#dc2054',
@@ -93,8 +94,8 @@ export class CounterPage {
             '#51a8e7',
             // blue
             '#597fdd',
-            // lightPurple
-            '#6a5787',
+            // light purple
+            // '#6a5787',
             // purple
             '#8260ed',
             // magenta
@@ -106,12 +107,24 @@ export class CounterPage {
             // light pink
             '#f38aae',
         ];
-
-        return colors[Math.floor(Math.random() * colors.length)];
+        var color: string;
+        do {
+            color = colors[Math.floor(Math.random() * colors.length)];
+            for (let i = 0; i < this.players.length; i++) {
+                if (this.players[i].color === color) {
+                    color = null;
+                }
+            }
+        } while (isNullOrUndefined(color));
+        return color;
     }
 
     incrementLife(player: PlayerStats) {
         player.life += 1;
+    }
+
+    incrementMuchLife(player: PlayerStats) {
+        player.life += 3;
     }
 
     decrementLife(player: PlayerStats) {

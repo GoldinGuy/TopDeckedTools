@@ -3,6 +3,10 @@
     --background: #544a63 !important;
 }
 
+.grid {
+    padding: 0;
+}
+
 // centers grid horizontally and vertically
 .grid-container {
     display: flex;
@@ -19,15 +23,72 @@
     color: #fff;
 }
 
+.mgl-4 {
+    margin-left: 4px;
+}
+
+.mgr-4 {
+    margin-right: 4px;
+}
+.mgt-4 {
+    margin-top: 4px;
+}
+
+.mgb-4 {
+    margin-bottom: 4px;
+}
+
+.bdr-top {
+    border-radius: 0px 9px 9px 9px;
+}
+
+.bdr-left {
+    border-radius: 9px 0px 9px 9px;
+}
+
+.bdr-bottom {
+    border-radius: 9px 9px 0px 9px;
+}
+
+.bdr-right {
+    border-radius: 9px 9px 9px 0px;
+}
+
+.val-item {
+    --background: rgba(0, 0, 0, 0) !important;
+}
+
 .val-container {
     // background: #6a5787;
-    border-radius: 9px;
+    // border-radius: 9px;
     text-align: center;
-    margin: 4px 4px;
-    height: 48vh;
+    position: relative;
+    height: 49.4vh;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.up {
+    position: absolute;
+    width: 25vw;
+    height: 100%;
+}
+
+.down {
+    position: absolute;
+    width: 25vw;
+    height: 100%;
+}
+
+.right {
+    top: 0;
+    right: 0;
+}
+
+.left {
+    top: 0;
+    left: 0;
 }
 
 .rotate-left {

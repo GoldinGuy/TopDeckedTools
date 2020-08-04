@@ -4,12 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { CounterPage } from './counter';
+import { LongPressDirective } from '../../../../../plugins/longPressDirective';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         IonicModule,
+        LongPressDirective,
         RouterModule.forChild([
             {
                 path: '',
