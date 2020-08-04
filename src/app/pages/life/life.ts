@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
+import { CounterPage } from './modal/counter';
+import { CounterPageModule } from './modal/counter.module';
 
 @Component({
     selector: 'page-life',
@@ -7,43 +10,47 @@ import { LoadingController } from '@ionic/angular';
     styleUrls: ['life.scss'],
 })
 export class LifePage {
-    constructor(public loadingController: LoadingController) {
-        this.life = 20;
-        this.playerCount = 2;
+    constructor(
+        public loadingController: LoadingController,
+        public modalController: ModalController
+    ) {
+        this.startingLife = 20;
+        this.numPlayers = 2;
     }
 
-    numPlayers = [
-        { val: 2, isChecked: true },
-        { val: 3, isChecked: false },
-        { val: 4, isChecked: false },
-        { val: 5, isChecked: false },
-        { val: 6, isChecked: false },
-    ];
+    startingLife: number;
+    numPlayers: number;
 
-    life: number;
-    playerCount: number;
-
-    setPlayerCount(newPlayer: number) {
-        this.playerCount = newPlayer;
+    setNumPlayers(newPlayer: number) {
+        this.numPlayers = newPlayer;
     }
 
     setLife(newLife: number) {
-        this.life = newLife;
+        this.startingLife = newLife;
     }
 
-    startGame() {}
-
-    segmentButtonClicked(ev: any) {
-        // if (round.val == ev.target.value) {
-        //     return {
-        //         val: round.val,
-        //         isChecked: true,
-        //     };
-        // } else {
-        //     return {
-        //         val: round.val,
-        //         isChecked: false,
-        //     };
-        // }
+    async startGame() {
+        const modal = await this.modalController.create({
+            component: CounterPage,
+            cssClass: 'my-custom-class',
+            componentProps: {
+                startingLife: this.startingLife,
+                numPlayers: this.numPlayers,
+                timer: 3000,
+                pickFirstPlayer: false,
+            },
+        });
+        return await modal.present();
     }
+
+    // numPlayers = [
+    //     { val: 2, isChecked: true },
+    //     { val: 3, isChecked: false },
+    //     { val: 4, isChecked: false },
+    //     { val: 5, isChecked: false },
+    //     { val: 6, isChecked: false },
+    // ];
+
+    // segmentButtonClicked(ev: any) {
+    // }
 }

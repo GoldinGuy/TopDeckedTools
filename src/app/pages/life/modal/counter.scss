@@ -1,0 +1,164 @@
+// bg of counter
+.bg-theme {
+    --background: #544a63 !important;
+}
+
+// centers grid horizontally and vertically
+.grid-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+// the life number value
+.val {
+    font-size: 55px;
+    font-weight: bold;
+    // color: white;
+    color: #fff;
+}
+
+.val-container {
+    // background: #6a5787;
+    border-radius: 9px;
+    text-align: center;
+    margin: 4px 4px;
+    height: 48vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rotate-left {
+    transform: rotate(90deg);
+}
+
+.rotate-right {
+    transform: rotate(-90deg);
+}
+
+// COLORS for life bg
+.red {
+    background: #dc2054;
+}
+.orange {
+    background: #f0583b;
+}
+.tangerine {
+    background: #f29a2c;
+}
+.yellow {
+    background: #e6c72f;
+}
+.lime {
+    background: #a4d53f;
+}
+
+.green {
+    background: #6fd872;
+}
+
+.aqua {
+    background: #56c9ab;
+}
+
+.sky {
+    background: #51a8e7;
+}
+.blue {
+    background: #597fdd;
+}
+
+.lightPurple {
+    background: #6a5787;
+}
+
+.purple {
+    background: #8260ed;
+}
+
+.magenta {
+    background: #aa4ee0;
+}
+
+.pink {
+    background: #dc2054;
+}
+
+.lightPink {
+    background: #f38aae;
+}
+
+.hotPink {
+    background: #e0379d;
+}
+
+.black {
+    background: #333333;
+}
+
+.white {
+    background: #fff;
+}
+
+// .red {
+//     background: #e62d62;
+// }
+// .orange {
+//     background: #ff6f32;
+// }
+// .yellow {
+//     background: #ffcd32;
+// }
+
+// .lime {
+//     background: #a4d53f;
+// }
+
+// .green {
+//     background: #03c074;
+// }
+
+// .aqua {
+//     background: #56c9ab;
+// }
+
+// .sky {
+//     background: #51a8e7;
+// }
+// .blue {
+//     background: #3283c6;
+// }
+
+// .lightPurple {
+//     background: #6a5787;
+// }
+
+// .purple {
+//     background: #7f56ab;
+// }
+
+// .magenta {
+//     background: #aa4ee0;
+// }
+
+// .pink {
+//     background: #dc2054;
+// }
+
+// .lightPink {
+//     background: #f38aae;
+// }
+
+// .hotPink {
+//     background: #e0379d;
+// }
+
+// .black {
+//     background: #333333;
+// }
+
+// .white {
+//     background: #fff;
+// }

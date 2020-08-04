@@ -13,7 +13,7 @@
             <ion-row class="life pad">
                 <ion-col
                     class="life-choice"
-                    [style.background]="life === 20 ? '#915fc2' : '#6a5787'"
+                    [style.background]="startingLife === 20 ? '#915fc2' : '#6a5787'"
                     (click)="setLife(20)"
                 >
                     <a class="life-num">
@@ -22,7 +22,7 @@
                 </ion-col>
                 <ion-col
                     class="life-choice"
-                    [style.background]="life === 30 ? '#915fc2' : '#6a5787'"
+                    [style.background]="startingLife === 30 ? '#915fc2' : '#6a5787'"
                     (click)="setLife(30)"
                 >
                     <a class="life-num">
@@ -31,7 +31,7 @@
                 </ion-col>
                 <ion-col
                     class="life-choice"
-                    [style.background]="life === 40 ? '#915fc2' : '#6a5787'"
+                    [style.background]="startingLife === 40 ? '#915fc2' : '#6a5787'"
                     (click)="setLife(40)"
                 >
                     <a class="life-num">
@@ -46,8 +46,8 @@
             <ion-row class="life pad">
                 <ion-col
                     class="player-choice"
-                    [style.background]="playerCount === 1 ? '#915fc2' : '#6a5787'"
-                    (click)="setPlayerCount(1)"
+                    [style.background]="numPlayers === 1 ? '#915fc2' : '#6a5787'"
+                    (click)="setNumPlayers(1)"
                 >
                     <a class="player-die">
                         ⚀
@@ -55,8 +55,8 @@
                 </ion-col>
                 <ion-col
                     class="player-choice"
-                    [style.background]="playerCount === 2 ? '#915fc2' : '#6a5787'"
-                    (click)="setPlayerCount(2)"
+                    [style.background]="numPlayers === 2 ? '#915fc2' : '#6a5787'"
+                    (click)="setNumPlayers(2)"
                 >
                     <a class="player-die">
                         ⚁
@@ -64,8 +64,8 @@
                 </ion-col>
                 <ion-col
                     class="player-choice"
-                    [style.background]="playerCount === 3 ? '#915fc2' : '#6a5787'"
-                    (click)="setPlayerCount(3)"
+                    [style.background]="numPlayers === 3 ? '#915fc2' : '#6a5787'"
+                    (click)="setNumPlayers(3)"
                 >
                     <a class="player-die">
                         ⚂
@@ -75,8 +75,8 @@
             <ion-row class="life pad">
                 <ion-col
                     class="player-choice"
-                    [style.background]="playerCount === 4 ? '#915fc2' : '#6a5787'"
-                    (click)="setPlayerCount(4)"
+                    [style.background]="numPlayers === 4 ? '#915fc2' : '#6a5787'"
+                    (click)="setNumPlayers(4)"
                 >
                     <a class="player-die">
                         ⚃
@@ -84,8 +84,8 @@
                 </ion-col>
                 <ion-col
                     class="player-choice"
-                    [style.background]="playerCount === 5 ? '#915fc2' : '#6a5787'"
-                    (click)="setPlayerCount(5)"
+                    [style.background]="numPlayers === 5 ? '#915fc2' : '#6a5787'"
+                    (click)="setNumPlayers(5)"
                 >
                     <a class="player-die">
                         ⚄
@@ -93,8 +93,8 @@
                 </ion-col>
                 <ion-col
                     class="player-choice"
-                    [style.background]="playerCount === 6 ? '#915fc2' : '#6a5787'"
-                    (click)="setPlayerCount(6)"
+                    [style.background]="numPlayers === 6 ? '#915fc2' : '#6a5787'"
+                    (click)="setNumPlayers(6)"
                 >
                     <a class="player-die">
                         ⚅
