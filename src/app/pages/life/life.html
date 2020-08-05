@@ -5,103 +5,102 @@
             New Game
         </h3>
     </div>
-    <ion-grid class="fullheight">
-        <div class="cc">
-            <ion-row class="life">
-                <a class="life-title">Starting Life</a>
-            </ion-row>
-            <ion-row class="life pad">
-                <ion-col
-                    class="life-choice"
-                    [style.background]="startingLife === 20 ? '#915fc2' : '#6a5787'"
-                    (click)="setLife(20)"
-                >
-                    <a class="life-num">
-                        20
-                    </a>
-                </ion-col>
-                <ion-col
-                    class="life-choice"
-                    [style.background]="startingLife === 30 ? '#915fc2' : '#6a5787'"
-                    (click)="setLife(30)"
-                >
-                    <a class="life-num">
-                        30
-                    </a>
-                </ion-col>
-                <ion-col
-                    class="life-choice"
-                    [style.background]="startingLife === 40 ? '#915fc2' : '#6a5787'"
-                    (click)="setLife(40)"
-                >
-                    <a class="life-num">
-                        40
-                    </a>
-                </ion-col>
-            </ion-row>
+    <ion-grid class=" ">
+        <ion-row class="life">
+            <a class="life-title">Starting Life</a>
+        </ion-row>
+        <ion-row class="life pad">
+            <ion-col
+                class="life-choice"
+                [style.background]="startingLife === 20 ? '#915fc2' : '#6a5787'"
+                (click)="setLife(20)"
+            >
+                <a class="life-num">
+                    20
+                </a>
+            </ion-col>
+            <ion-col
+                class="life-choice"
+                [style.background]="startingLife === 30 ? '#915fc2' : '#6a5787'"
+                (click)="setLife(30)"
+            >
+                <a class="life-num">
+                    30
+                </a>
+            </ion-col>
+            <ion-col
+                class="life-choice"
+                [style.background]="startingLife === 40 ? '#915fc2' : '#6a5787'"
+                (click)="setLife(40)"
+            >
+                <a class="life-num">
+                    40
+                </a>
+            </ion-col>
+        </ion-row>
 
-            <ion-row class="life">
-                <a class="life-title">Number of Players</a>
-            </ion-row>
-            <ion-row class="life pad">
-                <ion-col
-                    class="player-choice"
-                    [style.background]="numPlayers === 1 ? '#915fc2' : '#6a5787'"
-                    (click)="setNumPlayers(1)"
-                >
-                    <a class="player-die">
-                        ⚀
-                    </a>
-                </ion-col>
-                <ion-col
-                    class="player-choice"
-                    [style.background]="numPlayers === 2 ? '#915fc2' : '#6a5787'"
-                    (click)="setNumPlayers(2)"
-                >
-                    <a class="player-die">
-                        ⚁
-                    </a>
-                </ion-col>
-                <ion-col
-                    class="player-choice"
-                    [style.background]="numPlayers === 3 ? '#915fc2' : '#6a5787'"
-                    (click)="setNumPlayers(3)"
-                >
-                    <a class="player-die">
-                        ⚂
-                    </a>
-                </ion-col>
-            </ion-row>
-            <ion-row class="life pad">
-                <ion-col
-                    class="player-choice"
-                    [style.background]="numPlayers === 4 ? '#915fc2' : '#6a5787'"
-                    (click)="setNumPlayers(4)"
-                >
-                    <a class="player-die">
-                        ⚃
-                    </a>
-                </ion-col>
-                <ion-col
-                    class="player-choice"
-                    [style.background]="numPlayers === 5 ? '#915fc2' : '#6a5787'"
-                    (click)="setNumPlayers(5)"
-                >
-                    <a class="player-die">
-                        ⚄
-                    </a>
-                </ion-col>
-                <ion-col
-                    class="player-choice"
-                    [style.background]="numPlayers === 6 ? '#915fc2' : '#6a5787'"
-                    (click)="setNumPlayers(6)"
-                >
-                    <a class="player-die">
-                        ⚅
-                    </a>
-                </ion-col>
-            </ion-row>
-            <!-- <ion-row class="life pad">
+        <ion-row class="life">
+            <a class="life-title">Number of Players</a>
+        </ion-row>
+        <ion-row class="life pad">
+            <ion-col
+                class="player-choice"
+                [style.background]="numPlayers === 1 ? '#915fc2' : '#6a5787'"
+                (click)="setNumPlayers(1)"
+            >
+                <a class="player-die">
+                    ⚀
+                </a>
+            </ion-col>
+            <ion-col
+                class="player-choice"
+                [style.background]="numPlayers === 2 ? '#915fc2' : '#6a5787'"
+                (click)="setNumPlayers(2)"
+            >
+                <a class="player-die">
+                    ⚁
+                </a>
+            </ion-col>
+            <ion-col
+                class="player-choice"
+                [style.background]="numPlayers === 3 ? '#915fc2' : '#6a5787'"
+                (click)="setNumPlayers(3)"
+            >
+                <a class="player-die">
+                    ⚂
+                </a>
+            </ion-col>
+        </ion-row>
+        <ion-row class="life pad">
+            <ion-col
+                class="player-choice"
+                [style.background]="numPlayers === 4 ? '#915fc2' : '#6a5787'"
+                (click)="setNumPlayers(4)"
+            >
+                <a class="player-die">
+                    ⚃
+                </a>
+            </ion-col>
+            <ion-col
+                class="player-choice"
+                [style.background]="numPlayers === 5 ? '#915fc2' : '#6a5787'"
+                (click)="setNumPlayers(5)"
+            >
+                <a class="player-die">
+                    ⚄
+                </a>
+            </ion-col>
+            <ion-col
+                class="player-choice"
+                [style.background]="numPlayers === 6 ? '#915fc2' : '#6a5787'"
+                (click)="setNumPlayers(6)"
+            >
+                <a class="player-die">
+                    ⚅
+                </a>
+            </ion-col>
+        </ion-row>
+        <!-- <ion-row class="life pad">
                 <ion-segment mode="ios" value="2" (ionChange)="segmentButtonClicked($event)">
                     <ion-segment-button
                         *ngFor="let choice of numPlayers"
@@ -115,20 +114,19 @@
                     </ion-segment-button>
                 </ion-segment>
             </ion-row> -->
-            <ion-row class="life">
-                <div class="fs-20 fw-900 spacing1">
-                    <ion-button
-                        color="primary"
-                        size="medium"
-                        class="txt-light but life"
-                        type="submit"
-                        (click)="startGame()"
-                        mode="ios"
-                    >
-                        <h2 class="roboto-white fs-18">Start Game</h2>
-                    </ion-button>
-                </div>
-            </ion-row>
-        </div>
+        <ion-row class="life">
+            <div class="fs-20 fw-900 spacing1">
+                <ion-button
+                    color="primary"
+                    size="medium"
+                    class="txt-light but life"
+                    type="submit"
+                    (click)="startGame()"
+                    mode="ios"
+                >
+                    <h2 class="roboto-white fs-18">Start Game</h2>
+                </ion-button>
+            </div>
+        </ion-row>
     </ion-grid>
 </ion-content>

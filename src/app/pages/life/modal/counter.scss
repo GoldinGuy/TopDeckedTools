@@ -1,167 +1,226 @@
-// bg of counter
 .bg-theme {
     --background: #544a63 !important;
 }
 
-.grid {
-    padding: 0;
-}
-
-// centers grid horizontally and vertically
 .grid-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+
+    .grid {
+        padding: 0;
+    }
 }
 
-// the life number value
-.val {
-    font-size: 55px;
-    font-weight: bold;
-    // color: white;
-    color: #fff;
-}
+#seat4 {
+    .val-container {
+        text-align: center;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 49.5vh;
 
-.mgl-4 {
-    margin-left: 4px;
-}
+        @media (orientation: portrait) {
+            --rotate-player1: 90deg;
+            --rotate-player2: -90deg;
+            --rotate-player3: 90deg;
+            --rotate-player4: -90deg;
 
-.mgr-4 {
-    margin-right: 4px;
-}
-.mgt-4 {
-    margin-top: 4px;
-}
+            .counter {
+                position: absolute;
+                width: 25vw;
+                height: 100%;
+            }
 
-.mgb-4 {
-    margin-bottom: 4px;
-}
+            .p2-add-life {
+                top: 0;
+                left: 0;
+            }
 
-.bdr-top {
-    border-radius: 0px 9px 9px 9px;
-}
+            .p2-rem-life {
+                bottom: 0;
+                right: 0;
+            }
 
-.bdr-left {
-    border-radius: 9px 0px 9px 9px;
-}
+            .p3-add-life {
+                bottom: 0;
+                right: 0;
+            }
 
-.bdr-bottom {
-    border-radius: 9px 9px 0px 9px;
-}
+            .p3-rem-life {
+                top: 0;
+                left: 0;
+            }
+        }
 
-.bdr-right {
-    border-radius: 9px 9px 9px 0px;
-}
+        @media (orientation: landscape) {
+            --rotate-player1: 180deg;
+            --rotate-player2: 180deg;
+            --rotate-player3: 0deg;
+            --rotate-player4: 0deg;
 
-.val-item {
-    --background: rgba(0, 0, 0, 0) !important;
-}
+            .counter {
+                position: absolute;
+                height: 25vh;
+                width: 100%;
+            }
 
-.val-container {
-    // background: #6a5787;
-    // border-radius: 9px;
-    text-align: center;
-    position: relative;
-    height: 49.4vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+            .p2-add-life {
+                bottom: 0;
+                right: 0;
+            }
 
-.up {
-    position: absolute;
-    width: 25vw;
-    height: 100%;
-}
+            .p2-rem-life {
+                top: 0;
+                left: 0;
+            }
 
-.down {
-    position: absolute;
-    width: 25vw;
-    height: 100%;
-}
+            .p3-add-life {
+                top: 0;
+                left: 0;
+            }
 
-.right {
-    top: 0;
-    right: 0;
-}
+            .p3-rem-life {
+                bottom: 0;
+                right: 0;
+            }
+        }
 
-.left {
-    top: 0;
-    left: 0;
-}
+        .p1-add-life {
+            bottom: 0;
+            right: 0;
+        }
 
-.rotate-left {
-    transform: rotate(90deg);
-}
+        .p1-rem-life {
+            top: 0;
+            left: 0;
+        }
 
-.rotate-right {
-    transform: rotate(-90deg);
+        .p4-add-life {
+            top: 0;
+            left: 0;
+        }
+
+        .p4-rem-life {
+            bottom: 0;
+            right: 0;
+        }
+
+        .val {
+            font-size: 60px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .rotate-player1 {
+            transform: rotate(var(--rotate-player1));
+        }
+        .rotate-player2 {
+            transform: rotate(var(--rotate-player2));
+        }
+        .rotate-player3 {
+            transform: rotate(var(--rotate-player3));
+        }
+        .rotate-player4 {
+            transform: rotate(var(--rotate-player4));
+        }
+    }
+
+    .top-left {
+        margin-right: 0.8vw;
+        margin-bottom: 0.5vh;
+        border-radius: 0px 9px 9px 9px;
+    }
+    .top-right {
+        margin-bottom: 0.5vh;
+        border-radius: 9px 0px 9px 9px;
+    }
+
+    .bottom-left {
+        margin-right: 0.8vw;
+        margin-top: 0.5vh;
+        border-radius: 9px 9px 9px 0px;
+    }
+
+    .bottom-right {
+        margin-top: 0.5vh;
+        border-radius: 9px 9px 0px 9px;
+    }
 }
+// each life/value container
+
+// .val-item {
+//     text-align: center;
+//     justify-content: center;
+//     align-items: center;
+//     --background: rgba(0, 0, 0, 0) !important;
+// }
 
 // COLORS for life bg
-.red {
-    background: #dc2054;
-}
-.orange {
-    background: #f0583b;
-}
-.tangerine {
-    background: #f29a2c;
-}
-.yellow {
-    background: #e6c72f;
-}
-.lime {
-    background: #a4d53f;
-}
+// .red {
+//     background: #dc2054;
+// }
+// .orange {
+//     background: #f0583b;
+// }
+// .tangerine {
+//     background: #f29a2c;
+// }
+// .yellow {
+//     background: #e6c72f;
+// }
+// .lime {
+//     background: #a4d53f;
+// }
 
-.green {
-    background: #6fd872;
-}
+// .green {
+//     background: #6fd872;
+// }
 
-.aqua {
-    background: #56c9ab;
-}
+// .aqua {
+//     background: #56c9ab;
+// }
 
-.sky {
-    background: #51a8e7;
-}
-.blue {
-    background: #597fdd;
-}
+// .sky {
+//     background: #51a8e7;
+// }
+// .blue {
+//     background: #597fdd;
+// }
 
-.lightPurple {
-    background: #6a5787;
-}
+// .lightPurple {
+//     background: #6a5787;
+// }
 
-.purple {
-    background: #8260ed;
-}
+// .purple {
+//     background: #8260ed;
+// }
 
-.magenta {
-    background: #aa4ee0;
-}
+// .magenta {
+//     background: #aa4ee0;
+// }
 
-.pink {
-    background: #dc2054;
-}
+// .pink {
+//     background: #dc2054;
+// }
 
-.lightPink {
-    background: #f38aae;
-}
+// .lightPink {
+//     background: #f38aae;
+// }
 
-.hotPink {
-    background: #e0379d;
-}
+// .hotPink {
+//     background: #e0379d;
+// }
 
-.black {
-    background: #333333;
-}
+// .black {
+//     background: #333333;
+// }
 
-.white {
-    background: #fff;
-}
+// .white {
+//     background: #fff;
+// }
 
 // .red {
 //     background: #e62d62;
