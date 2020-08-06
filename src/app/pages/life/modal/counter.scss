@@ -13,6 +13,107 @@
     }
 }
 
+#seat2 {
+    .val-container {
+        text-align: center;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 49.5vh;
+
+        @media (orientation: portrait) {
+            --rotate-player1: 90deg;
+            --rotate-player2: -90deg;
+
+            .counter {
+                position: absolute;
+                width: 25vw;
+                height: 100%;
+            }
+
+            .p2-add-life {
+                top: 0;
+                left: 0;
+            }
+
+            .p2-rem-life {
+                bottom: 0;
+                right: 0;
+            }
+        }
+
+        @media (orientation: landscape) {
+            --rotate-player1: 180deg;
+            --rotate-player2: 180deg;
+
+            .counter {
+                position: absolute;
+                height: 25vh;
+                width: 100%;
+            }
+
+            .p2-add-life {
+                bottom: 0;
+                right: 0;
+            }
+
+            .p2-rem-life {
+                top: 0;
+                left: 0;
+            }
+        }
+
+        .p1-add-life {
+            bottom: 0;
+            right: 0;
+        }
+
+        .p1-rem-life {
+            top: 0;
+            left: 0;
+        }
+
+        .val {
+            font-size: 60px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .rotate-player1 {
+            transform: rotate(var(--rotate-player1));
+        }
+        .rotate-player2 {
+            transform: rotate(var(--rotate-player2));
+        }
+    }
+
+    .top-left {
+        margin-right: 0.5vw;
+        margin-bottom: 0.5vh;
+        border-radius: 0px 9px 9px 9px;
+    }
+    .top-right {
+        margin-bottom: 0.5vh;
+        margin-left: 0.5vw;
+
+        border-radius: 9px 0px 9px 9px;
+    }
+
+    .bottom-left {
+        margin-right: 0.5vw;
+        margin-top: 0.5vh;
+        border-radius: 9px 9px 9px 0px;
+    }
+
+    .bottom-right {
+        margin-top: 0.5vh;
+        margin-left: 0.5vw;
+
+        border-radius: 9px 9px 0px 9px;
+    }
+}
+
 #seat4 {
     .val-container {
         text-align: center;
@@ -129,25 +230,41 @@
     }
 
     .top-left {
-        margin-right: 0.8vw;
+        margin-right: 0.5vw;
         margin-bottom: 0.5vh;
         border-radius: 0px 9px 9px 9px;
     }
     .top-right {
         margin-bottom: 0.5vh;
+        margin-left: 0.5vw;
+
         border-radius: 9px 0px 9px 9px;
     }
 
     .bottom-left {
-        margin-right: 0.8vw;
+        margin-right: 0.5vw;
         margin-top: 0.5vh;
         border-radius: 9px 9px 9px 0px;
     }
 
     .bottom-right {
         margin-top: 0.5vh;
+        margin-left: 0.5vw;
+
         border-radius: 9px 9px 0px 9px;
     }
+}
+
+.center-icon {
+    font-size: 20px;
+    padding: 6px;
+    color: #fff;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 22px;
+    background: #544a63;
 }
 
 // .val-item {
