@@ -129,11 +129,15 @@ export class CounterPage {
         player.life += 1;
     }
 
-    incrementMuchLife(player: PlayerStats) {
-        player.life += 3;
-    }
+    // incrementMuchLife(player: PlayerStats) {
+    //     player.life += 3;
+    // }
 
     decrementLife(player: PlayerStats) {
         player.life -= 1;
+    }
+
+    settings() {
+        this.router.navigate(['/tabs/life']);
     }
 }

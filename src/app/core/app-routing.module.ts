@@ -4,12 +4,29 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
     {
         path: '',
-        loadChildren: () => import('../tabs/tabs.module').then((m) => m.TabsPageModule),
+        children: [
+            {
+                path: '',
+                loadChildren: () => import('../tabs/tabs.module').then((m) => m.TabsPageModule),
+            },
+            {
+                path: 'lifeCounter',
+
+                loadChildren: () =>
+                    import('../pages/life/modal/counter.module').then((m) => m.CounterPageModule),
+            },
+
+            {
+                path: '',
+                redirectTo: '',
+                pathMatch: 'full',
+            },
+        ],
     },
     {
-        path: 'lifeCounter',
-        loadChildren: () =>
-            import('../pages/life/modal/counter.module').then((m) => m.CounterPageModule),
+        path: '',
+        redirectTo: '',
+        pathMatch: 'full',
     },
 ];
 @NgModule({
