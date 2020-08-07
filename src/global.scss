@@ -55,6 +55,11 @@
     src: url('/assets/font/Roboto/Roboto-Bold.ttf');
 }
 
+.modal-fullscreen {
+    --width: 100%;
+    --height: 100%;
+}
+
 .beleren {
     font-family: 'Beleren-Bold' !important;
 }

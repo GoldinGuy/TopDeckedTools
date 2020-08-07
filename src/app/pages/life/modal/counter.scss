@@ -117,6 +117,143 @@
     }
 }
 
+#seat3 {
+    .val-container-long {
+        text-align: center;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        @media (orientation: portrait) {
+            --rotate-player3: 180deg;
+            height: 25vh;
+
+            .counter {
+                position: absolute;
+                width: 100%;
+                height: 12.5vh;
+            }
+        }
+
+        @media (orientation: landscape) {
+            --rotate-player3: 90deg;
+            height: 100vh;
+
+            .counter {
+                position: absolute;
+                height: 100%;
+                width: 25vw;
+            }
+        }
+        .val {
+            font-size: 70px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .p3-add-life {
+            top: 0;
+            left: 0;
+        }
+
+        .p3-rem-life {
+            bottom: 0;
+            right: 0;
+        }
+    }
+
+    .val-container {
+        text-align: center;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        @media (orientation: portrait) {
+            --rotate-player1: 90deg;
+            --rotate-player2: -90deg;
+            height: 74vh;
+
+            .counter {
+                position: absolute;
+                height: 100%;
+                width: 25vw;
+            }
+        }
+
+        @media (orientation: landscape) {
+            --rotate-player1: 90deg;
+            --rotate-player2: -90deg;
+            height: 100vh;
+
+            .counter {
+                position: absolute;
+                width: 100%;
+                height: 25vh;
+            }
+        }
+
+        .p1-add-life {
+            bottom: 0;
+            right: 0;
+        }
+
+        .p1-rem-life {
+            top: 0;
+            left: 0;
+        }
+
+        .p2-add-life {
+            top: 0;
+            left: 0;
+        }
+
+        .p2-rem-life {
+            bottom: 0;
+            right: 0;
+        }
+
+        .val {
+            font-size: 70px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .rotate-player1 {
+            transform: rotate(var(--rotate-player1));
+        }
+        .rotate-player2 {
+            transform: rotate(var(--rotate-player2));
+        }
+    }
+    @media (orientation: portrait) {
+        .top {
+            // margin-bottom: 0.8vh;
+            border-radius: 0px 0px 9px 9px;
+        }
+
+        .bottom {
+            margin-top: 1vh;
+            border-radius: 9px 9px 0px 0px;
+        }
+    }
+    @media (orientation: landscape) {
+        .top {
+            margin-right: 0.6vh;
+            border-radius: 0px 9px 9px 0px;
+        }
+
+        .bottom {
+            margin-left: 0.6vh;
+            border-radius: 9px 0px 0px 9px;
+        }
+        .orient {
+            display: flex;
+        }
+    }
+}
+
 #seat4 {
     .val-container {
         text-align: center;
@@ -157,6 +294,15 @@
                 top: 0;
                 left: 0;
             }
+
+            /* For larger layouts */
+            @media (min-width: 700px) {
+                .val {
+                    font-size: 100px !important;
+                    font-weight: bold;
+                    color: #fff;
+                }
+            }
         }
 
         @media (orientation: landscape) {
@@ -190,6 +336,15 @@
                 bottom: 0;
                 right: 0;
             }
+
+            /* For larger layouts */
+            @media (min-width: 1000px) {
+                .val {
+                    font-size: 100px !important;
+                    font-weight: bold;
+                    color: #fff;
+                }
+            }
         }
 
         .p1-add-life {
@@ -213,7 +368,7 @@
         }
 
         .val {
-            font-size: 60px;
+            font-size: 70px;
             font-weight: bold;
             color: #fff;
         }

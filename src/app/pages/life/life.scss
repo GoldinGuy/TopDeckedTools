@@ -2,6 +2,12 @@
     --background: #544a63 !important;
 }
 
+// This NEEDS to be in global.scss for it to function properly on tablets
+// .modal-fullscreen {
+//     --width: 100%;
+//     --height: 100%;
+// }
+
 .life {
     text-align: center;
     justify-content: center;

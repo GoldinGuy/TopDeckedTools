@@ -25,6 +25,13 @@ const routes: Routes = [
                         loadChildren: () =>
                             import('../pages/life/life.module').then((m) => m.LifePageModule),
                     },
+                    {
+                        path: 'counter',
+                        loadChildren: () =>
+                            import('../pages/life/modal/counter.module').then(
+                                (m) => m.CounterPageModule
+                            ),
+                    },
                 ],
             },
 

@@ -3,6 +3,7 @@ import { LoadingController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { CounterPage } from './modal/counter';
 import { CounterPageModule } from './modal/counter.module';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
     selector: 'page-life',
@@ -12,7 +13,8 @@ import { CounterPageModule } from './modal/counter.module';
 export class LifePage {
     constructor(
         public loadingController: LoadingController,
-        public modalController: ModalController
+        public modalController: ModalController,
+        private router: Router
     ) {
         this.startingLife = 20;
         this.numPlayers = 2;
@@ -30,27 +32,26 @@ export class LifePage {
     }
 
     async startGame() {
-        const modal = await this.modalController.create({
-            component: CounterPage,
-            cssClass: 'my-custom-class',
-            componentProps: {
+        // const modal = await this.modalController.create({
+        //     component: CounterPage,
+        //     cssClass: 'modal-fullscreen',
+        //     componentProps: {
+        //         startingLife: this.startingLife,
+        //         numPlayers: this.numPlayers,
+        //         timer: 3000,
+        //         pickFirstPlayer: false,
+        //     },
+        // });
+        // return await modal.present();
+
+        let navigationExtras: NavigationExtras = {
+            state: {
                 startingLife: this.startingLife,
                 numPlayers: this.numPlayers,
                 timer: 3000,
                 pickFirstPlayer: false,
             },
-        });
-        return await modal.present();
+        };
+        this.router.navigate(['/lifeCounter'], navigationExtras);
     }
-
-    // numPlayers = [
-    //     { val: 2, isChecked: true },
-    //     { val: 3, isChecked: false },
-    //     { val: 4, isChecked: false },
-    //     { val: 5, isChecked: false },
-    //     { val: 6, isChecked: false },
-    // ];
-
-    // segmentButtonClicked(ev: any) {
-    // }
 }
