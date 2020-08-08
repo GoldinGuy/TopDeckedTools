@@ -66,7 +66,7 @@
         @media (orientation: portrait) {
             --rotate-player0: 180deg;
             --rotate-player1: 0deg;
-            --height: 49vh;
+            --height: 49.5vh;
 
             .counter {
                 position: absolute;
@@ -131,7 +131,7 @@
     }
     @media (orientation: landscape) {
         .p0 {
-            margin-right: 1vh;
+            margin-right: 1vw;
             border-radius: 0px 10px 10px 0px;
         }
 
@@ -278,7 +278,7 @@
         }
 
         .p1 {
-            margin-top: 1vh;
+            margin-top: 1vw;
             margin-right: 1vh;
             border-radius: 0px 10px 10px 0px;
         }
