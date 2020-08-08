@@ -14,8 +14,8 @@
 }
 
 .center-icon {
-    font-size: 20px;
-    padding: 6px;
+    font-size: 22px;
+    padding: 7px;
     color: #fff;
     position: fixed;
     top: 50%;
@@ -26,8 +26,8 @@
 }
 
 .icon-75 {
-    font-size: 20px;
-    padding: 6px;
+    font-size: 22px;
+    padding: 7px;
     color: #fff;
     position: fixed;
     transform: translate(-50%, -50%);
@@ -120,24 +120,24 @@
     }
     @media (orientation: portrait) {
         .top {
-            margin-bottom: 0.8vh;
-            border-radius: 0px 0px 9px 9px;
+            margin-bottom: 6px;
+            border-radius: 0px 0px 10px 10px;
         }
 
         .bottom {
-            margin-top: 0.8vh;
-            border-radius: 9px 9px 0px 0px;
+            margin-top: 6px;
+            border-radius: 10px 10px 0px 0px;
         }
     }
     @media (orientation: landscape) {
         .top {
-            margin-right: 0.6vh;
-            border-radius: 0px 9px 9px 0px;
+            margin-right: 6px;
+            border-radius: 0px 10px 10px 0px;
         }
 
         .bottom {
-            margin-left: 0.6vh;
-            border-radius: 9px 0px 0px 9px;
+            margin-left: 6px;
+            border-radius: 10px 0px 0px 10px;
         }
     }
 }
@@ -204,7 +204,7 @@
         @media (orientation: portrait) {
             --rotate-player1: 90deg;
             --rotate-player2: -90deg;
-            --height: 74vh;
+            --height: 75vh;
             --width: 50vw;
 
             .counter {
@@ -263,31 +263,30 @@
     }
     @media (orientation: portrait) {
         .top {
-            border-radius: 0px 0px 9px 9px;
+            border-radius: 0px 0px 10px 10px;
         }
 
         .bottom {
-            margin-top: 1vh;
-            border-radius: 9px 9px 0px 0px;
+            margin-top: 6px;
+            border-radius: 10px 10px 0px 0px;
         }
 
         .mg-cent {
-            margin-left: 0.8vh;
+            margin-left: 6px;
         }
     }
     @media (orientation: landscape) {
         .top {
-            margin-right: 0.6vh;
-            border-radius: 0px 9px 9px 0px;
+            margin-right: 6px;
+            border-radius: 0px 10px 10px 0px;
         }
 
         .bottom {
-            margin-left: 0.6vh;
-            border-radius: 9px 0px 0px 9px;
+            border-radius: 10px 0px 0px 10px;
         }
 
         .mg-cent {
-            margin-top: 1vh;
+            margin-top: 6px;
         }
     }
 }
@@ -299,7 +298,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 49.5vh;
+        height: 49.6vh;
+        width: 24.6vw;
 
         @media (orientation: portrait) {
             --rotate-player1: 90deg;
@@ -418,25 +418,21 @@
     }
 
     .top-left {
-        margin-right: 0.5vw;
-        margin-bottom: 0.5vh;
-        border-radius: 0px 9px 9px 9px;
+        margin-right: 6px;
+
+        border-radius: 0px 10px 10px 10px;
     }
     .top-right {
-        margin-bottom: 0.5vh;
-        margin-left: 0.5vw;
+        margin-bottom: 6px;
 
-        border-radius: 9px 0px 9px 9px;
+        border-radius: 10px 0px 10px 10px;
     }
     .bottom-left {
-        margin-right: 0.5vw;
-        margin-top: 0.5vh;
-        border-radius: 9px 9px 9px 0px;
+        border-radius: 10px 10px 10px 0px;
     }
     .bottom-right {
-        margin-top: 0.5vh;
-        margin-left: 0.5vw;
-        border-radius: 9px 9px 0px 9px;
+        margin-left: 6px;
+        border-radius: 10px 10px 0px 10px;
     }
 }
 
