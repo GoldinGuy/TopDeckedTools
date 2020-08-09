@@ -2,10 +2,24 @@
 <ion-content fullscreen class="bg-theme">
     <div class="grid-container">
         <ion-grid class="grid">
+            <!-- 1 player -->
+            <ng-container *ngIf="players.length === 1">
+                <div id="seat1">
+                    <!-- <div class="flex-land"> -->
+                    <ng-container *ngFor="let player of players">
+                        <ion-col class="val-container p0" [style.background-color]="player.color">
+                            <p class="val rotate-player0">{{ player.life }}</p>
+                            <div class="counter p0-add-life" (click)="incrementLife(player)"></div>
+                            <div class="counter p0-rem-life" (click)="decrementLife(player)"></div>
+                        </ion-col>
+                    </ng-container>
+                    <!-- </div> -->
+                </div>
+            </ng-container>
             <!-- 2 players -->
             <ng-container *ngIf="players.length === 2">
                 <div id="seat2">
-                    <div class="orient-land">
+                    <div class="flex-land">
                         <ng-container *ngFor="let player of players; let i = index;">
                             <ion-col
                                 class="val-container p{{i}}"
@@ -28,8 +42,8 @@
             <!-- 3 players -->
             <ng-container *ngIf="players.length === 3">
                 <div id="seat3">
-                    <div class="orient-land">
-                        <div class="orient-port">
+                    <div class="flex-land">
+                        <div class="flex-port orient">
                             <ng-container *ngFor="let player of players; let i = index;">
                                 <ion-col
                                     class="val-container long-p{{i}} p{{i}}"
@@ -56,6 +70,7 @@
                     <div class="orient">
                         <ng-container *ngFor="let player of players; let i = index;">
                             <ion-col
+                                id="p{{i}}"
                                 class="val-container p{{i}}"
                                 [style.background-color]="player.color"
                             >
@@ -96,106 +111,13 @@
                     </div>
                 </div>
             </ng-container>
-
-            <!-- <ng-container *ngIf="players.length === 6">
-                <div id="seat6">
-                    <div class="orient-land">
-                        <ion-col
-                            class="val-container top-left"
-                            [style.background-color]="players[0].color"
-                        >
-                            <p class="val rotate-player1">{{ players[0].life }}</p>
-                            <div
-                                class="counter top-add-life"
-                                (click)="incrementLife(players[0])"
-                            ></div>
-                            <div
-                                class="counter top-rem-life"
-                                (click)="decrementLife(players[0])"
-                            ></div>
-                        </ion-col>
-                        <ion-col
-                            class="val-container top-mid"
-                            [style.background-color]="players[1].color"
-                        >
-                            <p class="val rotate-player2">{{ players[1].life }}</p>
-                            <div
-                                class="counter top-add-life"
-                                (click)="incrementLife(players[1])"
-                            ></div>
-                            <div
-                                class="counter top-rem-life"
-                                (click)="decrementLife(players[1])"
-                            ></div>
-                        </ion-col>
-                        <ion-col
-                            class="val-container top-right"
-                            [style.background-color]="players[2].color"
-                        >
-                            <p class="val rotate-player3">{{ players[2].life }}</p>
-                            <div
-                                class="counter top-add-life"
-                                (click)="incrementLife(players[2])"
-                            ></div>
-                            <div
-                                class="counter top-rem-life"
-                                (click)="decrementLife(players[2])"
-                            ></div>
-                        </ion-col>
-                    </div>
-                    <div class="orient-land">
-                        <ion-col
-                            class="val-container bottom-left"
-                            [style.background-color]="players[3].color"
-                        >
-                            <p class="val rotate-player4">{{ players[3].life }}</p>
-                            <div
-                                class="counter bot-add-life"
-                                (click)="incrementLife(players[3])"
-                            ></div>
-                            <div
-                                class="counter bot-rem-life"
-                                (click)="decrementLife(players[3])"
-                            ></div>
-                        </ion-col>
-                        <ion-col
-                            class="val-container bottom-mid"
-                            [style.background-color]="players[4].color"
-                        >
-                            <p class="val rotate-player5">{{ players[4].life }}</p>
-                            <div
-                                class="counter bot-add-life"
-                                (click)="incrementLife(players[4])"
-                            ></div>
-                            <div
-                                class="counter bot-rem-life"
-                                (click)="decrementLife(players[4])"
-                            ></div>
-                        </ion-col>
-                        <ion-col
-                            class="val-container bottom-right"
-                            [style.background-color]="players[5].color"
-                        >
-                            <p class="val rotate-player6">{{ players[5].life }}</p>
-                            <div
-                                class="counter bot-add-life"
-                                (click)="incrementLife(players[5])"
-                            ></div>
-                            <div
-                                class="counter bot-rem-life"
-                                (click)="decrementLife(players[5])"
-                            ></div>
-                        </ion-col>
-                    </div>
-                </div>
-            </ng-container> -->
             <!-- settings icon -->
             <div id="settings">
                 <ion-icon
                     name="settings"
-                    class="settings-icon odd"
-                    [ngClass]="{ 'odd1-3': players.length % 2 === 1, 'even2-4': players.length % 2 === 0 && players.length != 6,  'even6': players.length === 6  }"
+                    class="settings-icon"
                     (click)="settings()"
+                    [ngClass]="{ 'odd1': players.length === 1, 'odd3-5': players.length % 2 === 1 && players.length != 1, 'even2-4': players.length % 2 === 0 && players.length != 6,  'even6': players.length === 6  }"
                 ></ion-icon>
             </div>
         </ion-grid>

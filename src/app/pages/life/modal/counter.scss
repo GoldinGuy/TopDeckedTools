@@ -1,3 +1,5 @@
+// bg and layout
+
 .bg-theme {
     --background: #544a63 !important;
 }
@@ -12,6 +14,8 @@
     }
 }
 
+// settings icon
+
 #settings {
     .settings-icon {
         font-size: 22px;
@@ -24,8 +28,19 @@
         z-index: 1;
         top: var(--top);
         left: var(--left);
+        right: var(--right);
+        bottom: var(--bottom);
     }
-    .odd1-3 {
+    .odd1 {
+        --right: 0%;
+        @media (orientation: portrait) {
+            --bottom: 0%;
+        }
+        @media (orientation: landscape) {
+            --top: 8%;
+        }
+    }
+    .odd3-5 {
         @media (orientation: portrait) {
             --top: 74.5%;
             --left: 50%;
@@ -51,18 +66,88 @@
     }
 }
 
+// FLEX
+
+.flex {
+    display: flex;
+}
+
 @media (orientation: portrait) {
-    .orient-port {
+    .flex-port {
         display: flex;
     }
 }
 
 @media (orientation: landscape) {
-    .orient-land {
+    .flex-land {
         display: flex;
     }
 }
 
+// 1 player
+#seat1 {
+    .val-container {
+        text-align: center;
+        position: fixed;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        // height: 98vh;
+        // width: 98vw;
+
+        @media (orientation: portrait) {
+            --rotate-player0: 90deg;
+
+            .counter {
+                position: absolute;
+                width: 50%;
+                height: 100vh;
+            }
+            .p0-add-life {
+                bottom: 0;
+                right: 0;
+            }
+            .p0-rem-life {
+                top: 0;
+                left: 0;
+            }
+        }
+
+        @media (orientation: landscape) {
+            --rotate-player0: 0deg;
+
+            .counter {
+                position: absolute;
+                height: 50%;
+                width: 100vw;
+            }
+            .p0-add-life {
+                top: 0;
+                left: 0;
+            }
+            .p0-rem-life {
+                bottom: 0;
+                right: 0;
+            }
+        }
+
+        .val {
+            font-size: 130px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .rotate-player0 {
+            transform: rotate(var(--rotate-player0));
+        }
+    }
+    // .p0 {
+    //     border-radius: 10px;
+    //     margin: 1vh 1vw 1vh;
+    // }
+}
+
+// 2 players
 #seat2 {
     .val-container {
         text-align: center;
@@ -141,7 +226,12 @@
     }
 }
 
+// 3 players
 #seat3 {
+    .orient {
+        flex-direction: row-reverse;
+    }
+
     .val-container {
         text-align: center;
         position: relative;
@@ -152,8 +242,8 @@
         width: var(--width);
 
         @media (orientation: portrait) {
-            --rotate-player0: 90deg;
-            --rotate-player1: -90deg;
+            --rotate-player0: -90deg;
+            --rotate-player1: 90deg;
             --height: 74vh;
             --width: 50vw;
 
@@ -167,7 +257,7 @@
         @media (orientation: landscape) {
             --rotate-player0: 180deg;
             --rotate-player1: 0deg;
-            --height: 49vh;
+            --height: 49.1vh;
             --width: 74vw;
 
             .counter {
@@ -177,13 +267,13 @@
             }
         }
 
-        .p0-add-life,
-        .p1-rem-life {
+        .p0-rem-life,
+        .p1-add-life {
             bottom: 0;
             right: 0;
         }
-        .p0-rem-life,
-        .p1-add-life {
+        .p0-add-life,
+        .p1-rem-life {
             top: 0;
             left: 0;
         }
@@ -250,10 +340,10 @@
 
     @media (orientation: portrait) {
         .p0 {
+            margin-left: 1vh;
             border-radius: 0px 0px 10px 10px;
         }
         .p1 {
-            margin-left: 1vh;
             border-radius: 0px 0px 10px 10px;
         }
         .p2 {
@@ -277,10 +367,29 @@
     }
 }
 
+// 4 players
 #seat4 {
     .orient {
         display: grid;
         grid-template-columns: 1fr 1fr;
+
+        @media (orientation: landscape) {
+            #p0 {
+                order: 3;
+            }
+
+            #p1 {
+                order: 1;
+            }
+
+            #p2 {
+                order: 4;
+            }
+
+            #p3 {
+                order: 2;
+            }
+        }
     }
 
     .val-container {
@@ -309,11 +418,20 @@
                 top: 0;
                 left: 0;
             }
-
             .p1-rem-life,
             .p2-add-life {
                 bottom: 0;
                 right: 0;
+            }
+            .p0-add-life,
+            .p3-rem-life {
+                bottom: 0;
+                right: 0;
+            }
+            .p0-rem-life,
+            .p3-add-life {
+                top: 0;
+                left: 0;
             }
 
             @media (min-width: 700px) {
@@ -326,10 +444,10 @@
         }
 
         @media (orientation: landscape) {
-            --rotate-player0: 180deg;
+            --rotate-player0: 0deg;
             --rotate-player1: 180deg;
             --rotate-player2: 0deg;
-            --rotate-player3: 0deg;
+            --rotate-player3: 180deg;
 
             .counter {
                 position: absolute;
@@ -337,13 +455,23 @@
                 width: 100%;
             }
 
-            .p1-add-life,
+            .p0-add-life,
             .p2-rem-life {
                 bottom: 0;
                 right: 0;
             }
-            .p1-rem-life,
+            .p0-rem-life,
             .p2-add-life {
+                top: 0;
+                left: 0;
+            }
+            .p1-add-life,
+            .p3-rem-life {
+                bottom: 0;
+                right: 0;
+            }
+            .p1-rem-life,
+            .p3-add-life {
                 top: 0;
                 left: 0;
             }
@@ -355,17 +483,6 @@
                     color: #fff;
                 }
             }
-        }
-
-        .p0-add-life,
-        .p3-rem-life {
-            bottom: 0;
-            right: 0;
-        }
-        .p0-rem-life,
-        .p3-add-life {
-            top: 0;
-            left: 0;
         }
 
         .val {
@@ -409,25 +526,26 @@
     }
     @media (orientation: landscape) {
         .p0 {
-            margin-bottom: 1vh;
-            border-radius: 0px 10px 10px 10px;
-        }
-        .p1 {
-            margin-left: 1vw;
-            border-radius: 10px 0px 10px 10px;
-        }
-        .p2 {
             margin-top: 1vh;
             border-radius: 10px 10px 10px 0px;
         }
-        .p3 {
+        .p1 {
+            margin-bottom: 1vh;
+            border-radius: 0px 10px 10px 10px;
+        }
+        .p2 {
             margin-top: 1vh;
             margin-left: 1vw;
             border-radius: 10px 10px 0px 10px;
         }
+        .p3 {
+            margin-left: 1vw;
+            border-radius: 10px 0px 10px 10px;
+        }
     }
 }
 
+// 6 players
 #seat6 {
     .orient {
         display: grid;
