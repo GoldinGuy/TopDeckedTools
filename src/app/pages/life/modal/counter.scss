@@ -13,35 +13,52 @@
     }
 }
 
-.center-icon {
-    font-size: 22px;
-    padding: 7px;
-    color: #fff;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 22px;
-    background: #544a63;
+#settings {
+    .settings-icon {
+        font-size: 22px;
+        padding: 7px;
+        color: #fff;
+        position: fixed;
+        transform: translate(-50%, -50%);
+        border-radius: 22px;
+        background: #544a63;
+        z-index: 1;
+        top: var(--top);
+        left: var(--left);
+    }
+    .even {
+        --top: 50%;
+        --left: 50%;
+    }
+    .odd {
+        @media (orientation: portrait) {
+            --top: 74.5%;
+            --left: 50%;
+        }
+        @media (orientation: landscape) {
+            --top: 50%;
+            --left: 74.5%;
+        }
+    }
 }
 
-.icon-75 {
-    font-size: 22px;
-    padding: 7px;
-    color: #fff;
-    position: fixed;
-    transform: translate(-50%, -50%);
-    border-radius: 22px;
-    background: #544a63;
-    @media (orientation: portrait) {
-        top: 74.5%;
-        left: 50%;
-    }
-    @media (orientation: landscape) {
-        top: 50%;
-        left: 74.5%;
-    }
-}
+// .icon-75 {
+//     font-size: 22px;
+//     padding: 7px;
+//     color: #fff;
+//     position: fixed;
+//     transform: translate(-50%, -50%);
+//     border-radius: 22px;
+//     background: #544a63;
+//     @media (orientation: portrait) {
+//         top: 74.5%;
+//         left: 50%;
+//     }
+//     @media (orientation: landscape) {
+//         top: 50%;
+//         left: 74.5%;
+//     }
+// }
 
 @media (orientation: portrait) {
     .orient-port {
@@ -62,6 +79,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        height: var(--height);
 
         @media (orientation: portrait) {
             --rotate-player0: 180deg;
@@ -86,7 +104,6 @@
                 width: 25vw;
             }
         }
-        height: var(--height);
 
         .p0-add-life {
             bottom: 0;
@@ -146,6 +163,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        height: var(--height);
+        width: var(--width);
 
         @media (orientation: portrait) {
             --rotate-player0: 90deg;
@@ -172,9 +191,6 @@
                 height: 25vh;
             }
         }
-
-        height: var(--height);
-        width: var(--width);
 
         .p0-add-life {
             bottom: 0;
@@ -208,6 +224,8 @@
     }
     .long-p2 {
         position: absolute;
+        height: var(--height) !important;
+        width: var(--width) !important;
 
         @media (orientation: portrait) {
             --rotate-player2: 0deg;
@@ -236,8 +254,6 @@
                 width: 12.5vw !important;
             }
         }
-        height: var(--height) !important;
-        width: var(--width) !important;
 
         .rotate-player2 {
             transform: rotate(var(--rotate-player2));

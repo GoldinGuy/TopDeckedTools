@@ -76,6 +76,29 @@
             <!-- 6 players -->
             <ng-container *ngIf="players.length === 6">
                 <div id="seat6">
+                    <div class="orient">
+                        <ng-container *ngFor="let player of players; let i = index;">
+                            <ion-col
+                                class="val-container p{{i}}"
+                                [style.background-color]="player.color"
+                            >
+                                <p class="val rotate-player{{i}}">{{ player.life }}</p>
+                                <div
+                                    class="counter p{{i}}-add-life"
+                                    (click)="incrementLife(player)"
+                                ></div>
+                                <div
+                                    class="counter p{{i}}-rem-life"
+                                    (click)="decrementLife(player)"
+                                ></div>
+                            </ion-col>
+                        </ng-container>
+                    </div>
+                </div>
+            </ng-container>
+
+            <!-- <ng-container *ngIf="players.length === 6">
+                <div id="seat6">
                     <div class="orient-land">
                         <ion-col
                             class="val-container top-left"
@@ -165,14 +188,22 @@
                         </ion-col>
                     </div>
                 </div>
-            </ng-container>
+            </ng-container> -->
             <!-- settings icon -->
-            <ng-container *ngIf="players.length != 3">
-                <ion-icon name="settings" class="center-icon" (click)="settings()"></ion-icon>
-            </ng-container>
-            <ng-container *ngIf="players.length === 3">
+            <div id="settings">
+                <ion-icon
+                    name="settings"
+                    class="settings-icon odd"
+                    [ngClass]="{'even': players.length % 2 === 0,
+                 'odd': players.length % 2 === 1 }"
+                    (click)="settings()"
+                ></ion-icon>
+            </div>
+            <!-- [ngClass]="{'even': players.length % 2 === 0,
+                 'odd': players.length % 2 === 1 }" -->
+            <!-- <ng-container *ngIf="players.length === 3">
                 <ion-icon name="settings" class="icon-75" (click)="settings()"></ion-icon>
-            </ng-container>
+            </ng-container> -->
         </ion-grid>
     </div>
 </ion-content>
