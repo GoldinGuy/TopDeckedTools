@@ -194,8 +194,7 @@
                 <ion-icon
                     name="settings"
                     class="settings-icon odd"
-                    [ngClass]="{'even': players.length % 2 === 0,
-                 'odd': players.length % 2 === 1 }"
+                    [ngClass]="{ 'odd1-3': players.length % 2 === 1, 'even2-4': players.length % 2 === 0 && players.length != 6,  'even6': players.length === 6  }"
                     (click)="settings()"
                 ></ion-icon>
             </div>

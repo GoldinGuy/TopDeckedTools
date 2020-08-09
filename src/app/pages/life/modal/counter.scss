@@ -5,7 +5,6 @@
 .grid-container {
     display: flex;
     justify-content: center;
-    // align-items: center;
     height: 100vh;
     width: 100vw;
     .grid {
@@ -26,11 +25,7 @@
         top: var(--top);
         left: var(--left);
     }
-    .even {
-        --top: 50%;
-        --left: 50%;
-    }
-    .odd {
+    .odd1-3 {
         @media (orientation: portrait) {
             --top: 74.5%;
             --left: 50%;
@@ -40,25 +35,21 @@
             --left: 74.5%;
         }
     }
+    .even2-4 {
+        --top: 50%;
+        --left: 50%;
+    }
+    .even6 {
+        @media (orientation: portrait) {
+            --top: 67%;
+            --left: 50%;
+        }
+        @media (orientation: landscape) {
+            --top: 50%;
+            --left: 67%;
+        }
+    }
 }
-
-// .icon-75 {
-//     font-size: 22px;
-//     padding: 7px;
-//     color: #fff;
-//     position: fixed;
-//     transform: translate(-50%, -50%);
-//     border-radius: 22px;
-//     background: #544a63;
-//     @media (orientation: portrait) {
-//         top: 74.5%;
-//         left: 50%;
-//     }
-//     @media (orientation: landscape) {
-//         top: 50%;
-//         left: 74.5%;
-//     }
-// }
 
 @media (orientation: portrait) {
     .orient-port {
@@ -454,8 +445,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 32.66vh;
-        width: 49.3vw;
+        height: var(--height);
+        width: var(--width);
 
         @media (orientation: portrait) {
             --rotate-player0: 90deg;
@@ -464,6 +455,8 @@
             --rotate-player3: -90deg;
             --rotate-player4: 90deg;
             --rotate-player5: -90deg;
+            --height: 32.66vh;
+            --width: 49.3vw;
 
             .counter {
                 position: absolute;
@@ -487,6 +480,8 @@
             --rotate-player3: 0deg;
             --rotate-player4: 0deg;
             --rotate-player5: 0deg;
+            --height: 49.1vh;
+            --width: 32.66vw;
 
             .counter {
                 position: absolute;
@@ -585,26 +580,27 @@
 
     @media (orientation: landscape) {
         .p0 {
-            margin-right: 6px;
+            margin-right: 1vw;
             border-radius: 0px 10px 10px 10px;
         }
         .p1 {
-            margin-bottom: 6px;
-            border-radius: 10px 0px 10px 10px;
-        }
-        .p2 {
-            margin-right: 6px;
+            margin-bottom: 1vh;
+            margin-right: 1vw;
             border-radius: 10px;
         }
+        .p2 {
+            margin-bottom: 1vw;
+            border-radius: 10px 0px 10px 10px;
+        }
         .p3 {
+            margin-right: 1vw;
             border-radius: 10px 10px 10px 0px;
         }
         .p4 {
-            margin-left: 6px;
-            border-radius: 10px 0px 10px 10px;
+            margin-right: 1vw;
+            border-radius: 10px;
         }
         .p5 {
-            margin-left: 6px;
             border-radius: 10px 10px 0px 10px;
         }
     }
