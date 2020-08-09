@@ -105,21 +105,15 @@
             }
         }
 
-        .p0-add-life {
-            bottom: 0;
-            right: 0;
-        }
-        .p0-rem-life {
-            top: 0;
-            left: 0;
-        }
-        .p1-add-life {
-            top: 0;
-            left: 0;
-        }
+        .p0-add-life,
         .p1-rem-life {
             bottom: 0;
             right: 0;
+        }
+        .p0-rem-life,
+        .p1-add-life {
+            top: 0;
+            left: 0;
         }
 
         .val {
@@ -192,21 +186,15 @@
             }
         }
 
-        .p0-add-life {
-            bottom: 0;
-            right: 0;
-        }
-        .p0-rem-life {
-            top: 0;
-            left: 0;
-        }
-        .p1-add-life {
-            top: 0;
-            left: 0;
-        }
+        .p0-add-life,
         .p1-rem-life {
             bottom: 0;
             right: 0;
+        }
+        .p0-rem-life,
+        .p1-add-life {
+            top: 0;
+            left: 0;
         }
 
         .val {
@@ -325,24 +313,16 @@
                 height: 100%;
             }
 
-            .p1-add-life {
-                top: 0;
-                left: 0;
-            }
-
-            .p1-rem-life {
-                bottom: 0;
-                right: 0;
-            }
-
-            .p2-add-life {
-                bottom: 0;
-                right: 0;
-            }
-
+            .p1-add-life,
             .p2-rem-life {
                 top: 0;
                 left: 0;
+            }
+
+            .p1-rem-life,
+            .p2-add-life {
+                bottom: 0;
+                right: 0;
             }
 
             @media (min-width: 700px) {
@@ -366,21 +346,15 @@
                 width: 100%;
             }
 
-            .p1-add-life {
-                bottom: 0;
-                right: 0;
-            }
-            .p1-rem-life {
-                top: 0;
-                left: 0;
-            }
-            .p2-add-life {
-                top: 0;
-                left: 0;
-            }
+            .p1-add-life,
             .p2-rem-life {
                 bottom: 0;
                 right: 0;
+            }
+            .p1-rem-life,
+            .p2-add-life {
+                top: 0;
+                left: 0;
             }
 
             @media (min-width: 1000px) {
@@ -392,21 +366,15 @@
             }
         }
 
-        .p0-add-life {
-            bottom: 0;
-            right: 0;
-        }
-        .p0-rem-life {
-            top: 0;
-            left: 0;
-        }
-        .p3-add-life {
-            top: 0;
-            left: 0;
-        }
+        .p0-add-life,
         .p3-rem-life {
             bottom: 0;
             right: 0;
+        }
+        .p0-rem-life,
+        .p3-add-life {
+            top: 0;
+            left: 0;
         }
 
         .val {
@@ -470,22 +438,32 @@
 }
 
 #seat6 {
+    .orient {
+        display: grid;
+        @media (orientation: portrait) {
+            grid-template-columns: 1fr 1fr;
+        }
+        @media (orientation: landscape) {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+    }
+
     .val-container {
         text-align: center;
         position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 49.3vh;
-        width: 24.6vw;
+        height: 32.66vh;
+        width: 49.3vw;
 
         @media (orientation: portrait) {
-            --rotate-player1: 90deg;
-            --rotate-player2: -90deg;
-            --rotate-player3: 90deg;
-            --rotate-player4: -90deg;
-            --rotate-player5: 90deg;
-            --rotate-player6: -90deg;
+            --rotate-player0: 90deg;
+            --rotate-player1: -90deg;
+            --rotate-player2: 90deg;
+            --rotate-player3: -90deg;
+            --rotate-player4: 90deg;
+            --rotate-player5: -90deg;
 
             .counter {
                 position: absolute;
@@ -503,12 +481,12 @@
         }
 
         @media (orientation: landscape) {
+            --rotate-player0: 180deg;
             --rotate-player1: 180deg;
             --rotate-player2: 180deg;
-            --rotate-player3: 180deg;
+            --rotate-player3: 0deg;
             --rotate-player4: 0deg;
             --rotate-player5: 0deg;
-            --rotate-player6: 0deg;
 
             .counter {
                 position: absolute;
@@ -525,19 +503,27 @@
             }
         }
 
-        .top-add-life {
+        .p0-add-life,
+        .p1-add-life,
+        .p2-add-life {
             bottom: 0;
             right: 0;
         }
-        .top-rem-life {
+        .p0-rem-life,
+        .p1-rem-life,
+        .p2-rem-life {
             top: 0;
             left: 0;
         }
-        .bot-add-life {
+        .p3-add-life,
+        .p4-add-life,
+        .p5-add-life {
             top: 0;
             left: 0;
         }
-        .bot-rem-life {
+        .p3-rem-life,
+        .p4-rem-life,
+        .p5-rem-life {
             bottom: 0;
             right: 0;
         }
@@ -548,6 +534,9 @@
             color: #fff;
         }
 
+        .rotate-player0 {
+            transform: rotate(var(--rotate-player0));
+        }
         .rotate-player1 {
             transform: rotate(var(--rotate-player1));
         }
@@ -563,39 +552,61 @@
         .rotate-player5 {
             transform: rotate(var(--rotate-player5));
         }
-        .rotate-player6 {
-            transform: rotate(var(--rotate-player6));
+    }
+
+    @media (orientation: portrait) {
+        .p0 {
+            margin-right: 1vw;
+            border-radius: 0px 10px 10px 10px;
+        }
+        .p1 {
+            margin-bottom: 1vh;
+            margin-left: 1vw;
+            border-radius: 10px 0px 10px 10px;
+        }
+        .p2 {
+            margin-right: 1vw;
+            border-radius: 10px;
+        }
+        .p3 {
+            margin-bottom: 1vh;
+            margin-left: 1vw;
+            border-radius: 10px;
+        }
+        .p4 {
+            margin-right: 1vw;
+            border-radius: 10px 10px 10px 0px;
+        }
+        .p5 {
+            margin-left: 1vw;
+            border-radius: 10px 10px 0px 10px;
         }
     }
 
-    .top-left {
-        margin-right: 6px;
-
-        border-radius: 0px 10px 10px 10px;
-    }
-    .top-right {
-        margin-bottom: 6px;
-
-        border-radius: 10px 0px 10px 10px;
-    }
-
-    .top-mid {
-        margin-right: 6px;
-        border-radius: 10px;
-    }
-
-    .bottom-left {
-        border-radius: 10px 10px 10px 0px;
-    }
-    .bottom-right {
-        margin-left: 6px;
-        border-radius: 10px 10px 0px 10px;
-    }
-
-    .bottom-mid {
-        margin-left: 6px;
-
-        border-radius: 10px;
+    @media (orientation: landscape) {
+        .p0 {
+            margin-right: 6px;
+            border-radius: 0px 10px 10px 10px;
+        }
+        .p1 {
+            margin-bottom: 6px;
+            border-radius: 10px 0px 10px 10px;
+        }
+        .p2 {
+            margin-right: 6px;
+            border-radius: 10px;
+        }
+        .p3 {
+            border-radius: 10px 10px 10px 0px;
+        }
+        .p4 {
+            margin-left: 6px;
+            border-radius: 10px 0px 10px 10px;
+        }
+        .p5 {
+            margin-left: 6px;
+            border-radius: 10px 10px 0px 10px;
+        }
     }
 }
 
