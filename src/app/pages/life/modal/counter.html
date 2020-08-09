@@ -5,7 +5,6 @@
             <!-- 1 player -->
             <ng-container *ngIf="players.length === 1">
                 <div id="seat1">
-                    <!-- <div class="flex-land"> -->
                     <ng-container *ngFor="let player of players">
                         <ion-col class="val-container p0" [style.background-color]="player.color">
                             <p class="val rotate-player0">{{ player.life }}</p>
@@ -13,7 +12,6 @@
                             <div class="counter p0-rem-life" (click)="decrementLife(player)"></div>
                         </ion-col>
                     </ng-container>
-                    <!-- </div> -->
                 </div>
             </ng-container>
             <!-- 2 players -->
@@ -94,6 +92,7 @@
                     <div class="orient">
                         <ng-container *ngFor="let player of players; let i = index;">
                             <ion-col
+                                id="p{{i}}"
                                 class="val-container p{{i}}"
                                 [style.background-color]="player.color"
                             >

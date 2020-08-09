@@ -15,7 +15,6 @@
 }
 
 // settings icon
-
 #settings {
     .settings-icon {
         font-size: 22px;
@@ -67,7 +66,6 @@
 }
 
 // FLEX
-
 .flex {
     display: flex;
 }
@@ -87,16 +85,15 @@
 // 1 player
 #seat1 {
     .val-container {
-        text-align: center;
+        display: flex;
         position: fixed;
         justify-content: center;
         align-items: center;
         height: 100vh;
-        // height: 98vh;
-        // width: 98vw;
 
         @media (orientation: portrait) {
             --rotate-player0: 90deg;
+            text-align: end;
 
             .counter {
                 position: absolute;
@@ -115,6 +112,8 @@
 
         @media (orientation: landscape) {
             --rotate-player0: 0deg;
+            text-align: center;
+            padding-bottom: 20px;
 
             .counter {
                 position: absolute;
@@ -132,7 +131,7 @@
         }
 
         .val {
-            font-size: 130px;
+            font-size: 160px;
             font-weight: bold;
             color: #fff;
         }
@@ -141,10 +140,6 @@
             transform: rotate(var(--rotate-player0));
         }
     }
-    // .p0 {
-    //     border-radius: 10px;
-    //     margin: 1vh 1vw 1vh;
-    // }
 }
 
 // 2 players
@@ -377,15 +372,12 @@
             #p0 {
                 order: 3;
             }
-
             #p1 {
                 order: 1;
             }
-
             #p2 {
                 order: 4;
             }
-
             #p3 {
                 order: 2;
             }
@@ -398,7 +390,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 49.5vh;
+        height: var(--height);
         width: 49.5vw;
 
         @media (orientation: portrait) {
@@ -406,6 +398,7 @@
             --rotate-player1: -90deg;
             --rotate-player2: 90deg;
             --rotate-player3: -90deg;
+            --height: 49.5vh;
 
             .counter {
                 position: absolute;
@@ -448,6 +441,7 @@
             --rotate-player1: 180deg;
             --rotate-player2: 0deg;
             --rotate-player3: 180deg;
+            --height: 49vh;
 
             .counter {
                 position: absolute;
@@ -554,6 +548,24 @@
         }
         @media (orientation: landscape) {
             grid-template-columns: 1fr 1fr 1fr;
+            #p0 {
+                order: 4;
+            }
+            #p1 {
+                order: 1;
+            }
+            #p2 {
+                order: 5;
+            }
+            #p3 {
+                order: 2;
+            }
+            #p4 {
+                order: 6;
+            }
+            #p5 {
+                order: 3;
+            }
         }
     }
 
@@ -592,12 +604,12 @@
         }
 
         @media (orientation: landscape) {
-            --rotate-player0: 180deg;
+            --rotate-player0: 0deg;
             --rotate-player1: 180deg;
-            --rotate-player2: 180deg;
-            --rotate-player3: 0deg;
+            --rotate-player2: 0deg;
+            --rotate-player3: 180deg;
             --rotate-player4: 0deg;
-            --rotate-player5: 0deg;
+            --rotate-player5: 180deg;
             --height: 49.1vh;
             --width: 32.66vw;
 
@@ -614,31 +626,6 @@
                     color: #fff;
                 }
             }
-        }
-
-        .p0-add-life,
-        .p1-add-life,
-        .p2-add-life {
-            bottom: 0;
-            right: 0;
-        }
-        .p0-rem-life,
-        .p1-rem-life,
-        .p2-rem-life {
-            top: 0;
-            left: 0;
-        }
-        .p3-add-life,
-        .p4-add-life,
-        .p5-add-life {
-            top: 0;
-            left: 0;
-        }
-        .p3-rem-life,
-        .p4-rem-life,
-        .p5-rem-life {
-            bottom: 0;
-            right: 0;
         }
 
         .val {
@@ -668,6 +655,31 @@
     }
 
     @media (orientation: portrait) {
+        .p0-add-life,
+        .p2-add-life,
+        .p4-add-life {
+            bottom: 0;
+            right: 0;
+        }
+        .p0-rem-life,
+        .p2-rem-life,
+        .p4-rem-life {
+            top: 0;
+            left: 0;
+        }
+        .p1-add-life,
+        .p3-add-life,
+        .p5-add-life {
+            top: 0;
+            left: 0;
+        }
+        .p1-rem-life,
+        .p3-rem-life,
+        .p5-rem-life {
+            bottom: 0;
+            right: 0;
+        }
+
         .p0 {
             margin-right: 1vw;
             border-radius: 0px 10px 10px 10px;
@@ -697,29 +709,54 @@
     }
 
     @media (orientation: landscape) {
+        .p1-add-life,
+        .p3-add-life,
+        .p5-add-life {
+            bottom: 0;
+            right: 0;
+        }
+        .p1-rem-life,
+        .p3-rem-life,
+        .p5-rem-life {
+            top: 0;
+            left: 0;
+        }
+        .p2-add-life,
+        .p4-add-life,
+        .p0-add-life {
+            top: 0;
+            left: 0;
+        }
+        .p2-rem-life,
+        .p4-rem-life,
+        .p0-rem-life {
+            bottom: 0;
+            right: 0;
+        }
+
         .p0 {
-            margin-right: 1vw;
-            border-radius: 0px 10px 10px 10px;
-        }
-        .p1 {
-            margin-bottom: 1vh;
-            margin-right: 1vw;
-            border-radius: 10px;
-        }
-        .p2 {
-            margin-bottom: 1vw;
-            border-radius: 10px 0px 10px 10px;
-        }
-        .p3 {
             margin-right: 1vw;
             border-radius: 10px 10px 10px 0px;
         }
-        .p4 {
+        .p1 {
+            margin-right: 1vw;
+            border-radius: 0px 10px 10px 10px;
+        }
+        .p2 {
+            // margin-bottom: 1vh;
             margin-right: 1vw;
             border-radius: 10px;
         }
-        .p5 {
+        .p3 {
+            margin-right: 1vw;
+            border-radius: 10px;
+        }
+        .p4 {
             border-radius: 10px 10px 0px 10px;
+        }
+        .p5 {
+            margin-bottom: 1vw;
+            border-radius: 10px 0px 10px 10px;
         }
     }
 }
