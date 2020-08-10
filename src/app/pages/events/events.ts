@@ -124,7 +124,7 @@ export class EventsPage {
         this.name = '';
         this.phoneNumber = '';
 
-        console.log(JSON.stringify(this.tourney.participants));
+        // console.log(JSON.stringify(this.tourney.participants));
     };
 
     remove = async (name: string) => {

@@ -153,7 +153,11 @@ export class TournamentsPage {
     };
 
     reset() {
-        this.tournamentService.saveTournament(this.events, this.storage);
+        try {
+            this.tournamentService.saveTournament(null, this.storage);
+        } catch (e) {
+            console.log(e);
+        }
         this.router.navigate(['/tabs/events']);
     }
 
