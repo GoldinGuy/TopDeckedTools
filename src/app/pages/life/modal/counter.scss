@@ -14,6 +14,10 @@
     }
 }
 
+.tap:active {
+    background: rgb(3, 3, 3, 0.1);
+}
+
 // settings icon
 #settings {
     .settings-icon {
@@ -69,13 +73,11 @@
 .flex {
     display: flex;
 }
-
 @media (orientation: portrait) {
     .flex-port {
         display: flex;
     }
 }
-
 @media (orientation: landscape) {
     .flex-land {
         display: flex;

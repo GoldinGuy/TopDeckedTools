@@ -8,8 +8,14 @@
                     <ng-container *ngFor="let player of players">
                         <ion-col class="val-container" [style.background-color]="player.color">
                             <p class="val rotate-player0">{{ player.life }}</p>
-                            <div class="counter p0-add-life" (click)="incrementLife(player)"></div>
-                            <div class="counter p0-rem-life" (click)="decrementLife(player)"></div>
+                            <div
+                                class="counter p0-add-life tap"
+                                (click)="incrementLife(player)"
+                            ></div>
+                            <div
+                                class="counter p0-rem-life tap"
+                                (click)="decrementLife(player)"
+                            ></div>
                         </ion-col>
                     </ng-container>
                 </div>
@@ -25,11 +31,11 @@
                             >
                                 <p class="val rotate-player{{i}}">{{ player.life }}</p>
                                 <div
-                                    class="counter p{{i}}-add-life"
+                                    class="counter p{{i}}-add-life tap"
                                     (click)="incrementLife(player)"
                                 ></div>
                                 <div
-                                    class="counter p{{i}}-rem-life"
+                                    class="counter p{{i}}-rem-life tap"
                                     (click)="decrementLife(player)"
                                 ></div>
                             </ion-col>
@@ -49,11 +55,11 @@
                                 >
                                     <p class="val rotate-player{{i}}">{{ player.life }}</p>
                                     <div
-                                        class="counter p{{i}}-add-life"
+                                        class="counter p{{i}}-add-life tap"
                                         (click)="incrementLife(player)"
                                     ></div>
                                     <div
-                                        class="counter p{{i}}-rem-life"
+                                        class="counter p{{i}}-rem-life tap"
                                         (click)="decrementLife(player)"
                                     ></div>
                                 </ion-col>
@@ -74,11 +80,11 @@
                             >
                                 <p class="val rotate-player{{i}}">{{ player.life }}</p>
                                 <div
-                                    class="counter p{{i}}-add-life"
+                                    class="counter p{{i}}-add-life tap"
                                     (click)="incrementLife(player)"
                                 ></div>
                                 <div
-                                    class="counter p{{i}}-rem-life"
+                                    class="counter p{{i}}-rem-life tap"
                                     (click)="decrementLife(player)"
                                 ></div>
                             </ion-col>
@@ -98,11 +104,11 @@
                             >
                                 <p class="val rotate-player{{i}}">{{ player.life }}</p>
                                 <div
-                                    class="counter p{{i}}-add-life"
+                                    class="counter p{{i}}-add-life tap"
                                     (click)="incrementLife(player)"
                                 ></div>
                                 <div
-                                    class="counter p{{i}}-rem-life"
+                                    class="counter p{{i}}-rem-life tap"
                                     (click)="decrementLife(player)"
                                 ></div>
                             </ion-col>
@@ -122,11 +128,11 @@
                             >
                                 <p class="val rotate-player{{i}}">{{ player.life }}</p>
                                 <div
-                                    class="counter p{{i}}-add-life"
+                                    class="counter p{{i}}-add-life tap"
                                     (click)="incrementLife(player)"
                                 ></div>
                                 <div
-                                    class="counter p{{i}}-rem-life"
+                                    class="counter p{{i}}-rem-life tap"
                                     (click)="decrementLife(player)"
                                 ></div>
                             </ion-col>

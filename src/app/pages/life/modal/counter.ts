@@ -3,10 +3,13 @@ export interface PlayerStats {
     life: number;
     color: string;
     cmdDam: Array<number>;
-    infect: number;
-    energy: number;
-    monarch: boolean;
-    cityBless: boolean;
+    history: Array<string>;
+    other: {
+        infect: number;
+        energy: number;
+        monarch: boolean;
+        cityBless: boolean;
+    };
 }
 
 import { Component, Input } from '@angular/core';
@@ -33,51 +36,49 @@ export class CounterPage {
     ) {}
 
     ngOnInit() {
+        // console.table(this.navParams);
+        // let data = this.navParams.data;
         this.route.queryParams.subscribe(() => {
             if (this.router.getCurrentNavigation().extras.state) {
-                this.startingLife = this.router.getCurrentNavigation().extras.state.startingLife;
-                this.numPlayers = this.router.getCurrentNavigation().extras.state.numPlayers;
-                this.timer = this.router.getCurrentNavigation().extras.state.timer;
-                this.pickFirstPlayer = this.router.getCurrentNavigation().extras.state.pickFirstPlayer;
+                let data = this.router.getCurrentNavigation().extras.state;
+                this.startingLife = data.startingLife;
+                this.numPlayers = data.numPlayers;
+                this.timer = data.timer;
+                this.pickFirstPlayer = data.pickFirstPlayer;
             }
         });
 
         this.players = [];
         for (let i = 0; i < this.numPlayers; i++) {
             this.players.push({
-                id: null,
+                id: 'Player' + (i + 1),
                 life: this.startingLife,
                 color: this.getColor(),
                 cmdDam: [],
-                infect: 0,
-                energy: 0,
-                monarch: false,
-                cityBless: false,
+                history: [],
+                other: {
+                    infect: 0,
+                    energy: 0,
+                    monarch: false,
+                    cityBless: false,
+                },
             });
         }
-        console.log('Players: ' + JSON.stringify(this.players));
-        console.log('colors: ' + this.players[0].color + ', ' + this.players[1].color);
-        // console.table(this.navParams);
-        // let data = this.navParams.data;
-        // (this.startingLife = data.startingLife),
-        //     (this.numPlayers = data.numPlayers),
-        //     (this.timer = data.timer),
-        //     (this.pickFirstPlayer = data.pickFirstPlayer),
-        //     (this.players = []);
-        // for (let i = 0; i < this.numPlayers; i++) {
-        //     this.players.push({
-        //         id: null,
-        //         life: this.startingLife,
-        //         color: this.getColor(),
-        //         cmdDam: [],
-        //         infect: 0,
-        //         energy: 0,
-        //         monarch: false,
-        //         cityBless: false,
-        //     });
-        // }
+        console.table(this.players);
         // console.log('Players: ' + JSON.stringify(this.players));
-        // console.log('colors: ' + this.players[0].color + ', ' + this.players[1].color);
+    }
+
+    setHistory(player: PlayerStats) {
+        var shift: number, hist: string;
+        shift = player.life - parseInt(player.history[player.history.length - 1]);
+        if (shift > 0) {
+            hist = '+' + shift;
+        } else {
+            hist = shift.toString();
+        }
+        player.history.push(hist);
+        player.history.push(player.life.toString());
+        console.table(this.players);
     }
 
     getColor(): string {
@@ -100,8 +101,6 @@ export class CounterPage {
             '#51a8e7',
             // blue
             '#597fdd',
-            // light purple
-            // '#6a5787',
             // purple
             '#8260ed',
             // magenta
@@ -127,17 +126,18 @@ export class CounterPage {
 
     incrementLife(player: PlayerStats) {
         player.life += 1;
+        this.setHistory(player);
     }
-
-    // incrementMuchLife(player: PlayerStats) {
-    //     player.life += 3;
-    // }
 
     decrementLife(player: PlayerStats) {
         player.life -= 1;
+        this.setHistory(player);
     }
 
     settings() {
         this.router.navigate(['/tabs/life']);
     }
+    // incrementMuchLife(player: PlayerStats) {
+    //     player.life += 3;
+    // }
 }
