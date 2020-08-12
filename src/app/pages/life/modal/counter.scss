@@ -14,8 +14,18 @@
     }
 }
 
+// .tap {
+//     background: transparent !important;
+//     padding: 0 !important;
+//     margin: 0 !important;
+//     color: transparent !important;
+//     border-radius: none !important;
+// }
+
 .tap:active {
-    background: rgb(3, 3, 3, 0.1);
+    background-color: rgba(3, 3, 3, 0.1);
+    background-size: 100%;
+    transition: background 0s;
 }
 
 // settings icon
