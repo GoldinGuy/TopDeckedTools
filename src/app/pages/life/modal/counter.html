@@ -30,16 +30,14 @@
                                 [style.background-color]="player.color"
                             >
                                 <p class="val rotate-player{{i}}">{{ player.life }}</p>
-                                <ion-button
+                                <div
                                     class="counter p{{i}}-add-life tap"
-                                    fill="clear"
                                     (click)="incrementLife(player)"
-                                ></ion-button>
-                                <ion-button
+                                ></div>
+                                <div
                                     class="counter p{{i}}-rem-life tap"
-                                    fill="clear"
                                     (click)="decrementLife(player)"
-                                ></ion-button>
+                                ></div>
                             </ion-col>
                         </ng-container>
                     </div>
