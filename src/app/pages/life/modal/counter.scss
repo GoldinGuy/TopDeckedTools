@@ -53,12 +53,12 @@
     }
     .seat3-5p {
         @media (orientation: portrait) {
-            --top: 74.5%;
+            --top: 69.4%;
             --left: 50%;
         }
         @media (orientation: landscape) {
             --top: 50%;
-            --left: 74.5%;
+            --left: 69.4%;
         }
     }
     .seat2-4p {
@@ -249,7 +249,7 @@
         @media (orientation: portrait) {
             --rotate-player0: -90deg;
             --rotate-player1: 90deg;
-            --height: 74vh;
+            --height: 69vh;
             --width: 50vw;
 
             .counter {
@@ -263,7 +263,7 @@
             --rotate-player0: 180deg;
             --rotate-player1: 0deg;
             --height: 49.1vh;
-            --width: 74vw;
+            --width: 69vw;
 
             .counter {
                 position: absolute;
@@ -303,7 +303,7 @@
 
         @media (orientation: portrait) {
             --rotate-player2: 0deg;
-            --height: 25vh;
+            --height: 30vh;
             --width: 100vw;
             bottom: 0;
             left: 0;
@@ -311,13 +311,13 @@
             .counter {
                 position: absolute;
                 width: 100%;
-                height: 12.5vh !important;
+                height: 15vh !important;
             }
         }
 
         @media (orientation: landscape) {
             --rotate-player2: -90deg;
-            --width: 25vw;
+            --width: 30vw;
             --height: 100vh;
             bottom: 0;
             right: 0;
@@ -325,7 +325,7 @@
             .counter {
                 position: absolute;
                 height: 100%;
-                width: 12.5vw !important;
+                width: 15vw !important;
             }
         }
 
@@ -556,7 +556,7 @@
         grid-template-columns: 1fr 1fr;
 
         @media (orientation: landscape) {
-            grid-template-columns: 36.5vw 36.5vw;
+            grid-template-columns: 34vw 34vw;
             #p0 {
                 order: 3;
             }
@@ -586,7 +586,7 @@
             --rotate-player1: -90deg;
             --rotate-player2: 90deg;
             --rotate-player3: -90deg;
-            --height: 36.5vh;
+            --height: 34vh;
             --width: 49.5vw;
 
             .counter {
@@ -631,7 +631,7 @@
             --rotate-player2: 0deg;
             --rotate-player3: 180deg;
             --height: 49vh;
-            --width: 36.5vw;
+            --width: 34vw;
 
             .counter {
                 position: absolute;
@@ -735,7 +735,7 @@
 
         @media (orientation: portrait) {
             --rotate-player4: 0deg;
-            --height: 25vh;
+            --height: 30vh;
             --width: 100vw;
             margin-top: 1vh;
             bottom: 0;
@@ -744,13 +744,13 @@
             .counter {
                 position: absolute;
                 width: 100%;
-                height: 12.5vh !important;
+                height: 15vh !important;
             }
         }
 
         @media (orientation: landscape) {
             --rotate-player4: -90deg;
-            --width: 25vw;
+            --width: 30vw;
             --height: 100vh;
             margin-left: 1vw;
             bottom: 0;
@@ -759,7 +759,7 @@
             .counter {
                 position: absolute;
                 height: 100%;
-                width: 12.5vw !important;
+                width: 15vw !important;
             }
         }
 
@@ -782,7 +782,9 @@
         }
     }
     @media (orientation: landscape) {
-        border-radius: 10px 0px 0px 10px;
+        .p4 {
+            border-radius: 10px 0px 0px 10px;
+        }
     }
 }
 

@@ -83,16 +83,15 @@ export class CounterPage {
     }
 
     setHistory(player: PlayerStats) {
-        var shift: number, hist: string;
+        var shift: number;
         shift = player.life - parseInt(player.history[player.history.length - 1]);
-        if (shift > 0) {
-            hist = '+' + shift;
-        } else {
-            hist = shift.toString();
-        }
-        player.history.push(hist);
+        // if (shift > 0) {
+        //     hist = '+' + shift;
+        // } else {
+        //     hist = shift.toString();
+        // }
+        // player.history.push(hist);
         player.history.push(player.life.toString());
-        console.table(this.players);
     }
 
     getColor(): string {
