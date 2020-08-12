@@ -40,12 +40,6 @@
     --ion-color-primary-contrast-rgb: 255, 255, 255;
     --ion-color-primary-shade: #6a5787;
     --ion-color-primary-tint: #6a5787;
-    // --ion-color-primary: #7044ff;
-    // --ion-color-primary-rgb: 112, 68, 255;
-    // --ion-color-primary-contrast: #f8f8f8;
-    // --ion-color-primary-contrast-rgb: 255, 255, 255;
-    // --ion-color-primary-shade: #633ce0;
-    // --ion-color-primary-tint: #7e57ff;
 
     /** secondary **/
     --ion-color-secondary: #f4f4f4;
@@ -125,95 +119,10 @@
     background-image: none !important;
 }
 
-/* INCLUDE FONTS
-=======================================================
-=======================================================*/
-@import 'fontello';
-@import 'rtl';
-
-/* SETTINGS FONT SIZE
-=======================================================
-=======================================================*/
-[text-size-xl] {
-    font-size: var(--h1-font-size, 20px) !important;
-    color: var(--mystic-light, #1b1e28);
-}
-
-[text-size-lg] {
-    font-size: var(--h2-font-size, 18px) !important;
-    color: var(--mystic-light, #1b1e28);
-}
-
-[text-size-md] {
-    font-size: var(--h3-font-size, 16px) !important;
-    color: var(--mystic-light, #1b1e28);
-}
-
-[text-size-xs] {
-    font-size: var(--h4-font-size, 14px) !important;
-    color: var(--mystic-light, #1b1e28);
-}
-
-[text-size-sm] {
-    font-size: var(--h5-font-size, 15px) !important;
-    color: var(--mystic-light, #1b1e28);
-}
-
-[text-size-p] {
-    font-size: var(--text-font-size, 14px) !important;
-    color: var(--mystic-light, #1b1e28);
-}
-
-[text-nowrap] {
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
-
-page-home {
-    .swiper-pagination.swiper-pagination-bullets {
-        bottom: 5px !important;
-
-        .swiper-pagination-bullet-active {
-            --bullet-background: var(--mystic-light, #231942) !important;
-            background: var(--bullet-background);
-        }
-    }
-}
-
 *::-webkit-scrollbar {
     display: none !important;
 }
 
-/* SETTINGS BUTTON
-=======================================================
-=======================================================*/
-[default-button] {
-    --padding-top: 20px;
-    --padding-bottom: 20px;
-    --background: var(--mystic-light, #892bfe);
-    --color: var(--mystic-primary, #ffffff);
-    --ripple-color: transparent;
-    border-radius: 4px;
-    overflow: hidden;
-    min-height: 45px;
-    text-transform: inherit;
-}
-
-/* SETTINGS CATEGORY
-=======================================================
-=======================================================*/
-// [category] {
-//     position: absolute;
-//     top: 7px;
-//     z-index: 999;
-//     left: 7px;
-//     border-radius: 4px;
-//     // background: var(--mystic-danger, #5e548e);
-//     background: var(--mystic-danger, #892bfe);
-//     padding: 5px;
-//     font-size: 10px;
-//     color: var(--mystic-category, #fff);
-// }
 [category] {
     position: absolute;
     top: 8px;
@@ -251,9 +160,6 @@ page-home {
     color: var(--mystic-category, #fff);
 }
 
-/* SETTINGS COLOR BACKGROUND OUR APP
-=======================================================
-=======================================================*/
 ion-content {
     --background: var(--mystic-backgroundColor, #ffffff);
 }
@@ -287,75 +193,15 @@ ion-title {
     --color: var(--mystic-light, #1b1e28) !important;
 }
 
-.bg-theme {
-    --background: var(--mystic-toobarBackground, #ffffff) !important;
-}
-
-/* SETTINGS CHIP
-=======================================================
-=======================================================*/
-ion-chip {
-    --background: transparent;
-    margin: 0;
-    padding-top: 0;
-    -webkit-padding-start: 4px;
-    padding-inline-start: 4px;
-    padding-inline-end: 0px;
-
-    .ripple-effect {
-        display: none !important;
-    }
-
-    ion-icon {
-        color: var(--mystic-colorIcon, #cccbda);
-    }
-    ion-label {
-        color: var(--mystic-colorIconText, #876796) !important;
-    }
-}
-
-/* SETTINGS SEGMENT
-=======================================================
-=======================================================*/
-// ion-segment-button {
-// --background: #876796 !important;
-// // --background: var(--mystic-toobarBackground, #ffffff);
-// --background-checked: #876796 !important;
-// --background-activated: #876796 !important;
-// // --color: var(--mystic-light, #1b1e28);
-// --color-checked: #876796 !important;
-// }
-
-/* SETTINGS COLOR AND SIZE ICON
-=======================================================
-=======================================================*/
 [icon-small] {
     color: var(--mystic-colorIcon, #cccbda);
     font-size: var(--icon-size-small, 20px);
 }
 
-/* Image
-=======================================================
-=======================================================*/
-
 img {
     object-fit: cover;
 }
 
-/* Settings bookmark
-=======================================================
-=======================================================*/
-[bookMark] {
-    ion-icon {
-        &.active {
-            color: var(--mystic-danger, #892bfe) !important;
-        }
-    }
-}
-
-/* Default Overview Ionic Section
-=======================================================
-=======================================================*/
 [background-size] {
     background-size: cover !important;
     background-position: center !important;
@@ -388,6 +234,4 @@ img {
     clear: both;
 }
 
-// #16161D
-// #892bfe ;
 $toolbar-md-title-text-color: black;

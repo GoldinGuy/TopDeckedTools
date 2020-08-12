@@ -15,7 +15,6 @@ const routes: Routes = [
                 loadChildren: () =>
                     import('../pages/life/modal/counter.module').then((m) => m.CounterPageModule),
             },
-
             {
                 path: '',
                 redirectTo: '',

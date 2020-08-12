@@ -33,12 +33,8 @@ export class CounterPage {
         // private navParams: NavParams,
         private router: Router,
         private route: ActivatedRoute
-    ) {}
-
-    ngOnInit() {
-        // console.table(this.navParams);
-        // let data = this.navParams.data;
-        this.route.queryParams.subscribe(() => {
+    ) {
+        this.route.queryParamMap.subscribe(() => {
             if (this.router.getCurrentNavigation().extras.state) {
                 let data = this.router.getCurrentNavigation().extras.state;
                 this.startingLife = data.startingLife;
@@ -49,6 +45,17 @@ export class CounterPage {
         });
 
         this.players = [];
+    }
+
+    ionViewDidLeave() {
+        this.numPlayers = undefined;
+        this.players = undefined;
+    }
+
+    ionViewWillEnter() {
+        // console.table(this.navParams);
+        // let data = this.navParams.data;
+
         for (let i = 0; i < this.numPlayers; i++) {
             this.players.push({
                 id: 'Player' + (i + 1),
@@ -66,6 +73,13 @@ export class CounterPage {
         }
         console.table(this.players);
         // console.log('Players: ' + JSON.stringify(this.players));
+    }
+
+    ionViewDidEnter() {
+        if (this.numPlayers === undefined) {
+            console.log('Back');
+            this.router.navigate(['/tabs/life']);
+        }
     }
 
     setHistory(player: PlayerStats) {

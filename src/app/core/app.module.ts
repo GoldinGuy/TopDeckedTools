@@ -10,8 +10,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IonicStorageModule } from '@ionic/storage';
 import { SMS } from '@ionic-native/sms/ngx';
-// import { RulesService } from '../services/rules.service';
-// import { TournamentService } from '../services/tournament.service';
 
 @NgModule({
     declarations: [AppComponent],
@@ -30,8 +28,6 @@ import { SMS } from '@ionic-native/sms/ngx';
         StatusBar,
         SplashScreen,
         ScreenOrientation,
-        // RulesService,
-        // TournamentService,
         SMS,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     ],
