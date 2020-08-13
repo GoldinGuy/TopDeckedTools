@@ -1,0 +1,1086 @@
+// bg and layout
+
+.bg-theme {
+    --background: #544a63 !important;
+}
+
+.grid-container {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    .grid {
+        padding: 0;
+    }
+}
+
+// .tap {
+//     background: transparent !important;
+//     padding: 0 !important;
+//     margin: 0 !important;
+//     color: transparent !important;
+//     border-radius: none !important;
+// }
+
+#settingsOverlay {
+    .overlay {
+        height: 100vh;
+        width: 100vw;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgba(84, 74, 99, 0.8);
+        z-index: 2;
+        align-items: center;
+        display: flex;
+    }
+
+    .option {
+        border-radius: 9px;
+        text-align: center;
+        margin: 10px 10px;
+        padding: 15px;
+        // justify-content: center;
+        // align-items: center;
+    }
+
+    .icon {
+        font-size: 55px;
+        color: white;
+    }
+}
+
+.tap:active {
+    background-color: rgba(3, 3, 3, 0.1);
+}
+
+// .options {
+//     color: #fff;
+//     font-size: 20px;
+// }
+
+// .na {
+//     --background: transparent !important;
+//     padding: 0 !important;
+//     margin: 0 !important;
+//     --color: transparent !important;
+//     text-align: center;
+//     // z-index: -1;
+//     border-radius: none !important;
+// }
+
+// .dot-container {
+//     text-align: center;
+//     z-index: 1;
+// }
+
+// .dot {
+//     cursor: pointer;
+//     height: 15px;
+//     width: 15px;
+//     margin: 0 2px;
+//     background-color: #bbb;
+//     border-radius: 50%;
+//     display: inline-block;
+//     transition: background-color 0.6s ease;
+// }
+
+// .active,
+// .dot:hover {
+//     background-color: #717171;
+// }
+
+// settings icon
+#settings {
+    .settings-icon {
+        font-size: 22px;
+        padding: 7px;
+        color: #fff;
+        position: fixed;
+        transform: translate(-50%, -50%);
+        border-radius: 22px;
+        background: #544a63;
+        z-index: 1;
+        top: var(--top);
+        left: var(--left);
+        right: var(--right);
+        bottom: var(--bottom);
+    }
+    .seat1p {
+        --right: 0%;
+        @media (orientation: portrait) {
+            --bottom: 0%;
+        }
+        @media (orientation: landscape) {
+            --top: 8%;
+        }
+    }
+    .seat3-5p {
+        @media (orientation: portrait) {
+            --top: 69.4%;
+            --left: 50%;
+        }
+        @media (orientation: landscape) {
+            --top: 50%;
+            --left: 69.4%;
+        }
+    }
+    .seat2-4p {
+        --top: 50%;
+        --left: 50%;
+    }
+    .seat6p {
+        @media (orientation: portrait) {
+            --top: 67%;
+            --left: 50%;
+        }
+        @media (orientation: landscape) {
+            --top: 50%;
+            --left: 67%;
+        }
+    }
+}
+
+// FLEX
+.flex {
+    display: flex;
+}
+@media (orientation: portrait) {
+    .flex-port {
+        display: flex;
+    }
+}
+@media (orientation: landscape) {
+    .flex-land {
+        display: flex;
+    }
+}
+
+// 1 player
+#seat1 {
+    .val-container {
+        display: flex;
+        position: fixed;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+
+        @media (orientation: portrait) {
+            --rotate-player0: 90deg;
+            text-align: end;
+
+            .counter {
+                position: absolute;
+                width: 50%;
+                height: 100vh;
+            }
+            .p0-add-life {
+                bottom: 0;
+                right: 0;
+            }
+            .p0-rem-life {
+                top: 0;
+                left: 0;
+            }
+        }
+
+        @media (orientation: landscape) {
+            --rotate-player0: 0deg;
+            text-align: center;
+            padding-bottom: 20px;
+
+            .counter {
+                position: absolute;
+                height: 50%;
+                width: 100vw;
+            }
+            .p0-add-life {
+                top: 0;
+                left: 0;
+            }
+            .p0-rem-life {
+                bottom: 0;
+                right: 0;
+            }
+        }
+
+        .val {
+            font-size: 160px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .rotate-player0 {
+            transform: rotate(var(--rotate-player0));
+        }
+    }
+}
+
+// 2 players
+#seat2 {
+    .val-container {
+        text-align: center;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: var(--height);
+
+        @media (orientation: portrait) {
+            --rotate-player0: 180deg;
+            --rotate-player1: 0deg;
+            --height: 49.5vh;
+
+            .counter {
+                position: absolute;
+                width: 100%;
+                height: 25vh;
+            }
+        }
+
+        @media (orientation: landscape) {
+            --rotate-player0: 90deg;
+            --rotate-player1: -90deg;
+            --height: 100vh;
+
+            .counter {
+                position: absolute;
+                height: 100%;
+                width: 25vw;
+            }
+        }
+
+        .p0-add-life,
+        .p1-rem-life {
+            bottom: 0;
+            right: 0;
+        }
+        .p0-rem-life,
+        .p1-add-life {
+            top: 0;
+            left: 0;
+        }
+
+        .val {
+            font-size: 110px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .rotate-player0 {
+            transform: rotate(var(--rotate-player0));
+        }
+        .rotate-player1 {
+            transform: rotate(var(--rotate-player1));
+        }
+    }
+    @media (orientation: portrait) {
+        .p0 {
+            margin-bottom: 1vh;
+            border-radius: 0px 0px 10px 10px;
+        }
+        .p1 {
+            margin-top: 1vh;
+            border-radius: 10px 10px 0px 0px;
+        }
+    }
+    @media (orientation: landscape) {
+        .p0 {
+            margin-right: 1vw;
+            border-radius: 0px 10px 10px 0px;
+        }
+        .p1 {
+            border-radius: 10px 0px 0px 10px;
+        }
+    }
+}
+
+// 3 players
+#seat3 {
+    .orient {
+        flex-direction: row-reverse;
+    }
+
+    .val-container {
+        text-align: center;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: var(--height);
+        width: var(--width);
+
+        @media (orientation: portrait) {
+            --rotate-player0: -90deg;
+            --rotate-player1: 90deg;
+            --height: 69vh;
+            --width: 50vw;
+
+            .counter {
+                position: absolute;
+                height: 100%;
+                width: 25vw;
+            }
+
+            .p0-rem-life,
+            .p1-add-life {
+                bottom: 0;
+                right: 0;
+            }
+            .p0-add-life,
+            .p1-rem-life {
+                top: 0;
+                left: 0;
+            }
+        }
+
+        @media (orientation: landscape) {
+            --rotate-player0: 180deg;
+            --rotate-player1: 0deg;
+            --height: 49.1vh;
+            --width: 69vw;
+
+            .counter {
+                position: absolute;
+                width: 100%;
+                height: 25vh;
+            }
+
+            .p1-rem-life,
+            .p0-add-life {
+                bottom: 0;
+                right: 0;
+            }
+            .p1-add-life,
+            .p0-rem-life {
+                top: 0;
+                left: 0;
+            }
+        }
+
+        .val {
+            font-size: 70px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .rotate-player0 {
+            transform: rotate(var(--rotate-player0));
+        }
+        .rotate-player1 {
+            transform: rotate(var(--rotate-player1));
+        }
+    }
+    .long-p2 {
+        position: absolute;
+        height: var(--height) !important;
+        width: var(--width) !important;
+
+        @media (orientation: portrait) {
+            --rotate-player2: 0deg;
+            --height: 30vh;
+            --width: 100vw;
+            bottom: 0;
+            left: 0;
+
+            .counter {
+                position: absolute;
+                width: 100%;
+                height: 15vh !important;
+            }
+        }
+
+        @media (orientation: landscape) {
+            --rotate-player2: -90deg;
+            --width: 30vw;
+            --height: 100vh;
+            bottom: 0;
+            right: 0;
+
+            .counter {
+                position: absolute;
+                height: 100%;
+                width: 15vw !important;
+            }
+        }
+
+        .rotate-player2 {
+            transform: rotate(var(--rotate-player2));
+        }
+
+        .p2-add-life {
+            top: 0;
+            left: 0;
+        }
+        .p2-rem-life {
+            bottom: 0;
+            right: 0;
+        }
+    }
+
+    @media (orientation: portrait) {
+        .p0 {
+            margin-left: 1vh;
+            border-radius: 0px 0px 10px 10px;
+        }
+        .p1 {
+            border-radius: 0px 0px 10px 10px;
+        }
+        .p2 {
+            margin-top: 1vh;
+            border-radius: 10px 10px 0px 0px;
+        }
+    }
+    @media (orientation: landscape) {
+        .p0 {
+            margin-right: 1vh;
+            border-radius: 0px 10px 10px 0px;
+        }
+        .p1 {
+            margin-top: 1vw;
+            margin-right: 1vh;
+            border-radius: 0px 10px 10px 0px;
+        }
+        .p2 {
+            border-radius: 10px 0px 0px 10px;
+        }
+    }
+}
+
+// 4 players
+#seat4 {
+    .orient {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        @media (orientation: landscape) {
+            #p0 {
+                order: 3;
+            }
+            #p1 {
+                order: 1;
+            }
+            #p2 {
+                order: 4;
+            }
+            #p3 {
+                order: 2;
+            }
+        }
+    }
+
+    .val-container {
+        text-align: center;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: var(--height);
+        width: 49.5vw;
+
+        @media (orientation: portrait) {
+            --rotate-player0: 90deg;
+            --rotate-player1: -90deg;
+            --rotate-player2: 90deg;
+            --rotate-player3: -90deg;
+            --height: 49.5vh;
+
+            .counter {
+                position: absolute;
+                width: 25vw;
+                height: 100%;
+            }
+
+            .p1-add-life,
+            .p2-rem-life {
+                top: 0;
+                left: 0;
+            }
+            .p1-rem-life,
+            .p2-add-life {
+                bottom: 0;
+                right: 0;
+            }
+            .p0-add-life,
+            .p3-rem-life {
+                bottom: 0;
+                right: 0;
+            }
+            .p0-rem-life,
+            .p3-add-life {
+                top: 0;
+                left: 0;
+            }
+
+            @media (min-width: 700px) {
+                .val {
+                    font-size: 100px !important;
+                    font-weight: bold;
+                    color: #fff;
+                }
+            }
+        }
+
+        @media (orientation: landscape) {
+            --rotate-player0: 0deg;
+            --rotate-player1: 180deg;
+            --rotate-player2: 0deg;
+            --rotate-player3: 180deg;
+            --height: 49vh;
+
+            .counter {
+                position: absolute;
+                height: 25vh;
+                width: 100%;
+            }
+
+            .p3-add-life,
+            .p2-rem-life {
+                bottom: 0;
+                right: 0;
+            }
+            .p3-rem-life,
+            .p2-add-life {
+                top: 0;
+                left: 0;
+            }
+            .p1-add-life,
+            .p0-rem-life {
+                bottom: 0;
+                right: 0;
+            }
+            .p1-rem-life,
+            .p0-add-life {
+                top: 0;
+                left: 0;
+            }
+
+            @media (min-width: 1000px) {
+                .val {
+                    font-size: 100px !important;
+                    font-weight: bold;
+                    color: #fff;
+                }
+            }
+        }
+
+        .val {
+            font-size: 70px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .rotate-player0 {
+            transform: rotate(var(--rotate-player0));
+        }
+        .rotate-player1 {
+            transform: rotate(var(--rotate-player1));
+        }
+        .rotate-player2 {
+            transform: rotate(var(--rotate-player2));
+        }
+        .rotate-player3 {
+            transform: rotate(var(--rotate-player3));
+        }
+    }
+
+    @media (orientation: portrait) {
+        .p0 {
+            margin-right: 1vw;
+            border-radius: 0px 10px 10px 10px;
+        }
+        .p1 {
+            margin-left: 1vw;
+            border-radius: 10px 0px 10px 10px;
+        }
+        .p2 {
+            margin-top: 1vh;
+            border-radius: 10px 10px 10px 0px;
+        }
+        .p3 {
+            margin-top: 1vh;
+            margin-left: 1vw;
+            border-radius: 10px 10px 0px 10px;
+        }
+    }
+    @media (orientation: landscape) {
+        .p0 {
+            margin-top: 1vh;
+            border-radius: 10px 10px 10px 0px;
+        }
+        .p1 {
+            margin-bottom: 1vh;
+            border-radius: 0px 10px 10px 10px;
+        }
+        .p2 {
+            margin-top: 1vh;
+            margin-left: 1vw;
+            border-radius: 10px 10px 0px 10px;
+        }
+        .p3 {
+            margin-left: 1vw;
+            border-radius: 10px 0px 10px 10px;
+        }
+    }
+}
+
+// 5 players
+#seat5 {
+    .orient {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        @media (orientation: landscape) {
+            grid-template-columns: 34vw 34vw;
+            #p0 {
+                order: 3;
+            }
+            #p1 {
+                order: 1;
+            }
+            #p2 {
+                order: 4;
+            }
+            #p3 {
+                order: 2;
+            }
+        }
+    }
+
+    .val-container {
+        text-align: center;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: var(--height);
+        width: var(--width);
+
+        @media (orientation: portrait) {
+            --rotate-player0: 90deg;
+            --rotate-player1: -90deg;
+            --rotate-player2: 90deg;
+            --rotate-player3: -90deg;
+            --height: 34vh;
+            --width: 49.5vw;
+
+            .counter {
+                position: absolute;
+                width: 25vw;
+                height: 100%;
+            }
+
+            .p1-add-life,
+            .p2-rem-life {
+                top: 0;
+                left: 0;
+            }
+            .p1-rem-life,
+            .p2-add-life {
+                bottom: 0;
+                right: 0;
+            }
+            .p0-add-life,
+            .p3-rem-life {
+                bottom: 0;
+                right: 0;
+            }
+            .p0-rem-life,
+            .p3-add-life {
+                top: 0;
+                left: 0;
+            }
+
+            @media (min-width: 700px) {
+                .val {
+                    font-size: 100px !important;
+                    font-weight: bold;
+                    color: #fff;
+                }
+            }
+        }
+
+        @media (orientation: landscape) {
+            --rotate-player0: 0deg;
+            --rotate-player1: 180deg;
+            --rotate-player2: 0deg;
+            --rotate-player3: 180deg;
+            --height: 49vh;
+            --width: 34vw;
+
+            .counter {
+                position: absolute;
+                height: 25vh;
+                width: 100%;
+            }
+
+            .p3-add-life,
+            .p2-rem-life {
+                bottom: 0;
+                right: 0;
+            }
+            .p3-rem-life,
+            .p2-add-life {
+                top: 0;
+                left: 0;
+            }
+            .p1-add-life,
+            .p0-rem-life {
+                bottom: 0;
+                right: 0;
+            }
+            .p1-rem-life,
+            .p0-add-life {
+                top: 0;
+                left: 0;
+            }
+
+            @media (min-width: 1000px) {
+                .val {
+                    font-size: 100px !important;
+                    font-weight: bold;
+                    color: #fff;
+                }
+            }
+        }
+
+        .val {
+            font-size: 70px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .rotate-player0 {
+            transform: rotate(var(--rotate-player0));
+        }
+        .rotate-player1 {
+            transform: rotate(var(--rotate-player1));
+        }
+        .rotate-player2 {
+            transform: rotate(var(--rotate-player2));
+        }
+        .rotate-player3 {
+            transform: rotate(var(--rotate-player3));
+        }
+    }
+
+    @media (orientation: portrait) {
+        .p0 {
+            margin-right: 1vw;
+            border-radius: 0px 10px 10px 10px;
+        }
+        .p1 {
+            margin-left: 1vw;
+            border-radius: 10px 0px 10px 10px;
+        }
+        .p2 {
+            margin-top: 1vh;
+            border-radius: 10px 10px 10px 0px;
+        }
+        .p3 {
+            margin-top: 1vh;
+            margin-left: 1vw;
+            border-radius: 10px 10px 0px 10px;
+        }
+    }
+    @media (orientation: landscape) {
+        .p0 {
+            margin-top: 1vh;
+            border-radius: 10px 10px 10px 0px;
+        }
+        .p1 {
+            margin-bottom: 1vh;
+            border-radius: 0px 10px 10px 10px;
+        }
+        .p2 {
+            margin-top: 1vh;
+            margin-left: 1vw;
+            border-radius: 10px 10px 0px 10px;
+        }
+        .p3 {
+            margin-left: 1vw;
+            border-radius: 10px 0px 10px 10px;
+        }
+    }
+
+    .long-p4 {
+        position: absolute;
+        height: var(--height) !important;
+        width: var(--width) !important;
+
+        @media (orientation: portrait) {
+            --rotate-player4: 0deg;
+            --height: 30vh;
+            --width: 100vw;
+            margin-top: 1vh;
+            bottom: 0;
+            right: 0;
+
+            .counter {
+                position: absolute;
+                width: 100%;
+                height: 15vh !important;
+            }
+        }
+
+        @media (orientation: landscape) {
+            --rotate-player4: -90deg;
+            --width: 30vw;
+            --height: 100vh;
+            margin-left: 1vw;
+            bottom: 0;
+            right: 0;
+
+            .counter {
+                position: absolute;
+                height: 100%;
+                width: 15vw !important;
+            }
+        }
+
+        .rotate-player4 {
+            transform: rotate(var(--rotate-player4));
+        }
+
+        .p4-add-life {
+            top: 0;
+            left: 0;
+        }
+        .p4-rem-life {
+            bottom: 0;
+            right: 0;
+        }
+    }
+    @media (orientation: portrait) {
+        .p4 {
+            border-radius: 10px 10px 0px 0px;
+        }
+    }
+    @media (orientation: landscape) {
+        .p4 {
+            border-radius: 10px 0px 0px 10px;
+        }
+    }
+}
+
+// 6 players
+#seat6 {
+    .orient {
+        display: grid;
+        @media (orientation: portrait) {
+            grid-template-columns: 1fr 1fr;
+        }
+        @media (orientation: landscape) {
+            grid-template-columns: 1fr 1fr 1fr;
+            #p0 {
+                order: 4;
+            }
+            #p1 {
+                order: 1;
+            }
+            #p2 {
+                order: 5;
+            }
+            #p3 {
+                order: 2;
+            }
+            #p4 {
+                order: 6;
+            }
+            #p5 {
+                order: 3;
+            }
+        }
+    }
+
+    .val-container {
+        text-align: center;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: var(--height);
+        width: var(--width);
+
+        @media (orientation: portrait) {
+            --rotate-player0: 90deg;
+            --rotate-player1: -90deg;
+            --rotate-player2: 90deg;
+            --rotate-player3: -90deg;
+            --rotate-player4: 90deg;
+            --rotate-player5: -90deg;
+            --height: 32.66vh;
+            --width: 49.3vw;
+
+            .counter {
+                position: absolute;
+                width: 25vw;
+                height: 100%;
+            }
+
+            @media (min-width: 700px) {
+                .val {
+                    font-size: 100px !important;
+                    font-weight: bold;
+                    color: #fff;
+                }
+            }
+        }
+
+        @media (orientation: landscape) {
+            --rotate-player0: 0deg;
+            --rotate-player1: 180deg;
+            --rotate-player2: 0deg;
+            --rotate-player3: 180deg;
+            --rotate-player4: 0deg;
+            --rotate-player5: 180deg;
+            --height: 49.1vh;
+            --width: 32.66vw;
+
+            .counter {
+                position: absolute;
+                height: 25vh;
+                width: 100%;
+            }
+
+            @media (min-width: 1000px) {
+                .val {
+                    font-size: 100px !important;
+                    font-weight: bold;
+                    color: #fff;
+                }
+            }
+        }
+
+        .val {
+            font-size: 70px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .rotate-player0 {
+            transform: rotate(var(--rotate-player0));
+        }
+        .rotate-player1 {
+            transform: rotate(var(--rotate-player1));
+        }
+        .rotate-player2 {
+            transform: rotate(var(--rotate-player2));
+        }
+        .rotate-player3 {
+            transform: rotate(var(--rotate-player3));
+        }
+        .rotate-player4 {
+            transform: rotate(var(--rotate-player4));
+        }
+        .rotate-player5 {
+            transform: rotate(var(--rotate-player5));
+        }
+    }
+
+    @media (orientation: portrait) {
+        .p0-add-life,
+        .p2-add-life,
+        .p4-add-life {
+            bottom: 0;
+            right: 0;
+        }
+        .p0-rem-life,
+        .p2-rem-life,
+        .p4-rem-life {
+            top: 0;
+            left: 0;
+        }
+        .p1-add-life,
+        .p3-add-life,
+        .p5-add-life {
+            top: 0;
+            left: 0;
+        }
+        .p1-rem-life,
+        .p3-rem-life,
+        .p5-rem-life {
+            bottom: 0;
+            right: 0;
+        }
+
+        .p0 {
+            margin-right: 1vw;
+            border-radius: 0px 10px 10px 10px;
+        }
+        .p1 {
+            margin-bottom: 1vh;
+            margin-left: 1vw;
+            border-radius: 10px 0px 10px 10px;
+        }
+        .p2 {
+            margin-right: 1vw;
+            border-radius: 10px;
+        }
+        .p3 {
+            margin-bottom: 1vh;
+            margin-left: 1vw;
+            border-radius: 10px;
+        }
+        .p4 {
+            margin-right: 1vw;
+            border-radius: 10px 10px 10px 0px;
+        }
+        .p5 {
+            margin-left: 1vw;
+            border-radius: 10px 10px 0px 10px;
+        }
+    }
+
+    @media (orientation: landscape) {
+        .p1-add-life,
+        .p3-add-life,
+        .p5-add-life {
+            bottom: 0;
+            right: 0;
+        }
+        .p1-rem-life,
+        .p3-rem-life,
+        .p5-rem-life {
+            top: 0;
+            left: 0;
+        }
+        .p2-add-life,
+        .p4-add-life,
+        .p0-add-life {
+            top: 0;
+            left: 0;
+        }
+        .p2-rem-life,
+        .p4-rem-life,
+        .p0-rem-life {
+            bottom: 0;
+            right: 0;
+        }
+
+        .p0 {
+            margin-right: 1vw;
+            border-radius: 10px 10px 10px 0px;
+        }
+        .p1 {
+            margin-right: 1vw;
+            border-radius: 0px 10px 10px 10px;
+        }
+        .p2 {
+            // margin-bottom: 1vh;
+            margin-right: 1vw;
+            border-radius: 10px;
+        }
+        .p3 {
+            margin-right: 1vw;
+            border-radius: 10px;
+        }
+        .p4 {
+            border-radius: 10px 10px 0px 10px;
+        }
+        .p5 {
+            margin-bottom: 1vw;
+            border-radius: 10px 0px 10px 10px;
+        }
+    }
+}

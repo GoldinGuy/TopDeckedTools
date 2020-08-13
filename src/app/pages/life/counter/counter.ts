@@ -16,6 +16,9 @@ import { Component, Input } from '@angular/core';
 // import { NavParams } from '@ionic/angular';
 import { isNullOrUndefined } from 'util';
 import { Router, ActivatedRoute } from '@angular/router';
+import { SettingsPage } from '../settings/settings';
+import { SettingsPageModule } from '../settings/settings.module';
+import { ModalController } from '@ionic/angular';
 
 @Component({
     selector: 'page-life',
@@ -28,10 +31,12 @@ export class CounterPage {
     @Input() timer: number;
     @Input() pickFirstPlayer: boolean;
     players: Array<PlayerStats>;
+    displaySettings: boolean;
 
     constructor(
         // private navParams: NavParams,
         private router: Router,
+        public modalController: ModalController,
         private route: ActivatedRoute
     ) {
         this.route.queryParamMap.subscribe(() => {
@@ -45,6 +50,7 @@ export class CounterPage {
         });
 
         this.players = [];
+        this.displaySettings = false;
     }
 
     ionViewDidLeave() {
@@ -148,7 +154,16 @@ export class CounterPage {
     }
 
     settings() {
-        this.router.navigate(['/tabs/life']);
+        this.displaySettings = true;
+        // this.router.navigate(['/tabs/life']);
+        // const modal = await this.modalController.create({
+        //     component: CounterPage,
+        //     cssClass: 'modal-fullscreen',
+        //     componentProps: {
+        //         players: this.players,
+        //     },
+        // });
+        // return await modal.present();
     }
     // incrementMuchLife(player: PlayerStats) {
     //     player.life += 3;

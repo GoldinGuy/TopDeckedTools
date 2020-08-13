@@ -13,7 +13,7 @@ const routes: Routes = [
                 path: 'lifeCounter',
 
                 loadChildren: () =>
-                    import('../pages/life/modal/counter.module').then((m) => m.CounterPageModule),
+                    import('../pages/life/counter/counter.module').then((m) => m.CounterPageModule),
             },
             {
                 path: '',

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
-import { CounterPage } from './modal/counter';
-import { CounterPageModule } from './modal/counter.module';
+// import { CounterPage } from './counter/counter';
+// import { CounterPageModule } from './counter/counter.module';
 import { NavigationExtras, Router } from '@angular/router';
 
 @Component({

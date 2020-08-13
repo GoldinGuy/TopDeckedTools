@@ -2,6 +2,36 @@
 <ion-content fullscreen class="bg-theme">
     <div class="grid-container">
         <ion-grid class="grid">
+            <ng-container *ngIf="displaySettings">
+                <div id="settingsOverlay">
+                    <div class="overlay">
+                        <ion-grid>
+                            <ion-row>
+                                <ion-col class="option">
+                                    <ion-icon name="stopwatch" class="icon"></ion-icon>
+                                    <p>Timer</p>
+                                </ion-col>
+                                <ion-col class="option">
+                                    <ion-icon name="time" class="icon"></ion-icon>
+                                    <p>Timer</p>
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col class="option">
+                                    <ion-icon name="color-palette" class="icon"></ion-icon>
+                                    <p>Colors</p>
+                                </ion-col>
+
+                                <ion-col class="option">
+                                    <ion-icon name="color-palette" class="icon"></ion-icon>
+                                    <p>Quit Game</p>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </div>
+                </div>
+            </ng-container>
+
             <!-- 1 player -->
             <ng-container *ngIf="players.length === 1">
                 <div id="seat1">

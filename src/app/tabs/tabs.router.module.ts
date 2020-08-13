@@ -28,7 +28,7 @@ const routes: Routes = [
                     {
                         path: 'counter',
                         loadChildren: () =>
-                            import('../pages/life/modal/counter.module').then(
+                            import('../pages/life/counter/counter.module').then(
                                 (m) => m.CounterPageModule
                             ),
                     },
