@@ -16,8 +16,6 @@ import { Component, Input } from '@angular/core';
 // import { NavParams } from '@ionic/angular';
 import { isNullOrUndefined } from 'util';
 import { Router, ActivatedRoute } from '@angular/router';
-import { SettingsPage } from '../settings/settings';
-import { SettingsPageModule } from '../settings/settings.module';
 import { ModalController } from '@ionic/angular';
 
 @Component({
@@ -78,7 +76,6 @@ export class CounterPage {
             });
         }
         console.table(this.players);
-        // console.log('Players: ' + JSON.stringify(this.players));
     }
 
     ionViewDidEnter() {
@@ -153,19 +150,11 @@ export class CounterPage {
         this.setHistory(player);
     }
 
-    settings() {
-        this.displaySettings = true;
-        // this.router.navigate(['/tabs/life']);
-        // const modal = await this.modalController.create({
-        //     component: CounterPage,
-        //     cssClass: 'modal-fullscreen',
-        //     componentProps: {
-        //         players: this.players,
-        //     },
-        // });
-        // return await modal.present();
+    toggleSettings() {
+        if (this.displaySettings) {
+            this.displaySettings = false;
+        } else {
+            this.displaySettings = true;
+        }
     }
-    // incrementMuchLife(player: PlayerStats) {
-    //     player.life += 3;
-    // }
 }
