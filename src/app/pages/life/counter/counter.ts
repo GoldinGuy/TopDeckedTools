@@ -30,6 +30,8 @@ export class CounterPage {
     @Input() pickFirstPlayer: boolean;
     players: Array<PlayerStats>;
     displaySettings: boolean;
+    displayHistory: boolean;
+    displayTimer: boolean;
 
     constructor(
         // private navParams: NavParams,
@@ -48,12 +50,7 @@ export class CounterPage {
         });
 
         this.players = [];
-        this.displaySettings = false;
-    }
-
-    ionViewDidLeave() {
-        this.numPlayers = undefined;
-        this.players = undefined;
+        (this.displaySettings = false), (this.displayHistory = false);
     }
 
     ionViewWillEnter() {
@@ -78,12 +75,17 @@ export class CounterPage {
         console.table(this.players);
     }
 
-    ionViewDidEnter() {
-        if (this.numPlayers === undefined) {
-            console.log('Back');
-            this.router.navigate(['/tabs/life']);
-        }
-    }
+    // ionViewDidEnter() {
+    //     if (this.numPlayers === undefined) {
+    //         console.log('Back');
+    //         this.router.navigate(['/tabs/life']);
+    //     }
+    // }
+
+    // ionViewDidLeave() {
+    //     this.numPlayers = undefined;
+    //     this.players = undefined;
+    // }
 
     setHistory(player: PlayerStats) {
         var shift: number;
@@ -156,5 +158,47 @@ export class CounterPage {
         } else {
             this.displaySettings = true;
         }
+    }
+
+    toggleTimer() {
+        if (this.displayTimer) {
+            this.displayTimer = false;
+        } else {
+            this.displayTimer = true;
+        }
+    }
+
+    toggleHistory() {
+        if (this.displayHistory) {
+            this.displayHistory = false;
+        } else {
+            this.displayHistory = true;
+        }
+    }
+
+    reset() {
+        for (let i = 0; i < this.players.length; i++) {
+            this.players[i] = {
+                id: this.players[i].id,
+                life: this.startingLife,
+                color: this.players[i].color,
+                cmdDam: [],
+                history: [],
+                other: {
+                    infect: 0,
+                    energy: 0,
+                    monarch: false,
+                    cityBless: false,
+                },
+            };
+        }
+        console.table(this.players);
+        this.toggleSettings();
+    }
+
+    quit() {
+        this.players = [];
+        this.toggleSettings();
+        this.router.navigate(['/tabs/life']);
     }
 }

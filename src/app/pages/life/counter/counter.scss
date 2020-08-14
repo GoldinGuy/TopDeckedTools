@@ -1,5 +1,4 @@
 // bg and layout
-
 .bg-theme {
     --background: #544a63 !important;
 }
@@ -11,42 +10,6 @@
     width: 100vw;
     .grid {
         padding: 0;
-    }
-}
-
-// .tap {
-//     background: transparent !important;
-//     padding: 0 !important;
-//     margin: 0 !important;
-//     color: transparent !important;
-//     border-radius: none !important;
-// }
-
-#settingsOverlay {
-    .overlay {
-        height: 100vh;
-        width: 100vw;
-        position: absolute;
-        top: 0;
-        left: 0;
-        background-color: rgba(84, 74, 99, 0.8);
-        z-index: 2;
-        align-items: center;
-        display: flex;
-    }
-
-    .option {
-        border-radius: 9px;
-        text-align: center;
-        margin: 10px 10px;
-        padding: 15px;
-        // justify-content: center;
-        // align-items: center;
-    }
-
-    .icon {
-        font-size: 55px;
-        color: white;
     }
 }
 
@@ -88,6 +51,14 @@
 // .active,
 // .dot:hover {
 //     background-color: #717171;
+// }
+
+// .tap {
+//     background: transparent !important;
+//     padding: 0 !important;
+//     margin: 0 !important;
+//     color: transparent !important;
+//     border-radius: none !important;
 // }
 
 // settings icon
@@ -141,6 +112,74 @@
     }
 }
 
+#overlay {
+    .bg {
+        height: 100%;
+        width: 100vw;
+        overflow: auto;
+        position: absolute;
+        background-color: rgba(84, 74, 99, 0.8);
+        z-index: 2;
+        align-items: center;
+        display: flex;
+        top: 0;
+        left: 0;
+
+        @media (orientation: landscape) {
+            padding: 50px 100px 20px;
+        }
+    }
+
+    .option {
+        border-radius: 9px;
+        text-align: center;
+        margin: 10px 10px;
+        padding: 15px;
+    }
+
+    .option-text {
+        font-size: 20px;
+        color: #fff;
+    }
+
+    .icon {
+        font-size: 55px;
+        color: #fff;
+    }
+
+    .hist {
+        font-size: 25px !important;
+    }
+
+    .hist-grid {
+        height: 100vh;
+        @media (orientation: portrait) {
+            margin-top: 16vh;
+        }
+    }
+
+    .hist-col {
+        text-align: center;
+        border-top: 4px solid #fff;
+        border-right: 4px solid #fff;
+        height: 100%;
+    }
+
+    ion-col:last-child {
+        border-right: none;
+    }
+
+    .top-left {
+        color: #fff;
+        position: absolute;
+        padding: 15px;
+        font-size: 30px;
+        z-index: 2;
+        top: 0;
+        left: 0;
+    }
+}
+
 // FLEX
 .flex {
     display: flex;
@@ -158,6 +197,10 @@
 
 // 1 player
 #seat1 {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+
     .val-container {
         display: flex;
         position: fixed;
@@ -218,6 +261,10 @@
 
 // 2 players
 #seat2 {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+
     .val-container {
         text-align: center;
         position: relative;
@@ -297,6 +344,10 @@
 
 // 3 players
 #seat3 {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+
     .orient {
         flex-direction: row-reverse;
     }
@@ -449,6 +500,10 @@
 
 // 4 players
 #seat4 {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+
     .orient {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -626,6 +681,10 @@
 
 // 5 players
 #seat5 {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+
     .orient {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -865,6 +924,10 @@
 
 // 6 players
 #seat6 {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+
     .orient {
         display: grid;
         @media (orientation: portrait) {

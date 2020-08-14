@@ -182,32 +182,73 @@
                     [ngClass]="{ 'seat1p': players.length === 1, 'seat3-5p': players.length === 3 || players.length === 5, 'seat2-4p': players.length === 2 || players.length === 4,  'seat6p': players.length === 6  }"
                 ></ion-icon>
             </div>
-
             <!-- settings overlay -->
-            <ng-container *ngIf="displaySettings">
-                <div id="settingsOverlay">
-                    <div class="overlay">
+            <ng-container *ngIf="displaySettings && !displayHistory">
+                <div id="overlay">
+                    <div class="bg">
+                        <ion-icon
+                            name="chevron-back"
+                            class="top-left"
+                            (click)="toggleSettings()"
+                        ></ion-icon>
                         <ion-grid>
                             <ion-row>
                                 <ion-col class="option">
                                     <ion-icon name="stopwatch" class="icon"></ion-icon>
-                                    <p>Timer</p>
+                                    <p class="option-text">Timer</p>
                                 </ion-col>
-                                <ion-col class="option">
-                                    <ion-icon name="time" class="icon"></ion-icon>
-                                    <p>Timer</p>
+                                <ion-col class="option" (click)="reset()">
+                                    <ion-icon name="sync" class="icon"></ion-icon>
+                                    <p class="option-text">RESET</p>
+                                </ion-col>
+                                <ion-col class="option" (click)="toggleTimer()">
+                                    <ion-icon name="timer" class="icon"></ion-icon>
+                                    <p class="option-text">TIMER</p>
                                 </ion-col>
                             </ion-row>
                             <ion-row>
                                 <ion-col class="option">
                                     <ion-icon name="color-palette" class="icon"></ion-icon>
-                                    <p>Colors</p>
+                                    <p class="option-text">COLORS</p>
                                 </ion-col>
-
-                                <ion-col class="option">
-                                    <ion-icon name="color-palette" class="icon"></ion-icon>
-                                    <p>Quit Game</p>
+                                <ion-col class="option" (click)="toggleHistory()">
+                                    <ion-icon name="library" class="icon"></ion-icon>
+                                    <p class="option-text">HISTORY</p>
                                 </ion-col>
+                                <ion-col class="option" (click)="quit()">
+                                    <ion-icon name="log-out" class="icon"></ion-icon>
+                                    <p class="option-text">QUIT</p>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </div>
+                </div>
+            </ng-container>
+            <!-- history overlay -->
+            <ng-container *ngIf="displayHistory">
+                <div id="overlay">
+                    <div class="bg">
+                        <ion-icon
+                            name="chevron-back"
+                            class="top-left"
+                            (click)="toggleHistory()"
+                        ></ion-icon>
+                        <ion-grid class="hist-grid">
+                            <ion-row>
+                                <ng-container *ngFor="let player of players">
+                                    <ion-col class="hist-col">
+                                        <p class="hist" [style.color]="player.color">
+                                            {{ startingLife }}
+                                        </p>
+                                        <p
+                                            *ngFor="let hist of player.history"
+                                            class="hist"
+                                            [style.color]="player.color"
+                                        >
+                                            {{ hist }}
+                                        </p>
+                                    </ion-col>
+                                </ng-container>
                             </ion-row>
                         </ion-grid>
                     </div>
