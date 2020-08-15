@@ -12,8 +12,15 @@ export interface PlayerStats {
     };
 }
 
-import { Component, Input } from '@angular/core';
-// import { NavParams } from '@ionic/angular';
+export interface Game {
+    players: Array<PlayerStats>;
+    startingLife: number;
+    numPlayers: number;
+    timer: number;
+    pickFirstPlayer: boolean;
+}
+
+import { Component } from '@angular/core';
 import { isNullOrUndefined } from 'util';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
@@ -24,43 +31,30 @@ import { ModalController } from '@ionic/angular';
     styleUrls: ['counter.scss'],
 })
 export class CounterPage {
-    @Input() startingLife: number;
-    @Input() numPlayers: number;
-    @Input() timer: number;
-    @Input() pickFirstPlayer: boolean;
-    players: Array<PlayerStats>;
+    game: Game;
     displaySettings: boolean;
     displayHistory: boolean;
     displayTimer: boolean;
 
     constructor(
-        // private navParams: NavParams,
         private router: Router,
         public modalController: ModalController,
         private route: ActivatedRoute
     ) {
         this.route.queryParamMap.subscribe(() => {
             if (this.router.getCurrentNavigation().extras.state) {
-                let data = this.router.getCurrentNavigation().extras.state;
-                this.startingLife = data.startingLife;
-                this.numPlayers = data.numPlayers;
-                this.timer = data.timer;
-                this.pickFirstPlayer = data.pickFirstPlayer;
+                this.game = this.router.getCurrentNavigation().extras.state.game;
             }
         });
-
-        this.players = [];
-        (this.displaySettings = false), (this.displayHistory = false);
+        this.displaySettings = false;
+        this.displayHistory = false;
     }
 
     ionViewWillEnter() {
-        // console.table(this.navParams);
-        // let data = this.navParams.data;
-
-        for (let i = 0; i < this.numPlayers; i++) {
-            this.players.push({
+        for (let i = 0; i < this.game.numPlayers; i++) {
+            this.game.players.push({
                 id: 'Player' + (i + 1),
-                life: this.startingLife,
+                life: this.game.startingLife,
                 color: this.getColor(),
                 cmdDam: [],
                 history: [],
@@ -72,7 +66,7 @@ export class CounterPage {
                 },
             });
         }
-        console.table(this.players);
+        console.table(this.game.players);
     }
 
     // ionViewDidEnter() {
@@ -133,8 +127,8 @@ export class CounterPage {
         var color: string;
         do {
             color = colors[Math.floor(Math.random() * colors.length)];
-            for (let i = 0; i < this.players.length; i++) {
-                if (this.players[i].color === color) {
+            for (let i = 0; i < this.game.players.length; i++) {
+                if (this.game.players[i].color === color) {
                     color = null;
                 }
             }
@@ -171,20 +165,12 @@ export class CounterPage {
         }
     }
 
-    toggleHistory() {
-        if (this.displayHistory) {
-            this.displayHistory = false;
-        } else {
-            this.displayHistory = true;
-        }
-    }
-
     reset() {
-        for (let i = 0; i < this.players.length; i++) {
-            this.players[i] = {
-                id: this.players[i].id,
-                life: this.startingLife,
-                color: this.players[i].color,
+        for (let i = 0; i < this.game.players.length; i++) {
+            this.game.players[i] = {
+                id: this.game.players[i].id,
+                life: this.game.startingLife,
+                color: this.game.players[i].color,
                 cmdDam: [],
                 history: [],
                 other: {
@@ -195,12 +181,11 @@ export class CounterPage {
                 },
             };
         }
-        console.table(this.players);
+        console.table(this.game.players);
         this.toggleSettings();
     }
 
     quit() {
-        this.players = [];
         this.toggleSettings();
         this.router.navigate(['/tabs/life']);
     }

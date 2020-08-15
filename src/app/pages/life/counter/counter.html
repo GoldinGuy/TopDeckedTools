@@ -3,9 +3,9 @@
     <div class="grid-container">
         <ion-grid class="grid">
             <!-- 1 player -->
-            <ng-container *ngIf="players.length === 1">
+            <ng-container *ngIf="game.players.length === 1">
                 <div id="seat1">
-                    <ng-container *ngFor="let player of players">
+                    <ng-container *ngFor="let player of game.players">
                         <ion-col class="val-container" [style.background-color]="player.color">
                             <!-- <ion-item-sliding class="na">
                                 <ion-item-options side="start">
@@ -49,11 +49,11 @@
                     </ng-container>
                 </div>
             </ng-container>
-            <!-- 2 players -->
-            <ng-container *ngIf="players.length === 2">
+            <!-- 2 game.players -->
+            <ng-container *ngIf="game.players.length === 2">
                 <div id="seat2">
                     <div class="flex-land">
-                        <ng-container *ngFor="let player of players; let i = index;">
+                        <ng-container *ngFor="let player of game.players; let i = index;">
                             <ion-col
                                 class="val-container p{{i}}"
                                 [style.background-color]="player.color"
@@ -76,12 +76,12 @@
                     </div>
                 </div>
             </ng-container>
-            <!-- 3 players -->
-            <ng-container *ngIf="players.length === 3">
+            <!-- 3 game.players -->
+            <ng-container *ngIf="game.players.length === 3">
                 <div id="seat3">
                     <div class="flex-land">
                         <div class="flex-port orient">
-                            <ng-container *ngFor="let player of players; let i = index;">
+                            <ng-container *ngFor="let player of game.players; let i = index;">
                                 <ion-col
                                     class="val-container long-p{{i}} p{{i}}"
                                     [style.background-color]="player.color"
@@ -101,11 +101,11 @@
                     </div>
                 </div>
             </ng-container>
-            <!-- 4 players -->
-            <ng-container *ngIf="players.length === 4">
+            <!-- 4 game.players -->
+            <ng-container *ngIf="game.players.length === 4">
                 <div id="seat4">
                     <div class="orient">
-                        <ng-container *ngFor="let player of players; let i = index;">
+                        <ng-container *ngFor="let player of game.players; let i = index;">
                             <ion-col
                                 id="p{{i}}"
                                 class="val-container  p{{i}}"
@@ -125,11 +125,11 @@
                     </div>
                 </div>
             </ng-container>
-            <!-- 5 players -->
-            <ng-container *ngIf="players.length === 5">
+            <!-- 5 game.players -->
+            <ng-container *ngIf="game.players.length === 5">
                 <div id="seat5">
                     <div class="orient">
-                        <ng-container *ngFor="let player of players; let i = index;">
+                        <ng-container *ngFor="let player of game.players; let i = index;">
                             <ion-col
                                 id="p{{i}}"
                                 class="val-container long-p{{i}} p{{i}}"
@@ -149,11 +149,11 @@
                     </div>
                 </div>
             </ng-container>
-            <!-- 6 players -->
-            <ng-container *ngIf="players.length === 6">
+            <!-- 6 game.players -->
+            <ng-container *ngIf="game.players.length === 6">
                 <div id="seat6">
                     <div class="orient">
-                        <ng-container *ngFor="let player of players; let i = index;">
+                        <ng-container *ngFor="let player of game.players; let i = index;">
                             <ion-col
                                 id="p{{i}}"
                                 class="val-container p{{i}}"
@@ -179,7 +179,7 @@
                     name="settings"
                     class="settings-icon"
                     (click)="toggleSettings()"
-                    [ngClass]="{ 'seat1p': players.length === 1, 'seat3-5p': players.length === 3 || players.length === 5, 'seat2-4p': players.length === 2 || players.length === 4,  'seat6p': players.length === 6  }"
+                    [ngClass]="{ 'seat1p': game.players.length === 1, 'seat3-5p': game.players.length === 3 || game.players.length === 5, 'seat2-4p': game.players.length === 2 || game.players.length === 4,  'seat6p': game.players.length === 6  }"
                 ></ion-icon>
             </div>
             <!-- settings overlay -->
@@ -215,7 +215,7 @@
                                         ></ion-icon>
                                         <p class="option-text">COLORS</p>
                                     </ion-col>
-                                    <ion-col class="option tap" (click)="toggleHistory()">
+                                    <ion-col class="option tap" (click)="displayHistory = true">
                                         <ion-icon name="library" class="icon icon-tap"></ion-icon>
                                         <p class="option-text">HISTORY</p>
                                     </ion-col>
@@ -231,14 +231,14 @@
                             <ion-icon
                                 name="chevron-forward"
                                 class="top-right"
-                                (click)="toggleHistory()"
+                                (click)="displayHistory = false"
                             ></ion-icon>
                             <ion-grid class="hist-grid">
                                 <ion-row>
-                                    <ng-container *ngFor="let player of players">
+                                    <ng-container *ngFor="let player of game.players">
                                         <ion-col class="hist-col">
                                             <p class="hist" [style.color]="player.color">
-                                                {{ startingLife }}
+                                                {{ game.startingLife }}
                                             </p>
                                             <p
                                                 *ngFor="let hist of player.history"
@@ -257,14 +257,14 @@
                             <ion-icon
                                 name="chevron-forward"
                                 class="top-right"
-                                (click)="toggleHistory()"
+                                (click)="displayTimer = false"
                             ></ion-icon>
                             <ion-grid class="hist-grid">
                                 <ion-row>
-                                    <ng-container *ngFor="let player of players">
+                                    <ng-container *ngFor="let player of game.players">
                                         <ion-col class="hist-col">
                                             <p class="hist" [style.color]="player.color">
-                                                {{ startingLife }}
+                                                {{ game.startingLife }}
                                             </p>
                                             <p
                                                 *ngFor="let hist of player.history"

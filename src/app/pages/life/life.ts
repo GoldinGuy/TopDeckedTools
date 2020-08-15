@@ -4,6 +4,7 @@ import { ModalController } from '@ionic/angular';
 // import { CounterPage } from './counter/counter';
 // import { CounterPageModule } from './counter/counter.module';
 import { NavigationExtras, Router } from '@angular/router';
+import { Game } from './counter/counter';
 
 @Component({
     selector: 'page-life',
@@ -44,12 +45,17 @@ export class LifePage {
         // });
         // return await modal.present();
 
+        let game: Game = {
+            players: [],
+            startingLife: this.startingLife,
+            numPlayers: this.numPlayers,
+            timer: 3000,
+            pickFirstPlayer: false,
+        };
+
         let navigationExtras: NavigationExtras = {
             state: {
-                startingLife: this.startingLife,
-                numPlayers: this.numPlayers,
-                timer: 3000,
-                pickFirstPlayer: false,
+                game: game,
             },
         };
         this.router.navigate(['/lifeCounter'], navigationExtras);
