@@ -155,6 +155,9 @@ export class CounterPage {
     toggleSettings() {
         if (this.displaySettings) {
             this.displaySettings = false;
+            if (this.displayHistory) {
+                this.displayHistory = false;
+            }
         } else {
             this.displaySettings = true;
         }

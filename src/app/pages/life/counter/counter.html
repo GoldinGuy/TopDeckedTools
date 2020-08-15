@@ -183,7 +183,7 @@
                 ></ion-icon>
             </div>
             <!-- settings overlay -->
-            <ng-container *ngIf="displaySettings && !displayHistory">
+            <ng-container *ngIf="displaySettings">
                 <div id="overlay">
                     <div class="bg">
                         <ion-icon
@@ -191,73 +191,93 @@
                             class="top-left"
                             (click)="toggleSettings()"
                         ></ion-icon>
-                        <ion-grid>
-                            <ion-row>
-                                <ion-col class="option tap">
-                                    <ion-icon name="stopwatch" class="icon icon-tap"></ion-icon>
-                                    <p class="option-text">Timer</p>
-                                </ion-col>
-                                <ion-col class="option tap" (click)="reset()">
-                                    <ion-icon name="sync" class="icon icon-tap"></ion-icon>
-                                    <p class="option-text">RESET</p>
-                                </ion-col>
-                                <ion-col class="option tap" (click)="toggleTimer()">
-                                    <ion-icon name="timer" class="icon icon-tap"></ion-icon>
-                                    <p class="option-text">TIMER</p>
-                                </ion-col>
-                            </ion-row>
-                            <ion-row>
-                                <ion-col class="option tap">
-                                    <ion-icon name="color-palette" class="icon icon-tap"></ion-icon>
-                                    <p class="option-text">COLORS</p>
-                                </ion-col>
-                                <ion-col class="option tap" (click)="toggleHistory()">
-                                    <ion-icon name="library" class="icon icon-tap"></ion-icon>
-                                    <p class="option-text">HISTORY</p>
-                                </ion-col>
-                                <ion-col class="option tap" (click)="quit()">
-                                    <ion-icon name="log-out" class="icon icon-tap"></ion-icon>
-                                    <p class="option-text">QUIT</p>
-                                </ion-col>
-                            </ion-row>
-                        </ion-grid>
-                    </div>
-                </div>
-            </ng-container>
-            <!-- history overlay -->
-            <ng-container *ngIf="displayHistory">
-                <div id="overlay">
-                    <div class="bg">
-                        <ion-row>
-                            <ion-icon
-                                name="close"
-                                class="top-left"
-                                (click)="toggleSettings();toggleHistory()"
-                            ></ion-icon>
+                        <ng-container *ngIf="!displayHistory">
+                            <ion-grid>
+                                <ion-row>
+                                    <ion-col class="option tap">
+                                        <ion-icon name="stopwatch" class="icon icon-tap"></ion-icon>
+                                        <p class="option-text">Timer</p>
+                                    </ion-col>
+                                    <ion-col class="option tap" (click)="reset()">
+                                        <ion-icon name="sync" class="icon icon-tap"></ion-icon>
+                                        <p class="option-text">RESET</p>
+                                    </ion-col>
+                                    <ion-col class="option tap" (click)="toggleTimer()">
+                                        <ion-icon name="timer" class="icon icon-tap"></ion-icon>
+                                        <p class="option-text">TIMER</p>
+                                    </ion-col>
+                                </ion-row>
+                                <ion-row>
+                                    <ion-col class="option tap">
+                                        <ion-icon
+                                            name="color-palette"
+                                            class="icon icon-tap"
+                                        ></ion-icon>
+                                        <p class="option-text">COLORS</p>
+                                    </ion-col>
+                                    <ion-col class="option tap" (click)="toggleHistory()">
+                                        <ion-icon name="library" class="icon icon-tap"></ion-icon>
+                                        <p class="option-text">HISTORY</p>
+                                    </ion-col>
+                                    <ion-col class="option tap" (click)="quit()">
+                                        <ion-icon name="log-out" class="icon icon-tap"></ion-icon>
+                                        <p class="option-text">QUIT</p>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </ng-container>
+                        <!-- history overlay -->
+                        <ng-container *ngIf="displayHistory">
                             <ion-icon
                                 name="chevron-forward"
                                 class="top-right"
                                 (click)="toggleHistory()"
                             ></ion-icon>
-                        </ion-row>
-                        <ion-grid class="hist-grid">
-                            <ion-row>
-                                <ng-container *ngFor="let player of players">
-                                    <ion-col class="hist-col">
-                                        <p class="hist" [style.color]="player.color">
-                                            {{ startingLife }}
-                                        </p>
-                                        <p
-                                            *ngFor="let hist of player.history"
-                                            class="hist"
-                                            [style.color]="player.color"
-                                        >
-                                            {{ hist }}
-                                        </p>
-                                    </ion-col>
-                                </ng-container>
-                            </ion-row>
-                        </ion-grid>
+                            <ion-grid class="hist-grid">
+                                <ion-row>
+                                    <ng-container *ngFor="let player of players">
+                                        <ion-col class="hist-col">
+                                            <p class="hist" [style.color]="player.color">
+                                                {{ startingLife }}
+                                            </p>
+                                            <p
+                                                *ngFor="let hist of player.history"
+                                                class="hist"
+                                                [style.color]="player.color"
+                                            >
+                                                {{ hist }}
+                                            </p>
+                                        </ion-col>
+                                    </ng-container>
+                                </ion-row>
+                            </ion-grid>
+                        </ng-container>
+                        <!-- timer overlay -->
+                        <ng-container *ngIf="displayTimer">
+                            <ion-icon
+                                name="chevron-forward"
+                                class="top-right"
+                                (click)="toggleHistory()"
+                            ></ion-icon>
+                            <ion-grid class="hist-grid">
+                                <ion-row>
+                                    <ng-container *ngFor="let player of players">
+                                        <ion-col class="hist-col">
+                                            <p class="hist" [style.color]="player.color">
+                                                {{ startingLife }}
+                                            </p>
+                                            <p
+                                                *ngFor="let hist of player.history"
+                                                class="hist"
+                                                [style.color]="player.color"
+                                            >
+                                                {{ hist }}
+                                            </p>
+                                        </ion-col>
+                                    </ng-container>
+                                </ion-row>
+                            </ion-grid>
+                        </ng-container>
                     </div>
                 </div>
             </ng-container>
