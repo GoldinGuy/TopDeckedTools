@@ -1,8 +1,146 @@
 <!DOCTYPE html>
 <ion-content fullscreen class="bg-theme">
     <div class="grid-container">
-        <ion-grid class="grid">
-            <ion-row> </ion-row>
+        <ion-grid class="grid" [style.background]="player.color">
+            <ion-icon
+                class="item-icon"
+                name="close"
+                class="top-left"
+                (click)="dismiss()"
+            ></ion-icon>
+            <ion-row [style.background]="player.color">
+                <!-- Commander Damage -->
+                <ion-item class="detail" lines="none">
+                    <ion-grid>
+                        <ion-row class="just-cent">
+                            <ion-label class="cmdDam-lab">
+                                Commander Damage
+                            </ion-label>
+                        </ion-row>
+
+                        <ion-row class="just-cent">
+                            <ion-note class="num cmd-num" [style.background]="player.color"
+                                >{{ player.cmdDam[0] }}</ion-note
+                            >
+                            <ion-note
+                                class="num cmd-num"
+                                [style.background]="player.color"
+                                [hidden]="player.cmdDam.length < 2"
+                                >{{ player.cmdDam[1] }}</ion-note
+                            >
+                            <ion-note
+                                class="num cmd-num"
+                                [style.background]="player.color"
+                                [hidden]="player.cmdDam.length < 3"
+                                >{{ player.cmdDam[2] }}</ion-note
+                            >
+                            <ion-note
+                                class="num cmd-num"
+                                [style.background]="player.color"
+                                [hidden]="player.cmdDam.length < 4"
+                                >{{ player.cmdDam[3] }}</ion-note
+                            >
+                            <ion-note
+                                class="num cmd-num"
+                                [style.background]="player.color"
+                                [hidden]="player.cmdDam.length < 5"
+                                >{{ player.cmdDam[4] }}</ion-note
+                            >
+                            <ion-note
+                                class="num cmd-num"
+                                [style.background]="player.color"
+                                [hidden]="player.cmdDam.length < 6"
+                                >{{ player.cmdDam[5] }}</ion-note
+                            >
+                        </ion-row>
+                    </ion-grid>
+                </ion-item>
+                <!-- storm -->
+                <ion-item class="detail" lines="none">
+                    <ion-note slot="start" class="num left-num" [style.background]="player.color"
+                        >{{ player.other.storm }}</ion-note
+                    >
+                    <ion-label>
+                        Storm
+                    </ion-label>
+                    <ion-button class="but" (click)="increment(player, 'storm')">
+                        +
+                    </ion-button>
+                    <ion-button class="but" (click)="decrement(player, 'storm')">
+                        −
+                    </ion-button>
+                </ion-item>
+                <!-- infect -->
+                <ion-item class="detail" lines="none">
+                    <ion-note slot="start" class="num left-num" [style.background]="player.color"
+                        >{{ player.other.infect }}</ion-note
+                    >
+                    <ion-label>
+                        Infect
+                    </ion-label>
+                    <ion-button class="but" (click)="increment(player, 'infect')">
+                        +
+                    </ion-button>
+                    <ion-button class="but" (click)="decrement(player, 'infect')">
+                        −
+                    </ion-button>
+                </ion-item>
+                <!-- energy -->
+                <ion-item class="detail" lines="none">
+                    <ion-note slot="start" class="num left-num" [style.background]="player.color"
+                        >{{ player.other.energy }}</ion-note
+                    >
+                    <ion-label>
+                        Energy
+                    </ion-label>
+                    <ion-button class="but" (click)="increment(player, 'energy')">
+                        +
+                    </ion-button>
+                    <ion-button class="but" (click)="decrement(player, 'energy')">
+                        −
+                    </ion-button>
+                </ion-item>
+                <!-- monarch -->
+                <ion-item class="detail" lines="none">
+                    <ion-icon class="item-icon" name="trophy" slot="start"></ion-icon>
+                    <ion-label>
+                        Monarch
+                    </ion-label>
+                    <ion-toggle
+                        slot="end"
+                        checked="{{player.other.monarch}}"
+                        (ionChange)="toggleBool(player, 'monarch')"
+                    ></ion-toggle>
+                </ion-item>
+                <!-- city blessing -->
+                <ion-item class="detail" lines="none">
+                    <ion-icon class="item-icon" name="podium" slot="start"></ion-icon>
+                    <ion-label>
+                        City's Blessing
+                    </ion-label>
+                    <ion-toggle
+                        slot="end"
+                        checked="{{player.other.cityBless}}"
+                        (ionChange)="toggleBool(player, 'cityBless')"
+                    ></ion-toggle>
+                </ion-item>
+                <!-- color -->
+                <ion-item class="detail" lines="none">
+                    <ion-icon class="item-icon" name="color-palette" slot="start"></ion-icon>
+                    <ion-label>
+                        Change Color
+                    </ion-label>
+                    <ion-select>
+                        <ion-select-option value="">No Game Console</ion-select-option>
+                        <ion-select-option value="nes">NES</ion-select-option>
+                        <ion-select-option value="n64" selected>Nintendo64</ion-select-option>
+                        <ion-select-option value="ps">PlayStation</ion-select-option>
+                        <ion-select-option value="genesis">Sega Genesis</ion-select-option>
+                        <ion-select-option value="saturn">Sega Saturn</ion-select-option>
+                        <ion-select-option value="snes">SNES</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-row>
         </ion-grid>
     </div>
 </ion-content>

@@ -176,7 +176,7 @@
             <!-- settings icon -->
             <div id="settings">
                 <ion-icon
-                    name="settings"
+                    name="cube"
                     class="settings-icon"
                     (click)="toggleSettings()"
                     [ngClass]="{ 'seat1p': game.players.length === 1, 'seat3-5p': game.players.length === 3 || game.players.length === 5, 'seat2-4p': game.players.length === 2 || game.players.length === 4,  'seat6p': game.players.length === 6  }"
@@ -194,9 +194,12 @@
                         <ng-container *ngIf="!displayHistory">
                             <ion-grid>
                                 <ion-row>
-                                    <ion-col class="option tap">
+                                    <ion-col
+                                        class="option tap"
+                                        (click)="detailsModal(game.players[0])"
+                                    >
                                         <ion-icon name="stopwatch" class="icon icon-tap"></ion-icon>
-                                        <p class="option-text">Timer</p>
+                                        <p class="option-text">Details</p>
                                     </ion-col>
                                     <ion-col class="option tap" (click)="reset()">
                                         <ion-icon name="sync" class="icon icon-tap"></ion-icon>

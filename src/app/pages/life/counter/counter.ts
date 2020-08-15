@@ -7,6 +7,7 @@ export interface PlayerStats {
     other: {
         infect: number;
         energy: number;
+        storm: number;
         monarch: boolean;
         cityBless: boolean;
     };
@@ -24,6 +25,7 @@ import { Component } from '@angular/core';
 import { isNullOrUndefined } from 'util';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import { DetailsPage } from './details/details';
 
 @Component({
     selector: 'page-life',
@@ -51,16 +53,21 @@ export class CounterPage {
     }
 
     ionViewWillEnter() {
+        let cmdDam = [];
+        for (let i = 0; i < this.game.numPlayers; i++) {
+            cmdDam.push(0);
+        }
         for (let i = 0; i < this.game.numPlayers; i++) {
             this.game.players.push({
                 id: 'Player' + (i + 1),
                 life: this.game.startingLife,
                 color: this.getColor(),
-                cmdDam: [],
+                cmdDam: cmdDam,
                 history: [],
                 other: {
                     infect: 0,
                     energy: 0,
+                    storm: 0,
                     monarch: false,
                     cityBless: false,
                 },
@@ -165,17 +172,33 @@ export class CounterPage {
         }
     }
 
+    async detailsModal(player: PlayerStats) {
+        const modal = await this.modalController.create({
+            component: DetailsPage,
+            cssClass: 'modal-fullscreen',
+            componentProps: {
+                player: player,
+            },
+        });
+        return await modal.present();
+    }
+
     reset() {
+        let cmdDam = [];
+        for (let i = 0; i < this.game.numPlayers; i++) {
+            cmdDam.push(0);
+        }
         for (let i = 0; i < this.game.players.length; i++) {
             this.game.players[i] = {
                 id: this.game.players[i].id,
                 life: this.game.startingLife,
                 color: this.game.players[i].color,
-                cmdDam: [],
+                cmdDam: cmdDam,
                 history: [],
                 other: {
                     infect: 0,
                     energy: 0,
+                    storm: 0,
                     monarch: false,
                     cityBless: false,
                 },
