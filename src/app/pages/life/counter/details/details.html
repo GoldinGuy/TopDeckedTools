@@ -20,7 +20,10 @@
                         </ion-row>
 
                         <ion-row class="just-cent">
-                            <ion-button class="but" (click)="increment(player, 'storm')">
+                            <ion-button
+                                class="but"
+                                (click)="lifeCounter.incrementCount(player, 'storm')"
+                            >
                                 +
                             </ion-button>
                             <ion-note
@@ -61,7 +64,10 @@
                                 }}</ion-note
                             >
 
-                            <ion-button class="but" (click)="decrement(player, 'storm')">
+                            <ion-button
+                                class="but"
+                                (click)="lifeCounter.decrementCount(player, 'storm')"
+                            >
                                 −
                             </ion-button>
                         </ion-row>
@@ -75,10 +81,10 @@
                     <ion-label>
                         Storm
                     </ion-label>
-                    <ion-button class="but" (click)="increment(player, 'storm')">
+                    <ion-button class="but" (click)="lifeCounter.incrementCount(player, 'storm')">
                         +
                     </ion-button>
-                    <ion-button class="but" (click)="decrement(player, 'storm')">
+                    <ion-button class="but" (click)="lifeCounter.decrementCount(player, 'storm')">
                         −
                     </ion-button>
                 </ion-item>
@@ -90,10 +96,10 @@
                     <ion-label>
                         Infect
                     </ion-label>
-                    <ion-button class="but" (click)="increment(player, 'infect')">
+                    <ion-button class="but" (click)="lifeCounter.incrementCount(player, 'infect')">
                         +
                     </ion-button>
-                    <ion-button class="but" (click)="decrement(player, 'infect')">
+                    <ion-button class="but" (click)="lifeCounter.decrementCount(player, 'infect')">
                         −
                     </ion-button>
                 </ion-item>
@@ -105,10 +111,10 @@
                     <ion-label>
                         Energy
                     </ion-label>
-                    <ion-button class="but" (click)="increment(player, 'energy')">
+                    <ion-button class="but" (click)="lifeCounter.incrementCount(player, 'energy')">
                         +
                     </ion-button>
-                    <ion-button class="but" (click)="decrement(player, 'energy')">
+                    <ion-button class="but" (click)="lifeCounter.decrementCount(player, 'energy')">
                         −
                     </ion-button>
                 </ion-item>
@@ -122,7 +128,7 @@
                     <ion-toggle
                         slot="end"
                         checked="{{player.other.monarch}}"
-                        (ionChange)="toggleBool(player, 'monarch')"
+                        (ionChange)="lifeCounter.toggleBoolExtras(player, 'monarch')"
                     ></ion-toggle>
                 </ion-item>
                 <!-- city blessing -->
@@ -134,7 +140,7 @@
                     <ion-toggle
                         slot="end"
                         checked="{{player.other.cityBless}}"
-                        (ionChange)="toggleBool(player, 'cityBless')"
+                        (ionChange)="lifeCounter.toggleBoolExtras(player, 'cityBless')"
                     ></ion-toggle>
                 </ion-item>
                 <!-- color -->
@@ -146,8 +152,8 @@
                     <ion-select
                         class="color-picker"
                         placeholder="{{player.color}}"
-                        value="{{getColor(player.color)}}"
-                        (ionChange)="changeColor($event.detail.value)"
+                        value="{{lifeCounter.getColorFromHex(player.color)}}"
+                        (ionChange)="lifeCounter.changeColor($event.detail.value)"
                     >
                         <ion-select-option value="red">Red</ion-select-option>
                         <ion-select-option value="orange">Orange</ion-select-option>

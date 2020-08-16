@@ -1,32 +1,9 @@
-export interface PlayerStats {
-    id: string;
-    life: number;
-    color: string;
-    history: Array<string>;
-    opps: Array<PlayerStats>;
-    other: {
-        cmdDam: Array<number>;
-        infect: number;
-        energy: number;
-        storm: number;
-        monarch: boolean;
-        cityBless: boolean;
-    };
-}
-
-export interface Game {
-    players: Array<PlayerStats>;
-    startingLife: number;
-    numPlayers: number;
-    timer: number;
-    pickFirstPlayer: boolean;
-}
-
 import { Component } from '@angular/core';
 import { isNullOrUndefined } from 'util';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { DetailsPage } from './details/details';
+import { Game, PlayerStats, LifeCounterService } from 'src/app/services/life.service';
 
 @Component({
     selector: 'page-life',
@@ -41,6 +18,7 @@ export class CounterPage {
     displayModal: boolean;
 
     constructor(
+        public lifeCounter: LifeCounterService,
         private router: Router,
         public modalController: ModalController,
         private route: ActivatedRoute
@@ -58,111 +36,7 @@ export class CounterPage {
     }
 
     ionViewWillEnter() {
-        let cmdDam = [];
-        for (let i = 0; i < this.game.numPlayers; i++) {
-            cmdDam.push(0);
-        }
-        for (let i = 0; i < this.game.numPlayers; i++) {
-            this.game.players.push({
-                id: 'Player' + (i + 1),
-                life: this.game.startingLife,
-                color: this.setRandomColor(),
-                history: [],
-                opps: [],
-                other: {
-                    cmdDam: cmdDam,
-                    infect: 0,
-                    energy: 0,
-                    storm: 0,
-                    monarch: false,
-                    cityBless: false,
-                },
-            });
-        }
-        for (let i = 0; i < this.game.numPlayers; i++) {
-            for (let j = 0; j < this.game.numPlayers; j++) {
-                if (j != i) {
-                    this.game.players[i].opps.push(this.game.players[j]);
-                }
-            }
-        }
-    }
-
-    // ionViewDidEnter() {
-    //     if (this.numPlayers === undefined) {
-    //         console.log('Back');
-    //         this.router.navigate(['/tabs/life']);
-    //     }
-    // }
-
-    // ionViewDidLeave() {
-    //     this.numPlayers = undefined;
-    //     this.players = undefined;
-    // }
-
-    setHistory(player: PlayerStats) {
-        var shift: number;
-        shift = player.life - parseInt(player.history[player.history.length - 1]);
-        // if (shift > 0) {
-        //     hist = '+' + shift;
-        // } else {
-        //     hist = shift.toString();
-        // }
-        // player.history.push(hist);
-        player.history.push(player.life.toString());
-    }
-
-    setRandomColor(): string {
-        let colors = [
-            // red
-            '#dc2054',
-            // orange
-            '#f0583b',
-            // tangerine
-            '#f29a2c',
-            // yellow
-            '#e6c72f',
-            // lime
-            '#a4d53f',
-            // green
-            '#6fd872',
-            // aqua
-            '#56c9ab',
-            // sky
-            '#51a8e7',
-            // blue
-            '#597fdd',
-            // purple
-            '#8260ed',
-            // magenta
-            '#aa4ee0',
-            // pink
-            '#dc2054',
-            // hot pink
-            '#e0379d',
-            // light pink
-            '#f38aae',
-        ];
-        var color: string;
-        do {
-            color = colors[Math.floor(Math.random() * colors.length)];
-            for (let i = 0; i < this.game.players.length; i++) {
-                if (this.game.players[i].color === color) {
-                    color = null;
-                }
-            }
-        } while (isNullOrUndefined(color));
-        return color;
-    }
-
-    incrementLife(player: PlayerStats) {
-        player.life += 1;
-        this.setHistory(player);
-    }
-
-    decrementLife(player: PlayerStats) {
-        player.life -= 1;
-        this.setHistory(player);
+        this.game = this.lifeCounter.initializePlayers(this.game);
     }
 
     toggleSettings() {
@@ -202,28 +76,7 @@ export class CounterPage {
     }
 
     reset() {
-        let cmdDam = [];
-        for (let i = 0; i < this.game.numPlayers; i++) {
-            cmdDam.push(0);
-        }
-        for (let i = 0; i < this.game.numPlayers; i++) {
-            this.game.players[i] = {
-                id: this.game.players[i].id,
-                life: this.game.startingLife,
-                color: this.game.players[i].color,
-                history: [],
-                opps: this.game.players[i].opps,
-                other: {
-                    cmdDam: cmdDam,
-                    infect: 0,
-                    energy: 0,
-                    storm: 0,
-                    monarch: false,
-                    cityBless: false,
-                },
-            };
-        }
-        console.table(this.game.players);
+        this.game = this.lifeCounter.reset(this.game);
         this.toggleSettings();
     }
 

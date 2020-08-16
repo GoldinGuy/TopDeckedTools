@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { NavigationExtras, Router } from '@angular/router';
-import { Game } from './counter/counter';
+import { Game } from 'src/app/services/life.service';
 
 @Component({
     selector: 'page-life',
