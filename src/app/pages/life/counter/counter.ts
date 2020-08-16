@@ -27,7 +27,6 @@ import { isNullOrUndefined } from 'util';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { DetailsPage } from './details/details';
-import { LongPressDirective } from '../../../../../plugins/longPressDirective2';
 
 @Component({
     selector: 'page-life',
