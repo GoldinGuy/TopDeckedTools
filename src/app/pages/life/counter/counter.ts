@@ -2,9 +2,10 @@ export interface PlayerStats {
     id: string;
     life: number;
     color: string;
-    cmdDam: Array<number>;
     history: Array<string>;
+    opps: Array<PlayerStats>;
     other: {
+        cmdDam: Array<number>;
         infect: number;
         energy: number;
         storm: number;
@@ -61,10 +62,11 @@ export class CounterPage {
             this.game.players.push({
                 id: 'Player' + (i + 1),
                 life: this.game.startingLife,
-                color: this.getColor(),
-                cmdDam: cmdDam,
+                color: this.setRandomColor(),
                 history: [],
+                opps: [],
                 other: {
+                    cmdDam: cmdDam,
                     infect: 0,
                     energy: 0,
                     storm: 0,
@@ -73,7 +75,13 @@ export class CounterPage {
                 },
             });
         }
-        console.table(this.game.players);
+        for (let i = 0; i < this.game.numPlayers; i++) {
+            for (let j = 0; j < this.game.numPlayers; j++) {
+                if (j != i) {
+                    this.game.players[i].opps.push(this.game.players[j]);
+                }
+            }
+        }
     }
 
     // ionViewDidEnter() {
@@ -100,7 +108,7 @@ export class CounterPage {
         player.history.push(player.life.toString());
     }
 
-    getColor(): string {
+    setRandomColor(): string {
         let colors = [
             // red
             '#dc2054',
@@ -188,14 +196,15 @@ export class CounterPage {
         for (let i = 0; i < this.game.numPlayers; i++) {
             cmdDam.push(0);
         }
-        for (let i = 0; i < this.game.players.length; i++) {
+        for (let i = 0; i < this.game.numPlayers; i++) {
             this.game.players[i] = {
                 id: this.game.players[i].id,
                 life: this.game.startingLife,
                 color: this.game.players[i].color,
-                cmdDam: cmdDam,
                 history: [],
+                opps: this.game.players[i].opps,
                 other: {
+                    cmdDam: cmdDam,
                     infect: 0,
                     energy: 0,
                     storm: 0,

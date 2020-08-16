@@ -3,7 +3,7 @@
     <div class="grid-container">
         <ion-grid class="grid">
             <!-- 1 player -->
-            <ng-container *ngIf="game.players.length === 1">
+            <ng-container *ngIf="game.numPlayers === 1">
                 <div id="seat1">
                     <ng-container *ngFor="let player of game.players">
                         <ion-col class="val-container" [style.background-color]="player.color">
@@ -50,7 +50,7 @@
                 </div>
             </ng-container>
             <!-- 2 game.players -->
-            <ng-container *ngIf="game.players.length === 2">
+            <ng-container *ngIf="game.numPlayers === 2">
                 <div id="seat2">
                     <div class="flex-land">
                         <ng-container *ngFor="let player of game.players; let i = index;">
@@ -77,7 +77,7 @@
                 </div>
             </ng-container>
             <!-- 3 game.players -->
-            <ng-container *ngIf="game.players.length === 3">
+            <ng-container *ngIf="game.numPlayers === 3">
                 <div id="seat3">
                     <div class="flex-land">
                         <div class="flex-port orient">
@@ -102,7 +102,7 @@
                 </div>
             </ng-container>
             <!-- 4 game.players -->
-            <ng-container *ngIf="game.players.length === 4">
+            <ng-container *ngIf="game.numPlayers === 4">
                 <div id="seat4">
                     <div class="orient">
                         <ng-container *ngFor="let player of game.players; let i = index;">
@@ -126,7 +126,7 @@
                 </div>
             </ng-container>
             <!-- 5 game.players -->
-            <ng-container *ngIf="game.players.length === 5">
+            <ng-container *ngIf="game.numPlayers === 5">
                 <div id="seat5">
                     <div class="orient">
                         <ng-container *ngFor="let player of game.players; let i = index;">
@@ -150,7 +150,7 @@
                 </div>
             </ng-container>
             <!-- 6 game.players -->
-            <ng-container *ngIf="game.players.length === 6">
+            <ng-container *ngIf="game.numPlayers === 6">
                 <div id="seat6">
                     <div class="orient">
                         <ng-container *ngFor="let player of game.players; let i = index;">
@@ -176,10 +176,10 @@
             <!-- settings icon -->
             <div id="settings">
                 <ion-icon
-                    name="cube"
+                    name="settings"
                     class="settings-icon"
                     (click)="toggleSettings()"
-                    [ngClass]="{ 'seat1p': game.players.length === 1, 'seat3-5p': game.players.length === 3 || game.players.length === 5, 'seat2-4p': game.players.length === 2 || game.players.length === 4,  'seat6p': game.players.length === 6  }"
+                    [ngClass]="{ 'seat1p': game.numPlayers === 1, 'seat3-5p': game.numPlayers === 3 || game.numPlayers === 5, 'seat2-4p': game.numPlayers === 2 || game.numPlayers === 4,  'seat6p': game.numPlayers === 6  }"
                 ></ion-icon>
             </div>
             <!-- settings overlay -->
@@ -194,13 +194,13 @@
                         <ng-container *ngIf="!displayHistory">
                             <ion-grid>
                                 <ion-row>
-                                    <ion-col
+                                    <!-- <ion-col
                                         class="option tap"
                                         (click)="detailsModal(game.players[0])"
                                     >
                                         <ion-icon name="stopwatch" class="icon icon-tap"></ion-icon>
                                         <p class="option-text">Details</p>
-                                    </ion-col>
+                                    </ion-col> -->
                                     <ion-col class="option tap" (click)="reset()">
                                         <ion-icon name="sync" class="icon icon-tap"></ion-icon>
                                         <p class="option-text">RESET</p>
@@ -211,13 +211,6 @@
                                     </ion-col>
                                 </ion-row>
                                 <ion-row>
-                                    <ion-col class="option tap">
-                                        <ion-icon
-                                            name="color-palette"
-                                            class="icon icon-tap"
-                                        ></ion-icon>
-                                        <p class="option-text">COLORS</p>
-                                    </ion-col>
                                     <ion-col class="option tap" (click)="displayHistory = true">
                                         <ion-icon name="library" class="icon icon-tap"></ion-icon>
                                         <p class="option-text">HISTORY</p>

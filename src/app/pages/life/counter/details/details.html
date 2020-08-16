@@ -10,7 +10,8 @@
             ></ion-icon>
             <ion-row [style.background]="player.color">
                 <!-- Commander Damage -->
-                <ion-item class="detail" lines="none">
+
+                <ion-item class="detail" lines="none" [hidden]="player.opps.length < 1">
                     <ion-grid>
                         <ion-row class="just-cent">
                             <ion-label class="cmdDam-lab">
@@ -19,39 +20,50 @@
                         </ion-row>
 
                         <ion-row class="just-cent">
-                            <ion-note class="num cmd-num" [style.background]="player.color"
-                                >{{ player.cmdDam[0] }}</ion-note
+                            <ion-button class="but" (click)="increment(player, 'storm')">
+                                +
+                            </ion-button>
+                            <ion-note
+                                class="num cmd-num"
+                                [hidden]="player.opps.length < 1"
+                                [style.background]="player.opps.length > 0 ? player.opps[0].color: '#fff'"
+                                >{{ player.opps.length > 0 ? player.other.cmdDam[0] :
+                                '0'}}</ion-note
+                            >
+
+                            <ion-note
+                                class="num cmd-num"
+                                [hidden]="player.opps.length < 2"
+                                [style.background]="player.opps.length > 1 ? player.opps[1].color : '#fff'"
+                                >{{ player.opps.length > 1 ? player.other.cmdDam[1] :
+                                '0'}}</ion-note
+                            >
+
+                            <ion-note
+                                class="num cmd-num"
+                                [hidden]="player.opps.length < 3"
+                                [style.background]="player.opps.length > 2 ?  player.opps[2].color : '#fff'"
+                                >{{ player.opps.length > 2 ? player.other.cmdDam[2] : '0'
+                                }}</ion-note
+                            >
+
+                            <ion-note
+                                class="num cmd-num"
+                                [hidden]="player.opps.length < 4"
+                                [style.background]="player.opps.length > 3 ? player.opps[3].color : '#fff'"
+                                >{{player.opps.length > 3 ?player.other.cmdDam[3] : '0' }}</ion-note
                             >
                             <ion-note
                                 class="num cmd-num"
-                                [style.background]="player.color"
-                                [hidden]="player.cmdDam.length < 2"
-                                >{{ player.cmdDam[1] }}</ion-note
+                                [hidden]="player.opps.length < 5"
+                                [style.background]="player.opps.length > 4 ?player.opps[4].color : '#fff'"
+                                >{{ player.opps.length > 4 ?player.other.cmdDam[4] : '0'
+                                }}</ion-note
                             >
-                            <ion-note
-                                class="num cmd-num"
-                                [style.background]="player.color"
-                                [hidden]="player.cmdDam.length < 3"
-                                >{{ player.cmdDam[2] }}</ion-note
-                            >
-                            <ion-note
-                                class="num cmd-num"
-                                [style.background]="player.color"
-                                [hidden]="player.cmdDam.length < 4"
-                                >{{ player.cmdDam[3] }}</ion-note
-                            >
-                            <ion-note
-                                class="num cmd-num"
-                                [style.background]="player.color"
-                                [hidden]="player.cmdDam.length < 5"
-                                >{{ player.cmdDam[4] }}</ion-note
-                            >
-                            <ion-note
-                                class="num cmd-num"
-                                [style.background]="player.color"
-                                [hidden]="player.cmdDam.length < 6"
-                                >{{ player.cmdDam[5] }}</ion-note
-                            >
+
+                            <ion-button class="but" (click)="decrement(player, 'storm')">
+                                −
+                            </ion-button>
                         </ion-row>
                     </ion-grid>
                 </ion-item>
@@ -100,6 +112,7 @@
                         −
                     </ion-button>
                 </ion-item>
+
                 <!-- monarch -->
                 <ion-item class="detail" lines="none">
                     <ion-icon class="item-icon" name="trophy" slot="start"></ion-icon>
@@ -130,14 +143,26 @@
                     <ion-label>
                         Change Color
                     </ion-label>
-                    <ion-select>
-                        <ion-select-option value="">No Game Console</ion-select-option>
-                        <ion-select-option value="nes">NES</ion-select-option>
-                        <ion-select-option value="n64" selected>Nintendo64</ion-select-option>
-                        <ion-select-option value="ps">PlayStation</ion-select-option>
-                        <ion-select-option value="genesis">Sega Genesis</ion-select-option>
-                        <ion-select-option value="saturn">Sega Saturn</ion-select-option>
-                        <ion-select-option value="snes">SNES</ion-select-option>
+                    <ion-select
+                        class="color-picker"
+                        placeholder="{{player.color}}"
+                        value="{{getColor(player.color)}}"
+                        (ionChange)="changeColor($event.detail.value)"
+                    >
+                        <ion-select-option value="red">Red</ion-select-option>
+                        <ion-select-option value="orange">Orange</ion-select-option>
+                        <ion-select-option value="tangerine">Tangerine</ion-select-option>
+                        <ion-select-option value="yellow">Yellow</ion-select-option>
+                        <ion-select-option value="lime">Lime</ion-select-option>
+                        <ion-select-option value="green">Green</ion-select-option>
+                        <ion-select-option value="aqua">Aqua</ion-select-option>
+                        <ion-select-option value="sky">Sky</ion-select-option>
+                        <ion-select-option value="blue">Blue</ion-select-option>
+                        <ion-select-option value="purple">Purple</ion-select-option>
+                        <ion-select-option value="magenta">Magenta</ion-select-option>
+                        <ion-select-option value="pink">Pink</ion-select-option>
+                        <ion-select-option value="hotPink">Hot Pink</ion-select-option>
+                        <ion-select-option value="lightPink">Light Pink</ion-select-option>
                     </ion-select>
                 </ion-item>
             </ion-row>
