@@ -39,6 +39,7 @@ export class CounterPage {
     displaySettings: boolean;
     displayHistory: boolean;
     displayTimer: boolean;
+    displayModal: boolean;
 
     constructor(
         private router: Router,
@@ -52,6 +53,7 @@ export class CounterPage {
         });
         this.displaySettings = false;
         this.displayHistory = false;
+        this.displayModal = false;
     }
 
     ionViewWillEnter() {
@@ -182,14 +184,20 @@ export class CounterPage {
     }
 
     async detailsModal(player: PlayerStats) {
-        const modal = await this.modalController.create({
-            component: DetailsPage,
-            cssClass: 'modal-fullscreen',
-            componentProps: {
-                player: player,
-            },
-        });
-        return await modal.present();
+        if (!this.displayModal) {
+            this.displayModal = true;
+            const modal = await this.modalController.create({
+                component: DetailsPage,
+                cssClass: 'modal-fullscreen',
+                componentProps: {
+                    player: player,
+                },
+            });
+            modal.onDidDismiss().then(() => {
+                this.displayModal = false;
+            });
+            return await modal.present();
+        }
     }
 
     reset() {

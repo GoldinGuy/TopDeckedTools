@@ -58,13 +58,7 @@
                                 class="val-container p{{i}}"
                                 [style.background-color]="player.color"
                             >
-                                <p
-                                    class="val rotate-player{{i}}"
-                                    ion-long-press
-                                    [interval]="500"
-                                    (pressed)="decrementLife(player)"
-                                    (longPressed)="detailsModal(player)"
-                                >
+                                <p class="val rotate-player{{i}}">
                                     {{ player.life }}
                                 </p>
                                 <!-- <ion-icon
@@ -74,10 +68,16 @@
                                 <div
                                     class="counter p{{i}}-add-life tap"
                                     (click)="incrementLife(player)"
+                                    ion-long-press
+                                    [interval]="600"
+                                    (longPressed)="detailsModal(player)"
                                 ></div>
                                 <div
                                     class="counter p{{i}}-rem-life tap"
                                     (click)="decrementLife(player)"
+                                    ion-long-press
+                                    [interval]="600"
+                                    (longPressed)="detailsModal(player)"
                                 ></div>
                             </ion-col>
                         </ng-container>
