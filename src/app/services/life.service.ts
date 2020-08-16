@@ -40,7 +40,7 @@ export interface ILifeCounterService {
 
     // methods that deal with colors
     setRandomColor(game: Game): string;
-    changeColor(player: PlayerStats, color: string): void;
+    changeColor(player: PlayerStats, color: string): string;
     getColorFromHex(color: string): string;
 }
 
@@ -205,7 +205,7 @@ export class LifeCounterService implements ILifeCounterService {
         return color;
     }
 
-    changeColor(player: PlayerStats, color: string) {
+    changeColor(player: PlayerStats, color: string): string {
         if (color === 'red') {
             player.color = '#dc2054';
         } else if (color === 'orange') {
@@ -235,6 +235,7 @@ export class LifeCounterService implements ILifeCounterService {
         } else if (color === 'lightPink') {
             player.color = '#f38aae';
         }
+        return player.color;
     }
 
     getColorFromHex(color: string): string {

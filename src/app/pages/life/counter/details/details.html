@@ -153,7 +153,7 @@
                         class="color-picker"
                         placeholder="{{player.color}}"
                         value="{{lifeCounter.getColorFromHex(player.color)}}"
-                        (ionChange)="lifeCounter.changeColor($event.detail.value)"
+                        (ionChange)="player.color = lifeCounter.changeColor(player, $event.detail.value)"
                     >
                         <ion-select-option value="red">Red</ion-select-option>
                         <ion-select-option value="orange">Orange</ion-select-option>
