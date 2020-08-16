@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<ion-content fullscreen class="bg-theme">
+<ion-content fullscreen [style.--background]="player.color">
     <div class="grid-container">
-        <ion-grid class="grid" [style.background]="player.color">
+        <ion-grid class="grid">
             <ion-icon
                 class="item-icon"
                 name="close"
                 class="top-left"
                 (click)="dismiss()"
             ></ion-icon>
-            <ion-row [style.background]="player.color">
+            <ion-row class="bg">
                 <!-- Commander Damage -->
                 <ion-item class="detail" lines="none" [hidden]="player.opps.length < 1">
                     <ion-grid>

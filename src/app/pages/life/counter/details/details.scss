@@ -1,8 +1,4 @@
 // bg and layout
-.bg-theme {
-    --background: #544a63 !important;
-}
-
 .grid-container {
     display: flex;
     justify-content: center;
@@ -15,15 +11,35 @@
         display: flex;
         align-items: center;
         align-content: center;
+        // @media (orientation: landscape) {
+        //     position: fixed;
+        // }
+    }
+}
+
+@media (orientation: landscape) {
+    .bg {
+        height: 100vh;
+        justify-content: center;
+        padding-top: 12vh;
     }
 }
 
 .detail {
     border-radius: 9px;
     color: #fff;
-    width: 95vw;
     margin: 10px;
     --background: rgba(84, 74, 99, 0.3);
+    width: 95vw;
+
+    // @media (orientation: portrait) {
+    // width: 95vw;
+
+    // }
+    // @media (orientation: landscape) {
+    // width: 51vw;
+
+    // }
 
     .num {
         font-size: 25px;
