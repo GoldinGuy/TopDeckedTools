@@ -48,7 +48,7 @@ export interface ILifeCounterService {
 export class LifeCounterService implements ILifeCounterService {
     initializePlayers(game: Game): Game {
         let cmdDam = [];
-        for (let i = 0; i < game.numPlayers; i++) {
+        for (let i = 0; i < game.numPlayers - 1; i++) {
             cmdDam.push(0);
         }
         for (let i = 0; i < game.numPlayers; i++) {
@@ -80,7 +80,7 @@ export class LifeCounterService implements ILifeCounterService {
 
     reset(game: Game): Game {
         let cmdDam = [];
-        for (let i = 0; i < game.numPlayers; i++) {
+        for (let i = 0; i < game.numPlayers - 1; i++) {
             cmdDam.push(0);
         }
         for (let i = 0; i < game.numPlayers; i++) {
@@ -114,17 +114,19 @@ export class LifeCounterService implements ILifeCounterService {
         this.setHistory(player);
     }
 
-    incrementCount(player: PlayerStats, type: string) {
+    incrementCount(player: PlayerStats, type: string, activeCmd?: number) {
         if (type === 'infect') {
             player.other.infect += 1;
         } else if (type === 'storm') {
             player.other.storm += 1;
         } else if (type === 'energy') {
             player.other.energy += 1;
+        } else if (type === 'cmdDam') {
+            player.other.cmdDam[activeCmd] += 1;
         }
     }
 
-    decrementCount(player: PlayerStats, type: string) {
+    decrementCount(player: PlayerStats, type: string, activeCmd?: number) {
         if (type === 'infect') {
             if (player.other.infect > 0) {
                 player.other.infect -= 1;
@@ -137,6 +139,8 @@ export class LifeCounterService implements ILifeCounterService {
             if (player.other.energy > 0) {
                 player.other.energy -= 1;
             }
+        } else if (type === 'cmdDam') {
+            player.other.cmdDam[activeCmd] -= 1;
         }
     }
 
@@ -159,6 +163,7 @@ export class LifeCounterService implements ILifeCounterService {
     setHistory(player: PlayerStats) {
         let shift: number;
         shift = player.life - parseInt(player.history[player.history.length - 1]);
+        // console.log(shift);
         player.history.push(player.life.toString());
     }
 
@@ -182,13 +187,13 @@ export class LifeCounterService implements ILifeCounterService {
             '#51a8e7',
             // blue
             '#597fdd',
-            // purple
+            // indigo
             '#8260ed',
-            // magenta
+            // purple
             '#aa4ee0',
             // pink
             '#dc2054',
-            // hot pink
+            // magenta
             '#e0379d',
             // light pink
             '#f38aae',
@@ -224,13 +229,13 @@ export class LifeCounterService implements ILifeCounterService {
             player.color = '#51a8e7';
         } else if (color === 'blue') {
             player.color = '#597fdd';
-        } else if (color === 'purple') {
+        } else if (color === 'indigo') {
             player.color = '#8260ed';
-        } else if (color === 'magenta') {
+        } else if (color === 'purple') {
             player.color = '#aa4ee0';
         } else if (color === 'pink') {
             player.color = '#dc2054';
-        } else if (color === 'hotPink') {
+        } else if (color === 'magenta') {
             player.color = '#e0379d';
         } else if (color === 'lightPink') {
             player.color = '#f38aae';
@@ -258,13 +263,13 @@ export class LifeCounterService implements ILifeCounterService {
         } else if (color === '#597fdd') {
             return 'blue';
         } else if (color === '#8260ed') {
-            return 'purple';
+            return 'indigo';
         } else if (color === '#aa4ee0') {
-            return 'magenta';
+            return 'purple';
         } else if (color === '#dc2054') {
             return 'pink';
         } else if (color === '#e0379d') {
-            return 'hotPink';
+            return 'magenta';
         } else if (color === '#f38aae') {
             return 'lightPink';
         }

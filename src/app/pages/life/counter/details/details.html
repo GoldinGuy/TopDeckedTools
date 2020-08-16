@@ -10,7 +10,6 @@
             ></ion-icon>
             <ion-row [style.background]="player.color">
                 <!-- Commander Damage -->
-
                 <ion-item class="detail" lines="none" [hidden]="player.opps.length < 1">
                     <ion-grid>
                         <ion-row class="just-cent">
@@ -18,55 +17,68 @@
                                 Commander Damage
                             </ion-label>
                         </ion-row>
-
                         <ion-row class="just-cent">
                             <ion-button
                                 class="but"
-                                (click)="lifeCounter.incrementCount(player, 'storm')"
+                                (click)="lifeCounter.incrementCount(player, 'cmdDam', activeCmd)"
                             >
                                 +
                             </ion-button>
                             <ion-note
-                                class="num cmd-num"
+                                class="num"
+                                (click)="setCmd(0)"
                                 [hidden]="player.opps.length < 1"
                                 [style.background]="player.opps.length > 0 ? player.opps[0].color: '#fff'"
+                                [style.padding]="activeCmd === 0 ? '5px 10px 5px' : '6px'"
+                                [style.border]="activeCmd === 0 ? '1.5px solid #fff' : 'none' "
                                 >{{ player.opps.length > 0 ? player.other.cmdDam[0] :
                                 '0'}}</ion-note
                             >
 
                             <ion-note
-                                class="num cmd-num"
+                                class="num"
+                                (click)="setCmd(1)"
                                 [hidden]="player.opps.length < 2"
                                 [style.background]="player.opps.length > 1 ? player.opps[1].color : '#fff'"
+                                [style.padding]="activeCmd === 1 ? '5px 10px 5px' : '6px'"
+                                [style.border]="activeCmd === 1 ? '1.5px solid #fff' : 'none' "
                                 >{{ player.opps.length > 1 ? player.other.cmdDam[1] :
                                 '0'}}</ion-note
                             >
 
                             <ion-note
-                                class="num cmd-num"
+                                class="num"
+                                (click)="setCmd(2)"
                                 [hidden]="player.opps.length < 3"
+                                [style.padding]="activeCmd === 2 ? '5px 10px 5px' : '6px'"
                                 [style.background]="player.opps.length > 2 ?  player.opps[2].color : '#fff'"
+                                [style.border]="activeCmd === 2 ? '1.5px solid #fff' : 'none' "
                                 >{{ player.opps.length > 2 ? player.other.cmdDam[2] : '0'
                                 }}</ion-note
                             >
 
                             <ion-note
-                                class="num cmd-num"
+                                class="num"
+                                (click)="setCmd(3)"
                                 [hidden]="player.opps.length < 4"
+                                [style.padding]="activeCmd === 3 ? '5px 10px 5px' : '6px'"
+                                [style.border]="activeCmd === 3 ? '1.5px solid #fff' : 'none' "
                                 [style.background]="player.opps.length > 3 ? player.opps[3].color : '#fff'"
                                 >{{player.opps.length > 3 ?player.other.cmdDam[3] : '0' }}</ion-note
                             >
                             <ion-note
-                                class="num cmd-num"
+                                class="num"
+                                (click)="setCmd(4)"
+                                [style.padding]="activeCmd === 4 ? '5px 10px 5px' : '6px'"
                                 [hidden]="player.opps.length < 5"
+                                [style.border]="activeCmd === 4 ? '1.5px solid #fff' : 'none' "
                                 [style.background]="player.opps.length > 4 ?player.opps[4].color : '#fff'"
                                 >{{ player.opps.length > 4 ?player.other.cmdDam[4] : '0'
                                 }}</ion-note
                             >
-
                             <ion-button
                                 class="but"
-                                (click)="lifeCounter.decrementCount(player, 'storm')"
+                                (click)="lifeCounter.decrementCount(player, 'cmdDam', activeCmd)"
                             >
                                 −
                             </ion-button>
@@ -164,10 +176,10 @@
                         <ion-select-option value="aqua">Aqua</ion-select-option>
                         <ion-select-option value="sky">Sky</ion-select-option>
                         <ion-select-option value="blue">Blue</ion-select-option>
+                        <ion-select-option value="indigo">Indigo</ion-select-option>
                         <ion-select-option value="purple">Purple</ion-select-option>
                         <ion-select-option value="magenta">Magenta</ion-select-option>
                         <ion-select-option value="pink">Pink</ion-select-option>
-                        <ion-select-option value="hotPink">Hot Pink</ion-select-option>
                         <ion-select-option value="lightPink">Light Pink</ion-select-option>
                     </ion-select>
                 </ion-item>

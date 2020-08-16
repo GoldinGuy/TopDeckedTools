@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { isNullOrUndefined } from 'util';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { DetailsPage } from './details/details';
