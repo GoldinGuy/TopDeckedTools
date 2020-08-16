@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { IonicStorageModule } from '@ionic/storage';
 import { SMS } from '@ionic-native/sms/ngx';
 import { LongPressDirective } from '../../../plugins/longPressDirective2';
+import { IonicGestureConfig } from '../../../plugins/IonicGestureConfig';
 
 @NgModule({
     declarations: [AppComponent],
@@ -31,6 +32,7 @@ import { LongPressDirective } from '../../../plugins/longPressDirective2';
         ScreenOrientation,
         SMS,
         LongPressDirective,
+        { provide: HAMMER_GESTURE_CONFIG, useClass: IonicGestureConfig },
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     ],
     bootstrap: [AppComponent],

@@ -60,8 +60,10 @@
                             >
                                 <p
                                     class="val rotate-player{{i}}"
-                                    long-press
-                                    (press)="detailsModal(player)"
+                                    ion-long-press
+                                    [interval]="500"
+                                    (pressed)="decrementLife(player)"
+                                    (longPressed)="detailsModal(player)"
                                 >
                                     {{ player.life }}
                                 </p>
