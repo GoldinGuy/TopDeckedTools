@@ -58,7 +58,13 @@
                                 class="val-container p{{i}}"
                                 [style.background-color]="player.color"
                             >
-                                <p class="val rotate-player{{i}}">{{ player.life }}</p>
+                                <p
+                                    class="val rotate-player{{i}}"
+                                    long-press
+                                    (press)="detailsModal(player)"
+                                >
+                                    {{ player.life }}
+                                </p>
                                 <!-- <ion-icon
                                     name="heart"
                                     class="options rotate-player{{i}}"

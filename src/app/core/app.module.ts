@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IonicStorageModule } from '@ionic/storage';
 import { SMS } from '@ionic-native/sms/ngx';
+import { LongPressDirective } from '../../../plugins/longPressDirective2';
 
 @NgModule({
     declarations: [AppComponent],
@@ -29,6 +30,7 @@ import { SMS } from '@ionic-native/sms/ngx';
         SplashScreen,
         ScreenOrientation,
         SMS,
+        LongPressDirective,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     ],
     bootstrap: [AppComponent],
