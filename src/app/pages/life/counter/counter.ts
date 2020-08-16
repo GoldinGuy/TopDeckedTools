@@ -49,6 +49,8 @@ export class CounterPage {
         this.route.queryParamMap.subscribe(() => {
             if (this.router.getCurrentNavigation().extras.state) {
                 this.game = this.router.getCurrentNavigation().extras.state.game;
+            } else {
+                this.router.navigate(['/tabs/life']);
             }
         });
         this.displaySettings = false;
