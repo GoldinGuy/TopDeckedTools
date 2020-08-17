@@ -170,7 +170,7 @@ export class CounterPage {
 
     async quit() {
         this.settings = Settings.off;
-        this.toggleTimer();
+        this.timerOn = false;
         this.lifeCounter.setOpps(this.game, true);
         await this.lifeCounter.saveGame(this.game, this.storage);
         // await this.storage.set('activeGame', this.game);
