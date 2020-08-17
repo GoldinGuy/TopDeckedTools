@@ -21,50 +21,6 @@
     color: rgba(255, 255, 255, 0.6) !important;
 }
 
-// .options {
-//     color: #fff;
-//     font-size: 20px;
-// }
-
-// .na {
-//     --background: transparent !important;
-//     padding: 0 !important;
-//     margin: 0 !important;
-//     --color: transparent !important;
-//     text-align: center;
-//     // z-index: -1;
-//     border-radius: none !important;
-// }
-
-// .dot-container {
-//     text-align: center;
-//     z-index: 1;
-// }
-
-// .dot {
-//     cursor: pointer;
-//     height: 15px;
-//     width: 15px;
-//     margin: 0 2px;
-//     background-color: #bbb;
-//     border-radius: 50%;
-//     display: inline-block;
-//     transition: background-color 0.6s ease;
-// }
-
-// .active,
-// .dot:hover {
-//     background-color: #717171;
-// }
-
-// .tap {
-//     background: transparent !important;
-//     padding: 0 !important;
-//     margin: 0 !important;
-//     color: transparent !important;
-//     border-radius: none !important;
-// }
-
 // settings icon
 #settings {
     .settings-but {
@@ -76,7 +32,10 @@
     }
     .rotate1 {
         @media (orientation: portrait) {
-            transform: rotate(-90deg);
+            transform: rotate(90deg);
+            position: absolute;
+            right: 0;
+            bottom: 50px;
         }
     }
     .rotate {

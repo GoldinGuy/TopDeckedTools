@@ -184,12 +184,16 @@ export class CounterPage {
                             value: 2700,
                         },
                         {
-                            text: '35 Minutes',
+                            text: '40 Minutes',
                             value: 2400,
                         },
                         {
-                            text: '30 Minutes',
+                            text: '35 Minutes',
                             value: 2100,
+                        },
+                        {
+                            text: '30 Minutes',
+                            value: 1800,
                         },
                     ],
                 },
@@ -202,9 +206,9 @@ export class CounterPage {
                 {
                     text: 'Confirm',
                     handler: (picker) => {
+                        this.timerOn = false;
                         this.game.timer = picker.Timer.value;
                         this.timerDisplay = this.lifeCounter.getTimerDisplay(this.game);
-                        // console.table(picker);
                     },
                 },
             ],
