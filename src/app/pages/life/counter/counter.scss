@@ -93,6 +93,7 @@
     }
 }
 
+// settings overlay
 #overlay {
     .bg {
         height: 100vh;
@@ -106,9 +107,9 @@
         top: 0;
         left: 0;
         backdrop-filter: blur(6px);
-        @media (orientation: landscape) {
-            padding: 50px 100px 20px;
-        }
+        // @media (orientation: landscape) {
+        //     padding: 50px 100px 20px;
+        // }
     }
 
     .option {
@@ -136,6 +137,9 @@
         height: 90vh;
         @media (orientation: portrait) {
             margin-top: 10vh;
+        }
+        @media (orientation: landscape) {
+            margin-top: 15vh;
         }
     }
 
