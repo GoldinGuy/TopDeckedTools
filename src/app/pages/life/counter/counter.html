@@ -185,14 +185,18 @@
             <div id="settings" (click)="setSettings('default')">
                 <div
                     class="display"
-                    [ngClass]="{ 'seat1p': game.numPlayers === 1, 'seat3-5p': game.numPlayers === 3 || game.numPlayers === 5, 'seat2-4p': game.numPlayers === 2 || game.numPlayers === 4,  'seat6p': game.numPlayers === 6  }"
+                    [ngClass]="{ 'seat1p': game.numPlayers === 1, 'seat3-5p': game.numPlayers === 3 || game.numPlayers === 5, 'seat2-4p': game.numPlayers === 2 || game.numPlayers === 4,  'seat6p': game.numPlayers === 6 }"
                 >
                     <ion-icon
                         name="settings"
                         class="settings-but settings-icon"
                         *ngIf="!timerOn"
                     ></ion-icon>
-                    <div class="settings-but settings-timer" *ngIf="timerOn">
+                    <div
+                        class="settings-but settings-timer"
+                        *ngIf="timerOn"
+                        [ngClass]="{'rotate': game.numPlayers > 1, 'rotate1': game.numPlayers === 1 }"
+                    >
                         {{ timerDisplay }}
                     </div>
                 </div>
@@ -209,7 +213,7 @@
                         <ng-container *ngIf="settingsIs() === 'default'">
                             <ion-grid>
                                 <ion-row>
-                                    <ion-col class="option tap" (click)="reset()">
+                                    <ion-col class="option tap" (click)="resetGame()">
                                         <ion-icon name="sync" class="icon icon-tap"></ion-icon>
                                         <p class="option-text">RESET</p>
                                     </ion-col>
@@ -223,7 +227,7 @@
                                         <ion-icon name="library" class="icon icon-tap"></ion-icon>
                                         <p class="option-text">HISTORY</p>
                                     </ion-col>
-                                    <ion-col class="option tap" (click)="quit()">
+                                    <ion-col class="option tap" (click)="quitGame()">
                                         <ion-icon name="log-out" class="icon icon-tap"></ion-icon>
                                         <p class="option-text">QUIT</p>
                                     </ion-col>
@@ -268,7 +272,7 @@
                                     {{ timerDisplay }}
                                 </ion-row>
                                 <ion-row>
-                                    <ion-col class="timer-icon">
+                                    <ion-col class="timer-icon" (click)="editTimer()">
                                         <ion-icon name="pencil"></ion-icon>
                                     </ion-col>
                                     <ion-col class="timer-icon" (click)="resetTimer()">

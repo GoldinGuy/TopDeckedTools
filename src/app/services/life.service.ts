@@ -45,6 +45,8 @@ export interface ILifeCounterService {
     setRandomColor(game: Game): string;
     changeColor(player: PlayerStats, color: string): string;
     getColorFromHex(color: string): string;
+
+    getTimerDisplay(game: Game): string;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -102,6 +104,7 @@ export class LifeCounterService implements ILifeCounterService {
                 },
             };
         }
+        game.timer = 3000;
         console.table(game.players);
         return game;
     }
@@ -282,6 +285,31 @@ export class LifeCounterService implements ILifeCounterService {
             return 'magenta';
         } else if (color === '#f38aae') {
             return 'pink';
+        }
+    }
+
+    getTimerDisplay(game: Game): string {
+        var minutes: string, seconds: string;
+        if (game.timer === 3600) {
+            return '60:00';
+        } else {
+            if (game.timer % 60 < 10) {
+                seconds = '0' + parseInt('' + (game.timer % 60));
+            } else if (game.timer % 60 == 0) {
+                seconds = '00';
+            } else {
+                seconds = '' + parseInt((game.timer % 60).toString());
+            }
+            if (game.timer / 60 < 10) {
+                minutes = '0' + parseInt('' + game.timer / 60, 10);
+            } else {
+                minutes = '' + parseInt((game.timer / 60).toString(), 10);
+            }
+
+            if (parseInt(minutes) >= 60) {
+                minutes = parseInt('' + (parseInt(minutes) % 60)).toString();
+            }
+            return minutes + ':' + seconds;
         }
     }
 }

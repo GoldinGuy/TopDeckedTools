@@ -70,11 +70,16 @@
     .settings-but {
         font-size: 22px;
         color: #fff;
-        // position: fixed;
-        // transform: translate(-50%, -50%);
         border-radius: 22px;
         background: #544a63;
         z-index: 1;
+    }
+    .rotate1 {
+        @media (orientation: portrait) {
+            transform: rotate(-90deg);
+        }
+    }
+    .rotate {
         @media (orientation: landscape) {
             transform: rotate(-90deg);
         }

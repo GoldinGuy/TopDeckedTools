@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { ModalController, PickerController } from '@ionic/angular';
 import { DetailsPage } from './details/details';
 import { Game, PlayerStats, LifeCounterService } from 'src/app/services/life.service';
 import { Storage } from '@ionic/storage';
@@ -28,6 +28,7 @@ export class CounterPage {
         public lifeCounter: LifeCounterService,
         private router: Router,
         public modalController: ModalController,
+        private pickerController: PickerController,
         private storage: Storage,
         private route: ActivatedRoute
     ) {
@@ -47,7 +48,7 @@ export class CounterPage {
             this.game = this.lifeCounter.initializePlayers(this.game);
             this.timerOn = false;
         }
-        this.timerDisplay = this.getTimerDisplay();
+        this.timerDisplay = this.lifeCounter.getTimerDisplay(this.game);
     }
 
     settingsIs(): string {
@@ -72,6 +73,27 @@ export class CounterPage {
         } else if (val === 'timer') {
             this.settings = Settings.timer;
         }
+    }
+
+    resetGame() {
+        this.game = this.lifeCounter.reset(this.game);
+        this.timerDisplay = this.lifeCounter.getTimerDisplay(this.game);
+        this.timerOn = false;
+        this.settings = Settings.off;
+    }
+
+    async quitGame() {
+        this.settings = Settings.off;
+        this.timerOn = false;
+        this.lifeCounter.setOpps(this.game, true);
+        await this.lifeCounter.saveGame(this.game, this.storage);
+        // await this.storage.set('activeGame', this.game);
+        let navigationExtras: NavigationExtras = {
+            state: {
+                activeGame: this.game,
+            },
+        };
+        this.router.navigate(['/tabs/life'], navigationExtras);
     }
 
     async detailsModal(player: PlayerStats, rotate: string) {
@@ -110,42 +132,18 @@ export class CounterPage {
         }
     }
 
+    // methods that deal with timer
     async startTimer() {
         var interval = setInterval(() => {
             if (this.timerOn) {
                 if (this.game.timer > 0) {
                     this.game.timer--;
                 }
-                this.timerDisplay = this.getTimerDisplay();
+                this.timerDisplay = this.lifeCounter.getTimerDisplay(this.game);
             } else {
                 clearInterval(interval);
             }
         }, 1000);
-    }
-
-    getTimerDisplay(): string {
-        var minutes: string, seconds: string;
-        if (this.game.timer === 3000) {
-            return (this.game.timer / 60).toString() + ':00';
-        } else {
-            if (this.game.timer % 60 < 10) {
-                seconds = '0' + parseInt('' + (this.game.timer % 60));
-            } else if (this.game.timer % 60 == 0) {
-                seconds = '00';
-            } else {
-                seconds = '' + parseInt((this.game.timer % 60).toString());
-            }
-            if (this.game.timer / 60 < 10) {
-                minutes = '0' + parseInt('' + this.game.timer / 60, 10);
-            } else {
-                minutes = '' + parseInt((this.game.timer / 60).toString(), 10);
-            }
-
-            if (parseInt(minutes) >= 60) {
-                minutes = parseInt('' + (parseInt(minutes) % 60)).toString();
-            }
-            return minutes + ':' + seconds;
-        }
     }
 
     toggleTimer() {
@@ -160,25 +158,57 @@ export class CounterPage {
     resetTimer() {
         this.timerOn = false;
         this.game.timer = 3000;
-        this.timerDisplay = (this.game.timer / 60).toString() + ':00';
+        this.timerDisplay = this.lifeCounter.getTimerDisplay(this.game);
     }
 
-    reset() {
-        this.game = this.lifeCounter.reset(this.game);
-        this.settings = Settings.off;
-    }
-
-    async quit() {
-        this.settings = Settings.off;
-        this.timerOn = false;
-        this.lifeCounter.setOpps(this.game, true);
-        await this.lifeCounter.saveGame(this.game, this.storage);
-        // await this.storage.set('activeGame', this.game);
-        let navigationExtras: NavigationExtras = {
-            state: {
-                activeGame: this.game,
-            },
-        };
-        this.router.navigate(['/tabs/life'], navigationExtras);
+    async editTimer() {
+        const picker = await this.pickerController.create({
+            columns: [
+                {
+                    name: `Timer`,
+                    options: [
+                        {
+                            text: '60 Minutes',
+                            value: 3600,
+                        },
+                        {
+                            text: '55 Minutes',
+                            value: 3300,
+                        },
+                        {
+                            text: '50 Minutes',
+                            value: 3000,
+                        },
+                        {
+                            text: '45 Minutes',
+                            value: 2700,
+                        },
+                        {
+                            text: '35 Minutes',
+                            value: 2400,
+                        },
+                        {
+                            text: '30 Minutes',
+                            value: 2100,
+                        },
+                    ],
+                },
+            ],
+            buttons: [
+                {
+                    text: 'Cancel',
+                    role: 'cancel',
+                },
+                {
+                    text: 'Confirm',
+                    handler: (picker) => {
+                        this.game.timer = picker.Timer.value;
+                        this.timerDisplay = this.lifeCounter.getTimerDisplay(this.game);
+                        // console.table(picker);
+                    },
+                },
+            ],
+        });
+        await picker.present();
     }
 }

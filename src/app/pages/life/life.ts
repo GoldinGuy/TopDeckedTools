@@ -24,13 +24,6 @@ export class LifePage {
         });
         this.startingLife = 20;
         this.numPlayers = 2;
-        // this.activeGame = {
-        //     players: [],
-        //     startingLife: 20,
-        //     numPlayers: 2,
-        //     pickFirstPlayer: false,
-        //     timer: 3000,
-        // };
     }
     activeGame: Game;
     startingLife: number;
