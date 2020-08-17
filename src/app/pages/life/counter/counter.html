@@ -46,14 +46,14 @@
                                     (click)="lifeCounter.incrementLife(player)"
                                     ion-long-press
                                     [interval]="600"
-                                    (longPressed)="detailsModal(player)"
+                                    (longPressed)="detailsModal(player, ('rotate-player'+ i))"
                                 ></div>
                                 <div
                                     class="counter p{{i}}-rem-life tap"
                                     (click)="lifeCounter.decrementLife(player)"
                                     ion-long-press
                                     [interval]="600"
-                                    (longPressed)="detailsModal(player)"
+                                    (longPressed)="detailsModal(player, ('rotate-player'+ i))"
                                 ></div>
                             </ion-col>
                         </ng-container>
@@ -98,7 +98,7 @@
                         <ng-container *ngFor="let player of game.players; let i = index;">
                             <ion-col
                                 id="p{{i}}"
-                                class="val-container  p{{i}}"
+                                class="val-container p{{i}}"
                                 [style.background-color]="player.color"
                             >
                                 <p class="val rotate-player{{i}}">{{ player.life }}</p>
@@ -182,44 +182,44 @@
                 </div>
             </ng-container>
             <!-- settings icon -->
-            <div id="settings">
-                <ion-icon
-                    name="settings"
-                    class="settings-icon"
-                    (click)="toggleSettings()"
+            <div id="settings" (click)="setSettings('default')">
+                <div
+                    class="display"
                     [ngClass]="{ 'seat1p': game.numPlayers === 1, 'seat3-5p': game.numPlayers === 3 || game.numPlayers === 5, 'seat2-4p': game.numPlayers === 2 || game.numPlayers === 4,  'seat6p': game.numPlayers === 6  }"
-                ></ion-icon>
+                >
+                    <ion-icon
+                        name="settings"
+                        class="settings-but settings-icon"
+                        *ngIf="!timerOn"
+                    ></ion-icon>
+                    <div class="settings-but settings-timer" *ngIf="timerOn">
+                        {{ timerDisplay }}
+                    </div>
+                </div>
             </div>
             <!-- settings overlay -->
-            <ng-container *ngIf="displaySettings">
+            <ng-container *ngIf="settingsIs() != 'off'">
                 <div id="overlay">
                     <div class="bg">
                         <ion-icon
                             name="close"
                             class="top-left"
-                            (click)="toggleSettings()"
+                            (click)="setSettings('off')"
                         ></ion-icon>
-                        <ng-container *ngIf="!displayHistory">
+                        <ng-container *ngIf="settingsIs() === 'default'">
                             <ion-grid>
                                 <ion-row>
-                                    <!-- <ion-col
-                                        class="option tap"
-                                        (click)="detailsModal(game.players[0])"
-                                    >
-                                        <ion-icon name="stopwatch" class="icon icon-tap"></ion-icon>
-                                        <p class="option-text">Details</p>
-                                    </ion-col> -->
                                     <ion-col class="option tap" (click)="reset()">
                                         <ion-icon name="sync" class="icon icon-tap"></ion-icon>
                                         <p class="option-text">RESET</p>
                                     </ion-col>
-                                    <ion-col class="option tap" (click)="toggleTimer()">
+                                    <ion-col class="option tap" (click)="setSettings('timer')">
                                         <ion-icon name="timer" class="icon icon-tap"></ion-icon>
                                         <p class="option-text">TIMER</p>
                                     </ion-col>
                                 </ion-row>
                                 <ion-row>
-                                    <ion-col class="option tap" (click)="displayHistory = true">
+                                    <ion-col class="option tap" (click)="setSettings('history')">
                                         <ion-icon name="library" class="icon icon-tap"></ion-icon>
                                         <p class="option-text">HISTORY</p>
                                     </ion-col>
@@ -231,11 +231,11 @@
                             </ion-grid>
                         </ng-container>
                         <!-- history overlay -->
-                        <ng-container *ngIf="displayHistory">
+                        <ng-container *ngIf="settingsIs() === 'history'">
                             <ion-icon
                                 name="chevron-forward"
                                 class="top-right"
-                                (click)="displayHistory = false"
+                                (click)="setSettings('default')"
                             ></ion-icon>
                             <ion-grid class="hist-grid">
                                 <ion-row>
@@ -257,28 +257,27 @@
                             </ion-grid>
                         </ng-container>
                         <!-- timer overlay -->
-                        <ng-container *ngIf="displayTimer">
+                        <ng-container *ngIf="settingsIs() === 'timer'">
                             <ion-icon
                                 name="chevron-forward"
                                 class="top-right"
-                                (click)="displayTimer = false"
+                                (click)="setSettings('default')"
                             ></ion-icon>
-                            <ion-grid class="hist-grid">
+                            <ion-grid id="timer">
+                                <ion-row class="timer-display">
+                                    {{ timerDisplay }}
+                                </ion-row>
                                 <ion-row>
-                                    <ng-container *ngFor="let player of game.players">
-                                        <ion-col class="hist-col">
-                                            <p class="hist" [style.color]="player.color">
-                                                {{ game.startingLife }}
-                                            </p>
-                                            <p
-                                                *ngFor="let hist of player.history"
-                                                class="hist"
-                                                [style.color]="player.color"
-                                            >
-                                                {{ hist }}
-                                            </p>
-                                        </ion-col>
-                                    </ng-container>
+                                    <ion-col class="timer-icon">
+                                        <ion-icon name="pencil"></ion-icon>
+                                    </ion-col>
+                                    <ion-col class="timer-icon" (click)="resetTimer()">
+                                        <ion-icon name="reload"></ion-icon>
+                                    </ion-col>
+                                    <ion-col class="timer-icon" (click)="toggleTimer()">
+                                        <ion-icon name="play" *ngIf="!timerOn"></ion-icon>
+                                        <ion-icon name="pause" *ngIf="timerOn"></ion-icon>
+                                    </ion-col>
                                 </ion-row>
                             </ion-grid>
                         </ng-container>

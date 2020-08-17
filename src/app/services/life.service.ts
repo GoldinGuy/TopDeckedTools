@@ -24,13 +24,16 @@ export interface PlayerStats {
 
 import { Injectable } from '@angular/core';
 import { isNullOrUndefined } from 'util';
+import { Storage } from '@ionic/storage';
 
 export interface ILifeCounterService {
     // methods that alter all players/the whole game
     initializePlayers(game: Game): Game;
+    saveGame(game: Game, storage: Storage): void;
     reset(game: Game): Game;
 
     // methods that edit individual player values
+    setOpps(game: Game): void;
     incrementLife(player: PlayerStats): void;
     decrementLife(player: PlayerStats): void;
     incrementCount(player: PlayerStats, type: string): void;
@@ -47,11 +50,11 @@ export interface ILifeCounterService {
 @Injectable({ providedIn: 'root' })
 export class LifeCounterService implements ILifeCounterService {
     initializePlayers(game: Game): Game {
-        let cmdDam = [];
-        for (let i = 0; i < game.numPlayers - 1; i++) {
-            cmdDam.push(0);
-        }
         for (let i = 0; i < game.numPlayers; i++) {
+            let cmdDam = [];
+            for (let i = 0; i < game.numPlayers - 1; i++) {
+                cmdDam.push(0);
+            }
             game.players.push({
                 id: 'Player' + (i + 1),
                 life: game.startingLife,
@@ -68,22 +71,21 @@ export class LifeCounterService implements ILifeCounterService {
                 },
             });
         }
-        for (let i = 0; i < game.numPlayers; i++) {
-            for (let j = 0; j < game.numPlayers; j++) {
-                if (j != i) {
-                    game.players[i].opps.push(game.players[j]);
-                }
-            }
-        }
+        this.setOpps(game);
         return game;
     }
 
+    async saveGame(game: Game, storage: Storage) {
+        // TODO: save game to local storage/topdecked server
+        await storage.set('activeGame', game);
+    }
+
     reset(game: Game): Game {
-        let cmdDam = [];
-        for (let i = 0; i < game.numPlayers - 1; i++) {
-            cmdDam.push(0);
-        }
         for (let i = 0; i < game.numPlayers; i++) {
+            let cmdDam = [];
+            for (let i = 0; i < game.numPlayers - 1; i++) {
+                cmdDam.push(0);
+            }
             game.players[i] = {
                 id: game.players[i].id,
                 life: game.startingLife,
@@ -102,6 +104,20 @@ export class LifeCounterService implements ILifeCounterService {
         }
         console.table(game.players);
         return game;
+    }
+
+    setOpps(game: Game, empty?: boolean) {
+        for (let i = 0; i < game.numPlayers; i++) {
+            game.players[i].opps = [];
+            for (let j = 0; j < game.numPlayers; j++) {
+                if (j != i) {
+                    game.players[i].opps.push(game.players[j]);
+                }
+                if (empty) {
+                    game.players[i].opps = [];
+                }
+            }
+        }
     }
 
     incrementLife(player: PlayerStats) {
@@ -191,11 +207,9 @@ export class LifeCounterService implements ILifeCounterService {
             '#8260ed',
             // purple
             '#aa4ee0',
-            // pink
-            '#dc2054',
             // magenta
             '#e0379d',
-            // light pink
+            // pink
             '#f38aae',
         ];
         var color: string;
@@ -234,11 +248,9 @@ export class LifeCounterService implements ILifeCounterService {
         } else if (color === 'purple') {
             player.color = '#aa4ee0';
         } else if (color === 'pink') {
-            player.color = '#dc2054';
+            player.color = '#f38aae';
         } else if (color === 'magenta') {
             player.color = '#e0379d';
-        } else if (color === 'lightPink') {
-            player.color = '#f38aae';
         }
         return player.color;
     }
@@ -266,12 +278,10 @@ export class LifeCounterService implements ILifeCounterService {
             return 'indigo';
         } else if (color === '#aa4ee0') {
             return 'purple';
-        } else if (color === '#dc2054') {
-            return 'pink';
         } else if (color === '#e0379d') {
             return 'magenta';
         } else if (color === '#f38aae') {
-            return 'lightPink';
+            return 'pink';
         }
     }
 }

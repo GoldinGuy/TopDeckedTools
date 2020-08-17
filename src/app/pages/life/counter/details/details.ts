@@ -9,6 +9,7 @@ import { PlayerStats, LifeCounterService } from 'src/app/services/life.service';
 })
 export class DetailsPage {
     @Input() player: PlayerStats;
+    @Input() rotate: string;
     activeCmd: number;
 
     constructor(
@@ -19,9 +20,10 @@ export class DetailsPage {
         this.activeCmd = 0;
     }
 
-    onNgInit() {
-        console.table(this.navParams);
+    ngOnInit() {
+        // console.table(this.navParams);
         this.player = this.navParams.data.player;
+        this.rotate = this.navParams.data.rotate;
     }
 
     setCmd(num: number) {

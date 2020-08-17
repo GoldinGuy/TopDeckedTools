@@ -2,10 +2,26 @@
 <ion-content fullscreen class="bg-theme">
     <div class="bg-light-purple">
         <h3 class="white-title">
-            New Game
+            Life Counter
         </h3>
     </div>
-    <ion-grid class=" ">
+    <ion-grid>
+        <ion-row class="life">
+            <ion-row class="life" *ngIf="activeGame != undefined">
+                <div class="fs-20 fw-900 spacing1">
+                    <ion-button
+                        color="primary"
+                        size="medium"
+                        class="txt-light but life"
+                        type="submit"
+                        (click)="startGame(activeGame)"
+                        mode="ios"
+                    >
+                        <h2 class="roboto-white fs-18">Continue Last Game</h2>
+                    </ion-button>
+                </div>
+            </ion-row>
+        </ion-row>
         <ion-row class="life">
             <a class="life-title">Starting Life</a>
         </ion-row>
@@ -106,12 +122,12 @@
                 <ion-button
                     color="primary"
                     size="medium"
-                    class="txt-light but life"
+                    class="txt-light but mgt-40 life"
                     type="submit"
                     (click)="startGame()"
                     mode="ios"
                 >
-                    <h2 class="roboto-white fs-18">Start Game</h2>
+                    <h2 class="roboto-white fs-18">Start New Game</h2>
                 </ion-button>
             </div>
         </ion-row>

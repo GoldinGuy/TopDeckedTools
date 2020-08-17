@@ -1,189 +1,217 @@
 <!DOCTYPE html>
 <ion-content fullscreen [style.--background]="player.color">
-    <div class="grid-container">
-        <ion-grid class="grid">
-            <ion-icon
-                class="item-icon"
-                name="close"
-                class="top-left"
-                (click)="dismiss()"
-            ></ion-icon>
-            <ion-row class="bg">
-                <!-- Commander Damage -->
-                <ion-item class="detail" lines="none" [hidden]="player.opps.length < 1">
-                    <ion-grid>
-                        <ion-row class="just-cent">
-                            <ion-label class="cmdDam-lab">
-                                Commander Damage
-                            </ion-label>
-                        </ion-row>
-                        <ion-row class="just-cent">
-                            <ion-button
-                                class="but"
-                                (click)="lifeCounter.incrementCount(player, 'cmdDam', activeCmd)"
-                            >
-                                +
-                            </ion-button>
-                            <ion-note
-                                class="num"
-                                (click)="setCmd(0)"
-                                [hidden]="player.opps.length < 1"
-                                [style.background]="player.opps.length > 0 ? player.opps[0].color: '#fff'"
-                                [style.padding]="activeCmd === 0 ? '5px 10px 5px' : '6px'"
-                                [style.border]="activeCmd === 0 ? '1.5px solid #fff' : 'none' "
-                                >{{ player.opps.length > 0 ? player.other.cmdDam[0] :
-                                '0'}}</ion-note
-                            >
+    <div id="rotate">
+        <div class="grid-container {{rotate}}">
+            <ion-grid class="grid">
+                <ion-icon
+                    class="item-icon"
+                    name="close"
+                    class="top-left"
+                    (click)="dismiss()"
+                ></ion-icon>
+                <ion-row class="bg">
+                    <!-- Commander Damage -->
+                    <ion-item class="detail" lines="none" [hidden]="player.opps.length < 1">
+                        <ion-grid>
+                            <ion-row class="just-cent">
+                                <ion-label class="cmdDam-lab">
+                                    Commander Damage
+                                </ion-label>
+                            </ion-row>
+                            <ion-row class="just-cent">
+                                <ion-button
+                                    class="but"
+                                    (click)="lifeCounter.incrementCount(player, 'cmdDam', activeCmd)"
+                                >
+                                    +
+                                </ion-button>
+                                <ion-note
+                                    class="num"
+                                    (click)="setCmd(0)"
+                                    [hidden]="player.opps.length < 1"
+                                    [style.background]="player.opps.length > 0 ? player.opps[0].color: '#fff'"
+                                    [style.padding]="activeCmd === 0 ? '5px 10px 5px' : '6px'"
+                                    [style.border]="activeCmd === 0 ? '1.5px solid #fff' : 'none' "
+                                    >{{ player.opps.length > 0 ? player.other.cmdDam[0] :
+                                    '0'}}</ion-note
+                                >
+                                <ion-note
+                                    class="num"
+                                    (click)="setCmd(1)"
+                                    [hidden]="player.opps.length < 2"
+                                    [style.background]="player.opps.length > 1 ? player.opps[1].color : '#fff'"
+                                    [style.padding]="activeCmd === 1 ? '5px 10px 5px' : '6px'"
+                                    [style.border]="activeCmd === 1 ? '1.5px solid #fff' : 'none' "
+                                    >{{ player.opps.length > 1 ? player.other.cmdDam[1] :
+                                    '0'}}</ion-note
+                                >
 
-                            <ion-note
-                                class="num"
-                                (click)="setCmd(1)"
-                                [hidden]="player.opps.length < 2"
-                                [style.background]="player.opps.length > 1 ? player.opps[1].color : '#fff'"
-                                [style.padding]="activeCmd === 1 ? '5px 10px 5px' : '6px'"
-                                [style.border]="activeCmd === 1 ? '1.5px solid #fff' : 'none' "
-                                >{{ player.opps.length > 1 ? player.other.cmdDam[1] :
-                                '0'}}</ion-note
-                            >
+                                <ion-note
+                                    class="num"
+                                    (click)="setCmd(2)"
+                                    [hidden]="player.opps.length < 3"
+                                    [style.padding]="activeCmd === 2 ? '5px 10px 5px' : '6px'"
+                                    [style.background]="player.opps.length > 2 ?  player.opps[2].color : '#fff'"
+                                    [style.border]="activeCmd === 2 ? '1.5px solid #fff' : 'none' "
+                                    >{{ player.opps.length > 2 ? player.other.cmdDam[2] : '0'
+                                    }}</ion-note
+                                >
 
-                            <ion-note
-                                class="num"
-                                (click)="setCmd(2)"
-                                [hidden]="player.opps.length < 3"
-                                [style.padding]="activeCmd === 2 ? '5px 10px 5px' : '6px'"
-                                [style.background]="player.opps.length > 2 ?  player.opps[2].color : '#fff'"
-                                [style.border]="activeCmd === 2 ? '1.5px solid #fff' : 'none' "
-                                >{{ player.opps.length > 2 ? player.other.cmdDam[2] : '0'
-                                }}</ion-note
-                            >
+                                <ion-note
+                                    class="num"
+                                    (click)="setCmd(3)"
+                                    [hidden]="player.opps.length < 4"
+                                    [style.padding]="activeCmd === 3 ? '5px 10px 5px' : '6px'"
+                                    [style.border]="activeCmd === 3 ? '1.5px solid #fff' : 'none' "
+                                    [style.background]="player.opps.length > 3 ? player.opps[3].color : '#fff'"
+                                    >{{player.opps.length > 3 ?player.other.cmdDam[3] : '0'
+                                    }}</ion-note
+                                >
+                                <ion-note
+                                    class="num"
+                                    (click)="setCmd(4)"
+                                    [style.padding]="activeCmd === 4 ? '5px 10px 5px' : '6px'"
+                                    [hidden]="player.opps.length < 5"
+                                    [style.border]="activeCmd === 4 ? '1.5px solid #fff' : 'none' "
+                                    [style.background]="player.opps.length > 4 ?player.opps[4].color : '#fff'"
+                                    >{{ player.opps.length > 4 ?player.other.cmdDam[4] : '0'
+                                    }}</ion-note
+                                >
+                                <ion-button
+                                    class="but"
+                                    (click)="lifeCounter.decrementCount(player, 'cmdDam', activeCmd)"
+                                >
+                                    −
+                                </ion-button>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-item>
+                    <!-- storm -->
+                    <ion-item class="detail" lines="none">
+                        <ion-note
+                            slot="start"
+                            class="num left-num"
+                            [style.background]="player.color"
+                            >{{ player.other.storm }}</ion-note
+                        >
+                        <ion-label>
+                            Storm
+                        </ion-label>
+                        <ion-button
+                            class="but"
+                            (click)="lifeCounter.incrementCount(player, 'storm')"
+                        >
+                            +
+                        </ion-button>
+                        <ion-button
+                            class="but"
+                            (click)="lifeCounter.decrementCount(player, 'storm')"
+                        >
+                            −
+                        </ion-button>
+                    </ion-item>
+                    <!-- infect -->
+                    <ion-item class="detail" lines="none">
+                        <ion-note
+                            slot="start"
+                            class="num left-num"
+                            [style.background]="player.color"
+                            >{{ player.other.infect }}</ion-note
+                        >
+                        <ion-label>
+                            Infect
+                        </ion-label>
+                        <ion-button
+                            class="but"
+                            (click)="lifeCounter.incrementCount(player, 'infect')"
+                        >
+                            +
+                        </ion-button>
+                        <ion-button
+                            class="but"
+                            (click)="lifeCounter.decrementCount(player, 'infect')"
+                        >
+                            −
+                        </ion-button>
+                    </ion-item>
+                    <!-- energy -->
+                    <ion-item class="detail" lines="none">
+                        <ion-note
+                            slot="start"
+                            class="num left-num"
+                            [style.background]="player.color"
+                            >{{ player.other.energy }}</ion-note
+                        >
+                        <ion-label>
+                            Energy
+                        </ion-label>
+                        <ion-button
+                            class="but"
+                            (click)="lifeCounter.incrementCount(player, 'energy')"
+                        >
+                            +
+                        </ion-button>
+                        <ion-button
+                            class="but"
+                            (click)="lifeCounter.decrementCount(player, 'energy')"
+                        >
+                            −
+                        </ion-button>
+                    </ion-item>
 
-                            <ion-note
-                                class="num"
-                                (click)="setCmd(3)"
-                                [hidden]="player.opps.length < 4"
-                                [style.padding]="activeCmd === 3 ? '5px 10px 5px' : '6px'"
-                                [style.border]="activeCmd === 3 ? '1.5px solid #fff' : 'none' "
-                                [style.background]="player.opps.length > 3 ? player.opps[3].color : '#fff'"
-                                >{{player.opps.length > 3 ?player.other.cmdDam[3] : '0' }}</ion-note
-                            >
-                            <ion-note
-                                class="num"
-                                (click)="setCmd(4)"
-                                [style.padding]="activeCmd === 4 ? '5px 10px 5px' : '6px'"
-                                [hidden]="player.opps.length < 5"
-                                [style.border]="activeCmd === 4 ? '1.5px solid #fff' : 'none' "
-                                [style.background]="player.opps.length > 4 ?player.opps[4].color : '#fff'"
-                                >{{ player.opps.length > 4 ?player.other.cmdDam[4] : '0'
-                                }}</ion-note
-                            >
-                            <ion-button
-                                class="but"
-                                (click)="lifeCounter.decrementCount(player, 'cmdDam', activeCmd)"
-                            >
-                                −
-                            </ion-button>
-                        </ion-row>
-                    </ion-grid>
-                </ion-item>
-                <!-- storm -->
-                <ion-item class="detail" lines="none">
-                    <ion-note slot="start" class="num left-num" [style.background]="player.color"
-                        >{{ player.other.storm }}</ion-note
-                    >
-                    <ion-label>
-                        Storm
-                    </ion-label>
-                    <ion-button class="but" (click)="lifeCounter.incrementCount(player, 'storm')">
-                        +
-                    </ion-button>
-                    <ion-button class="but" (click)="lifeCounter.decrementCount(player, 'storm')">
-                        −
-                    </ion-button>
-                </ion-item>
-                <!-- infect -->
-                <ion-item class="detail" lines="none">
-                    <ion-note slot="start" class="num left-num" [style.background]="player.color"
-                        >{{ player.other.infect }}</ion-note
-                    >
-                    <ion-label>
-                        Infect
-                    </ion-label>
-                    <ion-button class="but" (click)="lifeCounter.incrementCount(player, 'infect')">
-                        +
-                    </ion-button>
-                    <ion-button class="but" (click)="lifeCounter.decrementCount(player, 'infect')">
-                        −
-                    </ion-button>
-                </ion-item>
-                <!-- energy -->
-                <ion-item class="detail" lines="none">
-                    <ion-note slot="start" class="num left-num" [style.background]="player.color"
-                        >{{ player.other.energy }}</ion-note
-                    >
-                    <ion-label>
-                        Energy
-                    </ion-label>
-                    <ion-button class="but" (click)="lifeCounter.incrementCount(player, 'energy')">
-                        +
-                    </ion-button>
-                    <ion-button class="but" (click)="lifeCounter.decrementCount(player, 'energy')">
-                        −
-                    </ion-button>
-                </ion-item>
-
-                <!-- monarch -->
-                <ion-item class="detail" lines="none">
-                    <ion-icon class="item-icon" name="trophy" slot="start"></ion-icon>
-                    <ion-label>
-                        Monarch
-                    </ion-label>
-                    <ion-toggle
-                        slot="end"
-                        checked="{{player.other.monarch}}"
-                        (ionChange)="lifeCounter.toggleBoolExtras(player, 'monarch')"
-                    ></ion-toggle>
-                </ion-item>
-                <!-- city blessing -->
-                <ion-item class="detail" lines="none">
-                    <ion-icon class="item-icon" name="podium" slot="start"></ion-icon>
-                    <ion-label>
-                        City's Blessing
-                    </ion-label>
-                    <ion-toggle
-                        slot="end"
-                        checked="{{player.other.cityBless}}"
-                        (ionChange)="lifeCounter.toggleBoolExtras(player, 'cityBless')"
-                    ></ion-toggle>
-                </ion-item>
-                <!-- color -->
-                <ion-item class="detail" lines="none">
-                    <ion-icon class="item-icon" name="color-palette" slot="start"></ion-icon>
-                    <ion-label>
-                        Change Color
-                    </ion-label>
-                    <ion-select
-                        class="color-picker"
-                        placeholder="{{player.color}}"
-                        value="{{lifeCounter.getColorFromHex(player.color)}}"
-                        (ionChange)="player.color = lifeCounter.changeColor(player, $event.detail.value)"
-                    >
-                        <ion-select-option value="red">Red</ion-select-option>
-                        <ion-select-option value="orange">Orange</ion-select-option>
-                        <ion-select-option value="tangerine">Tangerine</ion-select-option>
-                        <ion-select-option value="yellow">Yellow</ion-select-option>
-                        <ion-select-option value="lime">Lime</ion-select-option>
-                        <ion-select-option value="green">Green</ion-select-option>
-                        <ion-select-option value="aqua">Aqua</ion-select-option>
-                        <ion-select-option value="sky">Sky</ion-select-option>
-                        <ion-select-option value="blue">Blue</ion-select-option>
-                        <ion-select-option value="indigo">Indigo</ion-select-option>
-                        <ion-select-option value="purple">Purple</ion-select-option>
-                        <ion-select-option value="magenta">Magenta</ion-select-option>
-                        <ion-select-option value="pink">Pink</ion-select-option>
-                        <ion-select-option value="lightPink">Light Pink</ion-select-option>
-                    </ion-select>
-                </ion-item>
-            </ion-row>
-        </ion-grid>
+                    <!-- monarch -->
+                    <ion-item class="detail" lines="none">
+                        <ion-icon class="item-icon" name="trophy" slot="start"></ion-icon>
+                        <ion-label>
+                            Monarch
+                        </ion-label>
+                        <ion-toggle
+                            slot="end"
+                            checked="{{player.other.monarch}}"
+                            (ionChange)="lifeCounter.toggleBoolExtras(player, 'monarch')"
+                        ></ion-toggle>
+                    </ion-item>
+                    <!-- city blessing -->
+                    <ion-item class="detail" lines="none">
+                        <ion-icon class="item-icon" name="podium" slot="start"></ion-icon>
+                        <ion-label>
+                            City's Blessing
+                        </ion-label>
+                        <ion-toggle
+                            slot="end"
+                            checked="{{player.other.cityBless}}"
+                            (ionChange)="lifeCounter.toggleBoolExtras(player, 'cityBless')"
+                        ></ion-toggle>
+                    </ion-item>
+                    <!-- color -->
+                    <ion-item class="detail" lines="none">
+                        <ion-icon class="item-icon" name="color-palette" slot="start"></ion-icon>
+                        <ion-label>
+                            Change Color
+                        </ion-label>
+                        <ion-select
+                            class="color-picker"
+                            placeholder="{{player.color}}"
+                            value="{{lifeCounter.getColorFromHex(player.color)}}"
+                            (ionChange)="player.color = lifeCounter.changeColor(player, $event.detail.value)"
+                        >
+                            <ion-select-option value="red">Red</ion-select-option>
+                            <ion-select-option value="orange">Orange</ion-select-option>
+                            <ion-select-option value="tangerine">Tangerine</ion-select-option>
+                            <ion-select-option value="yellow">Yellow</ion-select-option>
+                            <ion-select-option value="lime">Lime</ion-select-option>
+                            <ion-select-option value="green">Green</ion-select-option>
+                            <ion-select-option value="aqua">Aqua</ion-select-option>
+                            <ion-select-option value="sky">Sky</ion-select-option>
+                            <ion-select-option value="blue">Blue</ion-select-option>
+                            <ion-select-option value="indigo">Indigo</ion-select-option>
+                            <ion-select-option value="purple">Purple</ion-select-option>
+                            <ion-select-option value="magenta">Magenta</ion-select-option>
+                            <ion-select-option value="pink">Pink</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                </ion-row>
+            </ion-grid>
+        </div>
     </div>
 </ion-content>

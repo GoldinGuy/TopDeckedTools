@@ -67,20 +67,33 @@
 
 // settings icon
 #settings {
-    .settings-icon {
+    .settings-but {
         font-size: 22px;
-        padding: 7px;
         color: #fff;
-        position: fixed;
-        transform: translate(-50%, -50%);
+        // position: fixed;
+        // transform: translate(-50%, -50%);
         border-radius: 22px;
         background: #544a63;
         z-index: 1;
+        @media (orientation: landscape) {
+            transform: rotate(-90deg);
+        }
+    }
+    .display {
+        transform: translate(-50%, -50%);
+        position: fixed;
         top: var(--top);
         left: var(--left);
         right: var(--right);
         bottom: var(--bottom);
     }
+    .settings-icon {
+        padding: 7px;
+    }
+    .settings-timer {
+        padding: 7px 10px;
+    }
+
     .seat1p {
         --right: 0%;
         @media (orientation: portrait) {
@@ -122,13 +135,13 @@
         width: 100vw;
         overflow: auto;
         position: absolute;
-        background-color: rgba(84, 74, 99, 0.9);
+        background-color: rgba(84, 74, 99, 0.8);
         z-index: 2;
         align-items: center;
         display: flex;
         top: 0;
         left: 0;
-
+        backdrop-filter: blur(6px);
         @media (orientation: landscape) {
             padding: 50px 100px 20px;
         }
@@ -164,8 +177,8 @@
 
     .hist-col {
         text-align: center;
-        border-top: 3px solid #fff;
-        border-right: 3px solid #fff;
+        border-top: 2px solid #fff;
+        border-right: 2px solid #fff;
         min-height: 92vh;
     }
 
@@ -1159,5 +1172,21 @@
             margin-bottom: 1vw;
             border-radius: 10px 0px 10px 10px;
         }
+    }
+}
+
+#timer {
+    .timer-display {
+        color: #fff;
+        font-size: 100px;
+        justify-content: center;
+        letter-spacing: -5px;
+    }
+
+    .timer-icon {
+        color: #fff;
+        text-align: center;
+        font-size: 40px;
+        padding-top: 30px;
     }
 }
