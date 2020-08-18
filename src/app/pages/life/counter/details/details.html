@@ -33,7 +33,7 @@
                                     [style.background]="player.opps.length > 0 ? player.opps[0].color: '#fff'"
                                     [style.padding]="activeCmd === 0 ? '5px 10px 5px' : '6px'"
                                     [style.border]="activeCmd === 0 ? '1.5px solid #fff' : 'none' "
-                                    >{{ player.opps.length > 0 ? player.other.cmdDam[0] :
+                                    >{{ player.opps.length > 0 ? player.state.cmdDam[0] :
                                     '0'}}</ion-note
                                 >
                                 <ion-note
@@ -43,7 +43,7 @@
                                     [style.background]="player.opps.length > 1 ? player.opps[1].color : '#fff'"
                                     [style.padding]="activeCmd === 1 ? '5px 10px 5px' : '6px'"
                                     [style.border]="activeCmd === 1 ? '1.5px solid #fff' : 'none' "
-                                    >{{ player.opps.length > 1 ? player.other.cmdDam[1] :
+                                    >{{ player.opps.length > 1 ? player.state.cmdDam[1] :
                                     '0'}}</ion-note
                                 >
 
@@ -54,7 +54,7 @@
                                     [style.padding]="activeCmd === 2 ? '5px 10px 5px' : '6px'"
                                     [style.background]="player.opps.length > 2 ?  player.opps[2].color : '#fff'"
                                     [style.border]="activeCmd === 2 ? '1.5px solid #fff' : 'none' "
-                                    >{{ player.opps.length > 2 ? player.other.cmdDam[2] : '0'
+                                    >{{ player.opps.length > 2 ? player.state.cmdDam[2] : '0'
                                     }}</ion-note
                                 >
 
@@ -65,7 +65,7 @@
                                     [style.padding]="activeCmd === 3 ? '5px 10px 5px' : '6px'"
                                     [style.border]="activeCmd === 3 ? '1.5px solid #fff' : 'none' "
                                     [style.background]="player.opps.length > 3 ? player.opps[3].color : '#fff'"
-                                    >{{player.opps.length > 3 ?player.other.cmdDam[3] : '0'
+                                    >{{player.opps.length > 3 ?player.state.cmdDam[3] : '0'
                                     }}</ion-note
                                 >
                                 <ion-note
@@ -75,7 +75,7 @@
                                     [hidden]="player.opps.length < 5"
                                     [style.border]="activeCmd === 4 ? '1.5px solid #fff' : 'none' "
                                     [style.background]="player.opps.length > 4 ?player.opps[4].color : '#fff'"
-                                    >{{ player.opps.length > 4 ?player.other.cmdDam[4] : '0'
+                                    >{{ player.opps.length > 4 ?player.state.cmdDam[4] : '0'
                                     }}</ion-note
                                 >
                                 <ion-button
@@ -93,7 +93,7 @@
                             slot="start"
                             class="num left-num"
                             [style.background]="player.color"
-                            >{{ player.other.storm }}</ion-note
+                            >{{ player.state.storm }}</ion-note
                         >
                         <ion-label>
                             Storm
@@ -117,7 +117,7 @@
                             slot="start"
                             class="num left-num"
                             [style.background]="player.color"
-                            >{{ player.other.infect }}</ion-note
+                            >{{ player.state.infect }}</ion-note
                         >
                         <ion-label>
                             Infect
@@ -141,7 +141,7 @@
                             slot="start"
                             class="num left-num"
                             [style.background]="player.color"
-                            >{{ player.other.energy }}</ion-note
+                            >{{ player.state.energy }}</ion-note
                         >
                         <ion-label>
                             Energy
@@ -168,7 +168,7 @@
                         </ion-label>
                         <ion-toggle
                             slot="end"
-                            checked="{{player.other.monarch}}"
+                            checked="{{player.state.monarch}}"
                             (ionChange)="lifeCounter.toggleBoolExtras(player, 'monarch')"
                         ></ion-toggle>
                     </ion-item>
@@ -180,7 +180,7 @@
                         </ion-label>
                         <ion-toggle
                             slot="end"
-                            checked="{{player.other.cityBless}}"
+                            checked="{{player.state.cityBless}}"
                             (ionChange)="lifeCounter.toggleBoolExtras(player, 'cityBless')"
                         ></ion-toggle>
                     </ion-item>

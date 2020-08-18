@@ -13,7 +13,7 @@
                                 [style.background-color]="player.color"
                             >
                                 <p class="val rotate-player{{i}}">
-                                    {{ player.life }}
+                                    {{ player.state.life }}
                                 </p>
                                 <div
                                     class="counter p{{i}}-add-life tap"
@@ -35,7 +35,7 @@
                 </div>
             </div>
             <!-- settings icon -->
-            <div id="settings" (click)="setSettings('default')">
+            <div id="settings" (click)="settings = 'default'">
                 <div
                     class="display"
                     [ngClass]="{ 'seat1p': game.numPlayers === 1, 'seat3-5p': game.numPlayers === 3 || game.numPlayers === 5, 'seat2-4p': game.numPlayers === 2 || game.numPlayers === 4,  'seat6p': game.numPlayers === 6 }"
@@ -55,28 +55,28 @@
                 </div>
             </div>
             <!-- settings overlay -->
-            <ng-container *ngIf="settingsIs() != 'off'">
+            <ng-container *ngIf="settings != 'off'">
                 <div id="overlay">
                     <div class="bg">
                         <ion-icon
                             name="close"
                             class="top-left"
-                            (click)="setSettings('off')"
+                            (click)="settings = 'off'"
                         ></ion-icon>
-                        <ng-container *ngIf="settingsIs() === 'default'">
+                        <ng-container *ngIf="settings === 'default'">
                             <ion-grid>
                                 <ion-row>
                                     <ion-col class="option tap" (click)="resetGame()">
                                         <ion-icon name="sync" class="icon icon-tap"></ion-icon>
                                         <p class="option-text">RESET</p>
                                     </ion-col>
-                                    <ion-col class="option tap" (click)="setSettings('timer')">
+                                    <ion-col class="option tap" (click)="settings = 'timer'">
                                         <ion-icon name="timer" class="icon icon-tap"></ion-icon>
                                         <p class="option-text">TIMER</p>
                                     </ion-col>
                                 </ion-row>
                                 <ion-row>
-                                    <ion-col class="option tap" (click)="setSettings('history')">
+                                    <ion-col class="option tap" (click)="settings = 'history'">
                                         <ion-icon name="library" class="icon icon-tap"></ion-icon>
                                         <p class="option-text">HISTORY</p>
                                     </ion-col>
@@ -88,11 +88,11 @@
                             </ion-grid>
                         </ng-container>
                         <!-- history overlay -->
-                        <ng-container *ngIf="settingsIs() === 'history'">
+                        <ng-container *ngIf="settings === 'history'">
                             <ion-icon
                                 name="chevron-forward"
                                 class="top-right"
-                                (click)="setSettings('default')"
+                                (click)="settings = 'default'"
                             ></ion-icon>
                             <ion-grid class="hist-grid">
                                 <ion-row>
@@ -114,11 +114,11 @@
                             </ion-grid>
                         </ng-container>
                         <!-- timer overlay -->
-                        <ng-container *ngIf="settingsIs() === 'timer'">
+                        <ng-container *ngIf="settings === 'timer'">
                             <ion-icon
                                 name="chevron-forward"
                                 class="top-right"
-                                (click)="setSettings('default')"
+                                (click)="settings = 'default'"
                             ></ion-icon>
                             <ion-grid id="timer">
                                 <ion-row class="timer-display">
