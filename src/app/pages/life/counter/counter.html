@@ -10,10 +10,12 @@
                             <ion-col
                                 id="p{{i}}"
                                 class="val-container long-p{{i}} p{{i}}"
+                                [class.val-container--rotated]="i === 5"
                                 [style.background-color]="player.color"
                             >
+                            <div class="val-container--inner">
                                 <p class="val rotate-player{{i}}">
-                                    {{ player.life }}
+                                    {{ player.other.life }}
                                 </p>
                                 <div
                                     class="counter p{{i}}-add-life tap"
@@ -29,13 +31,32 @@
                                     [interval]="600"
                                     (longPressed)="detailsModal(player)"
                                 ></div>
+                            </div>
+                            <div class="val-container--inner">
+                                <p class="val rotate-player{{i}}">
+                                    {{ player.other.life }}
+                                </p>
+                                <div
+                                    class="counter p{{i}}-add-life tap"
+                                    (click)="lifeCounter.incrementLife(player)"
+                                    ion-long-press
+                                    [interval]="600"
+                                    (longPressed)="detailsModal(player)"
+                                ></div>
+                                <div
+                                    class="counter p{{i}}-rem-life tap"
+                                    (click)="lifeCounter.decrementLife(player)"
+                                    ion-long-press
+                                    [interval]="600"
+                                    (longPressed)="detailsModal(player)"
+                                ></div></div>
                             </ion-col>
                         </ng-container>
                     </div>
                 </div>
             </div>
             <!-- settings icon -->
-            <div id="settings" (click)="setSettings('default')">
+            <div id="settings" (click)="settings = 'default'">
                 <div
                     class="display"
                     [ngClass]="{ 'seat1p': game.numPlayers === 1, 'seat3-5p': game.numPlayers === 3 || game.numPlayers === 5, 'seat2-4p': game.numPlayers === 2 || game.numPlayers === 4,  'seat6p': game.numPlayers === 6 }"
@@ -55,7 +76,7 @@
                 </div>
             </div>
             <!-- settings overlay -->
-            <ng-container *ngIf="settingsIs() != 'off'">
+            <ng-container *ngIf="settings != 'off'">
                 <div id="overlay">
                     <div class="bg">
                         <ion-icon

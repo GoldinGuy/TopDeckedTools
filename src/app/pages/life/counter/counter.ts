@@ -1,16 +1,13 @@
+import { Game, LifeCounterService, PlayerStats } from 'src/app/services/life.service';
+
 import { Component } from '@angular/core';
-import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { ModalController, PickerController } from '@ionic/angular';
-import { DetailsPage } from './details/details';
-import { Game, PlayerStats, LifeCounterService } from 'src/app/services/life.service';
 import { Storage } from '@ionic/storage';
 
-enum Settings {
-    off,
-    default,
-    history,
-    timer,
-}
+import { DetailsPage } from './details/details';
+
+type SettingsMode = 'off' | 'default' | 'history' | 'timer';
 
 @Component({
     selector: 'page-life',
@@ -19,7 +16,7 @@ enum Settings {
 })
 export class CounterPage {
     game: Game;
-    settings: Settings;
+    settings: SettingsMode;
     displayModal: boolean;
     timerOn: boolean;
     timerDisplay: string;
@@ -39,7 +36,7 @@ export class CounterPage {
                 this.router.navigate(['/tabs/life']);
             }
         });
-        this.settings = Settings.off;
+        this.settings = 'off';
         this.displayModal = false;
     }
 
@@ -51,39 +48,23 @@ export class CounterPage {
         this.timerDisplay = this.lifeCounter.getTimerDisplay(this.game);
     }
 
-    settingsIs(): string {
-        if (this.settings === Settings.off) {
-            return 'off';
-        } else if (this.settings === Settings.default) {
-            return 'default';
-        } else if (this.settings === Settings.history) {
-            return 'history';
-        } else if (this.settings === Settings.timer) {
-            return 'timer';
-        }
+    settingsIs(): SettingsMode {
+        return this.settings;
     }
 
-    setSettings(val: string) {
-        if (val === 'off') {
-            this.settings = Settings.off;
-        } else if (val === 'default') {
-            this.settings = Settings.default;
-        } else if (val === 'history') {
-            this.settings = Settings.history;
-        } else if (val === 'timer') {
-            this.settings = Settings.timer;
-        }
+    setSettings(val: SettingsMode) {
+        this.settings = val;
     }
 
     resetGame() {
         this.game = this.lifeCounter.reset(this.game);
         this.timerDisplay = this.lifeCounter.getTimerDisplay(this.game);
         this.timerOn = false;
-        this.settings = Settings.off;
+        this.settings = 'off';
     }
 
     async quitGame() {
-        this.settings = Settings.off;
+        this.settings = 'off';
         this.timerOn = false;
         this.lifeCounter.setOpps(this.game, true);
         await this.lifeCounter.saveGame(this.game, this.storage);

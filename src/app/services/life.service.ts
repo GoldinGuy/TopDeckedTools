@@ -6,24 +6,34 @@ export interface Game {
     pickFirstPlayer: boolean;
 }
 
+// TODO: Discuss w/Seth
+export type BooleanDetail = 'monarch' | 'cityBless';
+export type CountableDetail = 'life' | 'infect' | 'energy' | 'storm';
+
+const ARRAY_COUNTABLES = new Set(['cmdDam'] as const);
+type ArrayCountableDetail = typeof ARRAY_COUNTABLES extends Set<infer T> ? T : never; // unwrap typeof T
+
+function isArrayCountable(userInput: string): userInput is ArrayCountableDetail {
+    return (ARRAY_COUNTABLES as Set<string>).has(userInput);
+}
+
+export type PlayerStatsDetails =
+    { [K in BooleanDetail]: boolean; }
+    & { [K in CountableDetail]: number; }
+    & { [K in ArrayCountableDetail]: number[]; };
+
 export interface PlayerStats {
     id: string;
-    life: number;
     color: string;
     history: Array<string>;
     opps: Array<PlayerStats>;
-    other: {
-        cmdDam: Array<number>;
-        infect: number;
-        energy: number;
-        storm: number;
-        monarch: boolean;
-        cityBless: boolean;
-    };
+    // why set this here? can't you just use a method to access the singleton player list and get non-self players?
+    other: PlayerStatsDetails;
 }
 
-import { Injectable } from '@angular/core';
 import { isNullOrUndefined } from 'util';
+
+import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 
 export interface ILifeCounterService {
@@ -53,18 +63,18 @@ export interface ILifeCounterService {
 export class LifeCounterService implements ILifeCounterService {
     initializePlayers(game: Game): Game {
         for (let i = 0; i < game.numPlayers; i++) {
-            let cmdDam = [];
+            const cmdDam = [];
             for (let i = 0; i < game.numPlayers - 1; i++) {
                 cmdDam.push(0);
             }
             game.players.push({
                 id: 'Player' + (i + 1),
-                life: game.startingLife,
                 color: this.setRandomColor(game),
                 history: [],
                 opps: [],
                 other: {
-                    cmdDam: cmdDam,
+                    life: game.startingLife,
+                    cmdDam,
                     infect: 0,
                     energy: 0,
                     storm: 0,
@@ -84,18 +94,18 @@ export class LifeCounterService implements ILifeCounterService {
 
     reset(game: Game): Game {
         for (let i = 0; i < game.numPlayers; i++) {
-            let cmdDam = [];
+            const cmdDam = [];
             for (let i = 0; i < game.numPlayers - 1; i++) {
                 cmdDam.push(0);
             }
             game.players[i] = {
                 id: game.players[i].id,
-                life: game.startingLife,
                 color: game.players[i].color,
                 history: [],
                 opps: game.players[i].opps,
                 other: {
-                    cmdDam: cmdDam,
+                    life: game.startingLife,
+                    cmdDam,
                     infect: 0,
                     energy: 0,
                     storm: 0,
@@ -124,70 +134,49 @@ export class LifeCounterService implements ILifeCounterService {
     }
 
     incrementLife(player: PlayerStats) {
-        player.life += 1;
+        this.incrementCount(player, 'life');
         this.setHistory(player);
     }
 
     decrementLife(player: PlayerStats) {
-        player.life -= 1;
+        this.decrementCount(player, 'life');
         this.setHistory(player);
     }
 
-    incrementCount(player: PlayerStats, type: string, activeCmd?: number) {
-        if (type === 'infect') {
-            player.other.infect += 1;
-        } else if (type === 'storm') {
-            player.other.storm += 1;
-        } else if (type === 'energy') {
-            player.other.energy += 1;
-        } else if (type === 'cmdDam') {
-            player.other.cmdDam[activeCmd] += 1;
+    changeCount(player: PlayerStats, type: CountableDetail | ArrayCountableDetail, delta: number, activeCmd?: number) {
+        if (isArrayCountable(type)) {
+            player.other[type][activeCmd] += delta;
+        } else {
+            player.other[type] += delta;
         }
     }
 
-    decrementCount(player: PlayerStats, type: string, activeCmd?: number) {
-        if (type === 'infect') {
-            if (player.other.infect > 0) {
-                player.other.infect -= 1;
-            }
-        } else if (type === 'storm') {
-            if (player.other.storm > 0) {
-                player.other.storm -= 1;
-            }
-        } else if (type === 'energy') {
-            if (player.other.energy > 0) {
-                player.other.energy -= 1;
-            }
-        } else if (type === 'cmdDam') {
-            player.other.cmdDam[activeCmd] -= 1;
-        }
+    decrementCount(player: PlayerStats, type: CountableDetail | ArrayCountableDetail, activeCmd?: number) {
+        this.changeCount(player, type, -1, activeCmd);
     }
 
-    toggleBoolExtras(player: PlayerStats, type: string) {
-        if (type === 'monarch') {
-            if (player.other.monarch) {
-                player.other.monarch = false;
-            } else {
-                player.other.monarch = true;
-            }
-        } else if (type === 'cityBless') {
-            if (player.other.cityBless) {
-                player.other.cityBless = false;
-            } else {
-                player.other.cityBless = true;
-            }
-        }
+    incrementCount(player: PlayerStats, type: CountableDetail | ArrayCountableDetail, activeCmd?: number) {
+        this.changeCount(player, type, 1, activeCmd);
     }
+
+    toggleBoolExtras(player: PlayerStats, type: BooleanDetail) {
+        player.other[type] = !player.other[type];
+    }
+
+
+
+
+
 
     setHistory(player: PlayerStats) {
         let shift: number;
-        shift = player.life - parseInt(player.history[player.history.length - 1]);
+        shift = player.other.life - parseInt(player.history[player.history.length - 1]);
         // console.log(shift);
-        player.history.push(player.life.toString());
+        player.history.push(player.other.life.toString());
     }
 
     setRandomColor(game: Game): string {
-        let colors = [
+        const colors = [
             // red
             '#dc2054',
             // orange
@@ -215,7 +204,7 @@ export class LifeCounterService implements ILifeCounterService {
             // pink
             '#f38aae',
         ];
-        var color: string;
+        let color: string;
         do {
             color = colors[Math.floor(Math.random() * colors.length)];
             for (let i = 0; i < game.players.length; i++) {
@@ -289,7 +278,7 @@ export class LifeCounterService implements ILifeCounterService {
     }
 
     getTimerDisplay(game: Game): string {
-        var minutes: string, seconds: string;
+        let minutes: string, seconds: string;
         if (game.timer === 3600) {
             return '60:00';
         } else {
