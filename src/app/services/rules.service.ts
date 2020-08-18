@@ -15,7 +15,7 @@ export type RuleInstance = string;
 import { Injectable } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 
-import rules from './rules/rules_txt';
+const RULES = {};
 
 export interface IRulesService {
     // Direct get methods
@@ -45,7 +45,7 @@ export class RulesService implements IRulesService {
     glossary: string;
 
     constructor(public loadingController: LoadingController) {
-        this.topics = Object.keys(rules);
+        this.topics = Object.keys(RULES);
         for (const topic of this.topics) {
             if (topic.toLowerCase() === 'glossary') {
                 this.glossary = topic;
@@ -55,7 +55,7 @@ export class RulesService implements IRulesService {
 
     // Direct get methods
     getAllRules(): RuleInstance[] {
-        return rules;
+        return [];
     }
 
     getAllTopicIds(): string[] {
@@ -68,17 +68,13 @@ export class RulesService implements IRulesService {
     }
 
     getSubTopic(topic: RuleTopic, id: string): RuleInstance[] {
-        let subtopic = rules[topic][id];
-        if (typeof subtopic === 'string') {
-            subtopic = [subtopic];
-        }
-        return subtopic;
+        return []
     }
 
     getTopicFromSubtopic(subtopic: string): RuleTopic {
         for (const topic of this.topics) {
             if (topic.startsWith(subtopic.substring(0, 1))) {
-                return rules[topic];
+                return RULES[topic];
             }
         }
     }
@@ -91,7 +87,7 @@ export class RulesService implements IRulesService {
                 section = topic;
             }
         }
-        subsection = rules[section][rule];
+        subsection = RULES[section][rule];
         if (typeof subsection === 'string') {
             subsection = [subsection];
         }
@@ -107,7 +103,7 @@ export class RulesService implements IRulesService {
             .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
             .join(' ');
         if (!this.isRule(keyword) && keyword != null && keyword !== '') {
-            def = rules[this.glossary][keyword];
+            def = RULES[this.glossary][keyword];
         }
         return def;
     }
@@ -117,7 +113,7 @@ export class RulesService implements IRulesService {
         const temp: Array<RuleTopic> = [];
         for (const topic in this.topics) {
             if (topic.includes(term)) {
-                temp.push(rules[topic]);
+                temp.push(RULES[topic]);
             }
         }
         return temp;
@@ -131,7 +127,6 @@ export class RulesService implements IRulesService {
             for (const subtopic in topic) {
                 // check subtopic for match against term and add to result if it does
                 if (subtopic.includes(term)) {
-                    temp.push(rules[topic[subtopic]]);
                 }
             }
             console.log(temp);
@@ -145,9 +140,9 @@ export class RulesService implements IRulesService {
         } else {
             const temp = Array<RuleInstance>();
             this.topics.forEach((subtopic) => {
-                const subrule = rules[subtopic];
+                const subrule = RULES[subtopic];
                 Object.keys(subrule).forEach((instance) => {
-                    let detail = rules[subtopic][instance];
+                    let detail = RULES[subtopic][instance];
                     let added = false;
                     if (typeof detail !== 'object') {
                         detail = [detail];
