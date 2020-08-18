@@ -14,39 +14,19 @@
         <br />
         <h4 class="roboto-white">Add Participants</h4>
         <ion-item lines="none" light class="bdra-6">
-            <ion-input
-                placeholder="Name (Jace Beleren)"
-                class="enter fs-14"
-                [(ngModel)]="name"
-            ></ion-input>
+            <ion-input placeholder="Name (Jace Beleren)" class="enter fs-14" [(ngModel)]="name"></ion-input>
         </ion-item>
         <ion-item light lines="none" class="bdra-6 mgt-10">
-            <ion-input
-                class="enter fs-14"
-                placeholder="Phone (1234567890)"
-                [(ngModel)]="phoneNumber"
-            ></ion-input>
+            <ion-input class="enter fs-14" placeholder="Phone (1234567890)" [(ngModel)]="phoneNumber"></ion-input>
         </ion-item>
         <div class="mgt-45 text-right">
-            <ion-button
-                (click)="tourney.participants = lastUsedPlayers"
-                expand="round"
-                color="primary"
-                size="small"
+            <ion-button (click)="tourney.participants = lastUsedPlayers" expand="round" color="primary" size="small"
                 *ngIf="(events.length > 1) && (tourney.participants.length < 1) && (lastUsedPlayers.length > 0)"
-                slot="start"
-                class="txt-light mgt--30 light-purple"
-            >
+                slot="start" class="txt-light mgt--30 light-purple">
                 Use players from last event
             </ion-button>
-            <ion-button
-                (click)="addPlayer()"
-                expand="round"
-                color="primary"
-                slot="end"
-                size="small"
-                class="txt-light mgl-10 mgt--30 light-purple"
-            >
+            <ion-button (click)="addPlayer()" expand="round" color="primary" slot="end" size="small"
+                class="txt-light mgl-10 mgt--30 light-purple">
                 <ion-icon class="txt-light" name="add"></ion-icon>
             </ion-button>
         </div>
@@ -63,37 +43,25 @@
                         <ion-label class="roboto-white">{{ item.phoneNumber }}</ion-label>
                     </ion-item>
                     <ion-item-options side="end" class="white">
-                        <ion-item-option (click)="remove(item.name)" class="white"
-                            >Remove
+                        <ion-item-option (click)="remove(item.name)" class="white">Remove
                         </ion-item-option>
                     </ion-item-options>
                 </ion-item-sliding>
             </ion-list>
 
             <div class="mgr-10 text-right">
-                <ion-button
-                    expand="round"
-                    size="small"
-                    color="primary"
-                    (click)="removeAll()"
-                    class="mgt-10 light-purple text-right"
-                >
-                    <ion-label class="fs-14 mgr-10">Clear</ion-label
-                    ><ion-icon class="txt-light" name="close-circle"></ion-icon>
+                <ion-button expand="round" size="small" color="primary" (click)="removeAll()"
+                    class="mgt-10 light-purple text-right">
+                    <ion-label class="fs-14 mgr-10">Clear</ion-label>
+                    <ion-icon class="txt-light" name="close-circle"></ion-icon>
                 </ion-button>
             </div>
         </div>
         <h3 class="roboto-white">Rounds</h3>
         <div class="">
             <ion-segment mode="ios" value="4" (ionChange)="segmentButtonClicked($event)">
-                <ion-segment-button
-                    *ngFor="let choice of roundsPicker"
-                    (name)="(choice.val)"
-                    mode="ios"
-                    class="h-25 select"
-                    value="{{ choice.val }}"
-                    checked="{{ choice.isChecked }}"
-                >
+                <ion-segment-button *ngFor="let choice of roundsPicker" (name)="(choice.val)" mode="ios"
+                    class="h-25 select" value="{{ choice.val }}" checked="{{ choice.isChecked }}">
                     <ion-label class="fs-14 roboto-white">{{ choice.val }}</ion-label>
                 </ion-segment-button>
             </ion-segment>
@@ -104,15 +72,8 @@
 
         <div *ngIf="!isButtonDisabled()">
             <div class="fs-20 fw-900 mgb-35 spacing1 text-center">
-                <ion-button
-                    color="primary"
-                    size="medium"
-                    class="txt-light but text-center"
-                    type="submit"
-                    (disabled)="isButtonDisabled()"
-                    (click)="startEvent()"
-                    mode="ios"
-                >
+                <ion-button color="primary" size="medium" class="txt-light but text-center" type="submit"
+                    (disabled)="isButtonDisabled()" (click)="startEvent()" mode="ios">
                     <h2 class="roboto-white fs-18">Start Tournament</h2>
                 </ion-button>
             </div>

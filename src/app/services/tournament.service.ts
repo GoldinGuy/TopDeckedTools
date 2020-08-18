@@ -3,7 +3,7 @@ export interface Tournament {
     participants: Array<TournamentPlayer>;
     matches: Array<Pairing>;
     round: TournamentRound;
-    rounds: Array<TournamentRound>;
+    rounds: Array<TournamentRound>; // FIXME: Previous rounds, or is current round here as well?
     totalRounds: TotalRounds;
     standings: Array<Result>;
     status: string;
@@ -23,7 +23,7 @@ export interface TournamentRound {
 }
 
 export interface Result {
-    id: string;
+    id: string; // player name/id
     wins: number;
     losses: number;
     seed: number;
@@ -51,11 +51,12 @@ export interface Pairing {
 export type TotalRounds = number;
 export type Events = Array<Tournament>;
 
-import swiss from './tournaments/swiss.js';
 import { Injectable } from '@angular/core';
 import { SMS } from '@ionic-native/sms/ngx';
-import { Storage } from '@ionic/storage';
 import { AlertController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
+
+import swiss from './tournaments/swiss.js';
 
 export interface ITournamentService {
     // methods that control the status of the tournament
@@ -69,7 +70,7 @@ export interface ITournamentService {
         pname: string,
         phone: string,
         seed: number,
-        tourney?: Tournament
+        tourney?: Tournament,
     ): TournamentPlayer;
     removePlayer(tourney: Tournament, name: string): void;
     removeAllPlayers(tourney: Tournament): void;
@@ -84,8 +85,8 @@ export interface ITournamentService {
 
 @Injectable({ providedIn: 'root' })
 export class TournamentService implements ITournamentService {
-    createTournament(players: Array<TournamentPlayer>, numRounds: number, id?: string): Tournament {
-        var tourney: Tournament = {
+    public createTournament(players: Array<TournamentPlayer>, numRounds: number, id?: string): Tournament {
+        const tourney: Tournament = {
             id: id ? null : Math.random().toString(36).substring(2, 15),
             participants: players,
             matches: [],
@@ -105,23 +106,23 @@ export class TournamentService implements ITournamentService {
         return tourney;
     }
 
-    async saveTournament(tourneys: Events, storage: Storage) {
+    public async saveTournament(tourneys: Events, storage: Storage) {
         // TODO: save tournament to local storage/topdecked server
         // await storage.set('tournament', tourney);
         await storage.set('events', tourneys);
     }
 
-    loadTournament(tourneys: Events, id: string): Tournament {
-        for (var i = 0; i < tourneys.length; i++) {
+    public loadTournament(tourneys: Events, id: string): Tournament {
+        for (let i = 0; i < tourneys.length; i++) {
             if (tourneys[i].id === id) {
                 return tourneys[i];
             }
         }
     }
 
-    generateNextRound(tourney: Tournament): TournamentRound {
+    public generateNextRound(tourney: Tournament): TournamentRound {
         // create the next round with data based on last round
-        var newRound: TournamentRound = {
+        const newRound: TournamentRound = {
             roundNum: tourney.round.roundNum + 1,
             pairings: tourney.round.pairings,
         };
@@ -131,13 +132,14 @@ export class TournamentService implements ITournamentService {
             console.log('matches: ' + JSON.stringify(tourney.matches));
 
             // this.setResults(tourney);
-            // get the new matchups based on results of previous matchups
+            // get the new matchups based on results of previous matchups (uses Result.id to match)
             newRound.pairings = swiss.getMatchups(
                 newRound.roundNum,
                 tourney.participants,
-                tourney.matches || []
+                tourney.matches || [],
             );
-            // map pairings data
+
+            // map pairings data -- FIXME: is this necessary?
             newRound.pairings = newRound.pairings.map((pairing: Pairing, index: number) => {
                 if (!pairing.away) {
                     return {
@@ -181,18 +183,18 @@ export class TournamentService implements ITournamentService {
         }
     }
 
-    createPlayer(
+    public createPlayer(
         pname: string,
         phone: string,
         seed: number,
-        tourney?: Tournament
+        tourney?: Tournament,
     ): TournamentPlayer {
         // create the new player based on the interface
-        var player: TournamentPlayer = {
+        const player: TournamentPlayer = {
             name: pname,
             phoneNumber: phone,
             standing: null,
-            seed: seed,
+            seed,
         };
         // allows other classes to use this method to create a player without a valid tournament
         if (tourney != null && tourney != undefined) {
@@ -202,23 +204,23 @@ export class TournamentService implements ITournamentService {
         return player;
     }
 
-    removePlayer(tourney: Tournament, name: string) {
-        for (var i = 0; i < tourney.participants.length; i++) {
+    public removePlayer(tourney: Tournament, name: string) {
+        for (let i = 0; i < tourney.participants.length; i++) {
             if (tourney.participants[i].name === name) {
                 tourney.participants.splice(i--, 1);
             }
         }
     }
 
-    removeAllPlayers(tourney: Tournament) {
+    public removeAllPlayers(tourney: Tournament) {
         tourney.participants = [];
     }
 
-    setResults(tourney: Tournament) {
-        var round = tourney.round;
+    public setResults(tourney: Tournament) {
+        const round = tourney.round;
         // for each set of pairings in the tournament, calculate how many points each participant earns
         for (let i = 0; i < round.pairings.length; i++) {
-            if (round.pairings[i].home.score == round.pairings[i].away.score) {
+            if (round.pairings[i].home.score === round.pairings[i].away.score) {
                 round.pairings[i].home.points = 0.5;
                 round.pairings[i].away.points = 0.5;
             } else if (tourney.round.pairings[i].home.score > round.pairings[i].away.score) {
@@ -234,15 +236,15 @@ export class TournamentService implements ITournamentService {
         // this.getStandings(tourney);
     }
 
-    getStandings(tourney: Tournament): Array<Result> {
+    public getStandings(tourney: Tournament): Array<Result> {
         // generate standings based on the current results
         tourney.standings = swiss.getStandings(
             tourney.totalRounds + 1,
             tourney.participants,
-            tourney.matches
+            tourney.matches,
         );
 
-        let wins = {},
+        const wins = {},
             differential = {},
             points = {};
         // for each result, determine data
@@ -266,7 +268,7 @@ export class TournamentService implements ITournamentService {
 
         // determine standings for each participant
         tourney.standings = tourney.standings.map((result: Result) => {
-            var newStandings: Result = {
+            const newStandings: Result = {
                 id: result.id,
                 wins: result.wins,
                 losses: result.losses,
@@ -280,7 +282,7 @@ export class TournamentService implements ITournamentService {
 
         // sort participants by current standings
         tourney.standings.sort((standing1: Result, standing2: Result) => {
-            let val =
+            const val =
                 10 * standing2.wins - standing2.losses - (10 * standing1.wins - standing1.losses);
             if (val != 0) {
                 return val;
@@ -300,9 +302,9 @@ export class TournamentService implements ITournamentService {
         return tourney.standings;
     }
 
-    async getDetailedStandings(result: Result, alertController: AlertController): Promise<void> {
+    public async getDetailedStandings(result: Result, alertController: AlertController): Promise<void> {
         const alert = await alertController.create({
-            header: result.id + "'s record",
+            header: result.id + '\'s record',
             message: `<p>Wins: ${result.wins}</p>
             <p>Losses: ${result.losses}</p>
             <p>Opponent Wins: ${result.tiebreaker}</p>
@@ -313,24 +315,24 @@ export class TournamentService implements ITournamentService {
         return await alert.present();
     }
 
-    async sendPairings(tourney: Tournament, sms?: SMS, round?: TournamentRound) {
+    public async sendPairings(tourney: Tournament, sms?: SMS, round?: TournamentRound) {
         // sends current round pairings by default, with optional parameters
-        var shareRound = round ? null : tourney.round;
+        const shareRound = round ? null : tourney.round;
 
-        let participantRefactor = {};
+        const participantRefactor = {};
         tourney.participants.forEach((participant: TournamentPlayer) => {
             participantRefactor[participant.name] = participant.phoneNumber;
         });
 
-        let numbers = [];
+        const numbers = [];
         let string = shareRound.pairings.map((pairing: Pairing) => {
             numbers.push(participantRefactor[pairing.home.id]);
             numbers.push(participantRefactor[pairing.away.id]);
 
             return `${pairing.home.id} vs ${pairing.away.id}`;
         });
-        let pairings = string.join('\n');
-        let phoneNumbers = numbers.join(', ');
+        const pairings = string.join('\n');
+        const phoneNumbers = numbers.join(', ');
 
         if (sms != null) {
             // TODO: send pairings via topdecked messaging, right now instead it sends via sms
@@ -342,7 +344,7 @@ export class TournamentService implements ITournamentService {
         }
     }
 
-    getCurrentRound(tourney: Tournament): TournamentRound {
+    public getCurrentRound(tourney: Tournament): TournamentRound {
         return tourney.round;
     }
 }

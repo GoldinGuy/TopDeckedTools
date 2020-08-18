@@ -9,22 +9,13 @@
     </ion-toolbar>
 </ion-header>
 <ion-content class="bg-theme">
-    <div
-        class="roboto-white-title fs-21 text-center pdt-7 pdb-7"
-        (click)="manipulateTimer()"
-        *ngIf="!eventComplete"
-    >
-        <ion-icon name="timer" [style.color]="timer <= 300 ? 'red' : 'white'"></ion-icon
-        ><span class="ml-5">{{ timerDisplay }}</span>
+    <div class="roboto-white-title fs-21 text-center pdt-7 pdb-7" (click)="manipulateTimer()" *ngIf="!eventComplete">
+        <ion-icon name="timer" [style.color]="timer <= 300 ? 'red' : 'white'"></ion-icon><span
+            class="ml-5">{{ timerDisplay }}</span>
     </div>
 
     <div class="pdl-18 pdr-18 pdt-5">
-        <ion-segment
-            (ionChange)="segmentChanged($event)"
-            mode="ios"
-            value="pairings"
-            *ngIf="!eventComplete"
-        >
+        <ion-segment (ionChange)="segmentChanged($event)" mode="ios" value="pairings" *ngIf="!eventComplete">
             <ion-segment-button value="pairings">
                 <ion-label class="roboto-white">Pairings</ion-label>
             </ion-segment-button>
@@ -38,22 +29,15 @@
 
     <!-- display pairings -->
     <div *ngIf="!displayStandings && !expandedView">
-        <ion-card
-            no-margin
-            class="mgb-15 bg-purple-card bdra-5"
-            *ngFor="let pairing of tourney.round.pairings"
-        >
+        <ion-card no-margin class="mgb-15 bg-purple-card bdra-5" *ngFor="let pairing of tourney.round.pairings">
             <ion-grid>
                 <ion-row>
                     <h5 class="fs-17 roboto-white w-100 pdl-5" side="start">
                         {{ pairing.home.id }}
                     </h5>
-                    <button
-                        class="wins float-right"
-                        *ngIf="!pairing.bye"
+                    <button class="wins float-right" *ngIf="!pairing.bye"
                         [style.background]="pairing.home.score > pairing.away.score ? '#915fc2' : '#544a63'"
-                        (click)="incrementScore(pairing.home, pairing.away)"
-                    >
+                        (click)="incrementScore(pairing.home, pairing.away)">
                         <a class="fs-22 roboto-white">{{ pairing.home.score }}</a>
                     </button>
                     <ion-col *ngIf="pairing.bye">
@@ -61,19 +45,13 @@
                             BYE
                         </h3>
                     </ion-col>
-                    <h3
-                        ion-text-center
-                        class="center roboto-semibold roboto-white fs-18 pdl-7 pdr-7"
-                        *ngIf="!pairing.bye"
-                    >
+                    <h3 ion-text-center class="center roboto-semibold roboto-white fs-18 pdl-7 pdr-7"
+                        *ngIf="!pairing.bye">
                         VS
                     </h3>
-                    <button
-                        class="wins float-right"
-                        *ngIf="!pairing.bye"
+                    <button class="wins float-right" *ngIf="!pairing.bye"
                         [style.background]="pairing.home.score < pairing.away.score ? '#915fc2' : '#544a63'"
-                        (click)="incrementScore(pairing.away, pairing.home)"
-                    >
+                        (click)="incrementScore(pairing.away, pairing.home)">
                         <a class="fs-22 roboto-white">{{ pairing.away.score }}</a>
                     </button>
 
@@ -86,40 +64,27 @@
     </div>
 
     <div *ngIf="!displayStandings && expandedView">
-        <ion-card
-            no-margin
-            class="mgb-15 bg-purple-card bdra-5"
-            *ngFor="let pairing of tourney.round.pairings"
-        >
+        <ion-card no-margin class="mgb-15 bg-purple-card bdra-5" *ngFor="let pairing of tourney.round.pairings">
             <ion-grid>
                 <ion-row>
                     <ion-col>
                         <h5 class="fs-17 roboto-white w-100 pdl-5" side="start">
                             {{ pairing.home.id }}
                         </h5>
-                        <button
-                            class="wins float-right"
+                        <button class="wins float-right"
                             [style.background]="pairing.home.score > pairing.away.score ? '#915fc2' : '#544a63'"
-                            *ngIf="!pairing.bye"
-                            (click)="incrementScore(pairing.home, pairing.away)"
-                        >
+                            *ngIf="!pairing.bye" (click)="incrementScore(pairing.home, pairing.away)">
                             <a class="fs-22 roboto-white">{{ pairing.home.score }}</a>
                         </button>
                     </ion-col>
 
                     <ion-col>
-                        <h3
-                            ion-text-center
-                            class="center roboto-semibold roboto-white fs-18 pdl-7 pdr-7"
-                            *ngIf="pairing.bye"
-                        >
+                        <h3 ion-text-center class="center roboto-semibold roboto-white fs-18 pdl-7 pdr-7"
+                            *ngIf="pairing.bye">
                             BYE
                         </h3>
-                        <h3
-                            ion-text-center
-                            class="center roboto-semibold roboto-white fs-18 pdl-7 pdr-7"
-                            *ngIf="!pairing.bye"
-                        >
+                        <h3 ion-text-center class="center roboto-semibold roboto-white fs-18 pdl-7 pdr-7"
+                            *ngIf="!pairing.bye">
                             VS
                         </h3>
                     </ion-col>
@@ -127,12 +92,9 @@
                         <h5 class="fs-17 roboto-white float-right w-100 pdr-5" side="end">
                             {{ pairing.away.id }}
                         </h5>
-                        <button
-                            class="wins float-right"
+                        <button class="wins float-right"
                             [style.background]="pairing.home.score < pairing.away.score ? '#915fc2' : '#544a63'"
-                            *ngIf="!pairing.bye"
-                            (click)="incrementScore(pairing.away, pairing.home)"
-                        >
+                            *ngIf="!pairing.bye" (click)="incrementScore(pairing.away, pairing.home)">
                             <a class="fs-22 roboto-white">{{ pairing.away.score }}</a>
                         </button>
                     </ion-col>
@@ -145,28 +107,17 @@
     <div *ngIf="displayStandings">
         <div class="pdl-15 pdr-15 pdt-5">
             <ion-list class="player">
-                <ion-item
-                    class="player-item ion-text-start"
-                    lines="none"
-                    *ngFor="let person of tourney.standings"
-                    ><ion-col size="8">
+                <ion-item class="player-item ion-text-start" lines="none" *ngFor="let person of tourney.standings">
+                    <ion-col size="8">
                         <h5 class="fs-19 roboto-white">
                             <span class="rank">{{ person.index }}</span>
                             {{ person.id }}
                         </h5>
                     </ion-col>
-                    <ion-col
-                        ><ion-button
-                            side="end"
-                            mode="ios"
-                            class="results float-right"
-                            id="longMessage"
-                            expand="block"
-                            (click)="presentDetailedStandings(person)"
-                            shape="results"
-                            >RECORD</ion-button
-                        ></ion-col
-                    >
+                    <ion-col>
+                        <ion-button side="end" mode="ios" class="results float-right" id="longMessage" expand="block"
+                            (click)="presentDetailedStandings(person)" shape="results">RECORD</ion-button>
+                    </ion-col>
                 </ion-item>
             </ion-list>
         </div>
@@ -191,26 +142,12 @@
     </div>
 
     <div class="fs-20 fw-900 text-center" *ngIf="eventComplete">
-        <ion-button
-            color="primary"
-            mode="ios"
-            size="medium"
-            class="but fs-18"
-            type="submit"
-            (click)="endEvent()"
-        >
+        <ion-button color="primary" mode="ios" size="medium" class="but fs-18" type="submit" (click)="endEvent()">
             <h3 class="roboto-white">Done</h3>
         </ion-button>
     </div>
     <div class="fs-10 text-center">
-        <ion-button
-            color="bg-theme"
-            mode="ios"
-            size="small"
-            class="fs-10"
-            type="submit"
-            (click)="reset()"
-        >
+        <ion-button color="bg-theme" mode="ios" size="small" class="fs-10" type="submit" (click)="reset()">
             <p color="primary" class="fs-14 color-purp">Reset</p>
         </ion-button>
     </div>

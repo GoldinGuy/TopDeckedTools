@@ -1,14 +1,12 @@
-import { Component } from '@angular/core';
-import { Storage } from '@ionic/storage';
-import { Router, NavigationExtras } from '@angular/router';
-import { AlertController, PopoverController } from '@ionic/angular';
-import { isNullOrUndefined } from 'util';
 import {
-    Tournament,
-    TournamentService,
-    TournamentPlayer,
-    Events,
+  Events, Tournament, TournamentPlayer, TournamentService
 } from 'src/app/services/tournament.service';
+import { isNullOrUndefined } from 'util';
+
+import { Component } from '@angular/core';
+import { NavigationExtras, Router } from '@angular/router';
+import { AlertController, PopoverController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 
 @Component({
     selector: 'app-events',
@@ -16,14 +14,14 @@ import {
     styleUrls: ['events.scss'],
 })
 export class EventsPage {
-    tourney: Tournament;
-    events: Events;
-    lastUsedPlayers: Array<TournamentPlayer>;
+    public tourney: Tournament;
+    public events: Events;
+    public lastUsedPlayers: Array<TournamentPlayer>;
     // temporary UI fields
-    name: string;
-    phoneNumber: string;
+    public name: string;
+    public phoneNumber: string;
 
-    roundsPicker = [
+    public roundsPicker = [
         { val: 2, isChecked: false },
         { val: 3, isChecked: false },
         { val: 4, isChecked: true },
@@ -36,7 +34,7 @@ export class EventsPage {
         public alertController: AlertController,
         private router: Router,
         private storage: Storage,
-        private tournamentService: TournamentService
+        private tournamentService: TournamentService,
     ) {
         this.tourney = {
             id: 'unknown',
@@ -54,7 +52,7 @@ export class EventsPage {
         this.events = [this.tourney];
     }
 
-    async ionViewWillEnter() {
+    public async ionViewWillEnter() {
         this.lastUsedPlayers = [];
         try {
             this.events = await this.storage.get('events');
@@ -71,12 +69,12 @@ export class EventsPage {
                     this.tourney.round.roundNum >= this.tourney.totalRounds ||
                     isNullOrUndefined(this.tourney)
                 ) {
-                    for (var i = 0; i < this.tourney.participants.length; i++) {
-                        var play = this.tournamentService.createPlayer(
+                    for (let i = 0; i < this.tourney.participants.length; i++) {
+                        const play = this.tournamentService.createPlayer(
                             this.tourney.participants[i].name,
                             this.tourney.participants[i].phoneNumber,
                             this.lastUsedPlayers.length + 1,
-                            null
+                            null,
                         );
                         this.lastUsedPlayers.push(play);
                         // console.log(JSON.stringify(this.lastUsedPlayers));
@@ -97,12 +95,12 @@ export class EventsPage {
     }
 
     // handle button events, what they do, and whether they are disabled
-    async startEvent() {
+    public async startEvent() {
         if (this.tourney.participants.length < 2) {
             return;
         }
         this.tournamentService.saveTournament(this.events, this.storage);
-        let navigationExtras: NavigationExtras = {
+        const navigationExtras: NavigationExtras = {
             state: {
                 new: true,
             },
@@ -110,7 +108,7 @@ export class EventsPage {
         this.router.navigate(['/tabs/events/tournaments'], navigationExtras);
     }
 
-    addPlayer = async () => {
+    public addPlayer = async () => {
         if (!this.name || !this.phoneNumber) {
             return;
         }
@@ -118,27 +116,27 @@ export class EventsPage {
             this.name,
             this.phoneNumber,
             this.tourney.participants.length + 1,
-            this.tourney
+            this.tourney,
         );
 
         this.name = '';
         this.phoneNumber = '';
 
-        // console.log(JSON.stringify(this.tourney.participants));
-    };
+        console.log(JSON.stringify(this.tourney.participants));
+    }
 
-    remove = async (name: string) => {
+    public remove = async (name: string) => {
         this.tournamentService.removePlayer(this.tourney, name);
-    };
+    }
 
-    removeAll = async () => {
+    public removeAll = async () => {
         this.tournamentService.removeAllPlayers(this.tourney);
-    };
+    }
 
-    segmentButtonClicked(ev: any) {
+    public segmentButtonClicked(ev: any) {
         this.tourney.totalRounds = ev.target.value;
         this.roundsPicker = this.roundsPicker.map((round) => {
-            if (round.val == ev.target.value) {
+            if (round.val === ev.target.value) {
                 return {
                     val: round.val,
                     isChecked: true,
@@ -153,7 +151,7 @@ export class EventsPage {
         console.log(this.roundsPicker);
     }
 
-    isDisabled() {
+    public isDisabled() {
         if (this.tourney.participants.length < 1) {
             return true;
         } else {
@@ -161,7 +159,7 @@ export class EventsPage {
         }
     }
 
-    isButtonDisabled() {
+    public isButtonDisabled() {
         if (this.tourney.participants.length < 2) {
             return true;
         } else {
