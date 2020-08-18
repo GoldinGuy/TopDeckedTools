@@ -3,6 +3,8 @@
     --background: #544a63 !important;
 }
 
+// .fill {}
+
 .grid-container {
     display: flex;
     justify-content: center;
@@ -107,9 +109,6 @@
         top: 0;
         left: 0;
         backdrop-filter: blur(6px);
-        // @media (orientation: landscape) {
-        //     padding: 50px 100px 20px;
-        // }
     }
 
     .option {
@@ -182,16 +181,8 @@
 
 // 1 player
 #seat1 {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-
     .val-container {
-        display: flex;
-        position: fixed;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
+        --height: 100vh;
 
         @media (orientation: portrait) {
             --rotate-player0: 90deg;
@@ -218,9 +209,7 @@
             padding-bottom: 20px;
 
             .counter {
-                position: absolute;
-                height: 50%;
-                width: 100vw;
+                height: 50% !important;
             }
             .p0-add-life {
                 top: 0;
@@ -233,23 +222,13 @@
         }
 
         .val {
-            font-size: 160px;
-            font-weight: bold;
-            color: #fff;
-        }
-
-        .rotate-player0 {
-            transform: rotate(var(--rotate-player0));
+            font-size: 160px !important;
         }
     }
 }
 
 // 2 players
 #seat2 {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-
     @media (orientation: landscape) {
         .flex-land-2 {
             display: flex;
@@ -257,22 +236,14 @@
     }
 
     .val-container {
-        text-align: center;
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: var(--height);
-
         @media (orientation: portrait) {
             --rotate-player0: 180deg;
             --rotate-player1: 0deg;
             --height: 49.5vh;
 
             .counter {
-                position: absolute;
-                width: 100%;
-                height: 25vh;
+                height: 25vh !important;
+                width: 100% !important;
             }
         }
 
@@ -280,11 +251,9 @@
             --rotate-player0: 90deg;
             --rotate-player1: -90deg;
             --height: 100vh;
-
             .counter {
-                position: absolute;
-                height: 100%;
-                width: 25vw;
+                height: 100% !important;
+                width: 25vw !important;
             }
         }
 
@@ -335,10 +304,6 @@
 
 // 3 players
 #seat3 {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-
     @media (orientation: landscape) {
         .flex-land-3 {
             display: flex;
@@ -356,25 +321,11 @@
     }
 
     .val-container {
-        text-align: center;
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: var(--height);
-        width: var(--width);
-
         @media (orientation: portrait) {
             --rotate-player0: -90deg;
             --rotate-player1: 90deg;
             --height: 69vh;
             --width: 50vw;
-
-            .counter {
-                position: absolute;
-                height: 100%;
-                width: 25vw;
-            }
 
             .p0-rem-life,
             .p1-add-life {
@@ -394,12 +345,6 @@
             --height: 49.1vh;
             --width: 69vw;
 
-            .counter {
-                position: absolute;
-                width: 100%;
-                height: 25vh;
-            }
-
             .p1-rem-life,
             .p0-add-life {
                 bottom: 0;
@@ -410,19 +355,6 @@
                 top: 0;
                 left: 0;
             }
-        }
-
-        .val {
-            font-size: 70px;
-            font-weight: bold;
-            color: #fff;
-        }
-
-        .rotate-player0 {
-            transform: rotate(var(--rotate-player0));
-        }
-        .rotate-player1 {
-            transform: rotate(var(--rotate-player1));
         }
     }
     .long-p2 {
@@ -438,9 +370,8 @@
             left: 0;
 
             .counter {
-                position: absolute;
-                width: 100%;
                 height: 15vh !important;
+                width: 100% !important;
             }
         }
 
@@ -452,14 +383,9 @@
             right: 0;
 
             .counter {
-                position: absolute;
-                height: 100%;
                 width: 15vw !important;
+                height: 100% !important;
             }
-        }
-
-        .rotate-player2 {
-            transform: rotate(var(--rotate-player2));
         }
 
         .p2-add-life {
@@ -503,10 +429,6 @@
 
 // 4 players
 #seat4 {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-
     .orient {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -528,13 +450,7 @@
     }
 
     .val-container {
-        text-align: center;
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: var(--height);
-        width: 49.5vw;
+        --width: 49.5vw;
 
         @media (orientation: portrait) {
             --rotate-player0: 90deg;
@@ -542,12 +458,6 @@
             --rotate-player2: 90deg;
             --rotate-player3: -90deg;
             --height: 49.5vh;
-
-            .counter {
-                position: absolute;
-                width: 25vw;
-                height: 100%;
-            }
 
             .p1-add-life,
             .p2-rem-life {
@@ -569,14 +479,6 @@
                 top: 0;
                 left: 0;
             }
-
-            @media (min-width: 700px) {
-                .val {
-                    font-size: 100px !important;
-                    font-weight: bold;
-                    color: #fff;
-                }
-            }
         }
 
         @media (orientation: landscape) {
@@ -585,12 +487,6 @@
             --rotate-player2: 0deg;
             --rotate-player3: 180deg;
             --height: 49vh;
-
-            .counter {
-                position: absolute;
-                height: 25vh;
-                width: 100%;
-            }
 
             .p3-add-life,
             .p2-rem-life {
@@ -612,33 +508,6 @@
                 top: 0;
                 left: 0;
             }
-
-            @media (min-width: 1000px) {
-                .val {
-                    font-size: 100px !important;
-                    font-weight: bold;
-                    color: #fff;
-                }
-            }
-        }
-
-        .val {
-            font-size: 70px;
-            font-weight: bold;
-            color: #fff;
-        }
-
-        .rotate-player0 {
-            transform: rotate(var(--rotate-player0));
-        }
-        .rotate-player1 {
-            transform: rotate(var(--rotate-player1));
-        }
-        .rotate-player2 {
-            transform: rotate(var(--rotate-player2));
-        }
-        .rotate-player3 {
-            transform: rotate(var(--rotate-player3));
         }
     }
 
@@ -684,10 +553,6 @@
 
 // 5 players
 #seat5 {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-
     .orient {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -710,14 +575,6 @@
     }
 
     .val-container {
-        text-align: center;
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: var(--height);
-        width: var(--width);
-
         @media (orientation: portrait) {
             --rotate-player0: 90deg;
             --rotate-player1: -90deg;
@@ -727,9 +584,8 @@
             --width: 49.5vw;
 
             .counter {
-                position: absolute;
-                width: 25vw;
-                height: 100%;
+                height: 15vh !important;
+                width: 100% !important;
             }
 
             .p1-add-life,
@@ -752,14 +608,6 @@
                 top: 0;
                 left: 0;
             }
-
-            @media (min-width: 700px) {
-                .val {
-                    font-size: 100px !important;
-                    font-weight: bold;
-                    color: #fff;
-                }
-            }
         }
 
         @media (orientation: landscape) {
@@ -771,9 +619,8 @@
             --width: 34vw;
 
             .counter {
-                position: absolute;
-                height: 25vh;
-                width: 100%;
+                width: 15vw !important;
+                height: 100% !important;
             }
 
             .p3-add-life,
@@ -796,33 +643,6 @@
                 top: 0;
                 left: 0;
             }
-
-            @media (min-width: 1000px) {
-                .val {
-                    font-size: 100px !important;
-                    font-weight: bold;
-                    color: #fff;
-                }
-            }
-        }
-
-        .val {
-            font-size: 70px;
-            font-weight: bold;
-            color: #fff;
-        }
-
-        .rotate-player0 {
-            transform: rotate(var(--rotate-player0));
-        }
-        .rotate-player1 {
-            transform: rotate(var(--rotate-player1));
-        }
-        .rotate-player2 {
-            transform: rotate(var(--rotate-player2));
-        }
-        .rotate-player3 {
-            transform: rotate(var(--rotate-player3));
         }
     }
 
@@ -879,8 +699,6 @@
             right: 0;
 
             .counter {
-                position: absolute;
-                width: 100%;
                 height: 15vh !important;
             }
         }
@@ -894,14 +712,8 @@
             right: 0;
 
             .counter {
-                position: absolute;
-                height: 100%;
                 width: 15vw !important;
             }
-        }
-
-        .rotate-player4 {
-            transform: rotate(var(--rotate-player4));
         }
 
         .p4-add-life {
@@ -927,10 +739,6 @@
 
 // 6 players
 #seat6 {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-
     .orient {
         display: grid;
         @media (orientation: portrait) {
@@ -960,14 +768,6 @@
     }
 
     .val-container {
-        text-align: center;
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: var(--height);
-        width: var(--width);
-
         @media (orientation: portrait) {
             --rotate-player0: 90deg;
             --rotate-player1: -90deg;
@@ -977,20 +777,6 @@
             --rotate-player5: -90deg;
             --height: 32.66vh;
             --width: 49.3vw;
-
-            .counter {
-                position: absolute;
-                width: 25vw;
-                height: 100%;
-            }
-
-            @media (min-width: 700px) {
-                .val {
-                    font-size: 100px !important;
-                    font-weight: bold;
-                    color: #fff;
-                }
-            }
         }
 
         @media (orientation: landscape) {
@@ -1002,45 +788,6 @@
             --rotate-player5: 180deg;
             --height: 49.1vh;
             --width: 32.66vw;
-
-            .counter {
-                position: absolute;
-                height: 25vh;
-                width: 100%;
-            }
-
-            @media (min-width: 1000px) {
-                .val {
-                    font-size: 100px !important;
-                    font-weight: bold;
-                    color: #fff;
-                }
-            }
-        }
-
-        .val {
-            font-size: 70px;
-            font-weight: bold;
-            color: #fff;
-        }
-
-        .rotate-player0 {
-            transform: rotate(var(--rotate-player0));
-        }
-        .rotate-player1 {
-            transform: rotate(var(--rotate-player1));
-        }
-        .rotate-player2 {
-            transform: rotate(var(--rotate-player2));
-        }
-        .rotate-player3 {
-            transform: rotate(var(--rotate-player3));
-        }
-        .rotate-player4 {
-            transform: rotate(var(--rotate-player4));
-        }
-        .rotate-player5 {
-            transform: rotate(var(--rotate-player5));
         }
     }
 
@@ -1164,5 +911,71 @@
         text-align: center;
         font-size: 40px;
         padding-top: 30px;
+    }
+}
+
+.val-container {
+    text-align: center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: var(--height);
+    width: var(--width);
+
+    .rotate-player0 {
+        transform: rotate(var(--rotate-player0));
+    }
+    .rotate-player1 {
+        transform: rotate(var(--rotate-player1));
+    }
+    .rotate-player2 {
+        transform: rotate(var(--rotate-player2));
+    }
+    .rotate-player3 {
+        transform: rotate(var(--rotate-player3));
+    }
+    .rotate-player4 {
+        transform: rotate(var(--rotate-player4));
+    }
+    .rotate-player5 {
+        transform: rotate(var(--rotate-player5));
+    }
+
+    .val {
+        font-size: 70px;
+        font-weight: bold;
+        color: #fff;
+    }
+
+    @media (orientation: portrait) {
+        .counter {
+            position: absolute;
+            width: 25vw;
+            height: 100%;
+        }
+
+        @media (min-width: 700px) {
+            .val {
+                font-size: 100px !important;
+                font-weight: bold;
+                color: #fff;
+            }
+        }
+    }
+
+    @media (orientation: landscape) {
+        .counter {
+            position: absolute;
+            height: 25vh;
+            width: 100%;
+        }
+        @media (min-width: 1000px) {
+            .val {
+                font-size: 100px !important;
+                font-weight: bold;
+                color: #fff;
+            }
+        }
     }
 }
