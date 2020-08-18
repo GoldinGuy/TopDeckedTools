@@ -179,16 +179,6 @@
 .flex {
     display: flex;
 }
-@media (orientation: portrait) {
-    .flex-port {
-        display: flex;
-    }
-}
-@media (orientation: landscape) {
-    .flex-land {
-        display: flex;
-    }
-}
 
 // 1 player
 #seat1 {
@@ -259,6 +249,12 @@
     position: fixed;
     width: 100vw;
     height: 100vh;
+
+    @media (orientation: landscape) {
+        .flex-land {
+            display: flex;
+        }
+    }
 
     .val-container {
         text-align: center;
@@ -342,6 +338,18 @@
     position: fixed;
     width: 100vw;
     height: 100vh;
+
+    @media (orientation: landscape) {
+        .flex-land {
+            display: flex;
+        }
+    }
+
+    @media (orientation: portrait) {
+        .flex-port {
+            display: flex;
+        }
+    }
 
     .orient {
         flex-direction: row-reverse;

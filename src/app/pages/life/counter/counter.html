@@ -2,136 +2,19 @@
 <ion-content fullscreen class="bg-theme">
     <div class="grid-container">
         <ion-grid class="grid">
-            <!-- 1 player -->
-            <ng-container *ngIf="game.numPlayers === 1">
-                <div id="seat1">
-                    <ng-container *ngFor="let player of game.players">
-                        <ion-col class="val-container" [style.background-color]="player.color">
-                            <p class="val rotate-player0">
-                                {{ player.life }}
-                            </p>
-                            <div
-                                class="counter p0-add-life tap"
-                                (click)="lifeCounter.incrementLife(player)"
-                                ion-long-press
-                                [interval]="600"
-                                (longPressed)="detailsModal(player)"
-                            ></div>
-                            <div
-                                class="counter p0-rem-life tap"
-                                (click)="lifeCounter.decrementLife(player)"
-                                ion-long-press
-                                [interval]="600"
-                                (longPressed)="detailsModal(player)"
-                            ></div>
-                        </ion-col>
-                    </ng-container>
-                </div>
-            </ng-container>
-            <!-- 2 players -->
-            <ng-container *ngIf="game.numPlayers === 2">
-                <div id="seat2">
-                    <div class="flex-land">
-                        <ng-container *ngFor="let player of game.players; let i = index;">
-                            <ion-col
-                                class="val-container p{{i}}"
-                                [style.background-color]="player.color"
-                            >
-                                <p class="val rotate-player{{i}}">
-                                    {{ player.life }}
-                                </p>
-
-                                <div
-                                    class="counter p{{i}}-add-life tap"
-                                    (click)="lifeCounter.incrementLife(player)"
-                                    ion-long-press
-                                    [interval]="600"
-                                    (longPressed)="detailsModal(player, ('rotate-player'+ i))"
-                                ></div>
-                                <div
-                                    class="counter p{{i}}-rem-life tap"
-                                    (click)="lifeCounter.decrementLife(player)"
-                                    ion-long-press
-                                    [interval]="600"
-                                    (longPressed)="detailsModal(player, ('rotate-player'+ i))"
-                                ></div>
-                            </ion-col>
-                        </ng-container>
-                    </div>
-                </div>
-            </ng-container>
-            <!-- 3 players -->
-            <ng-container *ngIf="game.numPlayers === 3">
-                <div id="seat3">
-                    <div class="flex-land">
-                        <div class="flex-port orient">
-                            <ng-container *ngFor="let player of game.players; let i = index;">
-                                <ion-col
-                                    class="val-container long-p{{i}} p{{i}}"
-                                    [style.background-color]="player.color"
-                                >
-                                    <p class="val rotate-player{{i}}">{{ player.life }}</p>
-                                    <div
-                                        class="counter p{{i}}-add-life tap"
-                                        (click)="lifeCounter.incrementLife(player)"
-                                        ion-long-press
-                                        [interval]="600"
-                                        (longPressed)="detailsModal(player)"
-                                    ></div>
-                                    <div
-                                        class="counter p{{i}}-rem-life tap"
-                                        (click)="lifeCounter.decrementLife(player)"
-                                        ion-long-press
-                                        [interval]="600"
-                                        (longPressed)="detailsModal(player)"
-                                    ></div>
-                                </ion-col>
-                            </ng-container>
-                        </div>
-                    </div>
-                </div>
-            </ng-container>
-            <!-- 4 players -->
-            <ng-container *ngIf="game.numPlayers === 4">
-                <div id="seat4">
-                    <div class="orient">
-                        <ng-container *ngFor="let player of game.players; let i = index;">
-                            <ion-col
-                                id="p{{i}}"
-                                class="val-container p{{i}}"
-                                [style.background-color]="player.color"
-                            >
-                                <p class="val rotate-player{{i}}">{{ player.life }}</p>
-                                <div
-                                    class="counter p{{i}}-add-life tap"
-                                    (click)="lifeCounter.incrementLife(player)"
-                                    ion-long-press
-                                    [interval]="600"
-                                    (longPressed)="detailsModal(player)"
-                                ></div>
-                                <div
-                                    class="counter p{{i}}-rem-life tap"
-                                    (click)="lifeCounter.decrementLife(player)"
-                                    ion-long-press
-                                    [interval]="600"
-                                    (longPressed)="detailsModal(player)"
-                                ></div>
-                            </ion-col>
-                        </ng-container>
-                    </div>
-                </div>
-            </ng-container>
-            <!-- 5 players -->
-            <ng-container *ngIf="game.numPlayers === 5">
-                <div id="seat5">
-                    <div class="orient">
+            <!-- counter -->
+            <div id="seat{{game.numPlayers}}">
+                <div class="flex-land">
+                    <div class="flex-port orient">
                         <ng-container *ngFor="let player of game.players; let i = index;">
                             <ion-col
                                 id="p{{i}}"
                                 class="val-container long-p{{i}} p{{i}}"
                                 [style.background-color]="player.color"
                             >
-                                <p class="val rotate-player{{i}}">{{ player.life }}</p>
+                                <p class="val rotate-player{{i}}">
+                                    {{ player.life }}
+                                </p>
                                 <div
                                     class="counter p{{i}}-add-life tap"
                                     (click)="lifeCounter.incrementLife(player)"
@@ -150,37 +33,7 @@
                         </ng-container>
                     </div>
                 </div>
-            </ng-container>
-            <!-- 6 players -->
-            <ng-container *ngIf="game.numPlayers === 6">
-                <div id="seat6">
-                    <div class="orient">
-                        <ng-container *ngFor="let player of game.players; let i = index;">
-                            <ion-col
-                                id="p{{i}}"
-                                class="val-container p{{i}}"
-                                [style.background-color]="player.color"
-                            >
-                                <p class="val rotate-player{{i}}">{{ player.life }}</p>
-                                <div
-                                    class="counter p{{i}}-add-life tap"
-                                    (click)="lifeCounter.incrementLife(player)"
-                                    ion-long-press
-                                    [interval]="600"
-                                    (longPressed)="detailsModal(player)"
-                                ></div>
-                                <div
-                                    class="counter p{{i}}-rem-life tap"
-                                    (click)="lifeCounter.decrementLife(player)"
-                                    ion-long-press
-                                    [interval]="600"
-                                    (longPressed)="detailsModal(player)"
-                                ></div>
-                            </ion-col>
-                        </ng-container>
-                    </div>
-                </div>
-            </ng-container>
+            </div>
             <!-- settings icon -->
             <div id="settings" (click)="setSettings('default')">
                 <div

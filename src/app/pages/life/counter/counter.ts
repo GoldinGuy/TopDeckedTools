@@ -96,33 +96,23 @@ export class CounterPage {
         this.router.navigate(['/tabs/life'], navigationExtras);
     }
 
-    async detailsModal(player: PlayerStats, rotate: string) {
+    async detailsModal(player: PlayerStats) {
         if (!this.displayModal) {
             this.displayModal = true;
-            console.log(rotate);
+            // console.log(rotate);
             this.lifeCounter.setOpps(this.game);
             // let ro: string;
             // if (player.id === 'Player1') {
             //     ro = 'rotate(180.001deg)';
             // } else if (player.id === 'Player2') {
             //     ro = 'rotate(0deg)';
-            // } else if (player.id === 'Player3') {
-            //     ro = 'rotate(180.001deg)';
-            // } else if (player.id === 'Player4') {
-            //     ro = 'rotate(180.001deg)';
-            // } else if (player.id === 'Player5') {
-            //     ro = 'rotate(180.001deg)';
-            // } else if (player.id === 'Player6') {
-            //     ro = 'rotate(180.001deg)';
             // }
-            // rotation
-
             const modal = await this.modalController.create({
                 component: DetailsPage,
                 cssClass: 'modal-fullscreen',
                 componentProps: {
                     player: player,
-                    rotate: rotate,
+                    // rotate: rotate,
                 },
             });
             modal.onDidDismiss().then(() => {
