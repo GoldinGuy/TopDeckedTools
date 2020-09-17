@@ -12,9 +12,7 @@
                                 class="val-container long-p{{i}} p{{i}}"
                                 [style.background-color]="player.color"
                             >
-                                <p class="val rotate-player{{i}}">
-                                    {{ player.state.life }}
-                                </p>
+                                <p class="val rotate-player{{i}}">{{ player.state.life }}</p>
                                 <div
                                     class="counter p{{i}}-add-life tap"
                                     (click)="lifeCounter.incrementLife(player)"
@@ -35,7 +33,7 @@
                 </div>
             </div>
             <!-- settings icon -->
-            <div id="settings" (click)="settings = 'default'">
+            <div id="settings">
                 <div
                     class="display"
                     [ngClass]="{ 'seat1p': game.numPlayers === 1, 'seat3-5p': game.numPlayers === 3 || game.numPlayers === 5, 'seat2-4p': game.numPlayers === 2 || game.numPlayers === 4,  'seat6p': game.numPlayers === 6 }"
@@ -43,10 +41,12 @@
                     <ion-icon
                         name="settings"
                         class="settings-but settings-icon"
+                        (click)="settings = 'default'"
                         *ngIf="!timerOn"
                     ></ion-icon>
                     <div
                         class="settings-but settings-timer"
+                        (click)="settings = 'timer'"
                         *ngIf="timerOn"
                         [ngClass]="{'rotate': game.numPlayers > 1, 'rotate1': game.numPlayers === 1 }"
                     >
@@ -58,30 +58,31 @@
             <ng-container *ngIf="settings != 'off'">
                 <div id="overlay">
                     <div class="bg">
-                        <ion-icon
-                            name="close"
-                            class="top-left"
-                            (click)="settings = 'off'"
-                        ></ion-icon>
+                        <fa-icon icon="times" class="top-left" (click)="settings = 'off'"></fa-icon>
                         <ng-container *ngIf="settings === 'default'">
                             <ion-grid>
                                 <ion-row>
                                     <ion-col class="option tap" (click)="resetGame()">
-                                        <ion-icon name="sync" class="icon icon-tap"></ion-icon>
+                                        <fa-icon icon="redo-alt" class="icon icon-tap"></fa-icon>
+
                                         <p class="option-text">RESET</p>
                                     </ion-col>
                                     <ion-col class="option tap" (click)="settings = 'timer'">
-                                        <ion-icon name="timer" class="icon icon-tap"></ion-icon>
+                                        <fa-icon icon="clock" class="icon icon-tap"></fa-icon>
                                         <p class="option-text">TIMER</p>
                                     </ion-col>
                                 </ion-row>
                                 <ion-row>
                                     <ion-col class="option tap" (click)="settings = 'history'">
-                                        <ion-icon name="library" class="icon icon-tap"></ion-icon>
+                                        <fa-icon icon="history" class="icon icon-tap"></fa-icon>
+
                                         <p class="option-text">HISTORY</p>
                                     </ion-col>
                                     <ion-col class="option tap" (click)="quitGame()">
-                                        <ion-icon name="log-out" class="icon icon-tap"></ion-icon>
+                                        <fa-icon
+                                            icon="sign-out-alt"
+                                            class="icon icon-tap"
+                                        ></fa-icon>
                                         <p class="option-text">QUIT</p>
                                     </ion-col>
                                 </ion-row>
@@ -89,11 +90,11 @@
                         </ng-container>
                         <!-- history overlay -->
                         <ng-container *ngIf="settings === 'history'">
-                            <ion-icon
-                                name="chevron-forward"
+                            <fa-icon
+                                icon="chevron-right"
                                 class="top-right"
                                 (click)="settings = 'default'"
-                            ></ion-icon>
+                            ></fa-icon>
                             <ion-grid class="hist-grid">
                                 <ion-row>
                                     <ng-container *ngFor="let player of game.players">
@@ -115,25 +116,23 @@
                         </ng-container>
                         <!-- timer overlay -->
                         <ng-container *ngIf="settings === 'timer'">
-                            <ion-icon
-                                name="chevron-forward"
+                            <fa-icon
+                                icon="chevron-right"
                                 class="top-right"
                                 (click)="settings = 'default'"
-                            ></ion-icon>
+                            ></fa-icon>
                             <ion-grid id="timer">
-                                <ion-row class="timer-display">
-                                    {{ timerDisplay }}
-                                </ion-row>
+                                <ion-row class="timer-display"> {{ timerDisplay }} </ion-row>
                                 <ion-row>
                                     <ion-col class="timer-icon" (click)="editTimer()">
-                                        <ion-icon name="pencil"></ion-icon>
+                                        <fa-icon icon="edit"></fa-icon>
                                     </ion-col>
                                     <ion-col class="timer-icon" (click)="resetTimer()">
-                                        <ion-icon name="reload"></ion-icon>
+                                        <fa-icon icon="redo-alt"></fa-icon>
                                     </ion-col>
                                     <ion-col class="timer-icon" (click)="toggleTimer()">
-                                        <ion-icon name="play" *ngIf="!timerOn"></ion-icon>
-                                        <ion-icon name="pause" *ngIf="timerOn"></ion-icon>
+                                        <fa-icon icon="play" *ngIf="!timerOn"></fa-icon>
+                                        <fa-icon icon="pause" *ngIf="timerOn"></fa-icon>
                                     </ion-col>
                                 </ion-row>
                             </ion-grid>

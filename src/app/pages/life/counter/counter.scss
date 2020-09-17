@@ -3,7 +3,6 @@
     --background: #544a63 !important;
 }
 
-
 .grid-container {
     display: flex;
     justify-content: center;
@@ -582,11 +581,6 @@
             --height: 34vh;
             --width: 49.5vw;
 
-            .counter {
-                height: 15vh !important;
-                width: 100% !important;
-            }
-
             .p1-add-life,
             .p2-rem-life {
                 top: 0;
@@ -616,11 +610,6 @@
             --rotate-player3: 180deg;
             --height: 49vh;
             --width: 34vw;
-
-            .counter {
-                width: 15vw !important;
-                height: 100% !important;
-            }
 
             .p3-add-life,
             .p2-rem-life {
@@ -699,6 +688,7 @@
 
             .counter {
                 height: 15vh !important;
+                width: 100% !important;
             }
         }
 
@@ -712,6 +702,7 @@
 
             .counter {
                 width: 15vw !important;
+                height: 100% !important;
             }
         }
 

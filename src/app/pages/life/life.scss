@@ -24,6 +24,8 @@
     border-radius: 9px;
     text-align: center;
     margin: 10px 10px;
+    padding: 15px 15px;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
@@ -50,7 +52,7 @@
 }
 
 .player-die {
-    font-size: 55px;
+    font-size: 45px;
     color: white;
 }
 

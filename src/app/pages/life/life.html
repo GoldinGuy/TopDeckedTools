@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <ion-content fullscreen class="bg-theme">
     <div class="bg-light-purple">
-        <h3 class="white-title">
-            Life Counter
-        </h3>
+        <h3 class="white-title">Life Counter</h3>
     </div>
     <ion-grid>
         <ion-row class="life">
@@ -31,27 +29,21 @@
                 [style.background]="startingLife === 20 ? '#915fc2' : '#6a5787'"
                 (click)="setLife(20)"
             >
-                <a class="life-num">
-                    20
-                </a>
+                <a class="life-num"> 20 </a>
             </ion-col>
             <ion-col
                 class="life-choice"
                 [style.background]="startingLife === 30 ? '#915fc2' : '#6a5787'"
                 (click)="setLife(30)"
             >
-                <a class="life-num">
-                    30
-                </a>
+                <a class="life-num"> 30 </a>
             </ion-col>
             <ion-col
                 class="life-choice"
                 [style.background]="startingLife === 40 ? '#915fc2' : '#6a5787'"
                 (click)="setLife(40)"
             >
-                <a class="life-num">
-                    40
-                </a>
+                <a class="life-num"> 40 </a>
             </ion-col>
         </ion-row>
 
@@ -64,27 +56,21 @@
                 [style.background]="numPlayers === 1 ? '#915fc2' : '#6a5787'"
                 (click)="setNumPlayers(1)"
             >
-                <a class="player-die">
-                    ⚀
-                </a>
+                <fa-icon icon="dice-one" class="player-die"></fa-icon>
             </ion-col>
             <ion-col
                 class="player-choice"
                 [style.background]="numPlayers === 2 ? '#915fc2' : '#6a5787'"
                 (click)="setNumPlayers(2)"
             >
-                <a class="player-die">
-                    ⚁
-                </a>
+                <fa-icon icon="dice-two" class="player-die"></fa-icon>
             </ion-col>
             <ion-col
                 class="player-choice"
                 [style.background]="numPlayers === 3 ? '#915fc2' : '#6a5787'"
                 (click)="setNumPlayers(3)"
             >
-                <a class="player-die">
-                    ⚂
-                </a>
+                <fa-icon icon="dice-three" class="player-die"></fa-icon>
             </ion-col>
         </ion-row>
         <ion-row class="life pad">
@@ -93,27 +79,21 @@
                 [style.background]="numPlayers === 4 ? '#915fc2' : '#6a5787'"
                 (click)="setNumPlayers(4)"
             >
-                <a class="player-die">
-                    ⚃
-                </a>
+                <fa-icon icon="dice-four" class="player-die"></fa-icon>
             </ion-col>
             <ion-col
                 class="player-choice"
                 [style.background]="numPlayers === 5 ? '#915fc2' : '#6a5787'"
                 (click)="setNumPlayers(5)"
             >
-                <a class="player-die">
-                    ⚄
-                </a>
+                <fa-icon icon="dice-five" class="player-die"></fa-icon>
             </ion-col>
             <ion-col
                 class="player-choice"
                 [style.background]="numPlayers === 6 ? '#915fc2' : '#6a5787'"
                 (click)="setNumPlayers(6)"
             >
-                <a class="player-die">
-                    ⚅
-                </a>
+                <fa-icon icon="dice-six" class="player-die"></fa-icon>
             </ion-col>
         </ion-row>
 
